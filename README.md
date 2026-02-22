@@ -81,6 +81,14 @@ These plugins ship with the workflow engine and are always available:
 | [integration](./plugins/integration/manifest.json) | Integration workflow handler for multi-system connectors | core |
 | [ai](./plugins/ai/manifest.json) | AI steps (complete, classify, extract), dynamic components, sub-workflows | core |
 
+## External Plugins
+
+These plugins run as separate subprocesses via the [go-plugin](https://github.com/GoCodeAlone/go-plugin) IPC framework:
+
+| Plugin | Description | Tier |
+|--------|-------------|------|
+| [bento](./plugins/bento/manifest.json) | Stream processing via Bento — 100+ connectors, Bloblang transforms, at-least-once delivery | core |
+
 ---
 
 ## Templates
@@ -94,6 +102,7 @@ Starter configurations for common workflow patterns:
 | [full-stack](./templates/full-stack.yaml) | Full application with HTTP, auth, state machine, messaging, scheduler, and observability |
 | [plugin](./templates/plugin.yaml) | Scaffold for building a new engine plugin |
 | [ui-plugin](./templates/ui-plugin.yaml) | Scaffold for a React UI extension |
+| [stream-processor](./templates/stream-processor.yaml) | Stream processing pipeline using the Bento plugin |
 
 Initialize a project from a template:
 
