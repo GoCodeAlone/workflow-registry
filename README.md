@@ -1,5 +1,7 @@
 # workflow-registry
 
+[![Validate Registry](https://github.com/GoCodeAlone/workflow-registry/actions/workflows/validate.yml/badge.svg)](https://github.com/GoCodeAlone/workflow-registry/actions/workflows/validate.yml)
+
 The official plugin and template registry for the [GoCodeAlone/workflow](https://github.com/GoCodeAlone/workflow) engine.
 
 This registry catalogs all built-in plugins, community extensions, and reusable templates that can be used with the workflow engine. It serves as the source of truth for the `wfctl` CLI's marketplace and `wfctl publish` command.
@@ -120,9 +122,39 @@ All plugin manifests must conform to the [registry schema](./schema/registry-sch
 Validate a manifest locally:
 
 ```bash
-# Using ajv-cli
-npx ajv-cli validate -s schema/registry-schema.json -d plugins/my-plugin/manifest.json
+# Validate a single manifest
+npx ajv-cli validate --spec=draft2020 -s schema/registry-schema.json -d plugins/my-plugin/manifest.json
+
+# Validate all manifests at once
+bash scripts/validate-manifests.sh
+
+# Validate template plugin references
+bash scripts/validate-templates.sh
 ```
+
+---
+
+## Local Pre-commit Hook
+
+Install the provided pre-commit hook to catch validation errors before they reach CI:
+
+```bash
+cp scripts/pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+```
+
+The hook runs `scripts/validate-manifests.sh` when `plugins/*/manifest.json` or `schema/registry-schema.json` are staged, and `scripts/validate-templates.sh` when `templates/*.yaml` files are staged.
+
+---
+
+## CI/CD
+
+Every pull request and push to `main` triggers the [Validate Registry](.github/workflows/validate.yml) workflow, which:
+
+1. Validates all `plugins/*/manifest.json` files against `schema/registry-schema.json` (JSON Schema draft 2020-12 via `ajv-cli`)
+2. Checks that every plugin referenced in `templates/*.yaml` has a corresponding manifest
+
+PRs that fail validation cannot be merged.
 
 ---
 
