@@ -10,7 +10,7 @@ keywords:
   - database
   - pipeline
 plugins_required:
-  - workflow-plugin-http
+  - http
   - auth
   - storage
   - api

@@ -1,5 +1,5 @@
 {
-  "name": "workflow-plugin-http",
+  "name": "http",
   "version": "1.0.0",
   "author": "GoCodeAlone",
   "description": "HTTP server, router, handlers, middleware, proxy, and static file serving",
