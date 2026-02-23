@@ -88,6 +88,7 @@ These plugins run as separate subprocesses via the [go-plugin](https://github.co
 | Plugin | Description | Tier |
 |--------|-------------|------|
 | [bento](./plugins/bento/manifest.json) | Stream processing via Bento — 100+ connectors, Bloblang transforms, at-least-once delivery | core |
+| [ratchet](./plugins/ratchet/manifest.json) | Autonomous AI agent orchestration — agent coordination, task management, MCP integration, secrets/vault, SSE, and intelligent pipeline execution (13 step types, 15 wiring hooks) | community |
 
 ---
 
