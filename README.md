@@ -39,7 +39,7 @@ To search via CLI:
 
 ```bash
 wfctl marketplace search http
-wfctl marketplace info workflow-plugin-http
+wfctl marketplace info http
 ```
 
 To browse manually, see the [`plugins/`](./plugins/) directory.

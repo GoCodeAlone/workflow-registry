@@ -1,5 +1,5 @@
 {
-  "name": "integration-plugin",
+  "name": "integration",
   "version": "1.0.0",
   "author": "GoCodeAlone",
   "description": "Integration workflow handler for connector-based multi-system workflows via HTTP, webhooks, and database connectors",

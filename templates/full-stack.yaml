@@ -12,12 +12,12 @@ keywords:
   - scheduler
   - observability
 plugins_required:
-  - workflow-plugin-http
+  - http
   - auth
   - statemachine
   - storage
   - messaging
-  - scheduler-plugin
+  - scheduler
   - observability
   - api
   - pipeline-steps

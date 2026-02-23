@@ -1,5 +1,5 @@
 {
-  "name": "scheduler-plugin",
+  "name": "scheduler",
   "version": "1.0.0",
   "author": "GoCodeAlone",
   "description": "Scheduler workflow handler and schedule trigger for cron-based job execution",
