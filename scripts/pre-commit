@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# pre-commit — runs manifest schema validation and template reference checks
+# before every commit. Install by running:
+#   cp scripts/pre-commit .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+
+set -euo pipefail
+
+REPO_ROOT="$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel)"
+
+echo "Running pre-commit validation..."
+
+# Only validate if plugin manifests or schema have changed (or run all on first install)
+if git diff --cached --name-only | grep -qE '^(plugins/.*/manifest\.json|schema/registry-schema\.json)$'; then
+  echo "Validating plugin manifests..."
+  if ! bash "$REPO_ROOT/scripts/validate-manifests.sh"; then
+    echo "Pre-commit hook failed: fix manifest validation errors before committing."
+    exit 1
+  fi
+fi
+
+if git diff --cached --name-only | grep -qE '^templates/.*\.yaml$'; then
+  echo "Validating template plugin references..."
+  if ! bash "$REPO_ROOT/scripts/validate-templates.sh"; then
+    echo "Pre-commit hook failed: fix template validation errors before committing."
+    exit 1
+  fi
+fi
+
+echo "Pre-commit validation passed."
