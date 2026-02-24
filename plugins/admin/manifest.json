@@ -1,0 +1,21 @@
+{
+  "name": "admin",
+  "version": "1.0.0",
+  "author": "GoCodeAlone",
+  "description": "Admin dashboard UI and config-driven admin routes with embedded React UI. Provides user management, workflow management, settings, and real-time monitoring.",
+  "source": "github.com/GoCodeAlone/workflow-plugin-admin",
+  "type": "external",
+  "tier": "core",
+  "license": "MIT",
+  "minEngineVersion": "0.1.7",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-admin",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-admin",
+  "keywords": ["admin", "dashboard", "ui", "management", "iam", "auth", "settings"],
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "workflowHandlers": [],
+    "wiringHooks": []
+  }
+}
