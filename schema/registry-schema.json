@@ -98,6 +98,50 @@
     "repository": {
       "type": "string",
       "description": "Source code repository URL"
+    },
+    "downloads": {
+      "type": "array",
+      "description": "Binary download artifacts for this plugin version",
+      "items": {
+        "type": "object",
+        "required": ["os", "arch", "url"],
+        "properties": {
+          "os": {
+            "type": "string",
+            "enum": ["linux", "darwin", "windows"],
+            "description": "Target operating system"
+          },
+          "arch": {
+            "type": "string",
+            "enum": ["amd64", "arm64"],
+            "description": "Target CPU architecture"
+          },
+          "url": {
+            "type": "string",
+            "description": "Download URL for the binary archive"
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA-256 checksum of the archive"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "assets": {
+      "type": "object",
+      "description": "Asset capabilities provided by this plugin",
+      "properties": {
+        "ui": {
+          "type": "boolean",
+          "description": "Plugin includes an embedded UI"
+        },
+        "config": {
+          "type": "boolean",
+          "description": "Plugin provides config fragments via ConfigProvider"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
