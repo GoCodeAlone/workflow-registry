@@ -1,0 +1,52 @@
+{
+  "name": "gitlab",
+  "version": "1.0.0",
+  "author": "GoCodeAlone",
+  "description": "GitLab integration — webhook handling and GitLab CI pipeline management",
+  "source": "github.com/GoCodeAlone/workflow-plugin-gitlab",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "minEngineVersion": "0.2.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-gitlab",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-gitlab",
+  "keywords": ["gitlab", "webhook", "git", "ci", "cd", "pipeline", "merge-request", "integration"],
+  "capabilities": {
+    "moduleTypes": ["git.webhook"],
+    "stepTypes": [
+      "step.gitlab_trigger_pipeline",
+      "step.gitlab_pipeline_status",
+      "step.gitlab_create_merge_request",
+      "step.gitlab_mr_comment"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": [],
+    "wiringHooks": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.0/workflow-plugin-gitlab-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.0/workflow-plugin-gitlab-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.0/workflow-plugin-gitlab-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.0/workflow-plugin-gitlab-darwin-arm64.tar.gz"
+    }
+  ]
+}
