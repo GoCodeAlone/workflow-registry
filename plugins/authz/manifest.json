@@ -15,8 +15,7 @@
     "moduleTypes": ["authz.casbin"],
     "stepTypes": ["step.authz_check"],
     "triggerTypes": [],
-    "workflowHandlers": [],
-    "wiringHooks": []
+    "workflowHandlers": []
   },
   "assets": {
     "ui": false,

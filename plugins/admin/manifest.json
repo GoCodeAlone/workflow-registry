@@ -15,8 +15,7 @@
     "moduleTypes": [],
     "stepTypes": [],
     "triggerTypes": [],
-    "workflowHandlers": [],
-    "wiringHooks": []
+    "workflowHandlers": []
   },
   "assets": {
     "ui": true,
