@@ -99,6 +99,10 @@
       "type": "string",
       "description": "Source code repository URL"
     },
+    "private": {
+      "type": "boolean",
+      "description": "Whether this plugin is proprietary / not publicly available"
+    },
     "downloads": {
       "type": "array",
       "description": "Binary download artifacts for this plugin version",
