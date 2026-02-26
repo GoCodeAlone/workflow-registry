@@ -16,8 +16,7 @@
     "moduleTypes": ["static.fileserver"],
     "stepTypes": [],
     "triggerTypes": [],
-    "workflowHandlers": [],
-    "wiringHooks": []
+    "workflowHandlers": []
   },
   "assets": {
     "ui": true,

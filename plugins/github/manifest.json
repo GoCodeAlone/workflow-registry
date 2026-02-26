@@ -15,8 +15,7 @@
     "moduleTypes": ["git.webhook"],
     "stepTypes": ["step.gh_action_trigger", "step.gh_action_status", "step.gh_create_check"],
     "triggerTypes": [],
-    "workflowHandlers": [],
-    "wiringHooks": []
+    "workflowHandlers": []
   },
   "assets": {
     "ui": false,

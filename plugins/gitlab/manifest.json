@@ -20,8 +20,7 @@
       "step.gitlab_mr_comment"
     ],
     "triggerTypes": [],
-    "workflowHandlers": [],
-    "wiringHooks": []
+    "workflowHandlers": []
   },
   "assets": {
     "ui": false,
