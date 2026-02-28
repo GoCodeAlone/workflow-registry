@@ -5,7 +5,7 @@
   "description": "Casbin authorization policy management UI (React SPA)",
   "source": "github.com/GoCodeAlone/workflow-plugin-authz-ui",
   "type": "external",
-  "tier": "core",
+  "tier": "premium",
   "license": "Proprietary",
   "private": true,
   "minEngineVersion": "0.2.0",

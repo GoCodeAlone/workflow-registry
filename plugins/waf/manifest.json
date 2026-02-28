@@ -5,7 +5,7 @@
   "description": "Web Application Firewall with pluggable backends (Coraza, AWS WAF, Google Cloud Armor, Cloudflare)",
   "source": "github.com/GoCodeAlone/workflow-plugin-waf",
   "type": "external",
-  "tier": "core",
+  "tier": "premium",
   "license": "Proprietary",
   "private": true,
   "minEngineVersion": "0.3.0",

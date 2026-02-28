@@ -5,7 +5,7 @@
   "description": "MFA (TOTP) and encryption at rest with pluggable KMS backends (local, AWS KMS, GCP KMS, Azure Key Vault, Vault Transit)",
   "source": "github.com/GoCodeAlone/workflow-plugin-security",
   "type": "external",
-  "tier": "core",
+  "tier": "premium",
   "license": "Proprietary",
   "private": true,
   "minEngineVersion": "0.3.0",

@@ -5,7 +5,7 @@
   "description": "WASM-based sandboxed execution and goroutine resource guards using wazero",
   "source": "github.com/GoCodeAlone/workflow-plugin-sandbox",
   "type": "external",
-  "tier": "core",
+  "tier": "premium",
   "license": "Proprietary",
   "private": true,
   "minEngineVersion": "0.3.0",
