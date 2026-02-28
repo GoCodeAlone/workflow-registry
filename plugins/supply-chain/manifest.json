@@ -1,0 +1,46 @@
+{
+  "name": "supply-chain",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "Plugin signature verification, vulnerability scanning (Trivy, Grype, Snyk, ECR, GCP), and SBOM generation",
+  "source": "github.com/GoCodeAlone/workflow-plugin-supply-chain",
+  "type": "external",
+  "tier": "core",
+  "license": "MIT",
+  "minEngineVersion": "0.3.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain",
+  "keywords": ["supply-chain", "sbom", "vulnerability", "scanning", "trivy", "cosign", "signatures", "security"],
+  "capabilities": {
+    "moduleTypes": ["security.plugin-verifier", "security.scanner", "security.scanner.grype", "security.scanner.snyk", "security.scanner.ecr", "security.scanner.gcp-artifact"],
+    "stepTypes": ["step.verify_signature", "step.vuln_scan", "step.sbom_generate", "step.sbom_check"],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.1.0/workflow-plugin-supply-chain-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.1.0/workflow-plugin-supply-chain-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.1.0/workflow-plugin-supply-chain-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.1.0/workflow-plugin-supply-chain-darwin-arm64.tar.gz"
+    }
+  ]
+}

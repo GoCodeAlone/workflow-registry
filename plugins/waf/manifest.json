@@ -1,0 +1,46 @@
+{
+  "name": "waf",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "Web Application Firewall with pluggable backends (Coraza, AWS WAF, Google Cloud Armor, Cloudflare)",
+  "source": "github.com/GoCodeAlone/workflow-plugin-waf",
+  "type": "external",
+  "tier": "core",
+  "license": "MIT",
+  "minEngineVersion": "0.3.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-waf",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-waf",
+  "keywords": ["waf", "firewall", "security", "coraza", "owasp", "ip-filtering", "input-sanitization"],
+  "capabilities": {
+    "moduleTypes": ["security.waf", "security.waf.aws", "security.waf.gcloud", "security.waf.cloudflare"],
+    "stepTypes": ["step.input_sanitize", "step.ip_check", "step.waf_evaluate"],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-waf/releases/download/v0.1.0/workflow-plugin-waf-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-waf/releases/download/v0.1.0/workflow-plugin-waf-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-waf/releases/download/v0.1.0/workflow-plugin-waf-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-waf/releases/download/v0.1.0/workflow-plugin-waf-darwin-arm64.tar.gz"
+    }
+  ]
+}

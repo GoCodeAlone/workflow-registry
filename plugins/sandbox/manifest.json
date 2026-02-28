@@ -1,0 +1,46 @@
+{
+  "name": "sandbox",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "WASM-based sandboxed execution and goroutine resource guards using wazero",
+  "source": "github.com/GoCodeAlone/workflow-plugin-sandbox",
+  "type": "external",
+  "tier": "core",
+  "license": "MIT",
+  "minEngineVersion": "0.3.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-sandbox",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-sandbox",
+  "keywords": ["sandbox", "wasm", "wazero", "isolation", "security", "resource-limits"],
+  "capabilities": {
+    "moduleTypes": ["sandbox.wasm"],
+    "stepTypes": ["step.wasm_exec", "step.goroutine_guard"],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sandbox/releases/download/v0.1.0/workflow-plugin-sandbox-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sandbox/releases/download/v0.1.0/workflow-plugin-sandbox-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sandbox/releases/download/v0.1.0/workflow-plugin-sandbox-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sandbox/releases/download/v0.1.0/workflow-plugin-sandbox-darwin-arm64.tar.gz"
+    }
+  ]
+}
