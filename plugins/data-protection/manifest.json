@@ -1,0 +1,46 @@
+{
+  "name": "data-protection",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "PII/PHI detection and data masking with pluggable backends (regex, Google Cloud DLP, AWS Macie, Microsoft Presidio)",
+  "source": "github.com/GoCodeAlone/workflow-plugin-data-protection",
+  "type": "external",
+  "tier": "core",
+  "license": "MIT",
+  "minEngineVersion": "0.3.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-data-protection",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-data-protection",
+  "keywords": ["pii", "phi", "data-protection", "masking", "redaction", "dlp", "gdpr", "hipaa", "privacy"],
+  "capabilities": {
+    "moduleTypes": ["data.pii", "data.pii.gcp-dlp", "data.pii.aws-macie", "data.pii.presidio"],
+    "stepTypes": ["step.pii_detect", "step.data_mask", "step.data_classify"],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-protection/releases/download/v0.1.0/workflow-plugin-data-protection-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-protection/releases/download/v0.1.0/workflow-plugin-data-protection-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-protection/releases/download/v0.1.0/workflow-plugin-data-protection-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-protection/releases/download/v0.1.0/workflow-plugin-data-protection-darwin-arm64.tar.gz"
+    }
+  ]
+}

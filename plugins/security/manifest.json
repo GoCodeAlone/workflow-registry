@@ -1,0 +1,46 @@
+{
+  "name": "security",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "MFA (TOTP) and encryption at rest with pluggable KMS backends (local, AWS KMS, GCP KMS, Azure Key Vault, Vault Transit)",
+  "source": "github.com/GoCodeAlone/workflow-plugin-security",
+  "type": "external",
+  "tier": "core",
+  "license": "MIT",
+  "minEngineVersion": "0.3.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-security",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-security",
+  "keywords": ["mfa", "totp", "encryption", "kms", "aes", "security", "2fa"],
+  "capabilities": {
+    "moduleTypes": ["security.mfa", "security.encryption", "security.encryption.aws-kms", "security.encryption.gcp-kms", "security.encryption.azure-keyvault", "security.encryption.vault-transit"],
+    "stepTypes": ["step.mfa_enroll", "step.mfa_verify", "step.encrypt_value", "step.decrypt_value"],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.1.0/workflow-plugin-security-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.1.0/workflow-plugin-security-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.1.0/workflow-plugin-security-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.1.0/workflow-plugin-security-darwin-arm64.tar.gz"
+    }
+  ]
+}
