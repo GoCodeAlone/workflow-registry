@@ -1,0 +1,62 @@
+{
+  "name": "workflow-plugin-payments",
+  "version": "0.1.0",
+  "description": "Multi-provider payment processing plugin (Stripe, PayPal)",
+  "author": "GoCodeAlone",
+  "license": "Apache-2.0",
+  "type": "external",
+  "tier": "core",
+  "private": false,
+  "minEngineVersion": "0.3.12",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-payments",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-payments",
+  "keywords": ["payment", "stripe", "paypal", "billing", "subscription", "marketplace"],
+  "capabilities": {
+    "moduleTypes": ["payments.provider"],
+    "stepTypes": [
+      "step.payment_charge",
+      "step.payment_capture",
+      "step.payment_refund",
+      "step.payment_customer_ensure",
+      "step.payment_subscription_create",
+      "step.payment_subscription_update",
+      "step.payment_subscription_cancel",
+      "step.payment_checkout_create",
+      "step.payment_portal_create",
+      "step.payment_webhook_verify",
+      "step.payment_transfer",
+      "step.payment_payout",
+      "step.payment_fee_calculate",
+      "step.payment_invoice_list",
+      "step.payment_method_attach",
+      "step.payment_method_list"
+    ],
+    "triggerTypes": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.1.0/workflow-plugin-payments-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.1.0/workflow-plugin-payments-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.1.0/workflow-plugin-payments-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.1.0/workflow-plugin-payments-darwin-arm64.tar.gz"
+    }
+  ]
+}
