@@ -1,13 +1,13 @@
 {
   "name": "authz",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "author": "GoCodeAlone",
   "description": "RBAC authorization plugin using Casbin",
   "source": "github.com/GoCodeAlone/workflow-plugin-authz",
   "type": "external",
   "tier": "core",
   "license": "MIT",
-  "minEngineVersion": "0.2.0",
+  "minEngineVersion": "0.3.13",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-authz",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-authz",
   "keywords": ["authz", "rbac", "casbin", "authorization", "access-control"],
@@ -25,22 +25,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.1.0/workflow-plugin-authz-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.2.1/workflow-plugin-authz-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.1.0/workflow-plugin-authz-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.2.1/workflow-plugin-authz-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.1.0/workflow-plugin-authz-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.2.1/workflow-plugin-authz-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.1.0/workflow-plugin-authz-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.2.1/workflow-plugin-authz-darwin-arm64.tar.gz"
     }
   ]
 }

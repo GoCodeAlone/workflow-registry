@@ -1,6 +1,6 @@
 {
   "name": "agent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "GoCodeAlone",
   "description": "AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection",
   "source": "github.com/GoCodeAlone/workflow-plugin-agent",
@@ -8,7 +8,7 @@
   "tier": "core",
   "license": "Proprietary",
   "private": true,
-  "minEngineVersion": "0.3.10",
+  "minEngineVersion": "0.3.11",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-agent",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-agent",
   "keywords": ["agent", "ai", "llm", "provider", "memory", "tools", "executor", "autonomous", "loop-detection"],
