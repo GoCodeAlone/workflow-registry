@@ -1,6 +1,6 @@
 {
   "name": "statemachine",
-  "version": "1.0.0",
+  "version": "0.3.37",
   "author": "GoCodeAlone",
   "description": "State machine engine, state tracker, and state connector modules with workflow handler for lifecycle management",
   "source": "github.com/GoCodeAlone/workflow",
@@ -9,7 +9,14 @@
   "tier": "core",
   "license": "MIT",
   "minEngineVersion": "0.2.0",
-  "keywords": ["statemachine", "state", "transitions", "lifecycle", "workflow", "fsm"],
+  "keywords": [
+    "statemachine",
+    "state",
+    "transitions",
+    "lifecycle",
+    "workflow",
+    "fsm"
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "capabilities": {
@@ -20,6 +27,8 @@
     ],
     "stepTypes": [],
     "triggerTypes": [],
-    "workflowHandlers": ["statemachine"]
+    "workflowHandlers": [
+      "statemachine"
+    ]
   }
 }

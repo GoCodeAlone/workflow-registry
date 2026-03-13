@@ -1,6 +1,6 @@
 {
   "name": "observability",
-  "version": "1.0.0",
+  "version": "0.3.37",
   "author": "GoCodeAlone",
   "description": "Metrics collection, health checks, log collection, OpenTelemetry tracing, and OpenAPI spec generation",
   "source": "github.com/GoCodeAlone/workflow",
@@ -9,7 +9,16 @@
   "tier": "core",
   "license": "MIT",
   "minEngineVersion": "0.2.0",
-  "keywords": ["observability", "metrics", "prometheus", "health", "tracing", "otel", "openapi", "logging"],
+  "keywords": [
+    "observability",
+    "metrics",
+    "prometheus",
+    "health",
+    "tracing",
+    "otel",
+    "openapi",
+    "logging"
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "capabilities": {

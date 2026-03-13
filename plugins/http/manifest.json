@@ -1,6 +1,6 @@
 {
   "name": "http",
-  "version": "1.0.0",
+  "version": "0.3.37",
   "author": "GoCodeAlone",
   "description": "HTTP server, router, handlers, middleware, proxy, and static file serving",
   "source": "github.com/GoCodeAlone/workflow",
@@ -9,7 +9,17 @@
   "tier": "core",
   "license": "MIT",
   "minEngineVersion": "0.2.0",
-  "keywords": ["http", "server", "router", "middleware", "proxy", "static", "cors", "ratelimit", "reverseproxy"],
+  "keywords": [
+    "http",
+    "server",
+    "router",
+    "middleware",
+    "proxy",
+    "static",
+    "cors",
+    "ratelimit",
+    "reverseproxy"
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "capabilities": {
@@ -32,8 +42,12 @@
       "step.rate_limit",
       "step.circuit_breaker"
     ],
-    "triggerTypes": ["http"],
-    "workflowHandlers": ["http"],
+    "triggerTypes": [
+      "http"
+    ],
+    "workflowHandlers": [
+      "http"
+    ],
     "wiringHooks": [
       "http-auth-provider-wiring",
       "http-static-fileserver-registration",

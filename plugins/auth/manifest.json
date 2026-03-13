@@ -1,6 +1,6 @@
 {
   "name": "auth",
-  "version": "1.0.0",
+  "version": "0.3.37",
   "author": "GoCodeAlone",
   "description": "JWT authentication, user store, and auth middleware wiring for securing workflow endpoints",
   "source": "github.com/GoCodeAlone/workflow",
@@ -9,7 +9,14 @@
   "tier": "core",
   "license": "MIT",
   "minEngineVersion": "0.2.0",
-  "keywords": ["auth", "jwt", "authentication", "users", "security", "token"],
+  "keywords": [
+    "auth",
+    "jwt",
+    "authentication",
+    "users",
+    "security",
+    "token"
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "capabilities": {
@@ -20,6 +27,8 @@
     "stepTypes": [],
     "triggerTypes": [],
     "workflowHandlers": [],
-    "wiringHooks": ["auth-provider-wiring"]
+    "wiringHooks": [
+      "auth-provider-wiring"
+    ]
   }
 }

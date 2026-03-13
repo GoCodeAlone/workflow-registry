@@ -1,6 +1,6 @@
 {
   "name": "pipeline-steps",
-  "version": "1.0.0",
+  "version": "0.3.37",
   "author": "GoCodeAlone",
   "description": "Generic pipeline step types (validate, transform, conditional, set, log, delegate, jq, publish, event_publish, http_call, request_parse, db_query, db_exec, json_response, raw_response, workflow_call, validate_path_param, validate_pagination, validate_request_body, foreach, webhook_verify, base64_decode, cache_get/set/delete, ui_scaffold, dlq_send/replay, retry_with_backoff, resilient_circuit_breaker, s3_upload, auth_validate) and the pipeline workflow handler",
   "source": "github.com/GoCodeAlone/workflow",
@@ -9,7 +9,24 @@
   "tier": "core",
   "license": "MIT",
   "minEngineVersion": "0.2.0",
-  "keywords": ["pipeline", "steps", "validate", "transform", "conditional", "jq", "http", "database", "json", "cache", "dlq", "resilience", "s3", "auth", "webhook", "base64"],
+  "keywords": [
+    "pipeline",
+    "steps",
+    "validate",
+    "transform",
+    "conditional",
+    "jq",
+    "http",
+    "database",
+    "json",
+    "cache",
+    "dlq",
+    "resilience",
+    "s3",
+    "auth",
+    "webhook",
+    "base64"
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "capabilities": {
@@ -50,6 +67,8 @@
       "step.auth_validate"
     ],
     "triggerTypes": [],
-    "workflowHandlers": ["pipeline"]
+    "workflowHandlers": [
+      "pipeline"
+    ]
   }
 }

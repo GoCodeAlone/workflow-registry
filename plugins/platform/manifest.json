@@ -1,6 +1,6 @@
 {
   "name": "platform",
-  "version": "1.0.0",
+  "version": "0.3.37",
   "author": "GoCodeAlone",
   "description": "Platform infrastructure modules (provider, resource, context), reconciliation trigger, template step, and platform workflow handler",
   "source": "github.com/GoCodeAlone/workflow",
@@ -9,7 +9,15 @@
   "tier": "core",
   "license": "MIT",
   "minEngineVersion": "0.2.0",
-  "keywords": ["platform", "infrastructure", "iac", "provider", "resource", "reconciliation", "terraform"],
+  "keywords": [
+    "platform",
+    "infrastructure",
+    "iac",
+    "provider",
+    "resource",
+    "reconciliation",
+    "terraform"
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "capabilities": {
@@ -21,7 +29,11 @@
     "stepTypes": [
       "step.platform_template"
     ],
-    "triggerTypes": ["reconciliation"],
-    "workflowHandlers": ["platform"]
+    "triggerTypes": [
+      "reconciliation"
+    ],
+    "workflowHandlers": [
+      "platform"
+    ]
   }
 }

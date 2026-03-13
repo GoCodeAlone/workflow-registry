@@ -1,6 +1,6 @@
 {
   "name": "featureflags",
-  "version": "1.0.0",
+  "version": "0.3.37",
   "author": "GoCodeAlone",
   "description": "Feature flag service module and pipeline steps for runtime feature gating and gradual rollouts",
   "source": "github.com/GoCodeAlone/workflow",
@@ -9,7 +9,14 @@
   "tier": "core",
   "license": "MIT",
   "minEngineVersion": "0.2.0",
-  "keywords": ["feature-flags", "flags", "toggles", "rollout", "gating", "sse"],
+  "keywords": [
+    "feature-flags",
+    "flags",
+    "toggles",
+    "rollout",
+    "gating",
+    "sse"
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "capabilities": {
