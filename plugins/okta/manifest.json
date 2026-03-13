@@ -1,0 +1,51 @@
+{
+  "name": "workflow-plugin-okta",
+  "version": "0.1.0",
+  "description": "Okta identity and access management — users, groups, applications, authorization servers, MFA, policies, and more",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.3.30",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-okta",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-okta",
+  "keywords": ["okta", "identity", "iam", "sso", "mfa", "authentication", "authorization"],
+  "capabilities": {
+    "moduleTypes": ["okta.provider"],
+    "stepTypes": [
+      "step.okta_user_create", "step.okta_user_get", "step.okta_user_list", "step.okta_user_update", "step.okta_user_delete",
+      "step.okta_user_activate", "step.okta_user_deactivate", "step.okta_user_reactivate", "step.okta_user_suspend", "step.okta_user_unsuspend", "step.okta_user_unlock", "step.okta_user_reset_factors",
+      "step.okta_user_change_password", "step.okta_user_reset_password", "step.okta_user_expire_password", "step.okta_user_set_recovery_question",
+      "step.okta_group_create", "step.okta_group_get", "step.okta_group_list", "step.okta_group_delete", "step.okta_group_add_user", "step.okta_group_remove_user", "step.okta_group_list_users",
+      "step.okta_group_rule_create", "step.okta_group_rule_get", "step.okta_group_rule_list", "step.okta_group_rule_delete", "step.okta_group_rule_activate", "step.okta_group_rule_deactivate",
+      "step.okta_app_create", "step.okta_app_get", "step.okta_app_list", "step.okta_app_update", "step.okta_app_delete", "step.okta_app_activate", "step.okta_app_deactivate",
+      "step.okta_app_user_assign", "step.okta_app_user_get", "step.okta_app_user_list", "step.okta_app_user_update", "step.okta_app_user_unassign",
+      "step.okta_app_group_assign", "step.okta_app_group_get", "step.okta_app_group_list", "step.okta_app_group_update", "step.okta_app_group_unassign",
+      "step.okta_authz_server_create", "step.okta_authz_server_get", "step.okta_authz_server_list", "step.okta_authz_server_update", "step.okta_authz_server_delete", "step.okta_authz_server_activate", "step.okta_authz_server_deactivate",
+      "step.okta_authz_claim_create", "step.okta_authz_claim_list", "step.okta_authz_claim_delete", "step.okta_authz_scope_create", "step.okta_authz_scope_list", "step.okta_authz_scope_delete",
+      "step.okta_authz_policy_create", "step.okta_authz_policy_list", "step.okta_authz_policy_delete", "step.okta_authz_policy_rule_create", "step.okta_authz_policy_rule_list", "step.okta_authz_policy_rule_delete",
+      "step.okta_authz_key_list", "step.okta_authz_key_rotate",
+      "step.okta_policy_create", "step.okta_policy_get", "step.okta_policy_list", "step.okta_policy_delete", "step.okta_policy_activate", "step.okta_policy_deactivate",
+      "step.okta_policy_rule_create", "step.okta_policy_rule_list", "step.okta_policy_rule_delete", "step.okta_policy_rule_activate", "step.okta_policy_rule_deactivate",
+      "step.okta_authenticator_create", "step.okta_authenticator_get", "step.okta_authenticator_list", "step.okta_authenticator_activate", "step.okta_authenticator_deactivate",
+      "step.okta_factor_enroll", "step.okta_factor_list", "step.okta_factor_verify", "step.okta_factor_unenroll", "step.okta_factor_activate",
+      "step.okta_idp_create", "step.okta_idp_get", "step.okta_idp_list", "step.okta_idp_delete", "step.okta_idp_activate", "step.okta_idp_deactivate",
+      "step.okta_session_get", "step.okta_session_refresh", "step.okta_session_revoke",
+      "step.okta_network_zone_create", "step.okta_network_zone_get", "step.okta_network_zone_list", "step.okta_network_zone_delete", "step.okta_network_zone_activate", "step.okta_network_zone_deactivate",
+      "step.okta_log_list",
+      "step.okta_event_hook_create", "step.okta_event_hook_get", "step.okta_event_hook_list", "step.okta_event_hook_delete", "step.okta_event_hook_activate", "step.okta_event_hook_deactivate", "step.okta_event_hook_verify",
+      "step.okta_inline_hook_create", "step.okta_inline_hook_get", "step.okta_inline_hook_list", "step.okta_inline_hook_delete", "step.okta_inline_hook_activate", "step.okta_inline_hook_deactivate", "step.okta_inline_hook_execute",
+      "step.okta_domain_create", "step.okta_domain_get", "step.okta_domain_list", "step.okta_domain_delete", "step.okta_domain_verify",
+      "step.okta_brand_get", "step.okta_brand_list", "step.okta_brand_update", "step.okta_theme_get", "step.okta_theme_list", "step.okta_theme_update",
+      "step.okta_org_get", "step.okta_org_update"
+    ],
+    "triggerTypes": []
+  },
+  "downloads": [
+    {"os": "linux", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.1.0/workflow-plugin-okta-linux-amd64.tar.gz"},
+    {"os": "linux", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.1.0/workflow-plugin-okta-linux-arm64.tar.gz"},
+    {"os": "darwin", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.1.0/workflow-plugin-okta-darwin-amd64.tar.gz"},
+    {"os": "darwin", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.1.0/workflow-plugin-okta-darwin-arm64.tar.gz"}
+  ]
+}

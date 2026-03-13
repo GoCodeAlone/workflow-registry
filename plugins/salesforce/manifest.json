@@ -1,0 +1,49 @@
+{
+  "name": "workflow-plugin-salesforce",
+  "version": "0.1.0",
+  "description": "Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.3.30",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-salesforce",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-salesforce",
+  "keywords": ["salesforce", "crm", "soql", "sobject", "apex", "bulk-api", "reports"],
+  "capabilities": {
+    "moduleTypes": ["salesforce.provider"],
+    "stepTypes": [
+      "step.sf_record_create", "step.sf_record_get", "step.sf_record_update", "step.sf_record_delete", "step.sf_record_upsert",
+      "step.sf_query", "step.sf_query_all", "step.sf_search",
+      "step.sf_bulk_create", "step.sf_bulk_update", "step.sf_bulk_upsert", "step.sf_bulk_delete",
+      "step.sf_bulk_job_create", "step.sf_bulk_job_status", "step.sf_bulk_job_results", "step.sf_bulk_job_abort",
+      "step.sf_describe_object", "step.sf_describe_global", "step.sf_list_objects",
+      "step.sf_approval_submit", "step.sf_approval_approve", "step.sf_approval_reject",
+      "step.sf_approval_process_list", "step.sf_approval_pending_list",
+      "step.sf_flow_trigger", "step.sf_flow_list", "step.sf_flow_get",
+      "step.sf_apex_execute", "step.sf_apex_log_list", "step.sf_apex_log_get",
+      "step.sf_report_run", "step.sf_report_list", "step.sf_report_describe", "step.sf_report_instances",
+      "step.sf_dashboard_list", "step.sf_dashboard_get", "step.sf_dashboard_refresh", "step.sf_dashboard_status",
+      "step.sf_user_get", "step.sf_user_list", "step.sf_user_create", "step.sf_user_update",
+      "step.sf_user_reset_password", "step.sf_user_freeze", "step.sf_user_unfreeze",
+      "step.sf_metadata_deploy", "step.sf_metadata_retrieve", "step.sf_metadata_deploy_status",
+      "step.sf_metadata_list", "step.sf_metadata_read", "step.sf_metadata_create", "step.sf_metadata_update", "step.sf_metadata_delete",
+      "step.sf_custom_object_create", "step.sf_custom_field_create",
+      "step.sf_event_publish", "step.sf_event_subscribe",
+      "step.sf_chatter_post", "step.sf_chatter_feed_list", "step.sf_chatter_comment",
+      "step.sf_file_upload", "step.sf_file_download", "step.sf_file_list", "step.sf_file_version_list",
+      "step.sf_limits_get", "step.sf_org_info",
+      "step.sf_permission_set_list", "step.sf_permission_set_assign", "step.sf_permission_set_remove",
+      "step.sf_profile_list", "step.sf_profile_get",
+      "step.sf_role_list", "step.sf_role_get"
+    ],
+    "triggerTypes": []
+  },
+  "downloads": [
+    {"os": "linux", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.1.0/workflow-plugin-salesforce-linux-amd64.tar.gz"},
+    {"os": "linux", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.1.0/workflow-plugin-salesforce-linux-arm64.tar.gz"},
+    {"os": "darwin", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.1.0/workflow-plugin-salesforce-darwin-amd64.tar.gz"},
+    {"os": "darwin", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.1.0/workflow-plugin-salesforce-darwin-arm64.tar.gz"}
+  ]
+}
