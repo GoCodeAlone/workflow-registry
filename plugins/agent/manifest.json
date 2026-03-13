@@ -4,7 +4,7 @@
   "author": "GoCodeAlone",
   "description": "AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection",
   "source": "github.com/GoCodeAlone/workflow-plugin-agent",
-  "type": "internal",
+  "type": "builtin",
   "tier": "core",
   "license": "Proprietary",
   "private": true,
