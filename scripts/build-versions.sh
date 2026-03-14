@@ -52,19 +52,22 @@ while IFS= read -r manifest; do
     continue
   fi
 
-  # Extract owner/repo from URL (https://github.com/owner/repo or github.com/owner/repo)
-  gh_repo="$(echo "${repository}" | sed 's|https://github.com/||; s|http://github.com/||; s|github.com/||')"
+  # Extract owner/repo from URL, normalizing trailing slashes, .git suffix, and extra path segments
+  gh_repo="$(echo "${repository}" | sed 's|https://github.com/||; s|http://github.com/||; s|github.com/||; s|\.git$||; s|/$||' | cut -d/ -f1,2)"
 
   echo "  ${plugin_name}: fetching releases for ${gh_repo}..."
 
   # List releases (tagName + publishedAt only; assets not available in list output)
-  releases_list="$(gh release list \
+  if ! releases_list="$(gh release list \
     --repo "${gh_repo}" \
     --limit 100 \
     --json tagName,publishedAt \
-    2>/dev/null || echo "[]")"
+    2>&1)"; then
+    echo "    WARNING: failed to list releases for ${gh_repo}: ${releases_list}" >&2
+    releases_list="[]"
+  fi
 
-  if [[ "${releases_list}" == "[]" ]]; then
+  if [[ "${releases_list}" == "[]" ]] || [[ "$(echo "${releases_list}" | jq 'length')" == "0" ]]; then
     echo "    no releases found"
     jq -n --arg name "${plugin_name}" '{"name": $name, "versions": []}' \
       > "${dest_dir}/versions.json"
@@ -79,10 +82,13 @@ while IFS= read -r manifest; do
     ver="$(echo "${tag}" | sed 's/^v//')"
 
     # gh release view returns assets with a `digest` field (sha256:... format)
-    release_detail="$(gh release view "${tag}" \
+    if ! release_detail="$(gh release view "${tag}" \
       --repo "${gh_repo}" \
       --json assets \
-      2>/dev/null || echo '{"assets":[]}')"
+      2>&1)"; then
+      echo "    WARNING: failed to fetch assets for ${gh_repo}@${tag}: ${release_detail}" >&2
+      release_detail='{"assets":[]}'
+    fi
 
     version_entry="$(echo "${release_detail}" | jq \
       --arg ver "${ver}" \

@@ -50,9 +50,11 @@ while IFS= read -r manifest; do
     repository:       (.repository // null),
     minEngineVersion: (.minEngineVersion // null),
     capabilities: {
-      moduleTypes:  (.capabilities.moduleTypes  // []),
-      stepTypes:    (.capabilities.stepTypes    // []),
-      triggerTypes: (.capabilities.triggerTypes // [])
+      moduleTypes:      (.capabilities.moduleTypes      // []),
+      stepTypes:        (.capabilities.stepTypes        // []),
+      triggerTypes:     (.capabilities.triggerTypes     // []),
+      workflowHandlers: (.capabilities.workflowHandlers // []),
+      wiringHooks:      (.capabilities.wiringHooks      // [])
     }
   }' "${manifest}")"
 
