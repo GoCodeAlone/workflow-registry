@@ -22,7 +22,8 @@
       "step.discord_upload_file",
       "step.discord_create_thread",
       "step.discord_voice_join",
-      "step.discord_voice_leave"
+      "step.discord_voice_leave",
+      "step.discord_voice_play"
     ],
     "triggerTypes": ["trigger.discord"],
     "workflowHandlers": []
