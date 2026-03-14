@@ -1,0 +1,50 @@
+{
+  "name": "teams",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "Microsoft Teams messaging and channel management via the Microsoft Graph API. Provides a provider module with Azure AD client credentials auth, pipeline steps for messages/cards/channels/members, and an HTTP webhook trigger for Graph change notifications.",
+  "source": "github.com/GoCodeAlone/workflow-plugin-teams",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "minEngineVersion": "0.1.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-teams",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-teams",
+  "keywords": ["teams", "microsoft", "messaging", "chat", "graph", "azure", "notifications"],
+  "capabilities": {
+    "moduleTypes": ["teams.provider"],
+    "stepTypes": [
+      "step.teams_send_message",
+      "step.teams_send_card",
+      "step.teams_reply_message",
+      "step.teams_delete_message",
+      "step.teams_upload_file",
+      "step.teams_create_channel",
+      "step.teams_add_member"
+    ],
+    "triggerTypes": ["trigger.teams"],
+    "workflowHandlers": []
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-teams/releases/download/v0.1.0/workflow-plugin-teams-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-teams/releases/download/v0.1.0/workflow-plugin-teams-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-teams/releases/download/v0.1.0/workflow-plugin-teams-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-teams/releases/download/v0.1.0/workflow-plugin-teams-darwin-arm64.tar.gz"
+    }
+  ]
+}
