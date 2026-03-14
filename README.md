@@ -1,21 +1,26 @@
 # workflow-registry
 
 [![Validate Registry](https://github.com/GoCodeAlone/workflow-registry/actions/workflows/validate.yml/badge.svg)](https://github.com/GoCodeAlone/workflow-registry/actions/workflows/validate.yml)
+[![Build & Deploy](https://github.com/GoCodeAlone/workflow-registry/actions/workflows/build-pages.yml/badge.svg)](https://github.com/GoCodeAlone/workflow-registry/actions/workflows/build-pages.yml)
 
 The official plugin and template registry for the [GoCodeAlone/workflow](https://github.com/GoCodeAlone/workflow) engine.
+
+**Registry API**: `https://gocodealone.github.io/workflow-registry/v1/`
 
 This registry catalogs all built-in plugins, community extensions, and reusable templates that can be used with the workflow engine. It serves as the source of truth for the `wfctl` CLI's marketplace and `wfctl publish` command.
 
 ## Table of Contents
 
 - [What is this?](#what-is-this)
-- [Browsing Plugins](#browsing-plugins)
+- [Usage via wfctl](#usage-via-wfctl)
 - [Plugin Tiers](#plugin-tiers)
 - [Built-in Plugins](#built-in-plugins)
+- [External Plugins](#external-plugins)
 - [Templates](#templates)
 - [Schema](#schema)
-- [Submitting a Community Plugin](#submitting-a-community-plugin)
-- [Plugin Manifest Format](#plugin-manifest-format)
+- [Submitting a Plugin](#submitting-a-plugin)
+- [Automatic Version Tracking](#automatic-version-tracking)
+- [Registry Structure](#registry-structure)
 
 ---
 
@@ -30,21 +35,28 @@ The registry is consumed by:
 - `wfctl marketplace` — browse and search available plugins
 - `wfctl publish` — submit your plugin to the registry
 - The workflow UI Marketplace page
+- The static JSON API at `https://gocodealone.github.io/workflow-registry/v1/`
 
 ---
 
-## Browsing Plugins
-
-Plugins are organized under `plugins/<name>/manifest.json`. Each manifest describes the plugin's capabilities, version, tier, and source location.
-
-To search via CLI:
+## Usage via wfctl
 
 ```bash
+# Search for plugins by keyword
 wfctl marketplace search http
-wfctl marketplace info http
-```
 
-To browse manually, see the [`plugins/`](./plugins/) directory.
+# Get details for a specific plugin
+wfctl marketplace info payments
+
+# Install a plugin into your project
+wfctl install payments
+
+# List all installed plugins
+wfctl plugin list
+
+# Update all plugins to latest versions
+wfctl plugin update
+```
 
 ---
 
@@ -154,25 +166,37 @@ Every pull request and push to `main` triggers the [Validate Registry](.github/w
 1. Validates all `plugins/*/manifest.json` files against `schema/registry-schema.json` (JSON Schema draft 2020-12 via `ajv-cli`)
 2. Checks that every plugin referenced in `templates/*.yaml` has a corresponding manifest
 
+The [Build & Deploy](.github/workflows/build-pages.yml) workflow runs on every push to `main`, on a daily schedule, and whenever a plugin sends a `plugin-release` dispatch event. It:
+
+1. Generates `v1/index.json` from all manifests
+2. Queries GitHub Releases for each plugin to build `v1/plugins/<name>/versions.json`
+3. Deploys the `v1/` directory to GitHub Pages
+
 PRs that fail validation cannot be merged.
 
 ---
 
-## Submitting a Community Plugin
+## Submitting a Plugin
+
+### Step-by-step PR Process
 
 1. **Fork** this repository
 2. **Create** a directory under `plugins/<your-plugin-name>/`
 3. **Add** a `manifest.json` that conforms to the [registry schema](./schema/registry-schema.json)
-4. **Validate** your manifest against the schema
-5. **Open a PR** with a description of your plugin
+4. **Validate** your manifest locally:
+   ```bash
+   bash scripts/validate-manifests.sh
+   ```
+5. **Open a PR** with a description of your plugin, what it provides, and a link to the source repository
 
 ### Manifest Requirements
 
 - `name`, `version`, `author`, `description`, `type`, `tier`, `license` are required
 - `type` must be `"external"` for community plugins (only GoCodeAlone sets `"builtin"`)
 - `tier` must be `"community"` for third-party submissions
-- `source` should point to the public repository where the plugin lives
+- `repository` should point to the public GitHub repository where the plugin lives
 - `capabilities.moduleTypes`, `stepTypes`, `triggerTypes`, `workflowHandlers` must accurately reflect what the plugin registers
+- `private: true` must be set for plugins that are not publicly installable
 
 ### Review Process
 
@@ -181,6 +205,67 @@ PRs are reviewed by maintainers for:
 - Accurate capability declarations
 - Source repo accessibility
 - License compatibility
+
+---
+
+## Automatic Version Tracking
+
+When you publish a new release of your plugin, you can automatically trigger a registry rebuild so that `v1/plugins/<name>/versions.json` and `v1/plugins/<name>/latest.json` are updated within minutes.
+
+See [`templates/notify-registry.yml`](./templates/notify-registry.yml) for the reusable workflow snippet to add to your plugin's release workflow.
+
+**Setup**:
+1. Create a GitHub PAT with `repo` scope for `GoCodeAlone/workflow-registry`
+2. Add it as a secret named `REGISTRY_PAT` in your plugin repo
+3. Copy the `notify-registry` job from the template into your `.github/workflows/release.yml`
+
+The registry rebuilds daily at 06:00 UTC as a fallback even without dispatch events.
+
+---
+
+## Registry Structure
+
+```
+workflow-registry/
+├── plugins/                    # Source of truth — one directory per plugin
+│   └── <name>/
+│       └── manifest.json       # Plugin metadata and capabilities
+├── templates/                  # Reusable workflow config templates
+│   ├── notify-registry.yml     # Action snippet for plugin release notifications
+│   └── *.yaml                  # Workflow starter templates
+├── schema/
+│   └── registry-schema.json    # JSON Schema for manifest validation
+├── scripts/
+│   ├── build-index.sh          # Generates v1/index.json
+│   ├── build-versions.sh       # Queries GitHub Releases → v1/plugins/*/versions.json
+│   ├── validate-manifests.sh   # CI manifest validation
+│   └── validate-templates.sh   # CI template validation
+├── .github/workflows/
+│   ├── validate.yml            # PR validation gate
+│   └── build-pages.yml         # Build and deploy static registry to GitHub Pages
+└── v1/                         # Generated — served via GitHub Pages (not committed)
+    ├── index.json              # Array of all plugin summaries, sorted by name
+    └── plugins/
+        └── <name>/
+            ├── manifest.json   # Copy of source manifest
+            ├── versions.json   # Release history from GitHub
+            └── latest.json     # Latest release entry only
+```
+
+### Static API Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /v1/index.json` | All plugin summaries (name, description, version, capabilities, ...) |
+| `GET /v1/plugins/<name>/manifest.json` | Full manifest for a specific plugin |
+| `GET /v1/plugins/<name>/versions.json` | All release versions with download URLs |
+| `GET /v1/plugins/<name>/latest.json` | Latest release version only |
+
+---
+
+## Plugin Authoring Guide
+
+See the [Plugin Authoring Guide](./docs/plugin-authoring.md) for a complete walkthrough of building, testing, and publishing a workflow engine plugin.
 
 ---
 
@@ -198,6 +283,7 @@ PRs are reviewed by maintainers for:
   "tier": "community",
   "license": "MIT",
   "minEngineVersion": "0.1.0",
+  "repository": "https://github.com/yourorg/my-plugin",
   "keywords": ["tag1", "tag2"],
   "capabilities": {
     "moduleTypes": ["mymodule.type"],
