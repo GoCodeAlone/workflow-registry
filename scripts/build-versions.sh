@@ -5,6 +5,14 @@
 # and builds v1/plugins/<name>/versions.json and v1/plugins/<name>/latest.json.
 #
 # Requires: gh CLI (authenticated), jq
+#
+# Notes:
+#   - `gh release list` does NOT support --json assets; per-release assets are
+#     fetched via `gh release view <tag> --json assets`.
+#   - Asset digests (sha256) are read directly from the `digest` field returned
+#     by `gh release view`, so checksums.txt does not need to be downloaded.
+#   - The canonical plugin name used in versions.json is the directory name
+#     (same convention as build-index.sh), not the manifest's "name" field.
 
 set -euo pipefail
 
@@ -49,111 +57,58 @@ while IFS= read -r manifest; do
 
   echo "  ${plugin_name}: fetching releases for ${gh_repo}..."
 
-  # Query GitHub Releases API
-  releases_json="$(gh release list \
+  # List releases (tagName + publishedAt only; assets not available in list output)
+  releases_list="$(gh release list \
     --repo "${gh_repo}" \
     --limit 100 \
-    --json tagName,publishedAt,assets \
+    --json tagName,publishedAt \
     2>/dev/null || echo "[]")"
 
-  if [[ "${releases_json}" == "[]" ]]; then
+  if [[ "${releases_list}" == "[]" ]]; then
     echo "    no releases found"
     jq -n --arg name "${plugin_name}" '{"name": $name, "versions": []}' \
       > "${dest_dir}/versions.json"
     continue
   fi
 
-  # Build versions array from releases, newest-first (gh release list already returns newest-first)
-  versions="$(echo "${releases_json}" | jq --arg minEng "${min_engine}" '
-    [
-      .[] |
-      . as $release |
-      ($release.tagName | ltrimstr("v")) as $ver |
-      {
-        version: $ver,
-        released: $release.publishedAt,
-        minEngineVersion: (if $minEng != "" then $minEng else null end),
-        downloads: (
-          # Find checksums.txt asset content URL if available
-          ($release.assets | map(select(.name == "checksums.txt")) | first | .url // "") as $checksums_url |
-          [
-            $release.assets[] |
-            select(.name | test("(linux|darwin|windows)-(amd64|arm64)\\.tar\\.gz$")) |
-            . as $asset |
-            ($asset.name | capture("(?P<os>linux|darwin|windows)-(?P<arch>amd64|arm64)\\.tar\\.gz$")) as $parts |
-            {
-              os:     $parts.os,
-              arch:   $parts.arch,
-              url:    $asset.url,
-              sha256: ""
-            }
-          ]
-        )
-      }
-    ]
-  ')"
+  # For each release tag, fetch full asset list (includes digest/sha256)
+  final_versions="[]"
+  while IFS= read -r release_entry; do
+    tag="$(echo "${release_entry}" | jq -r '.tagName')"
+    published_at="$(echo "${release_entry}" | jq -r '.publishedAt')"
+    ver="$(echo "${tag}" | sed 's/^v//')"
 
-  # Resolve checksums for each version by fetching checksums.txt
-  versions_with_checksums="$(echo "${releases_json}" | jq --arg minEng "${min_engine}" '
-    [
-      .[] |
-      ($release = .) |
-      ($release.tagName | ltrimstr("v")) as $ver |
-      ($release.assets | map(select(.name == "checksums.txt")) | first) as $checksum_asset |
+    # gh release view returns assets with a `digest` field (sha256:... format)
+    release_detail="$(gh release view "${tag}" \
+      --repo "${gh_repo}" \
+      --json assets \
+      2>/dev/null || echo '{"assets":[]}')"
+
+    version_entry="$(echo "${release_detail}" | jq \
+      --arg ver "${ver}" \
+      --arg published_at "${published_at}" \
+      --arg minEng "${min_engine}" '
       {
         version: $ver,
-        released: $release.publishedAt,
+        released: $published_at,
         minEngineVersion: (if $minEng != "" then $minEng else null end),
-        checksum_url: ($checksum_asset.url // ""),
         downloads: [
-          $release.assets[] |
-          select(.name | test("(linux|darwin|windows)-(amd64|arm64)\\.tar\\.gz$")) |
+          .assets[] |
+          select(.name | test("(linux|darwin|windows)-(amd64|arm64)[.]tar[.]gz$")) |
           . as $asset |
-          ($asset.name | capture("(?P<os>linux|darwin|windows)-(?P<arch>amd64|arm64)\\.tar\\.gz$")) as $parts |
+          ($asset.name | capture("(?<os>linux|darwin|windows)-(?<arch>amd64|arm64)[.]tar[.]gz$")) as $parts |
           {
-            os:        $parts.os,
-            arch:      $parts.arch,
-            url:       $asset.url,
-            asset_name: $asset.name,
-            sha256:    ""
+            os:     $parts.os,
+            arch:   $parts.arch,
+            url:    $asset.url,
+            sha256: ($asset.digest | if . then ltrimstr("sha256:") else "" end)
           }
         ]
       }
-    ]
-  ')"
-
-  # Fetch checksums and populate sha256 fields
-  final_versions="[]"
-  while IFS= read -r version_entry; do
-    checksum_url="$(echo "${version_entry}" | jq -r '.checksum_url // ""')"
-    ver="$(echo "${version_entry}" | jq -r '.version')"
-
-    if [[ -n "${checksum_url}" ]]; then
-      # Download checksums.txt via gh api
-      checksums_txt="$(gh api "${checksum_url}" 2>/dev/null || echo "")"
-      # gh api on a release asset URL redirects; try direct download approach
-      if [[ -z "${checksums_txt}" ]]; then
-        checksums_txt="$(curl -sf -L "${checksum_url}" 2>/dev/null || echo "")"
-      fi
-    else
-      checksums_txt=""
-    fi
-
-    # Update sha256 for each download by matching asset name in checksums.txt
-    updated_entry="$(echo "${version_entry}" | jq \
-      --arg checksums "${checksums_txt}" '
-      del(.checksum_url) |
-      .downloads = [
-        .downloads[] |
-        . as $dl |
-        ($checksums | split("\n")[] | select(contains($dl.asset_name)) | split("  ")[0] // "") as $sha |
-        del(.asset_name) |
-        .sha256 = $sha
-      ]
     ')"
 
-    final_versions="$(echo "${final_versions}" | jq --argjson v "${updated_entry}" '. + [$v]')"
-  done < <(echo "${versions_with_checksums}" | jq -c '.[]')
+    final_versions="$(echo "${final_versions}" | jq --argjson v "${version_entry}" '. + [$v]')"
+  done < <(echo "${releases_list}" | jq -c '.[]')
 
   # Write versions.json (newest-first order preserved from gh release list)
   jq -n \
@@ -162,13 +117,14 @@ while IFS= read -r manifest; do
     '{"name": $name, "versions": $versions}' \
     > "${dest_dir}/versions.json"
 
+  version_count="$(echo "${final_versions}" | jq 'length')"
+  echo "    wrote ${version_count} version(s)"
+
   # Write latest.json (first/newest version entry)
   latest="$(echo "${final_versions}" | jq 'first // null')"
   if [[ "${latest}" != "null" ]]; then
     echo "${latest}" > "${dest_dir}/latest.json"
-    echo "    wrote ${final_versions_count:-$(echo "${final_versions}" | jq 'length')} versions, latest: $(echo "${latest}" | jq -r '.version')"
-  else
-    echo "    no versions parsed"
+    echo "    latest: $(echo "${latest}" | jq -r '.version')"
   fi
 
 done < <(find "${PLUGINS_DIR}" -name "manifest.json" | sort)

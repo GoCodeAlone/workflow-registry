@@ -34,9 +34,11 @@ while IFS= read -r manifest; do
     continue
   fi
 
-  # Extract summary fields
-  summary="$(jq '{
-    name:             (.name // ""),
+  # Extract summary fields.
+  # Use the directory name as the canonical "name" so that it matches the
+  # v1/plugins/<name>/ API path, even if the manifest's "name" field differs.
+  summary="$(jq --arg dir_name "${plugin_name}" '{
+    name:             $dir_name,
     description:      (.description // ""),
     version:          (.version // ""),
     type:             (.type // ""),

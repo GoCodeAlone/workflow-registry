@@ -265,7 +265,7 @@ workflow-registry/
 
 ## Plugin Authoring Guide
 
-See the [Plugin Authoring Guide](./docs/plugin-authoring.md) for a complete walkthrough of building, testing, and publishing a workflow engine plugin.
+See the [Plugin Manifest Format](#plugin-manifest-format) section below and the [registry schema](./schema/registry-schema.json) for a complete reference on building, testing, and publishing a workflow engine plugin.
 
 ---
 
