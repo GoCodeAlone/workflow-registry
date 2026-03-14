@@ -1801,3 +1801,246 @@ cd /Users/jon/workspace/workflow
 git add cmd/wfctl/registry_source.go cmd/wfctl/registry_config.go cmd/wfctl/multi_registry.go
 git commit -m "feat(wfctl): add static registry source type for GitHub Pages"
 ```
+
+---
+
+### Task 15: wfctl plugin install --local Support
+
+**Files:**
+- Modify: `cmd/wfctl/plugin_install.go` (in workflow repo)
+
+**Context:** Users need to install plugins from a local build directory without going through the registry. This is essential for development workflows and private plugins.
+
+**Step 1: Add the --local flag to runPluginInstall**
+
+In `cmd/wfctl/plugin_install.go`, add to the FlagSet (after the `directURL` flag from Task 4):
+
+```go
+localPath := fs.String("local", "", "Install from a local plugin directory or build output")
+```
+
+After the `*directURL` check, add:
+
+```go
+if *localPath != "" {
+    return installFromLocal(*localPath, pluginDirVal)
+}
+```
+
+**Step 2: Implement installFromLocal**
+
+```go
+// installFromLocal copies a plugin from a local directory to the plugin install dir.
+func installFromLocal(srcDir, pluginDir string) error {
+    // Read plugin.json to determine the name.
+    pjPath := filepath.Join(srcDir, "plugin.json")
+    pjData, err := os.ReadFile(pjPath)
+    if err != nil {
+        return fmt.Errorf("read plugin.json in %s: %w", srcDir, err)
+    }
+    var pj installedPluginJSON
+    if err := json.Unmarshal(pjData, &pj); err != nil {
+        return fmt.Errorf("parse plugin.json: %w", err)
+    }
+    if pj.Name == "" {
+        return fmt.Errorf("plugin.json missing name field")
+    }
+
+    pluginName := normalizePluginName(pj.Name)
+    destDir := filepath.Join(pluginDir, pluginName)
+    if err := os.MkdirAll(destDir, 0750); err != nil {
+        return fmt.Errorf("create plugin dir: %w", err)
+    }
+
+    // Copy plugin.json
+    if err := copyFile(pjPath, filepath.Join(destDir, "plugin.json")); err != nil {
+        return err
+    }
+
+    // Copy the binary (look for the plugin binary by name or largest executable)
+    binaryName := pluginName
+    srcBinary := filepath.Join(srcDir, binaryName)
+    if _, err := os.Stat(srcBinary); os.IsNotExist(err) {
+        // Try full name
+        fullName := "workflow-plugin-" + pluginName
+        srcBinary = filepath.Join(srcDir, fullName)
+        if _, err := os.Stat(srcBinary); os.IsNotExist(err) {
+            return fmt.Errorf("no plugin binary found in %s (tried %s and %s)", srcDir, pluginName, fullName)
+        }
+    }
+    if err := copyFile(srcBinary, filepath.Join(destDir, pluginName)); err != nil {
+        return err
+    }
+    // Ensure executable
+    _ = os.Chmod(filepath.Join(destDir, pluginName), 0750)
+
+    fmt.Printf("Installed %s v%s from %s to %s\n", pluginName, pj.Version, srcDir, destDir)
+    return nil
+}
+
+// copyFile copies a file from src to dst.
+func copyFile(src, dst string) error {
+    in, err := os.Open(src)
+    if err != nil {
+        return fmt.Errorf("open %s: %w", src, err)
+    }
+    defer in.Close()
+    out, err := os.Create(dst)
+    if err != nil {
+        return fmt.Errorf("create %s: %w", dst, err)
+    }
+    defer out.Close()
+    if _, err := io.Copy(out, in); err != nil {
+        return fmt.Errorf("copy %s to %s: %w", src, dst, err)
+    }
+    return nil
+}
+```
+
+**Step 3: Run tests**
+
+```bash
+cd /Users/jon/workspace/workflow
+go build ./cmd/wfctl/...
+```
+
+**Step 4: Commit**
+
+```bash
+cd /Users/jon/workspace/workflow
+git add cmd/wfctl/plugin_install.go
+git commit -m "feat(wfctl): add plugin install --local for local directory installs"
+```
+
+---
+
+### Task 16: Engine Load-Time Checksum Verification
+
+**Files:**
+- Modify: `plugin/loader.go` (in workflow repo)
+
+**Context:** The design requires that the engine verify the SHA-256 of on-disk plugin binaries against the lockfile on every load, preventing post-install tampering.
+
+**Step 1: Add lockfile-based verification to LoadPlugin**
+
+In `plugin/loader.go`, add a function that reads `.wfctl.yaml` and verifies the binary hash before loading:
+
+```go
+// VerifyPluginIntegrity checks the plugin binary's SHA-256 against the lockfile.
+// Returns nil if no lockfile entry exists or if the checksum matches.
+func VerifyPluginIntegrity(pluginDir, pluginName string) error {
+    lockfilePath := filepath.Join(".", ".wfctl.yaml")
+    data, err := os.ReadFile(lockfilePath)
+    if os.IsNotExist(err) {
+        return nil // no lockfile, skip verification
+    }
+    if err != nil {
+        return fmt.Errorf("read lockfile: %w", err)
+    }
+
+    var lf struct {
+        Plugins map[string]struct {
+            SHA256 string `yaml:"sha256"`
+        } `yaml:"plugins"`
+    }
+    if err := yaml.Unmarshal(data, &lf); err != nil {
+        return nil // unparseable lockfile, skip
+    }
+
+    entry, ok := lf.Plugins[pluginName]
+    if !ok || entry.SHA256 == "" {
+        return nil // not pinned with checksum
+    }
+
+    binaryPath := filepath.Join(pluginDir, pluginName, pluginName)
+    binaryData, err := os.ReadFile(binaryPath)
+    if err != nil {
+        return fmt.Errorf("read plugin binary %s: %w", binaryPath, err)
+    }
+
+    h := sha256.Sum256(binaryData)
+    got := hex.EncodeToString(h[:])
+    if !strings.EqualFold(got, entry.SHA256) {
+        return fmt.Errorf("plugin %q binary integrity check failed: checksum %s does not match lockfile %s", pluginName, got, entry.SHA256)
+    }
+    return nil
+}
+```
+
+**Step 2: Call VerifyPluginIntegrity before loading each external plugin**
+
+In the engine's external plugin discovery/load path, add:
+
+```go
+if err := plugin.VerifyPluginIntegrity(pluginDir, pluginName); err != nil {
+    logger.Error("plugin integrity check failed", "plugin", pluginName, "error", err)
+    continue // skip loading tampered plugin
+}
+```
+
+**Step 3: Run tests**
+
+```bash
+cd /Users/jon/workspace/workflow
+go build ./...
+go test ./plugin/... -count=1
+```
+
+**Step 4: Commit**
+
+```bash
+cd /Users/jon/workspace/workflow
+git add plugin/loader.go
+git commit -m "feat: verify plugin binary integrity against lockfile checksums on load"
+```
+
+---
+
+### Task 17: Auto-Fetch Version Constraint Passthrough
+
+**Files:**
+- Modify: `plugin/autofetch.go` (in workflow repo, created in Task 7)
+
+**Context:** Task 7's auto-fetch shells out to `wfctl plugin install` but doesn't pass the version constraint. The design says auto-fetch should respect `version: ">=0.1.0"` constraints and lockfile pins.
+
+**Step 1: Update AutoFetchPlugin to accept and pass version**
+
+```go
+func AutoFetchPlugin(pluginName, version, pluginDir, registryConfigPath string) error {
+    destDir := filepath.Join(pluginDir, pluginName)
+    if _, err := os.Stat(filepath.Join(destDir, "plugin.json")); err == nil {
+        return nil // already installed
+    }
+
+    fmt.Fprintf(os.Stderr, "[auto-fetch] Plugin %q not found locally, fetching from registry...\n", pluginName)
+
+    // Build install argument with version if specified
+    installArg := pluginName
+    if version != "" {
+        installArg = pluginName + "@" + strings.TrimPrefix(version, ">=")
+    }
+
+    args := []string{"plugin", "install", "--plugin-dir", pluginDir, installArg}
+    cmd := exec.Command("wfctl", args...)
+    cmd.Stdout = os.Stderr
+    cmd.Stderr = os.Stderr
+    if err := cmd.Run(); err != nil {
+        return fmt.Errorf("auto-fetch plugin %q: %w", pluginName, err)
+    }
+    return nil
+}
+```
+
+**Step 2: Update the engine callsite to pass version**
+
+```go
+if err := plugin.AutoFetchPlugin(ep.Name, ep.Version, e.pluginDir, ""); err != nil {
+```
+
+**Step 3: Commit**
+
+```bash
+cd /Users/jon/workspace/workflow
+git add plugin/autofetch.go engine.go
+git commit -m "feat: pass version constraint to auto-fetch plugin installs"
+```
