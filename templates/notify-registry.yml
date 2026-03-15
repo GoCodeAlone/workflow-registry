@@ -1,0 +1,26 @@
+# templates/notify-registry.yml
+#
+# Add this job to your plugin's .github/workflows/release.yml
+# to automatically notify the workflow-registry when you publish a release.
+#
+# Prerequisites:
+#   - Create a fine-grained GitHub PAT scoped to GoCodeAlone/workflow-registry
+#     with "Contents: Read" permission (sufficient for repository_dispatch).
+#     Alternatively, a classic PAT with `public_repo` scope works.
+#   - Add it as a secret named REGISTRY_PAT in your plugin repo
+#
+# Usage: Copy the job below into your release workflow, after the GoReleaser job.
+
+# notify-registry:
+#   if: startsWith(github.ref, 'refs/tags/v')
+#   needs: [release]  # adjust to match your release job name
+#   runs-on: ubuntu-latest
+#   steps:
+#     - name: Notify workflow-registry of new release
+#       uses: peter-evans/repository-dispatch@v3
+#       with:
+#         token: ${{ secrets.REGISTRY_PAT }}
+#         repository: GoCodeAlone/workflow-registry
+#         event-type: plugin-release
+#         client-payload: >-
+#           {"plugin": "${{ github.repository }}", "tag": "${{ github.ref_name }}"}
