@@ -1,0 +1,63 @@
+{
+  "name": "workflow-plugin-aws",
+  "version": "0.1.0",
+  "description": "AWS provider plugin for workflow IaC — manages ECS, EKS, RDS, ElastiCache, VPC, ALB, Route53, ECR, API Gateway, Security Groups, IAM, S3, and ACM resources",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "infra",
+  "private": false,
+  "minEngineVersion": "0.3.51",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-aws",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-aws",
+  "keywords": ["aws", "iac", "infrastructure", "cloud", "ecs", "eks", "rds", "elasticache", "vpc", "alb", "route53", "ecr", "s3"],
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "iacProvider": {
+      "name": "aws",
+      "resourceTypes": [
+        "infra.container_service",
+        "infra.k8s_cluster",
+        "infra.database",
+        "infra.cache",
+        "infra.vpc",
+        "infra.load_balancer",
+        "infra.dns",
+        "infra.registry",
+        "infra.api_gateway",
+        "infra.firewall",
+        "infra.iam_role",
+        "infra.storage",
+        "infra.certificate"
+      ]
+    }
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v0.1.0/workflow-plugin-aws-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v0.1.0/workflow-plugin-aws-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v0.1.0/workflow-plugin-aws-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v0.1.0/workflow-plugin-aws-darwin-arm64.tar.gz"
+    }
+  ]
+}

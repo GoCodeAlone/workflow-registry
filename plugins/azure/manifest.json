@@ -1,0 +1,63 @@
+{
+  "name": "workflow-plugin-azure",
+  "version": "0.1.0",
+  "description": "Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "infra",
+  "private": false,
+  "minEngineVersion": "0.3.51",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-azure",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-azure",
+  "keywords": ["azure", "iac", "infrastructure", "cloud", "aci", "aks", "sql", "redis", "vnet", "acr", "apim"],
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "iacProvider": {
+      "name": "azure",
+      "resourceTypes": [
+        "infra.container_service",
+        "infra.k8s_cluster",
+        "infra.database",
+        "infra.cache",
+        "infra.vpc",
+        "infra.load_balancer",
+        "infra.dns",
+        "infra.registry",
+        "infra.api_gateway",
+        "infra.firewall",
+        "infra.iam_role",
+        "infra.storage",
+        "infra.certificate"
+      ]
+    }
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v0.1.0/workflow-plugin-azure-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v0.1.0/workflow-plugin-azure-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v0.1.0/workflow-plugin-azure-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v0.1.0/workflow-plugin-azure-darwin-arm64.tar.gz"
+    }
+  ]
+}

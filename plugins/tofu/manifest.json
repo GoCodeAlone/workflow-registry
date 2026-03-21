@@ -1,0 +1,52 @@
+{
+  "name": "workflow-plugin-tofu",
+  "version": "0.1.0",
+  "description": "OpenTofu/Terraform adapter: HCL generation from abstract infra specs, plan/apply execution, and state import/export",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "core",
+  "private": false,
+  "minEngineVersion": "0.3.51",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-tofu",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-tofu",
+  "keywords": ["opentofu", "terraform", "iac", "hcl", "infrastructure", "aws", "gcp", "azure", "digitalocean"],
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.iac_generate_hcl",
+      "step.tofu_init",
+      "step.tofu_plan",
+      "step.tofu_apply",
+      "step.tofu_state_import",
+      "step.tofu_state_export"
+    ],
+    "triggerTypes": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.0/workflow-plugin-tofu-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.0/workflow-plugin-tofu-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.0/workflow-plugin-tofu-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.0/workflow-plugin-tofu-darwin-arm64.tar.gz"
+    }
+  ]
+}

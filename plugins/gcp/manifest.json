@@ -1,0 +1,63 @@
+{
+  "name": "workflow-plugin-gcp",
+  "version": "0.1.0",
+  "description": "GCP infrastructure provider plugin for workflow — manages Cloud Run, GKE, Cloud SQL, Memorystore, VPC, Load Balancer, Cloud DNS, Artifact Registry, API Gateway, Firewall, IAM, GCS, and Certificate Manager",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "infra",
+  "private": false,
+  "minEngineVersion": "0.3.51",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-gcp",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-gcp",
+  "keywords": ["gcp", "google-cloud", "iac", "infrastructure", "cloud-run", "gke", "cloud-sql", "memorystore", "gcs"],
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "iacProvider": {
+      "name": "gcp",
+      "resourceTypes": [
+        "infra.container_service",
+        "infra.k8s_cluster",
+        "infra.database",
+        "infra.cache",
+        "infra.vpc",
+        "infra.load_balancer",
+        "infra.dns",
+        "infra.registry",
+        "infra.api_gateway",
+        "infra.firewall",
+        "infra.iam_role",
+        "infra.storage",
+        "infra.certificate"
+      ]
+    }
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v0.1.0/workflow-plugin-gcp-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v0.1.0/workflow-plugin-gcp-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v0.1.0/workflow-plugin-gcp-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v0.1.0/workflow-plugin-gcp-darwin-arm64.tar.gz"
+    }
+  ]
+}

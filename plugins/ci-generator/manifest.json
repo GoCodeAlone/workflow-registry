@@ -1,0 +1,47 @@
+{
+  "name": "workflow-plugin-ci-generator",
+  "version": "0.1.0",
+  "description": "CI/CD config generator for GitHub Actions, GitLab CI, Jenkins, and CircleCI",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "core",
+  "private": false,
+  "minEngineVersion": "0.3.51",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator",
+  "keywords": ["ci", "cd", "github-actions", "gitlab-ci", "jenkins", "circleci", "devops", "infrastructure"],
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.ci_generate"
+    ],
+    "triggerTypes": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.0/workflow-plugin-ci-generator-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.0/workflow-plugin-ci-generator-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.0/workflow-plugin-ci-generator-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.0/workflow-plugin-ci-generator-darwin-arm64.tar.gz"
+    }
+  ]
+}
