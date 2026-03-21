@@ -1,6 +1,6 @@
 {
   "name": "statemachine",
-  "version": "0.3.37",
+  "version": "0.3.51",
   "author": "GoCodeAlone",
   "description": "State machine engine, state tracker, and state connector modules with workflow handler for lifecycle management",
   "source": "github.com/GoCodeAlone/workflow",

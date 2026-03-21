@@ -1,6 +1,6 @@
 {
   "name": "storage",
-  "version": "0.3.37",
+  "version": "0.3.51",
   "author": "GoCodeAlone",
   "description": "Storage, database, and persistence modules supporting S3, GCS, local filesystem, SQLite, and generic SQL databases",
   "source": "github.com/GoCodeAlone/workflow",

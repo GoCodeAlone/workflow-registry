@@ -1,6 +1,6 @@
 {
   "name": "cicd",
-  "version": "0.3.37",
+  "version": "0.3.51",
   "author": "GoCodeAlone",
   "description": "CI/CD pipeline step types for shell execution, Docker operations, artifact management, security scanning, deployment, and gating",
   "source": "github.com/GoCodeAlone/workflow",

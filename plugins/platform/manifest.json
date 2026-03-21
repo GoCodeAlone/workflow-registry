@@ -1,6 +1,6 @@
 {
   "name": "platform",
-  "version": "0.3.37",
+  "version": "0.3.51",
   "author": "GoCodeAlone",
   "description": "Platform infrastructure modules (provider, resource, context), reconciliation trigger, template step, and platform workflow handler",
   "source": "github.com/GoCodeAlone/workflow",

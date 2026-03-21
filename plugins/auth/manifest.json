@@ -1,6 +1,6 @@
 {
   "name": "auth",
-  "version": "0.3.37",
+  "version": "0.3.51",
   "author": "GoCodeAlone",
   "description": "JWT authentication, user store, and auth middleware wiring for securing workflow endpoints",
   "source": "github.com/GoCodeAlone/workflow",
