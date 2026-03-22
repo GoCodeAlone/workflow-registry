@@ -5,7 +5,7 @@
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
-  "tier": "infra",
+  "tier": "community",
   "private": false,
   "minEngineVersion": "0.3.51",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean",
@@ -14,26 +14,7 @@
   "capabilities": {
     "moduleTypes": [],
     "stepTypes": [],
-    "triggerTypes": [],
-    "iacProvider": {
-      "name": "digitalocean",
-      "resourceTypes": [
-        "infra.container_service",
-        "infra.k8s_cluster",
-        "infra.database",
-        "infra.cache",
-        "infra.load_balancer",
-        "infra.vpc",
-        "infra.firewall",
-        "infra.dns",
-        "infra.storage",
-        "infra.registry",
-        "infra.certificate",
-        "infra.droplet",
-        "infra.iam_role",
-        "infra.api_gateway"
-      ]
-    }
+    "triggerTypes": []
   },
   "assets": {
     "ui": false,

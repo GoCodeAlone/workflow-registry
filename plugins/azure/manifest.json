@@ -5,7 +5,7 @@
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
-  "tier": "infra",
+  "tier": "community",
   "private": false,
   "minEngineVersion": "0.3.51",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-azure",
@@ -14,25 +14,7 @@
   "capabilities": {
     "moduleTypes": [],
     "stepTypes": [],
-    "triggerTypes": [],
-    "iacProvider": {
-      "name": "azure",
-      "resourceTypes": [
-        "infra.container_service",
-        "infra.k8s_cluster",
-        "infra.database",
-        "infra.cache",
-        "infra.vpc",
-        "infra.load_balancer",
-        "infra.dns",
-        "infra.registry",
-        "infra.api_gateway",
-        "infra.firewall",
-        "infra.iam_role",
-        "infra.storage",
-        "infra.certificate"
-      ]
-    }
+    "triggerTypes": []
   },
   "assets": {
     "ui": false,
