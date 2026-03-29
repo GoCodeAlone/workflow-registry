@@ -146,6 +146,31 @@
         }
       },
       "additionalProperties": false
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other plugins that must be installed before this plugin can function",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Plugin name as it appears in the registry"
+          },
+          "minVersion": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+",
+            "description": "Minimum required plugin version (inclusive)"
+          },
+          "maxVersion": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+",
+            "description": "Maximum allowed plugin version (inclusive)"
+          }
+        },
+        "additionalProperties": false
+      }
     }
   },
   "additionalProperties": false
