@@ -1,0 +1,113 @@
+{
+  "name": "data-engineering",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "Data engineering: CDC, lakehouse (Iceberg), time-series (InfluxDB/TimescaleDB/ClickHouse/QuestDB/Druid), graph (Neo4j), data quality, migrations, catalog (DataHub/OpenMetadata)",
+  "source": "github.com/GoCodeAlone/workflow-plugin-data-engineering",
+  "path": "cmd/workflow-plugin-data-engineering",
+  "type": "external",
+  "tier": "core",
+  "license": "Commercial",
+  "private": true,
+  "minEngineVersion": "0.3.56",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering",
+  "keywords": ["cdc", "lakehouse", "iceberg", "timeseries", "influxdb", "timescaledb", "clickhouse", "questdb", "druid", "neo4j", "graph", "data-quality", "migration", "debezium", "kafka", "catalog", "datahub", "openmetadata", "data-contract", "multi-tenancy"],
+  "capabilities": {
+    "moduleTypes": [
+      "cdc.source",
+      "data.tenancy",
+      "catalog.iceberg",
+      "lakehouse.table",
+      "timeseries.influxdb",
+      "timeseries.timescaledb",
+      "timeseries.clickhouse",
+      "timeseries.questdb",
+      "timeseries.druid",
+      "catalog.schema_registry",
+      "graph.neo4j",
+      "catalog.datahub",
+      "catalog.openmetadata",
+      "quality.checks",
+      "migrate.schema"
+    ],
+    "stepTypes": [
+      "step.cdc_start",
+      "step.cdc_stop",
+      "step.cdc_status",
+      "step.cdc_snapshot",
+      "step.cdc_schema_history",
+      "step.tenant_provision",
+      "step.tenant_deprovision",
+      "step.tenant_migrate",
+      "step.lakehouse_create_table",
+      "step.lakehouse_evolve_schema",
+      "step.lakehouse_write",
+      "step.lakehouse_compact",
+      "step.lakehouse_snapshot",
+      "step.lakehouse_query",
+      "step.lakehouse_expire_snapshots",
+      "step.ts_write",
+      "step.ts_write_batch",
+      "step.ts_query",
+      "step.ts_downsample",
+      "step.ts_retention",
+      "step.ts_continuous_query",
+      "step.ts_druid_ingest",
+      "step.ts_druid_query",
+      "step.ts_druid_datasource",
+      "step.ts_druid_compact",
+      "step.schema_register",
+      "step.schema_validate",
+      "step.graph_query",
+      "step.graph_write",
+      "step.graph_import",
+      "step.graph_extract_entities",
+      "step.graph_link",
+      "step.catalog_register",
+      "step.catalog_search",
+      "step.contract_validate",
+      "step.quality_check",
+      "step.quality_schema_validate",
+      "step.quality_profile",
+      "step.quality_compare",
+      "step.quality_anomaly",
+      "step.quality_dbt_test",
+      "step.quality_soda_check",
+      "step.quality_ge_validate",
+      "step.migrate_plan",
+      "step.migrate_apply",
+      "step.migrate_run",
+      "step.migrate_rollback",
+      "step.migrate_status"
+    ],
+    "triggerTypes": ["cdc"],
+    "workflowHandlers": []
+  },
+  "assets": {
+    "ui": false,
+    "config": false
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.1.0/workflow-plugin-data-engineering-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.1.0/workflow-plugin-data-engineering-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.1.0/workflow-plugin-data-engineering-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.1.0/workflow-plugin-data-engineering-darwin-arm64.tar.gz"
+    }
+  ]
+}
