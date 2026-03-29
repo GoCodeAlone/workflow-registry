@@ -1,8 +1,8 @@
 {
   "name": "security",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "author": "GoCodeAlone",
-  "description": "MFA (TOTP) and encryption at rest with pluggable KMS backends (local, AWS KMS, GCP KMS, Azure Key Vault, Vault Transit)",
+  "description": "Unified security plugin: WAF (Coraza/AWS/GCloud/Cloudflare), MFA/encryption (TOTP, AES-256-GCM, AWS KMS, GCP KMS, Vault Transit), authorization (Casbin RBAC, Permit.io), data protection (PII detection/masking), sandbox (WASM/wazero, Docker), and supply-chain security (signatures, vuln scanning, SBOM)",
   "source": "github.com/GoCodeAlone/workflow-plugin-security",
   "type": "external",
   "tier": "premium",
@@ -11,10 +11,67 @@
   "minEngineVersion": "0.3.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-security",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-security",
-  "keywords": ["mfa", "totp", "encryption", "kms", "aes", "security", "2fa"],
+  "keywords": ["security", "waf", "coraza", "mfa", "totp", "encryption", "kms", "vault", "authz", "casbin", "rbac", "permit", "pii", "data-protection", "sandbox", "wasm", "supply-chain", "sbom"],
   "capabilities": {
-    "moduleTypes": ["security.mfa", "security.encryption", "security.encryption.aws-kms", "security.encryption.gcp-kms", "security.encryption.azure-keyvault", "security.encryption.vault-transit"],
-    "stepTypes": ["step.mfa_enroll", "step.mfa_verify", "step.encrypt_value", "step.decrypt_value"],
+    "moduleTypes": [
+      "security.waf",
+      "security.waf.aws",
+      "security.waf.gcloud",
+      "security.waf.cloudflare",
+      "security.mfa",
+      "security.encryption",
+      "security.encryption.aws-kms",
+      "security.encryption.gcp-kms",
+      "security.encryption.vault-transit",
+      "authz.casbin",
+      "permit.provider",
+      "data.pii",
+      "data.pii.gcp-dlp",
+      "data.pii.aws-macie",
+      "data.pii.presidio",
+      "sandbox.wasm",
+      "sandbox.docker",
+      "security.plugin-verifier",
+      "security.scanner",
+      "security.scanner.grype",
+      "security.scanner.snyk",
+      "security.scanner.ecr",
+      "security.scanner.gcp-artifact"
+    ],
+    "stepTypes": [
+      "step.input_sanitize",
+      "step.ip_check",
+      "step.waf_evaluate",
+      "step.mfa_enroll",
+      "step.mfa_verify",
+      "step.encrypt_value",
+      "step.decrypt_value",
+      "step.authz_check_casbin",
+      "step.authz_add_policy",
+      "step.authz_remove_policy",
+      "step.authz_role_assign",
+      "step.authz_capabilities",
+      "step.authz_acl_grant",
+      "step.authz_acl_revoke",
+      "step.authz_acl_check",
+      "step.authz_acl_list",
+      "step.authz_abac_check",
+      "step.authz_abac_add_policy",
+      "step.authz_rebac_add_relation",
+      "step.authz_rebac_remove_relation",
+      "step.authz_rebac_check",
+      "step.authz_rebac_list_relations",
+      "step.pii_detect",
+      "step.data_mask",
+      "step.data_classify",
+      "step.wasm_exec",
+      "step.goroutine_guard",
+      "step.docker_exec",
+      "step.verify_signature",
+      "step.vuln_scan",
+      "step.sbom_generate",
+      "step.sbom_check"
+    ],
     "triggerTypes": [],
     "workflowHandlers": []
   },
@@ -26,22 +83,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.1.0/workflow-plugin-security-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.0/workflow-plugin-security-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.1.0/workflow-plugin-security-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.0/workflow-plugin-security-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.1.0/workflow-plugin-security-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.0/workflow-plugin-security-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.1.0/workflow-plugin-security-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.0/workflow-plugin-security-darwin-arm64.tar.gz"
     }
   ]
 }

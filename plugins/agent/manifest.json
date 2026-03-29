@@ -1,8 +1,8 @@
 {
   "name": "agent",
-  "version": "0.1.1",
+  "version": "0.5.2",
   "author": "GoCodeAlone",
-  "description": "AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection",
+  "description": "AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection, orchestration (SSE hub, scheduler, MCP client/server, approvals, sub-agents, webhooks, security auditing, JWT, bcrypt, OAuth)",
   "source": "github.com/GoCodeAlone/workflow-plugin-agent",
   "type": "builtin",
   "tier": "core",
@@ -11,10 +11,38 @@
   "minEngineVersion": "0.3.11",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-agent",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-agent",
-  "keywords": ["agent", "ai", "llm", "provider", "memory", "tools", "executor", "autonomous", "loop-detection"],
+  "keywords": ["agent", "ai", "llm", "provider", "memory", "tools", "executor", "autonomous", "loop-detection", "orchestration", "mcp", "sse", "approvals", "jwt", "bcrypt"],
   "capabilities": {
-    "moduleTypes": ["agent.provider"],
-    "stepTypes": ["step.agent_execute", "step.provider_test", "step.provider_models"],
+    "moduleTypes": [
+      "agent.provider",
+      "ratchet.sse_hub",
+      "ratchet.scheduler",
+      "ratchet.mcp_client",
+      "ratchet.mcp_server",
+      "authz.casbin"
+    ],
+    "stepTypes": [
+      "step.agent_execute",
+      "step.provider_test",
+      "step.provider_models",
+      "step.model_pull",
+      "step.workspace_init",
+      "step.container_control",
+      "step.secret_manage",
+      "step.vault_config",
+      "step.mcp_reload",
+      "step.oauth_exchange",
+      "step.approval_resolve",
+      "step.webhook_process",
+      "step.security_audit",
+      "step.test_interact",
+      "step.human_request_resolve",
+      "step.memory_extract",
+      "step.bcrypt_check",
+      "step.bcrypt_hash",
+      "step.jwt_generate",
+      "step.jwt_decode"
+    ],
     "triggerTypes": [],
     "workflowHandlers": []
   }
