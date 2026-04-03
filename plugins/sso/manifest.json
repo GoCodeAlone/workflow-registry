@@ -1,0 +1,25 @@
+{
+  "name": "workflow-plugin-sso",
+  "version": "0.1.0",
+  "description": "Enterprise SSO via OpenID Connect with multi-provider support",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "core",
+  "private": false,
+  "minEngineVersion": "1.13.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-sso",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-sso",
+  "keywords": ["sso", "oidc", "openid-connect", "authentication", "identity", "enterprise"],
+  "capabilities": {
+    "moduleTypes": ["sso.oidc"],
+    "stepTypes": [
+      "step.sso_validate_token",
+      "step.sso_userinfo",
+      "step.sso_token_exchange",
+      "step.sso_refresh_token"
+    ],
+    "triggerTypes": []
+  },
+  "downloads": []
+}

@@ -1,0 +1,31 @@
+{
+  "name": "workflow-plugin-crm",
+  "version": "0.1.0",
+  "description": "Vendor-neutral CRM integration with Salesforce adapter",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "core",
+  "private": false,
+  "minEngineVersion": "1.13.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-crm",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-crm",
+  "keywords": ["crm", "salesforce", "contacts", "leads", "deals", "records"],
+  "capabilities": {
+    "moduleTypes": ["crm.provider"],
+    "stepTypes": [
+      "step.crm_create_record",
+      "step.crm_get_record",
+      "step.crm_update_record",
+      "step.crm_upsert_record",
+      "step.crm_delete_record",
+      "step.crm_query",
+      "step.crm_search",
+      "step.crm_bulk_import",
+      "step.crm_describe_object",
+      "step.crm_get_limits"
+    ],
+    "triggerTypes": []
+  },
+  "downloads": []
+}

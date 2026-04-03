@@ -1,0 +1,30 @@
+{
+  "name": "workflow-plugin-erp",
+  "version": "0.1.0",
+  "description": "Enterprise ERP integration via OData v4 with SAP adapter",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "core",
+  "private": false,
+  "minEngineVersion": "1.13.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-erp",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-erp",
+  "keywords": ["erp", "sap", "odata", "enterprise", "business-objects", "integration"],
+  "capabilities": {
+    "moduleTypes": ["erp.provider"],
+    "stepTypes": [
+      "step.erp_read_entity",
+      "step.erp_create_entity",
+      "step.erp_update_entity",
+      "step.erp_delete_entity",
+      "step.erp_query",
+      "step.erp_batch",
+      "step.erp_function_import",
+      "step.erp_get_metadata",
+      "step.erp_expand"
+    ],
+    "triggerTypes": []
+  },
+  "downloads": []
+}

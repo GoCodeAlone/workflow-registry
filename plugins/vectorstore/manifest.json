@@ -1,0 +1,28 @@
+{
+  "name": "workflow-plugin-vectorstore",
+  "version": "0.1.0",
+  "description": "Vector database integration for RAG pipelines with Pinecone support",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "core",
+  "private": false,
+  "minEngineVersion": "1.13.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
+  "keywords": ["vector", "vectorstore", "pinecone", "rag", "embeddings", "similarity-search"],
+  "capabilities": {
+    "moduleTypes": ["vectorstore.provider"],
+    "stepTypes": [
+      "step.vector_upsert",
+      "step.vector_query",
+      "step.vector_delete",
+      "step.vector_fetch",
+      "step.vector_list_indexes",
+      "step.vector_create_index",
+      "step.vector_delete_index"
+    ],
+    "triggerTypes": []
+  },
+  "downloads": []
+}
