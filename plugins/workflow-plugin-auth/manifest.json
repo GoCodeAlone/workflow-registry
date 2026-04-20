@@ -1,0 +1,58 @@
+{
+  "name": "workflow-plugin-auth",
+  "version": "0.1.2",
+  "description": "Passwordless authentication plugin: WebAuthn/passkeys, TOTP, email magic links",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "core",
+  "private": true,
+  "minEngineVersion": "0.3.27",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-auth",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-auth",
+  "keywords": ["auth", "webauthn", "passkey", "totp", "magic-link", "passwordless"],
+  "capabilities": {
+    "moduleTypes": ["auth.credential"],
+    "stepTypes": [
+      "step.auth_passkey_begin_register",
+      "step.auth_passkey_finish_register",
+      "step.auth_passkey_begin_login",
+      "step.auth_passkey_finish_login",
+      "step.auth_totp_generate_secret",
+      "step.auth_totp_verify",
+      "step.auth_totp_recovery_codes",
+      "step.auth_magic_link_generate",
+      "step.auth_magic_link_verify",
+      "step.auth_magic_link_send",
+      "step.auth_credential_list",
+      "step.auth_credential_revoke"
+    ],
+    "triggerTypes": []
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.1.2/workflow-plugin-auth_0.1.2_linux_amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.1.2/workflow-plugin-auth_0.1.2_linux_arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.1.2/workflow-plugin-auth_0.1.2_darwin_amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.1.2/workflow-plugin-auth_0.1.2_darwin_arm64.tar.gz"
+    }
+  ]
+}
