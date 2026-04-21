@@ -73,6 +73,23 @@
           "type": "array",
           "items": { "type": "string" },
           "description": "Post-init wiring hook names this plugin provides"
+        },
+        "iacProvider": {
+          "type": "object",
+          "description": "IaC provider declaration — name and supported resource types",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Canonical provider name used for discovery (e.g. \"digitalocean\", \"aws\", \"gcp\")"
+            },
+            "resourceTypes": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Resource types this provider's drivers can manage (e.g. infra.container_service, infra.k8s_cluster)"
+            }
+          },
+          "required": ["name"],
+          "additionalProperties": false
         }
       },
       "additionalProperties": false

@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-digitalocean",
-  "version": "0.1.0",
+  "version": "0.3.1",
   "description": "DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, IAM, and API gateway",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -12,9 +12,28 @@
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean",
   "keywords": ["digitalocean", "iac", "infra", "kubernetes", "database", "app-platform", "spaces", "redis", "doks"],
   "capabilities": {
-    "moduleTypes": [],
+    "moduleTypes": ["iac.provider"],
     "stepTypes": [],
-    "triggerTypes": []
+    "triggerTypes": [],
+    "iacProvider": {
+      "name": "digitalocean",
+      "resourceTypes": [
+        "infra.container_service",
+        "infra.k8s_cluster",
+        "infra.database",
+        "infra.cache",
+        "infra.load_balancer",
+        "infra.vpc",
+        "infra.firewall",
+        "infra.dns",
+        "infra.storage",
+        "infra.registry",
+        "infra.certificate",
+        "infra.droplet",
+        "infra.iam_role",
+        "infra.api_gateway"
+      ]
+    }
   },
   "assets": {
     "ui": false,
@@ -24,22 +43,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v0.1.0/workflow-plugin-digitalocean-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v0.3.1/workflow-plugin-digitalocean-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v0.1.0/workflow-plugin-digitalocean-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v0.3.1/workflow-plugin-digitalocean-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v0.1.0/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v0.3.1/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v0.1.0/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v0.3.1/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
     }
   ]
 }
