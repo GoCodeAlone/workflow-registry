@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-monday",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Comprehensive monday.com integration — boards, items, columns, groups, workspaces, and all resources via GraphQL",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -78,22 +78,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.0/workflow-plugin-monday-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.1/workflow-plugin-monday-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.0/workflow-plugin-monday-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.1/workflow-plugin-monday-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.0/workflow-plugin-monday-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.1/workflow-plugin-monday-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.0/workflow-plugin-monday-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.1/workflow-plugin-monday-darwin-arm64.tar.gz"
     }
   ]
 }

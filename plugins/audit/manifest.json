@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-audit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Compliance audit logging with EventBus collection and S3/database sinks",
   "author": "GoCodeAlone",
   "license": "MIT",

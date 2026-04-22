@@ -1,6 +1,6 @@
 {
   "name": "data-engineering",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "GoCodeAlone",
   "description": "Data engineering: CDC, lakehouse (Iceberg), time-series (InfluxDB/TimescaleDB/ClickHouse/QuestDB/Druid), graph (Neo4j), data quality, migrations, catalog (DataHub/OpenMetadata)",
   "source": "github.com/GoCodeAlone/workflow-plugin-data-engineering",
@@ -137,22 +137,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.0/workflow-plugin-data-engineering-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.1/workflow-plugin-data-engineering-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.0/workflow-plugin-data-engineering-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.1/workflow-plugin-data-engineering-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.0/workflow-plugin-data-engineering-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.1/workflow-plugin-data-engineering-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.0/workflow-plugin-data-engineering-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.1/workflow-plugin-data-engineering-darwin-arm64.tar.gz"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-launchdarkly",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "LaunchDarkly feature management — flags, segments, environments, projects, metrics, experiments, approvals, audit log, and more",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -48,9 +48,9 @@
     "triggerTypes": []
   },
   "downloads": [
-    {"os": "linux", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly/releases/download/v0.1.0/workflow-plugin-launchdarkly-linux-amd64.tar.gz"},
-    {"os": "linux", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly/releases/download/v0.1.0/workflow-plugin-launchdarkly-linux-arm64.tar.gz"},
-    {"os": "darwin", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly/releases/download/v0.1.0/workflow-plugin-launchdarkly-darwin-amd64.tar.gz"},
-    {"os": "darwin", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly/releases/download/v0.1.0/workflow-plugin-launchdarkly-darwin-arm64.tar.gz"}
+    {"os": "linux", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly/releases/download/v0.1.1/workflow-plugin-launchdarkly-linux-amd64.tar.gz"},
+    {"os": "linux", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly/releases/download/v0.1.1/workflow-plugin-launchdarkly-linux-arm64.tar.gz"},
+    {"os": "darwin", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly/releases/download/v0.1.1/workflow-plugin-launchdarkly-darwin-amd64.tar.gz"},
+    {"os": "darwin", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly/releases/download/v0.1.1/workflow-plugin-launchdarkly-darwin-arm64.tar.gz"}
   ]
 }

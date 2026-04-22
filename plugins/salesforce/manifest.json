@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-salesforce",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -41,9 +41,9 @@
     "triggerTypes": []
   },
   "downloads": [
-    {"os": "linux", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.1.0/workflow-plugin-salesforce-linux-amd64.tar.gz"},
-    {"os": "linux", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.1.0/workflow-plugin-salesforce-linux-arm64.tar.gz"},
-    {"os": "darwin", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.1.0/workflow-plugin-salesforce-darwin-amd64.tar.gz"},
-    {"os": "darwin", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.1.0/workflow-plugin-salesforce-darwin-arm64.tar.gz"}
+    {"os": "linux", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.1/workflow-plugin-salesforce-linux-amd64.tar.gz"},
+    {"os": "linux", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.1/workflow-plugin-salesforce-linux-arm64.tar.gz"},
+    {"os": "darwin", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.1/workflow-plugin-salesforce-darwin-amd64.tar.gz"},
+    {"os": "darwin", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.1/workflow-plugin-salesforce-darwin-arm64.tar.gz"}
   ]
 }

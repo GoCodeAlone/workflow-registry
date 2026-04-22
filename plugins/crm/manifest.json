@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-crm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vendor-neutral CRM integration with Salesforce adapter",
   "author": "GoCodeAlone",
   "license": "MIT",
