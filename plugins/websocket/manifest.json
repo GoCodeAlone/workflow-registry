@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-websocket",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "author": "GoCodeAlone",
   "description": "General-purpose WebSocket support — rooms, broadcast, send, close",
   "source": "github.com/GoCodeAlone/workflow-plugin-websocket",
