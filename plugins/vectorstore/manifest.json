@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-vectorstore",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vector database integration for RAG pipelines with Pinecone support",
   "author": "GoCodeAlone",
   "license": "MIT",

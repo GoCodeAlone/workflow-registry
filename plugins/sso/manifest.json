@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-sso",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Enterprise SSO via OpenID Connect with multi-provider support",
   "author": "GoCodeAlone",
   "license": "MIT",

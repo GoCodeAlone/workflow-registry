@@ -1,6 +1,6 @@
 {
   "name": "github",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "GoCodeAlone",
   "description": "GitHub integration plugin: webhook handling, GitHub Actions, PRs, issues, releases, and deployments",
   "source": "github.com/GoCodeAlone/workflow-plugin-github",
@@ -42,22 +42,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.1/workflow-plugin-github-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.2/workflow-plugin-github-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.1/workflow-plugin-github-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.2/workflow-plugin-github-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.1/workflow-plugin-github-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.2/workflow-plugin-github-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.1/workflow-plugin-github-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.2/workflow-plugin-github-darwin-arm64.tar.gz"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-openlms",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OpenLMS learning management — courses, enrollments, grades, assignments, quizzes, users, competencies, calendars, forums, and more",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -51,9 +51,9 @@
     "triggerTypes": []
   },
   "downloads": [
-    {"os": "linux", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-openlms/releases/download/v0.1.0/workflow-plugin-openlms-linux-amd64.tar.gz"},
-    {"os": "linux", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-openlms/releases/download/v0.1.0/workflow-plugin-openlms-linux-arm64.tar.gz"},
-    {"os": "darwin", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-openlms/releases/download/v0.1.0/workflow-plugin-openlms-darwin-amd64.tar.gz"},
-    {"os": "darwin", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-openlms/releases/download/v0.1.0/workflow-plugin-openlms-darwin-arm64.tar.gz"}
+    {"os": "linux", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-openlms/releases/download/v0.1.1/workflow-plugin-openlms-linux-amd64.tar.gz"},
+    {"os": "linux", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-openlms/releases/download/v0.1.1/workflow-plugin-openlms-linux-arm64.tar.gz"},
+    {"os": "darwin", "arch": "amd64", "url": "https://github.com/GoCodeAlone/workflow-plugin-openlms/releases/download/v0.1.1/workflow-plugin-openlms-darwin-amd64.tar.gz"},
+    {"os": "darwin", "arch": "arm64", "url": "https://github.com/GoCodeAlone/workflow-plugin-openlms/releases/download/v0.1.1/workflow-plugin-openlms-darwin-arm64.tar.gz"}
   ]
 }

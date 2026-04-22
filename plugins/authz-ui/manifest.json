@@ -1,6 +1,6 @@
 {
   "name": "authz-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "GoCodeAlone",
   "description": "Casbin authorization policy management UI (React SPA)",
   "source": "github.com/GoCodeAlone/workflow-plugin-authz-ui",
@@ -26,22 +26,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v0.1.0/workflow-plugin-authz-ui-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v0.1.1/workflow-plugin-authz-ui-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v0.1.0/workflow-plugin-authz-ui-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v0.1.1/workflow-plugin-authz-ui-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v0.1.0/workflow-plugin-authz-ui-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v0.1.1/workflow-plugin-authz-ui-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v0.1.0/workflow-plugin-authz-ui-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v0.1.1/workflow-plugin-authz-ui-darwin-arm64.tar.gz"
     }
   ]
 }
