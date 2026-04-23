@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-migrations",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Database migration plugin for the workflow engine: golang-migrate + goose drivers, pre-deploy runner, wfctl migrate CLI, static lint tool, and tenant-ensure schema setup",
   "author": "GoCodeAlone",
   "license": "Apache-2.0",
@@ -32,22 +32,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.2.0/workflow-plugin-migrations-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.1.0/workflow-plugin-migrations-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.2.0/workflow-plugin-migrations-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.1.0/workflow-plugin-migrations-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.2.0/workflow-plugin-migrations-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.1.0/workflow-plugin-migrations-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.2.0/workflow-plugin-migrations-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.1.0/workflow-plugin-migrations-darwin-arm64.tar.gz"
     }
   ]
 }
