@@ -1,0 +1,113 @@
+{
+  "name": "workflow-plugin-supply-chain",
+  "version": "0.3.0",
+  "description": "Supply chain security: SBOM generation, keyless signing, SLSA provenance, vulnerability scanning, and wfctl CLI extensions",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "core",
+  "private": false,
+  "minEngineVersion": "0.18.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain",
+  "keywords": ["supply-chain", "security", "sbom", "vulnerability", "trivy", "grype", "cosign", "slsa", "syft", "sigstore"],
+  "capabilities": {
+    "moduleTypes": [
+      "security.plugin-verifier",
+      "security.scanner",
+      "security.scanner.grype",
+      "security.scanner.snyk",
+      "security.scanner.ecr",
+      "security.scanner.gcp-artifact"
+    ],
+    "stepTypes": [
+      "step.verify_signature",
+      "step.vuln_scan",
+      "step.sbom_generate",
+      "step.sbom_check"
+    ],
+    "triggerTypes": [],
+    "buildHooks": [
+      {
+        "event": "post_container_build",
+        "priority": 500,
+        "on_hook_failure": "fail",
+        "description": "Generate CycloneDX SBOM via syft and attach to image as OCI artifact"
+      },
+      {
+        "event": "post_container_build",
+        "priority": 600,
+        "on_hook_failure": "fail",
+        "description": "Keyless-sign the built image digest via cosign + GitHub OIDC"
+      },
+      {
+        "event": "post_artifacts_publish",
+        "priority": 500,
+        "on_hook_failure": "fail",
+        "description": "Sign release assets (tarballs, binaries, SBOMs) via cosign sign-blob"
+      },
+      {
+        "event": "install_verify",
+        "priority": 500,
+        "on_hook_failure": "fail",
+        "description": "Verify plugin tarball signature and SBOM before extraction"
+      }
+    ],
+    "cliCommands": [
+      {
+        "name": "supply-chain",
+        "description": "Supply-chain verification and SBOM commands",
+        "flags_passthrough": true,
+        "subcommands": [
+          {"name": "scan",   "description": "Scan image with syft (OSV planned)"},
+          {"name": "verify", "description": "Verify cosign signature and SBOM"},
+          {"name": "sbom",   "description": "Generate CycloneDX SBOM"},
+          {"name": "report", "description": "Full supply-chain report"}
+        ]
+      },
+      {
+        "name": "scaffold",
+        "description": "Scaffold supply-chain config into app.yaml and CI",
+        "flags_passthrough": true,
+        "subcommands": [
+          {"name": "sbom", "description": "Add SBOM config to app.yaml + CI"},
+          {"name": "sign", "description": "Add signing config to app.yaml + CI"}
+        ]
+      },
+      {
+        "name": "ci",
+        "description": "CI preflight and doctor commands",
+        "flags_passthrough": true,
+        "subcommands": [
+          {"name": "doctor", "description": "Run supply-chain preflight checks"}
+        ]
+      }
+    ]
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.3.0/workflow-plugin-supply-chain-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.3.0/workflow-plugin-supply-chain-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.3.0/workflow-plugin-supply-chain-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.3.0/workflow-plugin-supply-chain-darwin-arm64.tar.gz"
+    }
+  ]
+}
