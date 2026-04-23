@@ -95,6 +95,73 @@
           },
           "required": ["name"],
           "additionalProperties": false
+        },
+        "migrationDrivers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Migration driver names this plugin provides (e.g. golang-migrate, goose)"
+        },
+        "cliCommands": {
+          "type": "array",
+          "description": "Dynamic wfctl CLI subcommand registrations (workflow v0.18.x+)",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Top-level command name registered with wfctl"
+              },
+              "description": {
+                "type": "string"
+              },
+              "flags_passthrough": {
+                "type": "boolean",
+                "description": "When true, wfctl passes all flags through to the plugin binary"
+              },
+              "subcommands": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["name"],
+                  "properties": {
+                    "name": { "type": "string" },
+                    "description": { "type": "string" }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "buildHooks": {
+          "type": "array",
+          "description": "Build-pipeline hook registrations (workflow v0.18.x+)",
+          "items": {
+            "type": "object",
+            "required": ["event", "priority"],
+            "properties": {
+              "event": {
+                "type": "string",
+                "description": "Hook event name (e.g. post_container_build, install_verify)"
+              },
+              "priority": {
+                "type": "integer",
+                "description": "Execution priority; lower numbers run first"
+              },
+              "on_hook_failure": {
+                "type": "string",
+                "enum": ["fail", "warn", "skip"],
+                "description": "How wfctl handles hook failures"
+              },
+              "description": {
+                "type": "string",
+                "description": "Human-readable description of what this hook does"
+              }
+            },
+            "additionalProperties": false
+          }
         }
       },
       "additionalProperties": false
