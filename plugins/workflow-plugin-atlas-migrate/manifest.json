@@ -17,10 +17,7 @@
       "database.migration_driver"
     ],
     "stepTypes": [],
-    "triggerTypes": [],
-    "migrationDrivers": ["atlas"],
-    "cliCommands": [],
-    "buildHooks": []
+    "triggerTypes": []
   },
   "assets": {
     "ui": false,
