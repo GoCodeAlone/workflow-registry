@@ -1,0 +1,51 @@
+{
+  "name": "workflow-plugin-atlas-migrate",
+  "version": "0.2.0",
+  "description": "Atlas migration driver plugin for the workflow engine: ariga.io/atlas v1 backed Up/Down/Status/Goto with SQL-backed revision tracking and auto-generated atlas.sum",
+  "author": "GoCodeAlone",
+  "license": "Apache-2.0",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.18.0",
+  "keywords": ["migrations", "database", "postgres", "atlas", "ariga"],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-migrations",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-migrations",
+  "capabilities": {
+    "moduleTypes": [
+      "database.migrations",
+      "database.migration_driver"
+    ],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "migrationDrivers": ["atlas"],
+    "cliCommands": [],
+    "buildHooks": []
+  },
+  "assets": {
+    "ui": false,
+    "config": false
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.2.0/workflow-plugin-atlas-migrate-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.2.0/workflow-plugin-atlas-migrate-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.2.0/workflow-plugin-atlas-migrate-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.2.0/workflow-plugin-atlas-migrate-darwin-arm64.tar.gz"
+    }
+  ]
+}
