@@ -86,6 +86,11 @@
               "type": "array",
               "items": { "type": "string" },
               "description": "Resource types this provider's drivers can manage (e.g. infra.container_service, infra.k8s_cluster)"
+            },
+            "supportedCanonicalKeys": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Canonical config keys this provider's drivers can map (e.g. name, region, image, env_vars)"
             }
           },
           "required": ["name"],
