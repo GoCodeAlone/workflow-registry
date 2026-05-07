@@ -1,6 +1,6 @@
 {
   "name": "cloud-ui",
-  "version": "0.1.0",
+  "version": "0.2.8",
   "author": "GoCodeAlone",
   "description": "Cloud management UI plugin (React SPA)",
   "source": "github.com/GoCodeAlone/workflow-cloud-ui",
@@ -11,9 +11,18 @@
   "minEngineVersion": "0.2.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-cloud-ui",
   "repository": "https://github.com/GoCodeAlone/workflow-cloud-ui",
-  "keywords": ["cloud", "ui", "dashboard", "management", "react", "spa"],
+  "keywords": [
+    "cloud",
+    "ui",
+    "dashboard",
+    "management",
+    "react",
+    "spa"
+  ],
   "capabilities": {
-    "moduleTypes": ["static.fileserver"],
+    "moduleTypes": [
+      "static.fileserver"
+    ],
     "stepTypes": [],
     "triggerTypes": [],
     "workflowHandlers": []
@@ -26,22 +35,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-cloud-ui/releases/download/v0.1.0/workflow-cloud-ui-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-cloud-ui/releases/download/v0.2.8/workflow-cloud-ui-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-cloud-ui/releases/download/v0.1.0/workflow-cloud-ui-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-cloud-ui/releases/download/v0.2.8/workflow-cloud-ui-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-cloud-ui/releases/download/v0.1.0/workflow-cloud-ui-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-cloud-ui/releases/download/v0.2.8/workflow-cloud-ui-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-cloud-ui/releases/download/v0.1.0/workflow-cloud-ui-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-cloud-ui/releases/download/v0.2.8/workflow-cloud-ui-darwin-arm64.tar.gz"
     }
   ]
 }
