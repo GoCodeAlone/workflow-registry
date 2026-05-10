@@ -36,8 +36,7 @@
     "cliCommands": [
       {
         "name": "payments",
-        "description": "Payment provider operations (webhook ensure, …)",
-        "flagsPassthrough": true
+        "description": "Payment provider operations (webhook ensure, …)"
       }
     ]
   },
