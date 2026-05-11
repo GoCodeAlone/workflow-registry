@@ -1,6 +1,6 @@
 {
     "name": "workflow-plugin-eventbus",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations.",
     "author": "GoCodeAlone",
     "license": "MIT",
@@ -21,9 +21,9 @@
     "repository": "https://github.com/GoCodeAlone/workflow-plugin-eventbus",
     "capabilities": {
         "moduleTypes": [
-            "infra.eventbus",
-            "infra.eventbus.stream",
-            "infra.eventbus.consumer"
+            "eventbus.broker",
+            "eventbus.stream",
+            "eventbus.consumer"
         ],
         "stepTypes": [
             "step.eventbus.publish",
@@ -38,27 +38,27 @@
         {
             "os": "linux",
             "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.1.0/workflow-plugin-eventbus-linux-amd64.tar.gz"
+            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-linux-amd64.tar.gz"
         },
         {
             "os": "linux",
             "arch": "arm64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.1.0/workflow-plugin-eventbus-linux-arm64.tar.gz"
+            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-linux-arm64.tar.gz"
         },
         {
             "os": "darwin",
             "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.1.0/workflow-plugin-eventbus-darwin-amd64.tar.gz"
+            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-darwin-amd64.tar.gz"
         },
         {
             "os": "darwin",
             "arch": "arm64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.1.0/workflow-plugin-eventbus-darwin-arm64.tar.gz"
+            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-darwin-arm64.tar.gz"
         },
         {
             "os": "windows",
             "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.1.0/workflow-plugin-eventbus-windows-amd64.tar.gz"
+            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-windows-amd64.tar.gz"
         }
     ]
 }
