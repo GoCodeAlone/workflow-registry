@@ -10,9 +10,20 @@
   "minEngineVersion": "0.3.30",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-twilio",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-twilio",
-  "keywords": ["twilio", "sms", "voice", "messaging", "verify", "video", "conversations", "whatsapp"],
+  "keywords": [
+    "twilio",
+    "sms",
+    "voice",
+    "messaging",
+    "verify",
+    "video",
+    "conversations",
+    "whatsapp"
+  ],
   "capabilities": {
-    "moduleTypes": ["twilio.provider"],
+    "moduleTypes": [
+      "twilio.provider"
+    ],
     "stepTypes": [
       "step.twilio_send_sms",
       "step.twilio_send_mms",
@@ -112,24 +123,28 @@
   },
   "downloads": [
     {
-      "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.1.3/workflow-plugin-twilio-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.1.3/workflow-plugin-twilio-linux-arm64.tar.gz"
-    },
-    {
       "os": "darwin",
+      "sha256": "2a6c78ff92494c31892c81b591e47cb759e4406acf26f3715c1a1900b52b7957",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.0/workflow-plugin-twilio-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "699b9f1939253da56df76ef67c4af68e02a04b15098150979ddb1b9817e66085",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.0/workflow-plugin-twilio-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.1.3/workflow-plugin-twilio-darwin-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "9fd68baeaa2a848a70ef1030fdbc964882f4129f432ed5a1c58731ef4f38ecad",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.0/workflow-plugin-twilio-linux-amd64.tar.gz"
     },
     {
-      "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.1.3/workflow-plugin-twilio-darwin-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "972391b7e7ca58ef954d3bd930ef5673fc4c9690bf14d2c10ff2362d6880e8d2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.0/workflow-plugin-twilio-linux-arm64.tar.gz"
     }
   ]
 }

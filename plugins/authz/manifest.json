@@ -33,24 +33,28 @@
   },
   "downloads": [
     {
-      "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.2/workflow-plugin-authz-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.2/workflow-plugin-authz-linux-arm64.tar.gz"
-    },
-    {
       "os": "darwin",
+      "sha256": "db31863dacf419323a719d05f64a80734169e7ad3a587e667e86a82d342fe9ea",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.3/workflow-plugin-authz-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "e8df26c303d8a021e53a571deb658f32b163cde28eb79cb0b0d6ccd2bd2c0fb1",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.3/workflow-plugin-authz-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.2/workflow-plugin-authz-darwin-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "f8391ed86cd703ae1b2d3816a33b54c0463fbac77c1cb8c3a0095fbb64f4236d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.3/workflow-plugin-authz-linux-amd64.tar.gz"
     },
     {
-      "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.2/workflow-plugin-authz-darwin-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "e8c881a34068e7849a7f4bc4fc55c87e1927684c96d3a9269a23b517a8e24949",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.3/workflow-plugin-authz-linux-arm64.tar.gz"
     }
   ]
 }

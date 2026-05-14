@@ -17,6 +17,19 @@ for manifest in "$PLUGINS_DIR"/*/manifest.json; do
   if ! $AJV validate --spec=draft2020 -s "$SCHEMA" -d "$manifest"; then
     errors=$((errors + 1))
   fi
+  if ! jq -e '
+    (.version // "") as $version |
+    if $version == "" then
+      true
+    else
+      all((.downloads // [])[]?;
+        (.url | test("/releases/download/v" + $version + "/"))
+      )
+    end
+  ' "$manifest" >/dev/null; then
+    echo "$manifest invalid: downloads[].url release tag must match manifest version" >&2
+    errors=$((errors + 1))
+  fi
 done
 
 if [[ $errors -gt 0 ]]; then
