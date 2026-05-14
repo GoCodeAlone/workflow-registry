@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-salesforce",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more",
   "author": "GoCodeAlone",
   "license": "MIT",

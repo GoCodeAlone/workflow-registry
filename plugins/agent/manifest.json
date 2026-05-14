@@ -1,6 +1,6 @@
 {
   "name": "agent",
-  "version": "0.5.2",
+  "version": "0.9.2",
   "author": "GoCodeAlone",
   "description": "AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection, orchestration (SSE hub, scheduler, MCP client/server, approvals, sub-agents, webhooks, security auditing, JWT, bcrypt, OAuth)",
   "source": "github.com/GoCodeAlone/workflow-plugin-agent",

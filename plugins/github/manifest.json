@@ -1,6 +1,6 @@
 {
   "name": "github",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "GoCodeAlone",
   "description": "GitHub integration plugin: webhook handling, GitHub Actions, PRs, issues, releases, and deployments",
   "source": "github.com/GoCodeAlone/workflow-plugin-github",

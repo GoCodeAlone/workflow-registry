@@ -1,6 +1,6 @@
 {
   "name": "authz",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "author": "GoCodeAlone",
   "description": "RBAC authorization plugin using Casbin",
   "source": "github.com/GoCodeAlone/workflow-plugin-authz",
