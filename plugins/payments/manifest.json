@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-payments",
-  "version": "0.3.1",
+  "version": "0.4.5",
   "description": "Multi-provider payment processing plugin (Stripe, PayPal)",
   "author": "GoCodeAlone",
   "license": "Apache-2.0",
@@ -10,9 +10,18 @@
   "minEngineVersion": "0.3.12",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-payments",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-payments",
-  "keywords": ["payment", "stripe", "paypal", "billing", "subscription", "marketplace"],
+  "keywords": [
+    "payment",
+    "stripe",
+    "paypal",
+    "billing",
+    "subscription",
+    "marketplace"
+  ],
   "capabilities": {
-    "moduleTypes": ["payments.provider"],
+    "moduleTypes": [
+      "payments.provider"
+    ],
     "stepTypes": [
       "step.payment_charge",
       "step.payment_capture",
@@ -46,24 +55,28 @@
   },
   "downloads": [
     {
-      "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.3.1/workflow-plugin-payments-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.3.1/workflow-plugin-payments-linux-arm64.tar.gz"
-    },
-    {
       "os": "darwin",
+      "sha256": "76047dc7068990d78d6f2b329c3f29e337c00cb27d03949335083fce43777510",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.5/workflow-plugin-payments-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "658ee8f7ea09afd54892fd5bec7ac3f542cffbc4280ef398ec8e65395c935bc2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.5/workflow-plugin-payments-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.3.1/workflow-plugin-payments-darwin-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "0f5851c87f5e14289cb7373497750ecbe848abc1be9c46dfd83aec39764fa816",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.5/workflow-plugin-payments-linux-amd64.tar.gz"
     },
     {
-      "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.3.1/workflow-plugin-payments-darwin-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "0e147fed6e584e2713e05e834968b2f66d45cd8ce518e72b41e3cbde57317f62",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.5/workflow-plugin-payments-linux-arm64.tar.gz"
     }
   ]
 }
