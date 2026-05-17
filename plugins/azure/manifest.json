@@ -1,16 +1,28 @@
 {
   "name": "workflow-plugin-azure",
-  "version": "0.1.2",
+  "version": "2.0.0",
   "description": "Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "community",
   "private": false,
-  "minEngineVersion": "0.3.51",
+  "minEngineVersion": "0.57.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-azure",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-azure",
-  "keywords": ["azure", "iac", "infrastructure", "cloud", "aci", "aks", "sql", "redis", "vnet", "acr", "apim"],
+  "keywords": [
+    "azure",
+    "iac",
+    "infrastructure",
+    "cloud",
+    "aci",
+    "aks",
+    "sql",
+    "redis",
+    "vnet",
+    "acr",
+    "apim"
+  ],
   "capabilities": {
     "moduleTypes": [],
     "stepTypes": [],
@@ -24,22 +36,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v0.1.2/workflow-plugin-azure-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.0.0/workflow-plugin-azure-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v0.1.2/workflow-plugin-azure-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.0.0/workflow-plugin-azure-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v0.1.2/workflow-plugin-azure-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.0.0/workflow-plugin-azure-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v0.1.2/workflow-plugin-azure-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.0.0/workflow-plugin-azure-darwin-arm64.tar.gz"
     }
   ]
 }
