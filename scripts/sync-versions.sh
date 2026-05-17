@@ -87,6 +87,18 @@ release_exists() {
   gh release view "$tag" --repo "$gh_repo" --json tagName >/dev/null 2>&1
 }
 
+# fetch_plugin_json downloads plugin.json from the plugin repo at the given
+# tag and prints it to stdout. Empty output on failure (e.g. plugin repo
+# without plugin.json, network glitch, missing tag). Used by capability
+# sync to copy moduleTypes/stepTypes/capabilities/iacProvider/minEngineVersion
+# from the source-of-truth (each plugin's own plugin.json) into the registry
+# manifest — closes workflow#703.
+fetch_plugin_json() {
+  local gh_repo="$1"
+  local tag="$2"
+  gh api "repos/$gh_repo/contents/plugin.json?ref=$tag" --jq '.content' 2>/dev/null | base64 -d 2>/dev/null || true
+}
+
 mismatches=0
 
 for manifest in "$PLUGINS_DIR"/*/manifest.json; do
@@ -169,7 +181,34 @@ for manifest in "$PLUGINS_DIR"/*/manifest.json; do
         ' "$manifest" > "$tmp"
       fi
       mv "$tmp" "$manifest"
-      echo "   FIXED  $plugin_name → $target_version downloads=$(echo "$downloads" | jq 'length')"
+      # workflow#703: also sync capabilities + minEngineVersion + iacProvider
+      # from the tagged plugin.json (source-of-truth). Falls back silently
+      # when the plugin repo has no plugin.json at the tag.
+      plugin_json="$(fetch_plugin_json "$gh_repo" "$target_tag")"
+      caps_synced=""
+      if [[ -n "$plugin_json" ]]; then
+        tmp_caps="$(mktemp)"
+        echo "$plugin_json" | jq -c '{
+          capabilities: (.capabilities // null),
+          minEngineVersion: (.minEngineVersion // null),
+          iacProvider: (.iacProvider // null)
+        }' > "$tmp_caps" 2>/dev/null || true
+        if [[ -s "$tmp_caps" ]]; then
+          tmp2="$(mktemp)"
+          jq --slurpfile src "$tmp_caps" '
+            . as $orig |
+            ($src[0]) as $upstream |
+            $orig
+            + (if $upstream.capabilities != null then {capabilities: $upstream.capabilities} else {} end)
+            + (if $upstream.minEngineVersion != null then {minEngineVersion: $upstream.minEngineVersion} else {} end)
+            + (if $upstream.iacProvider != null then {iacProvider: $upstream.iacProvider} else {} end)
+          ' "$manifest" > "$tmp2"
+          mv "$tmp2" "$manifest"
+          caps_synced=" capabilities+minEngine+iacProvider"
+        fi
+        rm -f "$tmp_caps"
+      fi
+      echo "   FIXED  $plugin_name → $target_version downloads=$(echo "$downloads" | jq 'length')${caps_synced}"
     fi
   fi
 done
