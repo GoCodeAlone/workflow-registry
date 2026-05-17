@@ -1,6 +1,6 @@
 {
   "name": "bento",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "author": "GoCodeAlone",
   "description": "Stream processing via Bento — 100+ connectors, Bloblang transforms, at-least-once delivery",
   "source": "github.com/GoCodeAlone/workflow-plugin-bento",
@@ -11,11 +11,35 @@
   "minEngineVersion": "0.3.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-bento",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-bento",
-  "keywords": ["bento", "benthos", "streaming", "kafka", "sqs", "pubsub", "redis", "amqp", "mqtt", "s3", "kinesis", "nats", "etl", "bloblang"],
+  "keywords": [
+    "bento",
+    "benthos",
+    "streaming",
+    "kafka",
+    "sqs",
+    "pubsub",
+    "redis",
+    "amqp",
+    "mqtt",
+    "s3",
+    "kinesis",
+    "nats",
+    "etl",
+    "bloblang"
+  ],
   "capabilities": {
-    "moduleTypes": ["bento.stream", "bento.input", "bento.output", "bento.broker"],
-    "stepTypes": ["step.bento"],
-    "triggerTypes": ["bento"],
+    "moduleTypes": [
+      "bento.stream",
+      "bento.input",
+      "bento.output",
+      "bento.broker"
+    ],
+    "stepTypes": [
+      "step.bento"
+    ],
+    "triggerTypes": [
+      "bento"
+    ],
     "workflowHandlers": []
   },
   "assets": {
@@ -24,24 +48,28 @@
   },
   "downloads": [
     {
-      "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.2/workflow-plugin-bento-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.2/workflow-plugin-bento-linux-arm64.tar.gz"
-    },
-    {
       "os": "darwin",
+      "sha256": "2fbc633e5d3942a1e4ace21b373c2ed95dde833c8508638c28bdf660034118f5",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.3/workflow-plugin-bento-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "8a1a4bd9b70ad03431478715d8253f9b74d54e658aeb2ccdfa41b78d10faeb46",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.3/workflow-plugin-bento-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.2/workflow-plugin-bento-darwin-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "addb85ddecfb8283d7582794735a80d46e90507c4aec9133229ed853e267ad54",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.3/workflow-plugin-bento-linux-amd64.tar.gz"
     },
     {
-      "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.2/workflow-plugin-bento-darwin-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "f2d37650a82a56d259c7461b7ccf526134141af3d9f0c42eac3f22e841f1dc59",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.3/workflow-plugin-bento-linux-arm64.tar.gz"
     }
   ]
 }
