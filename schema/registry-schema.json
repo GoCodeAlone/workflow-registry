@@ -166,6 +166,27 @@
       },
       "additionalProperties": false
     },
+    "iacProvider": {
+      "type": "object",
+      "description": "IaC provider runtime metadata used by wfctl after plugin install",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Canonical provider name when declared at top level"
+        },
+        "resourceTypes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Resource types this provider's drivers can manage"
+        },
+        "computePlanVersion": {
+          "type": "string",
+          "enum": ["v1", "v2"],
+          "description": "wfctl IaC compute/apply plan dispatch version; v2 enables the modern typed provider path"
+        }
+      },
+      "additionalProperties": false
+    },
     "checksums": {
       "type": "object",
       "description": "SHA-256 checksums keyed by version string for integrity verification",
