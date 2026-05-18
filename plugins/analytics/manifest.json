@@ -1,0 +1,67 @@
+{
+  "name": "workflow-plugin-analytics",
+  "version": "0.1.2",
+  "description": "Analytics and tag-manager injection for rendered HTML assets",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.57.4",
+  "keywords": [
+    "analytics",
+    "google-analytics",
+    "google-tag-manager",
+    "html",
+    "tags"
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.analytics_inject_html"
+    ],
+    "triggerTypes": [],
+    "cliCommands": [
+      {
+        "name": "analytics",
+        "description": "Inject analytics and tag-manager snippets into rendered HTML",
+        "flags_passthrough": true,
+        "subcommands": [
+          {
+            "name": "inject",
+            "description": "Inject provider snippet into HTML files"
+          }
+        ]
+      }
+    ]
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.2/workflow-plugin-analytics-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.2/workflow-plugin-analytics-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.2/workflow-plugin-analytics-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.2/workflow-plugin-analytics-darwin-arm64.tar.gz"
+    },
+    {
+      "os": "windows",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.2/workflow-plugin-analytics-windows-amd64.tar.gz"
+    }
+  ]
+}
