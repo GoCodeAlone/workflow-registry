@@ -94,6 +94,9 @@
       ]
     }
   },
+  "iacProvider": {
+    "computePlanVersion": "v2"
+  },
   "assets": {
     "ui": false,
     "config": true
