@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-ci-generator",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "CI/CD config generator for GitHub Actions, GitLab CI, Jenkins, and CircleCI",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "core",
   "private": false,
-  "minEngineVersion": "0.3.51",
+  "minEngineVersion": "0.53.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator",
   "keywords": [
@@ -21,6 +21,7 @@
     "infrastructure"
   ],
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [],
     "stepTypes": [
       "step.ci_generate"
@@ -35,26 +36,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "1cc264b5c75053115c357768197d418cd0c7494730f6b23946d4360580309646",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.3/workflow-plugin-ci-generator-darwin-amd64.tar.gz"
+      "sha256": "fe98f1ec337a044d027e1e2ec31c5553c31470eeb3e7e3fea0a5cf23b6cfb165",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.4/workflow-plugin-ci-generator-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "8f772461efd848108f538dc3bdf9ea076a7b256f24246b059e8ee98e4de391dc",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.3/workflow-plugin-ci-generator-darwin-arm64.tar.gz"
+      "sha256": "66d6e1afa3dd167253547890f0a5b13734319a6dfa715a4934e3fcc7694734cb",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.4/workflow-plugin-ci-generator-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "6ff31f9e377ff3b67eecc9eddfcc3db7dd42ddfc7264694c4573590c00e903fe",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.3/workflow-plugin-ci-generator-linux-amd64.tar.gz"
+      "sha256": "fe3f80992222fe41e1ace5adc6e8b5ab053ce85e7295f86c56617cb1b11df88e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.4/workflow-plugin-ci-generator-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "be0fbfe98e4854d47ecbc15bbc71f6ffcebf22cddfd29801415c95d64318f6b7",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.3/workflow-plugin-ci-generator-linux-arm64.tar.gz"
+      "sha256": "3b711dedcda2b5fde4fc6c2a7a0972ba5e97b51e2495465f3183560d882da19e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.4/workflow-plugin-ci-generator-linux-arm64.tar.gz"
     }
   ]
 }
