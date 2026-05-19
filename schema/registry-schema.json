@@ -41,6 +41,11 @@
       "enum": ["core", "community", "premium"],
       "description": "Plugin tier: core (maintained by GoCodeAlone), community (third-party), premium (paid)"
     },
+    "status": {
+      "type": "string",
+      "enum": ["verified", "experimental", "deprecated"],
+      "description": "Active-usage verification status. 'verified' = pinned in a merged main-branch wfctl.yaml of an active GoCodeAlone project; 'experimental' = compiles + unit-tests pass but no verified production usage; 'deprecated' = scheduled removal."
+    },
     "license": {
       "type": "string",
       "description": "SPDX license identifier (e.g. MIT, Apache-2.0)"
