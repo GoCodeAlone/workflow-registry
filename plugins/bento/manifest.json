@@ -11,11 +11,35 @@
   "minEngineVersion": "0.3.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-bento",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-bento",
-  "keywords": ["bento", "benthos", "streaming", "kafka", "sqs", "pubsub", "redis", "amqp", "mqtt", "s3", "kinesis", "nats", "etl", "bloblang"],
+  "keywords": [
+    "bento",
+    "benthos",
+    "streaming",
+    "kafka",
+    "sqs",
+    "pubsub",
+    "redis",
+    "amqp",
+    "mqtt",
+    "s3",
+    "kinesis",
+    "nats",
+    "etl",
+    "bloblang"
+  ],
   "capabilities": {
-    "moduleTypes": ["bento.stream", "bento.input", "bento.output", "bento.broker"],
-    "stepTypes": ["step.bento"],
-    "triggerTypes": ["bento"],
+    "moduleTypes": [
+      "bento.stream",
+      "bento.input",
+      "bento.output",
+      "bento.broker"
+    ],
+    "stepTypes": [
+      "step.bento"
+    ],
+    "triggerTypes": [
+      "bento"
+    ],
     "workflowHandlers": []
   },
   "assets": {
@@ -43,5 +67,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.2/workflow-plugin-bento-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

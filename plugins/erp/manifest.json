@@ -10,9 +10,18 @@
   "minEngineVersion": "1.13.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-erp",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-erp",
-  "keywords": ["erp", "sap", "odata", "enterprise", "business-objects", "integration"],
+  "keywords": [
+    "erp",
+    "sap",
+    "odata",
+    "enterprise",
+    "business-objects",
+    "integration"
+  ],
   "capabilities": {
-    "moduleTypes": ["erp.provider"],
+    "moduleTypes": [
+      "erp.provider"
+    ],
     "stepTypes": [
       "step.erp_read_entity",
       "step.erp_create_entity",
@@ -26,5 +35,6 @@
     ],
     "triggerTypes": []
   },
-  "downloads": []
+  "downloads": [],
+  "status": "experimental"
 }

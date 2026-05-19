@@ -8,11 +8,28 @@
   "tier": "core",
   "license": "MIT",
   "minEngineVersion": "0.5.0",
-  "keywords": ["cicd", "ci", "cd", "git", "docker", "shell", "codebuild", "scanning", "artifacts", "deployment", "rolling", "blue-green", "canary", "container"],
+  "keywords": [
+    "cicd",
+    "ci",
+    "cd",
+    "git",
+    "docker",
+    "shell",
+    "codebuild",
+    "scanning",
+    "artifacts",
+    "deployment",
+    "rolling",
+    "blue-green",
+    "canary",
+    "container"
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-cicd",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-cicd",
   "capabilities": {
-    "moduleTypes": ["aws.codebuild"],
+    "moduleTypes": [
+      "aws.codebuild"
+    ],
     "stepTypes": [
       "step.shell_exec",
       "step.artifact_pull",
@@ -48,5 +65,6 @@
     ],
     "triggerTypes": [],
     "workflowHandlers": []
-  }
+  },
+  "status": "experimental"
 }

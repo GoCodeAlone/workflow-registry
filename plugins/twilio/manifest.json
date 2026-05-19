@@ -146,5 +146,6 @@
       "sha256": "972391b7e7ca58ef954d3bd930ef5673fc4c9690bf14d2c10ff2362d6880e8d2",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.0/workflow-plugin-twilio-linux-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "verified"
 }

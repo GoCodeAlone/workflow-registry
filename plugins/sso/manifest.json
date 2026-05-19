@@ -10,9 +10,18 @@
   "minEngineVersion": "1.13.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-sso",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-sso",
-  "keywords": ["sso", "oidc", "openid-connect", "authentication", "identity", "enterprise"],
+  "keywords": [
+    "sso",
+    "oidc",
+    "openid-connect",
+    "authentication",
+    "identity",
+    "enterprise"
+  ],
   "capabilities": {
-    "moduleTypes": ["sso.oidc"],
+    "moduleTypes": [
+      "sso.oidc"
+    ],
     "stepTypes": [
       "step.sso_validate_token",
       "step.sso_userinfo",
@@ -21,5 +30,6 @@
     ],
     "triggerTypes": []
   },
-  "downloads": []
+  "downloads": [],
+  "status": "experimental"
 }

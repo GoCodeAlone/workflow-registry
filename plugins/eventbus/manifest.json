@@ -1,64 +1,65 @@
 {
-    "name": "workflow-plugin-eventbus",
-    "version": "0.2.0",
-    "description": "Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations.",
-    "author": "GoCodeAlone",
-    "license": "MIT",
-    "type": "external",
-    "tier": "community",
-    "private": false,
-    "minEngineVersion": "0.20.0",
-    "keywords": [
-        "eventbus",
-        "nats",
-        "kafka",
-        "kinesis",
-        "iac",
-        "infra",
-        "jetstream"
+  "name": "workflow-plugin-eventbus",
+  "version": "0.2.0",
+  "description": "Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations.",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.20.0",
+  "keywords": [
+    "eventbus",
+    "nats",
+    "kafka",
+    "kinesis",
+    "iac",
+    "infra",
+    "jetstream"
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-eventbus",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-eventbus",
+  "capabilities": {
+    "moduleTypes": [
+      "eventbus.broker",
+      "eventbus.stream",
+      "eventbus.consumer"
     ],
-    "homepage": "https://github.com/GoCodeAlone/workflow-plugin-eventbus",
-    "repository": "https://github.com/GoCodeAlone/workflow-plugin-eventbus",
-    "capabilities": {
-        "moduleTypes": [
-            "eventbus.broker",
-            "eventbus.stream",
-            "eventbus.consumer"
-        ],
-        "stepTypes": [
-            "step.eventbus.publish",
-            "step.eventbus.consume",
-            "step.eventbus.ack"
-        ],
-        "triggerTypes": [
-            "trigger.eventbus.subscribe"
-        ]
-    },
-    "downloads": [
-        {
-            "os": "linux",
-            "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-linux-amd64.tar.gz"
-        },
-        {
-            "os": "linux",
-            "arch": "arm64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-linux-arm64.tar.gz"
-        },
-        {
-            "os": "darwin",
-            "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-darwin-amd64.tar.gz"
-        },
-        {
-            "os": "darwin",
-            "arch": "arm64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-darwin-arm64.tar.gz"
-        },
-        {
-            "os": "windows",
-            "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-windows-amd64.tar.gz"
-        }
+    "stepTypes": [
+      "step.eventbus.publish",
+      "step.eventbus.consume",
+      "step.eventbus.ack"
+    ],
+    "triggerTypes": [
+      "trigger.eventbus.subscribe"
     ]
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-darwin-arm64.tar.gz"
+    },
+    {
+      "os": "windows",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.2.0/workflow-plugin-eventbus-windows-amd64.tar.gz"
+    }
+  ],
+  "status": "verified"
 }

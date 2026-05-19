@@ -11,9 +11,18 @@
   "minEngineVersion": "0.3.30",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-websocket",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-websocket",
-  "keywords": ["websocket", "ws", "realtime", "rooms", "broadcast", "multiplayer"],
+  "keywords": [
+    "websocket",
+    "ws",
+    "realtime",
+    "rooms",
+    "broadcast",
+    "multiplayer"
+  ],
   "capabilities": {
-    "moduleTypes": ["ws.server"],
+    "moduleTypes": [
+      "ws.server"
+    ],
     "stepTypes": [
       "step.ws_send",
       "step.ws_broadcast",
@@ -22,7 +31,10 @@
       "step.ws_room_list",
       "step.ws_close"
     ],
-    "triggerTypes": ["websocket"],
+    "triggerTypes": [
+      "websocket"
+    ],
     "workflowHandlers": []
-  }
+  },
+  "status": "experimental"
 }

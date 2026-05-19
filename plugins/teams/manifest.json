@@ -10,9 +10,19 @@
   "minEngineVersion": "0.1.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-teams",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-teams",
-  "keywords": ["teams", "microsoft", "messaging", "chat", "graph", "azure", "notifications"],
+  "keywords": [
+    "teams",
+    "microsoft",
+    "messaging",
+    "chat",
+    "graph",
+    "azure",
+    "notifications"
+  ],
   "capabilities": {
-    "moduleTypes": ["teams.provider"],
+    "moduleTypes": [
+      "teams.provider"
+    ],
     "stepTypes": [
       "step.teams_send_message",
       "step.teams_send_card",
@@ -22,7 +32,9 @@
       "step.teams_create_channel",
       "step.teams_add_member"
     ],
-    "triggerTypes": ["trigger.teams"],
+    "triggerTypes": [
+      "trigger.teams"
+    ],
     "workflowHandlers": []
   },
   "downloads": [
@@ -46,5 +58,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-teams/releases/download/v0.1.2/workflow-plugin-teams-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

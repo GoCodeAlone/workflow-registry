@@ -51,5 +51,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.0.0/workflow-plugin-gcp-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

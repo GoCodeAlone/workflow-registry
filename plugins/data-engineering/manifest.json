@@ -154,5 +154,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.1/workflow-plugin-data-engineering-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

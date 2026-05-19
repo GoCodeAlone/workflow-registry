@@ -125,5 +125,6 @@
       "sha256": "6a4df8121ab4297e7b5a0e6f8a8afd9970b1d2e234231276e9161c4feb65181f",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.2/workflow-plugin-salesforce-linux-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

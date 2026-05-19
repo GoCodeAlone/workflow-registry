@@ -10,9 +10,17 @@
   "minEngineVersion": "1.13.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-approval",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-approval",
-  "keywords": ["approval", "human-in-the-loop", "state-machine", "review", "workflow"],
+  "keywords": [
+    "approval",
+    "human-in-the-loop",
+    "state-machine",
+    "review",
+    "workflow"
+  ],
   "capabilities": {
-    "moduleTypes": ["approval.engine"],
+    "moduleTypes": [
+      "approval.engine"
+    ],
     "stepTypes": [
       "step.approval_request",
       "step.approval_check",
@@ -23,5 +31,6 @@
     ],
     "triggerTypes": []
   },
-  "downloads": []
+  "downloads": [],
+  "status": "experimental"
 }
