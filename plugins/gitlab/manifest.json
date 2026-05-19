@@ -1,26 +1,47 @@
 {
   "name": "gitlab",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "author": "GoCodeAlone",
   "description": "GitLab integration — webhook handling and GitLab CI pipeline management",
   "source": "github.com/GoCodeAlone/workflow-plugin-gitlab",
   "type": "external",
   "tier": "community",
   "license": "MIT",
-  "minEngineVersion": "0.2.0",
+  "minEngineVersion": "0.53.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-gitlab",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-gitlab",
-  "keywords": ["gitlab", "webhook", "git", "ci", "cd", "pipeline", "merge-request", "integration"],
+  "keywords": [
+    "gitlab",
+    "webhook",
+    "git",
+    "ci",
+    "cd",
+    "pipeline",
+    "merge-request",
+    "integration"
+  ],
   "capabilities": {
-    "moduleTypes": ["git.webhook"],
+    "configProvider": false,
+    "moduleTypes": [
+      "git.webhook",
+      "gitlab.webhook",
+      "gitlab.client"
+    ],
     "stepTypes": [
       "step.gitlab_trigger_pipeline",
       "step.gitlab_pipeline_status",
       "step.gitlab_create_merge_request",
-      "step.gitlab_mr_comment"
+      "step.gitlab_create_mr",
+      "step.gitlab_mr_comment",
+      "step.gitlab_parse_webhook"
     ],
-    "triggerTypes": [],
-    "workflowHandlers": []
+    "serviceMethods": [
+      "gitlab.client/trigger_pipeline",
+      "gitlab.client/pipeline_status",
+      "gitlab.client/create_merge_request",
+      "gitlab.client/mr_comment"
+    ],
+    "triggerTypes": []
   },
   "assets": {
     "ui": false,
@@ -28,24 +49,40 @@
   },
   "downloads": [
     {
-      "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.1/workflow-plugin-gitlab-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.1/workflow-plugin-gitlab-linux-arm64.tar.gz"
-    },
-    {
       "os": "darwin",
+      "sha256": "4353fff3eec914d5b9574c8787931a0eda0c582082067ef5f10321db75443450",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.3/workflow-plugin-gitlab-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "26e0bf1e27bec284e062d65a43c53d7e7f0fd2b5c91a896b3145084f6e8ed057",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.3/workflow-plugin-gitlab-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.1/workflow-plugin-gitlab-darwin-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "d6f44e61094dc27a1c1a53665719ffe525c68a528fe85c072ea904cd8b655548",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.3/workflow-plugin-gitlab-linux-amd64.tar.gz"
     },
     {
-      "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.1/workflow-plugin-gitlab-darwin-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "ee4832aa8ca2a51cb8e41f6851323d14d68e149384e0405b4b7a23c72e076299",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.3/workflow-plugin-gitlab-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "3b4fa47c45cd41ef2202486dce51a1bdd8989ba469b29c2a91565d00bb35ac98",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.3/workflow-plugin-gitlab-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "30f460ab3336586668a0f4d6b7717879d36d6f849b5dc9fb04d81546c0b543ab",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.0.3/workflow-plugin-gitlab-windows-arm64.tar.gz"
     }
   ]
 }
