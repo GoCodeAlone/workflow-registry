@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-marketplace",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "External plugin for the workflow engine.",
+  "source": "github.com/GoCodeAlone/workflow-plugin-marketplace",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-marketplace",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-marketplace",
+  "private": false,
+  "status": "experimental"
+}

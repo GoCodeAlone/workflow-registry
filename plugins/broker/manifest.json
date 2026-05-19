@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-broker",
+  "version": "0.2.2",
+  "author": "GoCodeAlone",
+  "description": "External plugin for the workflow engine.",
+  "source": "github.com/GoCodeAlone/workflow-plugin-broker",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-broker",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-broker",
+  "private": false,
+  "status": "experimental"
+}

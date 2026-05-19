@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-security-scanner",
+  "version": "1.0.2",
+  "author": "GoCodeAlone",
+  "description": "Security scanner plugin for workflow engine — vulnerability scanning, secret detection, and compliance checks",
+  "source": "github.com/GoCodeAlone/workflow-plugin-security-scanner",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner",
+  "private": false,
+  "status": "experimental"
+}

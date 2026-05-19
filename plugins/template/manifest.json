@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-template",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "Template repository for creating workflow engine external plugins",
+  "source": "github.com/GoCodeAlone/workflow-plugin-template",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-template",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-template",
+  "private": false,
+  "status": "experimental"
+}

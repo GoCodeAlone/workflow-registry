@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-rooms",
+  "version": "0.1.5",
+  "author": "GoCodeAlone",
+  "description": "Room management plugin for workflow engine — join, leave, broadcast, members",
+  "source": "github.com/GoCodeAlone/workflow-plugin-rooms",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-rooms",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-rooms",
+  "private": false,
+  "status": "experimental"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-infra",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "External plugin for the workflow engine.",
+  "source": "github.com/GoCodeAlone/workflow-plugin-infra",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-infra",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-infra",
+  "private": false,
+  "status": "experimental"
+}
