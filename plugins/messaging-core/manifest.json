@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-messaging-core",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "Shared messaging interfaces for workflow platform plugins",
+  "source": "github.com/GoCodeAlone/workflow-plugin-messaging-core",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core",
+  "private": false,
+  "status": "experimental"
+}

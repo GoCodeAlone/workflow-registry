@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-mcp",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "MCP (Model Context Protocol) plugin for GoCodeAlone/workflow",
+  "source": "github.com/GoCodeAlone/workflow-plugin-mcp",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-mcp",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-mcp",
+  "private": false,
+  "status": "experimental"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-steam",
+  "version": "0.3.2",
+  "author": "GoCodeAlone",
+  "description": "External plugin for the workflow engine.",
+  "source": "github.com/GoCodeAlone/workflow-plugin-steam",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-steam",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-steam",
+  "private": false,
+  "status": "experimental"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "workflow-plugin-ws-auth",
+  "version": "0.1.4",
+  "author": "GoCodeAlone",
+  "description": "WebSocket HMAC authentication plugin for workflow engine",
+  "source": "github.com/GoCodeAlone/workflow-plugin-ws-auth",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth",
+  "private": false,
+  "status": "experimental"
+}
