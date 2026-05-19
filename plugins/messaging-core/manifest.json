@@ -10,5 +10,16 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.messaging_send",
+      "step.messaging_reply",
+      "step.messaging_receive",
+      "step.messaging_react"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }

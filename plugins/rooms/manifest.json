@@ -10,5 +10,16 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-rooms",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-rooms",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.room_join",
+      "step.room_leave",
+      "step.room_broadcast",
+      "step.room_members"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }

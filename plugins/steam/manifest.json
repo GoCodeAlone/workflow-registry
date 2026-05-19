@@ -10,5 +10,16 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-steam",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-steam",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.steam_auth",
+      "step.steam_achievement_set",
+      "step.steam_achievement_sync",
+      "step.steam_stat_set"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }

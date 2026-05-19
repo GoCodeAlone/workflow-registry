@@ -10,5 +10,14 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-infra",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-infra",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [
+      "infra.cache",
+      "infra.registry"
+    ],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }

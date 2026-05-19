@@ -10,5 +10,15 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-template",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-template",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [
+      "example.module_type"
+    ],
+    "stepTypes": [
+      "step.example_action"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }

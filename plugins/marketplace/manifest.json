@@ -10,5 +10,18 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-marketplace",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-marketplace",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.marketplace_search",
+      "step.marketplace_detail",
+      "step.marketplace_install",
+      "step.marketplace_installed",
+      "step.marketplace_uninstall",
+      "step.marketplace_update"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }

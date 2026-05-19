@@ -10,5 +10,15 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.sast_scan",
+      "step.container_scan",
+      "step.deps_scan"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }
