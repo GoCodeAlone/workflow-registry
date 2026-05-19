@@ -10,5 +10,13 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.ws_auth_identity"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }

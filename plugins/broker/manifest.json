@@ -10,5 +10,16 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-broker",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-broker",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [
+      "messaging.broker.workflow"
+    ],
+    "stepTypes": [
+      "step.broker_publish",
+      "step.broker_subscribe"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }

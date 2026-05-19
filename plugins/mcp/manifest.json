@@ -10,5 +10,13 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-mcp",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-mcp",
   "private": false,
-  "status": "experimental"
+  "status": "experimental",
+  "capabilities": {
+    "moduleTypes": [
+      "mcp.server"
+    ],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  }
 }
