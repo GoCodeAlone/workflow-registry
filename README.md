@@ -131,6 +131,8 @@ wfctl init my-project --template api-service
 
 All plugin manifests must conform to the [registry schema](./schema/registry-schema.json). The schema is a JSON Schema (draft 2020-12) defining required fields, enums for `type`, `tier`, and `status`, and the structure of `capabilities`.
 
+The optional `status` field tracks active-usage verification: `"verified"` means the plugin is pinned in a merged main-branch `wfctl.yaml` of an active GoCodeAlone project (production miles); `"experimental"` means it compiles and unit-tests pass but has no validated production deployment; `"deprecated"` means it is scheduled for removal. Manifests without `status` continue to validate — the field is optional and additive.
+
 Validate a manifest locally:
 
 ```bash
@@ -197,6 +199,7 @@ PRs that fail validation cannot be merged.
 - `repository` should point to the public GitHub repository where the plugin lives
 - `capabilities.moduleTypes`, `stepTypes`, `triggerTypes`, `workflowHandlers` must accurately reflect what the plugin registers
 - `private: true` must be set for plugins that are not publicly installable
+- `status` is optional; if set, must be one of `"verified"`, `"experimental"`, or `"deprecated"` (see Schema section)
 
 ### Review Process
 
