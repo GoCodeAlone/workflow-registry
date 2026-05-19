@@ -129,7 +129,7 @@ wfctl init my-project --template api-service
 
 ## Schema
 
-All plugin manifests must conform to the [registry schema](./schema/registry-schema.json). The schema is a JSON Schema (draft 2020-12) defining required fields, enums for `type` and `tier`, and the structure of `capabilities`.
+All plugin manifests must conform to the [registry schema](./schema/registry-schema.json). The schema is a JSON Schema (draft 2020-12) defining required fields, enums for `type`, `tier`, and `status`, and the structure of `capabilities`.
 
 Validate a manifest locally:
 
