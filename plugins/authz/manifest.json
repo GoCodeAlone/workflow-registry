@@ -56,5 +56,6 @@
       "sha256": "e8c881a34068e7849a7f4bc4fc55c87e1927684c96d3a9269a23b517a8e24949",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.3/workflow-plugin-authz-linux-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

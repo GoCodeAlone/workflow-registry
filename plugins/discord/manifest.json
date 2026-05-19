@@ -10,9 +10,18 @@
   "minEngineVersion": "0.1.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-discord",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-discord",
-  "keywords": ["discord", "messaging", "bot", "voice", "chat", "notifications"],
+  "keywords": [
+    "discord",
+    "messaging",
+    "bot",
+    "voice",
+    "chat",
+    "notifications"
+  ],
   "capabilities": {
-    "moduleTypes": ["discord.provider"],
+    "moduleTypes": [
+      "discord.provider"
+    ],
     "stepTypes": [
       "step.discord_send_message",
       "step.discord_send_embed",
@@ -25,7 +34,9 @@
       "step.discord_voice_leave",
       "step.discord_voice_play"
     ],
-    "triggerTypes": ["trigger.discord"],
+    "triggerTypes": [
+      "trigger.discord"
+    ],
     "workflowHandlers": []
   },
   "downloads": [
@@ -49,5 +60,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.1/workflow-plugin-discord-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

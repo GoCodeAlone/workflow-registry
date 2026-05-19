@@ -8,7 +8,13 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.18.0",
-  "keywords": ["migrations", "database", "postgres", "golang-migrate", "goose"],
+  "keywords": [
+    "migrations",
+    "database",
+    "postgres",
+    "golang-migrate",
+    "goose"
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-migrations",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-migrations",
   "capabilities": {
@@ -49,5 +55,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.2.0/workflow-plugin-migrations-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

@@ -11,7 +11,18 @@
   "minEngineVersion": "0.2.0",
   "homepage": "https://github.com/GoCodeAlone/ratchet",
   "repository": "https://github.com/GoCodeAlone/ratchet",
-  "keywords": ["ai", "agent", "orchestration", "autonomous", "ratchet", "mcp", "llm", "sse", "vault", "secrets"],
+  "keywords": [
+    "ai",
+    "agent",
+    "orchestration",
+    "autonomous",
+    "ratchet",
+    "mcp",
+    "llm",
+    "sse",
+    "vault",
+    "secrets"
+  ],
   "capabilities": {
     "moduleTypes": [
       "ratchet.ai_provider",
@@ -76,5 +87,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/ratchet/releases/download/v1.0.0/ratchet-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

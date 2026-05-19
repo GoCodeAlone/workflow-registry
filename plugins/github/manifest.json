@@ -88,5 +88,6 @@
       "sha256": "e082ee47077d902ca5c8bebc984bba1b48bc6f74f46daf3158faeb73a0346e5c",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.3/workflow-plugin-github-windows-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

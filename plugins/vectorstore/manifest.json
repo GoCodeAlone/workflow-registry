@@ -10,9 +10,18 @@
   "minEngineVersion": "1.13.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
-  "keywords": ["vector", "vectorstore", "pinecone", "rag", "embeddings", "similarity-search"],
+  "keywords": [
+    "vector",
+    "vectorstore",
+    "pinecone",
+    "rag",
+    "embeddings",
+    "similarity-search"
+  ],
   "capabilities": {
-    "moduleTypes": ["vectorstore.provider"],
+    "moduleTypes": [
+      "vectorstore.provider"
+    ],
     "stepTypes": [
       "step.vector_upsert",
       "step.vector_query",
@@ -24,5 +33,6 @@
     ],
     "triggerTypes": []
   },
-  "downloads": []
+  "downloads": [],
+  "status": "experimental"
 }

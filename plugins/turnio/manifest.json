@@ -10,9 +10,17 @@
   "minEngineVersion": "0.3.30",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-turnio",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-turnio",
-  "keywords": ["whatsapp", "turnio", "turn.io", "messaging", "chatbot"],
+  "keywords": [
+    "whatsapp",
+    "turnio",
+    "turn.io",
+    "messaging",
+    "chatbot"
+  ],
   "capabilities": {
-    "moduleTypes": ["turnio.provider"],
+    "moduleTypes": [
+      "turnio.provider"
+    ],
     "stepTypes": [
       "step.turnio_send_text",
       "step.turnio_send_media",
@@ -63,5 +71,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.1/workflow-plugin-turnio-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

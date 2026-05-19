@@ -54,5 +54,6 @@
       "sha256": "a3f7bba9abbf9c936bbc396ff8015d8d9277aafa59031939c7851390080e8b8d",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.0.0/workflow-plugin-admin-linux-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

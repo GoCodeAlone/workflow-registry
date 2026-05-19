@@ -1,67 +1,68 @@
 {
-    "name": "workflow-plugin-audit-chain",
-    "version": "0.1.0",
-    "description": "Tamper-evident hash-chained audit logging with periodic Merkle root anchoring (OpenTimestamps/Bitcoin, git, Sigstore)",
-    "author": "GoCodeAlone",
-    "license": "MIT",
-    "type": "external",
-    "tier": "community",
-    "private": false,
-    "minEngineVersion": "0.20.0",
-    "keywords": [
-        "audit",
-        "hash-chain",
-        "merkle",
-        "opentimestamps",
-        "tamper-evident"
+  "name": "workflow-plugin-audit-chain",
+  "version": "0.1.0",
+  "description": "Tamper-evident hash-chained audit logging with periodic Merkle root anchoring (OpenTimestamps/Bitcoin, git, Sigstore)",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.20.0",
+  "keywords": [
+    "audit",
+    "hash-chain",
+    "merkle",
+    "opentimestamps",
+    "tamper-evident"
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain",
+  "capabilities": {
+    "moduleTypes": [
+      "audit.ledger",
+      "audit.anchor_provider.opentimestamps",
+      "audit.anchor_provider.git",
+      "audit.anchor_provider.sigstore"
     ],
-    "homepage": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain",
-    "repository": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain",
-    "capabilities": {
-        "moduleTypes": [
-            "audit.ledger",
-            "audit.anchor_provider.opentimestamps",
-            "audit.anchor_provider.git",
-            "audit.anchor_provider.sigstore"
-        ],
-        "stepTypes": [
-            "step.audit.append",
-            "step.audit.verify",
-            "step.audit.merkle_root",
-            "step.audit.anchor",
-            "step.audit.poll_anchor_confirmation",
-            "step.audit.proof",
-            "step.audit.public_receipt"
-        ],
-        "triggerTypes": [
-            "trigger.audit.entry_appended"
-        ]
-    },
-    "downloads": [
-        {
-            "os": "linux",
-            "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-linux-amd64.tar.gz"
-        },
-        {
-            "os": "linux",
-            "arch": "arm64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-linux-arm64.tar.gz"
-        },
-        {
-            "os": "darwin",
-            "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-darwin-amd64.tar.gz"
-        },
-        {
-            "os": "darwin",
-            "arch": "arm64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-darwin-arm64.tar.gz"
-        },
-        {
-            "os": "windows",
-            "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-windows-amd64.tar.gz"
-        }
+    "stepTypes": [
+      "step.audit.append",
+      "step.audit.verify",
+      "step.audit.merkle_root",
+      "step.audit.anchor",
+      "step.audit.poll_anchor_confirmation",
+      "step.audit.proof",
+      "step.audit.public_receipt"
+    ],
+    "triggerTypes": [
+      "trigger.audit.entry_appended"
     ]
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-darwin-arm64.tar.gz"
+    },
+    {
+      "os": "windows",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.1.0/workflow-plugin-audit-chain-windows-amd64.tar.gz"
+    }
+  ],
+  "status": "verified"
 }

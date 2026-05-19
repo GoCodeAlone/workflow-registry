@@ -10,9 +10,18 @@
   "minEngineVersion": "0.1.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-slack",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-slack",
-  "keywords": ["slack", "messaging", "chat", "notifications", "bot", "webhook"],
+  "keywords": [
+    "slack",
+    "messaging",
+    "chat",
+    "notifications",
+    "bot",
+    "webhook"
+  ],
   "capabilities": {
-    "moduleTypes": ["slack.provider"],
+    "moduleTypes": [
+      "slack.provider"
+    ],
     "stepTypes": [
       "step.slack_send_message",
       "step.slack_send_blocks",
@@ -23,7 +32,9 @@
       "step.slack_send_thread_reply",
       "step.slack_set_topic"
     ],
-    "triggerTypes": ["trigger.slack"],
+    "triggerTypes": [
+      "trigger.slack"
+    ],
     "workflowHandlers": []
   },
   "downloads": [
@@ -47,5 +58,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.1/workflow-plugin-slack-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

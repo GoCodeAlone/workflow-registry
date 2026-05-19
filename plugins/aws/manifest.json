@@ -55,5 +55,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.0.0/workflow-plugin-aws-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

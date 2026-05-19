@@ -10,9 +10,17 @@
   "minEngineVersion": "0.3.30",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-monday",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-monday",
-  "keywords": ["monday", "monday.com", "project-management", "boards", "graphql"],
+  "keywords": [
+    "monday",
+    "monday.com",
+    "project-management",
+    "boards",
+    "graphql"
+  ],
   "capabilities": {
-    "moduleTypes": ["monday.provider"],
+    "moduleTypes": [
+      "monday.provider"
+    ],
     "stepTypes": [
       "step.monday_create_board",
       "step.monday_list_boards",
@@ -95,5 +103,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.2/workflow-plugin-monday-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "experimental"
 }

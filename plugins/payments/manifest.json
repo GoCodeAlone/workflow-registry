@@ -10,9 +10,18 @@
   "minEngineVersion": "0.3.12",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-payments",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-payments",
-  "keywords": ["payment", "stripe", "paypal", "billing", "subscription", "marketplace"],
+  "keywords": [
+    "payment",
+    "stripe",
+    "paypal",
+    "billing",
+    "subscription",
+    "marketplace"
+  ],
   "capabilities": {
-    "moduleTypes": ["payments.provider"],
+    "moduleTypes": [
+      "payments.provider"
+    ],
     "stepTypes": [
       "step.payment_charge",
       "step.payment_capture",
@@ -65,5 +74,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.3.1/workflow-plugin-payments-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "status": "verified"
 }

@@ -10,9 +10,18 @@
   "minEngineVersion": "1.13.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-crm",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-crm",
-  "keywords": ["crm", "salesforce", "contacts", "leads", "deals", "records"],
+  "keywords": [
+    "crm",
+    "salesforce",
+    "contacts",
+    "leads",
+    "deals",
+    "records"
+  ],
   "capabilities": {
-    "moduleTypes": ["crm.provider"],
+    "moduleTypes": [
+      "crm.provider"
+    ],
     "stepTypes": [
       "step.crm_create_record",
       "step.crm_get_record",
@@ -27,5 +36,6 @@
     ],
     "triggerTypes": []
   },
-  "downloads": []
+  "downloads": [],
+  "status": "experimental"
 }

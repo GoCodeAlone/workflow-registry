@@ -10,9 +10,20 @@
   "minEngineVersion": "1.13.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-audit",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-audit",
-  "keywords": ["audit", "compliance", "logging", "eventbus", "s3", "governance"],
+  "keywords": [
+    "audit",
+    "compliance",
+    "logging",
+    "eventbus",
+    "s3",
+    "governance"
+  ],
   "capabilities": {
-    "moduleTypes": ["audit.collector", "audit.sink.s3", "audit.sink.db"],
+    "moduleTypes": [
+      "audit.collector",
+      "audit.sink.s3",
+      "audit.sink.db"
+    ],
     "stepTypes": [
       "step.audit_query",
       "step.audit_export",
@@ -20,5 +31,6 @@
     ],
     "triggerTypes": []
   },
-  "downloads": []
+  "downloads": [],
+  "status": "experimental"
 }
