@@ -30,9 +30,24 @@
     }
   },
   "required_secrets": [
-    { "name": "NAMECHEAP_API_USER", "sensitive": false, "description": "Namecheap account username (= ApiUser per API)", "prompt": "Namecheap username" },
-    { "name": "NAMECHEAP_API_KEY", "sensitive": true, "description": "Namecheap API key (rotate via Profile → Tools → Namecheap API Access)", "prompt": "Namecheap API key" },
-    { "name": "NAMECHEAP_CLIENT_IP", "sensitive": false, "description": "Public IP of the wfctl runner — Namecheap requires single-IP allowlisting (CIDR is unsupported)", "prompt": "Public IP to whitelist" }
+    {
+      "name": "NAMECHEAP_API_USER",
+      "sensitive": false,
+      "description": "Namecheap account username (= ApiUser per API)",
+      "prompt": "Namecheap username"
+    },
+    {
+      "name": "NAMECHEAP_API_KEY",
+      "sensitive": true,
+      "description": "Namecheap API key (rotate via Profile → Tools → Namecheap API Access)",
+      "prompt": "Namecheap API key"
+    },
+    {
+      "name": "NAMECHEAP_CLIENT_IP",
+      "sensitive": false,
+      "description": "Public IP of the wfctl runner — Namecheap requires single-IP allowlisting (CIDR is unsupported)",
+      "prompt": "Public IP to whitelist"
+    }
   ],
   "iacProvider": {
     "computePlanVersion": "v2"
@@ -41,6 +56,31 @@
     "ui": false,
     "config": true
   },
-  "downloads": [],
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "3be50b8248775e76166357de90d239dac952a806cb71253927db25d5edbad05b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.0/workflow-plugin-namecheap-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "506e5bfee46667a57c56764898628b2337bdf04564c7e147c9541bf2c1894974",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.0/workflow-plugin-namecheap-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "0cd4c835a07d8d476e31fcb169bf72ea0bbb00a13bc02665d6cf5c8c1bcda2f8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.0/workflow-plugin-namecheap-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "3e2f90f40d4c05e65a7ddba390ba275397757c8a334512778b2b8599030b7023",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.0/workflow-plugin-namecheap-linux-arm64.tar.gz"
+    }
+  ],
   "status": "experimental"
 }

@@ -31,9 +31,24 @@
     }
   },
   "required_secrets": [
-    { "name": "HOVER_USERNAME", "sensitive": false, "description": "Hover account username", "prompt": "Hover username" },
-    { "name": "HOVER_PASSWORD", "sensitive": true, "description": "Hover account password", "prompt": "Hover password" },
-    { "name": "HOVER_TOTP_SECRET", "sensitive": true, "description": "Base32-encoded TOTP seed from Hover 2FA setup. Plugin generates 6-digit codes per RFC 6238 on each login.", "prompt": "Hover TOTP seed (base32)" }
+    {
+      "name": "HOVER_USERNAME",
+      "sensitive": false,
+      "description": "Hover account username",
+      "prompt": "Hover username"
+    },
+    {
+      "name": "HOVER_PASSWORD",
+      "sensitive": true,
+      "description": "Hover account password",
+      "prompt": "Hover password"
+    },
+    {
+      "name": "HOVER_TOTP_SECRET",
+      "sensitive": true,
+      "description": "Base32-encoded TOTP seed from Hover 2FA setup. Plugin generates 6-digit codes per RFC 6238 on each login.",
+      "prompt": "Hover TOTP seed (base32)"
+    }
   ],
   "iacProvider": {
     "computePlanVersion": "v2"
@@ -42,6 +57,31 @@
     "ui": false,
     "config": true
   },
-  "downloads": [],
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "268376d385f8db7b129ffaa567e994af0f05d73c6f9cb5ba89aba98e1a5beb4d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.1.0/workflow-plugin-hover-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "26d17c53035f75da6e2fcb9b23eef30ed518d1c70ab25837e89b59b25a7c4c32",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.1.0/workflow-plugin-hover-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "d931e820a64a7bfbaf46fd4999fb801d26c95e0abc5af95e754cffc3687177d7",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.1.0/workflow-plugin-hover-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "ddc6f32cefbf76fe4e7595ca460443edb4c3022220dc9b18600597f3e9f296fe",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.1.0/workflow-plugin-hover-linux-arm64.tar.gz"
+    }
+  ],
   "status": "experimental"
 }
