@@ -1,0 +1,37 @@
+{
+  "name": "workflow-plugin-cms",
+  "version": "0.1.0-alpha",
+  "description": "Multi-tenant CMS engine — TenantResolver + static-wins routing + WYSIWYG page authoring (TipTap default). Foundation of gocodealone-multisite.",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.60.0",
+  "keywords": [
+    "cms",
+    "multi-tenant",
+    "wysiwyg",
+    "tiptap",
+    "static-site",
+    "domain-routing"
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-cms",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-cms",
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [
+      "cms.tenant_resolver",
+      "cms.static_serve_before_dynamic",
+      "cms.engine",
+      "analytics.injection"
+    ],
+    "stepTypes": [
+      "step.cms_render_page",
+      "step.cms_bundle_activate"
+    ],
+    "triggerTypes": []
+  },
+  "contracts": [],
+  "status": "experimental"
+}
