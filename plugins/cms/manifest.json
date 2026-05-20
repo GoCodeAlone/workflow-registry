@@ -19,7 +19,6 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-cms",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-cms",
   "capabilities": {
-    "configProvider": false,
     "moduleTypes": [
       "cms.tenant_resolver",
       "cms.static_serve_before_dynamic",
@@ -32,6 +31,5 @@
     ],
     "triggerTypes": []
   },
-  "contracts": [],
   "status": "experimental"
 }
