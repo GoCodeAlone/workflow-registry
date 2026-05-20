@@ -1,0 +1,46 @@
+{
+  "name": "workflow-plugin-namecheap",
+  "version": "0.1.0",
+  "minEngineVersion": "0.60.6",
+  "description": "Namecheap DNS provider for workflow IaC (infra.dns) backed by the official go-namecheap-sdk.",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-namecheap",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-namecheap",
+  "keywords": [
+    "dns",
+    "namecheap",
+    "iac",
+    "infra.dns"
+  ],
+  "capabilities": {
+    "moduleTypes": [
+      "iac.provider.namecheap"
+    ],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "iacProvider": {
+      "name": "namecheap",
+      "resourceTypes": [
+        "infra.dns"
+      ]
+    }
+  },
+  "required_secrets": [
+    { "name": "NAMECHEAP_API_USER", "sensitive": false, "description": "Namecheap account username (= ApiUser per API)", "prompt": "Namecheap username" },
+    { "name": "NAMECHEAP_API_KEY", "sensitive": true, "description": "Namecheap API key (rotate via Profile → Tools → Namecheap API Access)", "prompt": "Namecheap API key" },
+    { "name": "NAMECHEAP_CLIENT_IP", "sensitive": false, "description": "Public IP of the wfctl runner — Namecheap requires single-IP allowlisting (CIDR is unsupported)", "prompt": "Public IP to whitelist" }
+  ],
+  "iacProvider": {
+    "computePlanVersion": "v2"
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [],
+  "status": "experimental"
+}
