@@ -286,6 +286,33 @@
         },
         "additionalProperties": false
       }
+    },
+    "required_secrets": {
+      "type": "array",
+      "description": "Secrets the plugin requires to be set in the host environment. Consumed by `wfctl secrets setup --plugin <name>` to drive interactive prompts.",
+      "items": {
+        "type": "object",
+        "required": ["name", "sensitive"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Env var name (e.g. NAMECHEAP_API_KEY)"
+          },
+          "sensitive": {
+            "type": "boolean",
+            "description": "When true, wfctl prompts via term.ReadPassword (masked) instead of echo"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description shown above the prompt"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Optional short prompt label (defaults to name)"
+          }
+        },
+        "additionalProperties": false
+      }
     }
   },
   "additionalProperties": false

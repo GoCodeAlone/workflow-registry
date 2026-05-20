@@ -1,0 +1,47 @@
+{
+  "name": "workflow-plugin-hover",
+  "version": "0.1.0",
+  "minEngineVersion": "0.60.6",
+  "description": "Hover DNS provider for workflow IaC (infra.dns). No official API; mimics the browser-side username+password+TOTP login flow used by pjslauta/hover-dyn-dns.",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-hover",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-hover",
+  "keywords": [
+    "dns",
+    "hover",
+    "iac",
+    "infra.dns",
+    "totp"
+  ],
+  "capabilities": {
+    "moduleTypes": [
+      "iac.provider.hover"
+    ],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "iacProvider": {
+      "name": "hover",
+      "resourceTypes": [
+        "infra.dns"
+      ]
+    }
+  },
+  "required_secrets": [
+    { "name": "HOVER_USERNAME", "sensitive": false, "description": "Hover account username", "prompt": "Hover username" },
+    { "name": "HOVER_PASSWORD", "sensitive": true, "description": "Hover account password", "prompt": "Hover password" },
+    { "name": "HOVER_TOTP_SECRET", "sensitive": true, "description": "Base32-encoded TOTP seed from Hover 2FA setup. Plugin generates 6-digit codes per RFC 6238 on each login.", "prompt": "Hover TOTP seed (base32)" }
+  ],
+  "iacProvider": {
+    "computePlanVersion": "v2"
+  },
+  "assets": {
+    "ui": false,
+    "config": true
+  },
+  "downloads": [],
+  "status": "experimental"
+}
