@@ -233,9 +233,31 @@ jobs:
           if git ls-remote --exit-code --heads origin "${BRANCH}" >/dev/null 2>&1; then
             existing="$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')"
             if [[ -n "${existing}" ]]; then
-              # Open PR exists — preserve it (review/comments intact).
-              # Maintainer can land that PR or close it to allow a re-sync.
-              echo "branch ${BRANCH} already has open PR #${existing}; skipping (further updates should land on that PR)"
+              # Round-6 Copilot finding: open PR exists, but sync detected
+              # NEW drift in this run (we only reach this step when
+              # changed != 0). Skipping would silently drop the new drift
+              # until the PR is merged/closed. Instead, re-run the sync
+              # against the PR's branch state and append the result as an
+              # additional commit — preserves PR review history while
+              # ensuring the new drift lands.
+              echo "branch ${BRANCH} has open PR #${existing}; re-running sync against PR head to append new drift"
+              git fetch origin "${BRANCH}:refs/remotes/origin/${BRANCH}"
+              git checkout -B "${BRANCH}" "refs/remotes/origin/${BRANCH}"
+              if [[ -n "${PLUGIN}" ]]; then
+                scripts/sync-versions.sh --fix --plugin "${PLUGIN}"
+              else
+                scripts/sync-versions.sh --fix
+                WORKFLOW_REPO="$GITHUB_WORKSPACE/_workflow" scripts/sync-core-manifests.sh --fix
+              fi
+              scripts/generate-readme.sh
+              git add plugins/ README.md
+              if git diff --cached --quiet; then
+                echo "PR #${existing} already at expected state on re-sync; nothing new to append"
+                exit 0
+              fi
+              git commit -m "${TITLE}"
+              git push origin "${BRANCH}"
+              echo "appended sync commit to PR #${existing}"
               exit 0
             fi
             # Round-4 Copilot finding: branch exists but no open PR. This
