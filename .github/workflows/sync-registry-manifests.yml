@@ -212,24 +212,27 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
 
-          # Re-run / stale-branch handling.
+          # Re-run / stale-branch handling — three-case policy.
           #
-          # Round-2 Copilot finding: prior approaches (delete branch / force
-          # overwrite / checkout main -- ...) all had defects — deleting the
-          # branch closes any open PR, and the "checkout main -- plugins/"
-          # path discarded the freshly-synced working tree.
+          # The PR step only runs when sync detected drift (changed != 0).
+          # When we reach this point, the working tree has new manifest +
+          # README content that needs to land in a PR. The branch may or
+          # may not already exist on the remote.
           #
-          # Pragmatic policy: if the branch already exists, do NOT touch it.
-          # The branch name encodes plugin + version, so re-running for the
-          # same version means either (a) an open PR is still being reviewed
-          # (preserve it untouched), or (b) the PR was already closed/merged
-          # (no point recreating). In either case the right action is to
-          # log and exit cleanly. Maintainers who want to force a re-sync
-          # for the same version must manually delete the branch first.
+          # 1. Branch doesn't exist → create branch, commit, push, open PR.
+          # 2. Branch exists + open PR  → re-sync onto the PR's branch
+          #    head and append the new drift as an additional commit
+          #    (preserves PR review history; round-6 Copilot finding).
+          # 3. Branch exists + NO open PR → delete + recreate (round-4
+          #    finding: skipping would leave drift permanently unaddressed
+          #    if a previous run failed before PR creation or the PR was
+          #    closed without merging; no review state at risk).
           #
-          # Concurrency group already serialises same-plugin dispatches at
-          # the scheduler level, so two concurrent runs cannot reach this
-          # step simultaneously.
+          # Each leg has its own decision rationale inlined below.
+          #
+          # Concurrency group serialises same-plugin / same-key dispatches
+          # at the Actions scheduler level, so two concurrent runs cannot
+          # reach this step simultaneously.
           if git ls-remote --exit-code --heads origin "${BRANCH}" >/dev/null 2>&1; then
             existing="$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')"
             if [[ -n "${existing}" ]]; then
