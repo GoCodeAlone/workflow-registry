@@ -682,6 +682,14 @@ test -f "${tmp}/v1/plugins/foo-iac/manifest.json" || fail "foo-iac per-plugin ma
 test -f "${tmp}/v1/plugins/bar-simple/manifest.json" || fail "bar-simple per-plugin manifest copy missing"
 test -f "${tmp}/v1/plugins/qux-no-secrets/manifest.json" || fail "qux-no-secrets per-plugin manifest copy missing"
 
+# === Byte-identity for per-plugin manifest copies (per design spec line 249) ===
+# Future refactor that swaps raw `cp` for a jq-projected write would break
+# wfctl plugin install (which depends on full-fidelity per-plugin manifests).
+for f in foo-iac bar-simple baz-private qux-no-secrets; do
+  cmp --silent "${FIXTURE_DIR}/plugins/$f/manifest.json" "${tmp}/v1/plugins/$f/manifest.json" \
+    || fail "per-plugin manifest copy for $f is not byte-identical to source"
+done
+
 echo "OK — test-build-index.sh passed"
 ```
 
