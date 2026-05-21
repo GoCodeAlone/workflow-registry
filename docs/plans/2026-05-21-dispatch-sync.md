@@ -47,7 +47,7 @@ Three findings revised the plan baseline (verified against the actual file):
 
 ---
 
-### Task 1: Add `workflow_dispatch.inputs.plugin` + job-level concurrency group
+### Task 1: Add `workflow_dispatch.inputs.plugin` + job-level concurrency group + conditional `_workflow` checkout + Go setup
 
 **Files:**
 - Modify: `.github/workflows/sync-registry-manifests.yml`
@@ -85,7 +85,31 @@ Above `runs-on: ubuntu-latest` inside the `sync:` job, insert:
 
 The group key is the plugin name when filtered, or `all` for cron/full runs. Same-plugin concurrent dispatches now serialise at the Actions scheduler level — the second run waits for the first to finish before starting. Different-plugin dispatches run in parallel.
 
-**Step 3: Validate YAML**
+**Step 3: Add `if:` guards to the `_workflow` checkout + Go setup steps (Option 2 from round-3 review)**
+
+Both steps only exist to support `sync-core-manifests.sh` on the cron / full-run path. On a dispatch path (real-time, latency-sensitive), they waste ~30-45 s of runner time. Add a guard.
+
+Modify the existing two steps:
+
+```yaml
+      - name: Check out workflow
+        if: github.event_name != 'repository_dispatch' && github.event.inputs.plugin == ''
+        uses: actions/checkout@v4
+        with:
+          repository: GoCodeAlone/workflow
+          path: _workflow
+
+      - name: Set up Go
+        if: github.event_name != 'repository_dispatch' && github.event.inputs.plugin == ''
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+          cache-dependency-path: _workflow/go.sum
+```
+
+The dispatch path bypasses both. The cron path (`event_name == 'schedule'`) keeps both. The workflow_dispatch path runs them only when no plugin input is set (i.e. the user wanted a full-run from the UI).
+
+**Step 4: Validate YAML**
 
 ```bash
 python3 -c "import yaml; yaml.safe_load(open('.github/workflows/sync-registry-manifests.yml'))"
@@ -93,11 +117,11 @@ python3 -c "import yaml; yaml.safe_load(open('.github/workflows/sync-registry-ma
 
 Expected: silent, exit 0.
 
-**Step 4: Commit**
+**Step 5: Commit**
 
 ```bash
 git add .github/workflows/sync-registry-manifests.yml
-git commit -m "ci(sync-registry): workflow_dispatch plugin input + concurrency group"
+git commit -m "ci(sync-registry): workflow_dispatch plugin input + concurrency group + skip _workflow on dispatch"
 ```
 
 ---
@@ -233,7 +257,14 @@ Place it ONCE, after the `run:` block. Drop the duplicate.
 
 ```yaml
       - name: Open PR if manifests changed
-        if: steps.sync.outputs.changed != '0'
+        # I-5 (round-3): the && skip guard is REQUIRED. Without it, a
+        # skip=1 filter result causes the sync step to be skipped, which
+        # leaves steps.sync.outputs.changed as the empty string. The
+        # naked `!= '0'` check is true for empty strings, so the PR step
+        # would run with PLUGIN="", fall into the cron-path else branch,
+        # and crash on `git commit` with "nothing to commit". Belt-and-
+        # suspenders: mirror the sync step's own skip guard here.
+        if: steps.sync.outputs.changed != '0' && steps.filter.outputs.skip != '1'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PLUGIN:   ${{ steps.filter.outputs.plugin }}
