@@ -60,8 +60,26 @@ while IFS= read -r manifest; do
       triggerTypes:     (.capabilities.triggerTypes     // []),
       workflowHandlers: (.capabilities.workflowHandlers // []),
       wiringHooks:      (.capabilities.wiringHooks      // []),
-      migrationDrivers: (.capabilities.migrationDrivers // [])
-    }
+      migrationDrivers: (.capabilities.migrationDrivers // []),
+      iacProvider: (
+        if .capabilities.iacProvider == null then null
+        else {
+          name:                   (.capabilities.iacProvider.name // null),
+          resourceTypes:          (.capabilities.iacProvider.resourceTypes // []),
+          supportedCanonicalKeys: (.capabilities.iacProvider.supportedCanonicalKeys // [])
+        }
+        end
+      )
+    },
+    iacProvider: (
+      if .iacProvider == null then null
+      else {
+        name:               (.iacProvider.name // null),
+        resourceTypes:      (.iacProvider.resourceTypes // []),
+        computePlanVersion: (.iacProvider.computePlanVersion // null)
+      }
+      end
+    )
   }' "${manifest}")"
 
   summaries="$(echo "${summaries}" | jq --argjson s "${summary}" '. + [$s]')"
