@@ -81,6 +81,7 @@ jobs:
               # carries no plugin field — it triggers the full sync, so we
               # leave its empty value alone.
               if [[ "${DISPATCH_ACTION}" == "plugin-release" && -z "${plugin}" ]]; then
+                # No raw value to echo (plugin is empty by definition). Safe.
                 echo "::warning::plugin-release dispatch received with empty client_payload.plugin; skipping (use workflow-release for full-sync intent)"
                 echo "skip=1" >> "$GITHUB_OUTPUT"
                 echo "plugin=" >> "$GITHUB_OUTPUT"
@@ -95,15 +96,21 @@ jobs:
           # The concurrency group key uses the same value verbatim (Actions does
           # NOT sanitise the key — it locks against an opaque string), so the
           # bash step here is the real sanitisation boundary for filesystem refs.
+          # Round-2 Copilot finding: do NOT echo the raw plugin value back
+          # inside a ::warning:: workflow command. Newlines / %-sequences
+          # in client_payload.plugin could be interpreted as additional log
+          # commands (annotation injection). Log the rejection without
+          # quoting the value; the payload itself is in GitHub's webhook
+          # event log if forensic detail is needed.
           if [[ -n "${plugin}" ]]; then
             if [[ ! "${plugin}" =~ ^[A-Za-z0-9._-]+$ ]]; then
-              echo "::warning::rejecting plugin name '${plugin}' (invalid characters)"
+              echo "::warning::plugin-name regex validation failed; ignoring this dispatch"
               echo "skip=1" >> "$GITHUB_OUTPUT"
               echo "plugin=" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             if [[ ! -d "plugins/${plugin}" ]]; then
-              echo "::warning::plugin '${plugin}' has no directory under plugins/; skipping"
+              echo "::warning::dispatched plugin has no directory under plugins/; skipping"
               echo "skip=1" >> "$GITHUB_OUTPUT"
               echo "plugin=" >> "$GITHUB_OUTPUT"
               exit 0
@@ -177,45 +184,34 @@ jobs:
 
           # Re-run / stale-branch handling.
           #
-          # Round-2 I-4 caught the original "push first, check later" bug.
-          # The fix used `git push origin --delete` to reset the branch
-          # cleanly, but Copilot review on #84 caught a follow-on: deleting
-          # the remote head branch closes any open PR pointing at it, breaking
-          # review/links. Better: fetch the existing branch into a local
-          # tracking ref, then push with --force-with-lease (the lease is
-          # NOT illusory here because we explicitly fetched the ref — its
-          # round-2 "illusory" framing applies only to fresh-checkout cases
-          # where no tracking ref was fetched).
+          # Round-2 Copilot finding: prior approaches (delete branch / force
+          # overwrite / checkout main -- ...) all had defects — deleting the
+          # branch closes any open PR, and the "checkout main -- plugins/"
+          # path discarded the freshly-synced working tree.
           #
-          # Concurrency group already serialises same-plugin runs at the
-          # scheduler level, so two simultaneous dispatches can't both reach
-          # this step.
+          # Pragmatic policy: if the branch already exists, do NOT touch it.
+          # The branch name encodes plugin + version, so re-running for the
+          # same version means either (a) an open PR is still being reviewed
+          # (preserve it untouched), or (b) the PR was already closed/merged
+          # (no point recreating). In either case the right action is to
+          # log and exit cleanly. Maintainers who want to force a re-sync
+          # for the same version must manually delete the branch first.
+          #
+          # Concurrency group already serialises same-plugin dispatches at
+          # the scheduler level, so two concurrent runs cannot reach this
+          # step simultaneously.
           if git ls-remote --exit-code --heads origin "${BRANCH}" >/dev/null 2>&1; then
-            echo "branch ${BRANCH} exists on remote (likely a previous failed run); fetching for lease-safe overwrite"
-            git fetch origin "${BRANCH}:refs/remotes/origin/${BRANCH}"
-            git checkout -B "${BRANCH}" "refs/remotes/origin/${BRANCH}"
-            # Reset working tree state to the synced manifests + README.
-            git checkout main -- plugins/ README.md
-            git add plugins/ README.md
-            # Amend (or new) commit on the existing branch.
-            if ! git diff --cached --quiet; then
-              git commit -m "${TITLE}"
-              git push origin "${BRANCH}" --force-with-lease="${BRANCH}:refs/remotes/origin/${BRANCH}"
+            existing="$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')"
+            if [[ -n "${existing}" ]]; then
+              echo "branch ${BRANCH} already has open PR #${existing}; skipping (further updates should land on that PR)"
             else
-              echo "branch ${BRANCH} already at expected state; no push needed"
+              echo "branch ${BRANCH} exists with no open PR; skipping (delete the branch manually if a re-sync for the same version is needed)"
             fi
-          else
-            git checkout -b "${BRANCH}"
-            git add plugins/ README.md
-            git commit -m "${TITLE}"
-            git push origin "${BRANCH}"
-          fi
-
-          # Reuse existing PR if one is open (e.g. branch was deleted +
-          # recreated; closed-then-reopened scenario is rare but covered).
-          existing="$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')"
-          if [[ -n "${existing}" ]]; then
-            echo "PR #${existing} already open for ${BRANCH}; new commit pushed."
             exit 0
           fi
+
+          git checkout -b "${BRANCH}"
+          git add plugins/ README.md
+          git commit -m "${TITLE}"
+          git push origin "${BRANCH}"
           gh pr create --base main --head "${BRANCH}" --title "${TITLE}" --body "${BODY}"
