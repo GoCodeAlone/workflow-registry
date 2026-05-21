@@ -5,6 +5,11 @@ on:
   repository_dispatch:
     types: [plugin-release, workflow-release]
   workflow_dispatch:
+    inputs:
+      plugin:
+        description: 'Plugin directory name (optional; if set, syncs only that plugin)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -13,6 +18,15 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # Round-12 Copilot finding: gate the concurrency key on
+    # `action == 'plugin-release'`. Otherwise a workflow-release dispatch
+    # with a stray client_payload.plugin would serialise under
+    # sync-<plugin> instead of sync-all, allowing it to run concurrently
+    # with a legitimate cron / workflow-release full-sync. Mirrors the
+    # resolver + latency-guard gating from rounds 8 + 9.
+    concurrency:
+      group: sync-${{ (github.event_name == 'repository_dispatch' && github.event.action == 'plugin-release' && github.event.client_payload.plugin) || github.event.inputs.plugin || 'all' }}
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,47 +34,318 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check out workflow
+        # I-6 (round-4): guard must trigger only when a plugin name is in
+        # flight — NOT for any repository_dispatch. The `workflow-release`
+        # event type is also a repository_dispatch but sets no
+        # client_payload.plugin, so it must keep its _workflow checkout +
+        # Go setup. The negated-OR form below skips only when a non-empty
+        # plugin is supplied via either dispatch source.
+        # Latency-opt guard: skip _workflow checkout + Go setup ONLY for
+        # legitimate single-plugin paths. Round-9 Copilot finding: must
+        # match the resolver's action-gating — only `plugin-release`
+        # honors `client_payload.plugin`. If a `workflow-release` dispatch
+        # ever includes a stray `plugin` value, this guard previously
+        # would still skip _workflow even though the resolver treats it
+        # as a full-sync, leaving sync-core-manifests.sh without its
+        # checkout. The added `action == 'plugin-release'` gate keeps the
+        # two checks in lockstep.
+        #
+        # Truthy form (per round 5): `client_payload.plugin` is falsy
+        # for both null AND '', which Actions expression `==` coercion
+        # would otherwise get wrong.
+        if: >-
+          !(github.event_name == 'repository_dispatch' && github.event.action == 'plugin-release' && github.event.client_payload.plugin)
+          && !(github.event_name == 'workflow_dispatch' && github.event.inputs.plugin)
         uses: actions/checkout@v4
         with:
           repository: GoCodeAlone/workflow
           path: _workflow
 
       - name: Set up Go
+        # I-6 (round-4): guard must trigger only when a plugin name is in
+        # flight — NOT for any repository_dispatch. The `workflow-release`
+        # event type is also a repository_dispatch but sets no
+        # client_payload.plugin, so it must keep its _workflow checkout +
+        # Go setup. The negated-OR form below skips only when a non-empty
+        # plugin is supplied via either dispatch source.
+        # Latency-opt guard: skip _workflow checkout + Go setup ONLY for
+        # legitimate single-plugin paths. Round-9 Copilot finding: must
+        # match the resolver's action-gating — only `plugin-release`
+        # honors `client_payload.plugin`. If a `workflow-release` dispatch
+        # ever includes a stray `plugin` value, this guard previously
+        # would still skip _workflow even though the resolver treats it
+        # as a full-sync, leaving sync-core-manifests.sh without its
+        # checkout. The added `action == 'plugin-release'` gate keeps the
+        # two checks in lockstep.
+        #
+        # Truthy form (per round 5): `client_payload.plugin` is falsy
+        # for both null AND '', which Actions expression `==` coercion
+        # would otherwise get wrong.
+        if: >-
+          !(github.event_name == 'repository_dispatch' && github.event.action == 'plugin-release' && github.event.client_payload.plugin)
+          && !(github.event_name == 'workflow_dispatch' && github.event.inputs.plugin)
         uses: actions/setup-go@v5
         with:
           go-version: '1.26'
           cache-dependency-path: _workflow/go.sum
 
-      - name: Detect and update drifted manifests
-        id: sync
+      - name: Resolve plugin filter from event
+        id: filter
+        # Per round-1 C-1: do NOT inline ${{ ... }} into bash. Read from env.
+        env:
+          PLUGIN_FROM_DISPATCH: ${{ github.event.client_payload.plugin }}
+          PLUGIN_FROM_INPUT:    ${{ github.event.inputs.plugin }}
+          EVENT_NAME:           ${{ github.event_name }}
+          # github.event.action is the repository_dispatch event_type
+          # (e.g. "plugin-release" or "workflow-release"). Empty for other
+          # event triggers (schedule, workflow_dispatch).
+          DISPATCH_ACTION:      ${{ github.event.action }}
         run: |
           set -euo pipefail
-          scripts/sync-versions.sh --fix
-          WORKFLOW_REPO="$GITHUB_WORKSPACE/_workflow" scripts/sync-core-manifests.sh --fix
-          scripts/generate-readme.sh
+          plugin=""
+          case "${EVENT_NAME}" in
+            repository_dispatch)
+              # Only honor client_payload.plugin for plugin-release events.
+              # workflow-release MUST be full-sync — if it accidentally
+              # included a plugin field, the single-plugin path would skip
+              # the _workflow checkout + sync-core-manifests.sh that
+              # workflow-release exists to drive. Defense in depth.
+              # (Round-8 Copilot finding.)
+              if [[ "${DISPATCH_ACTION}" == "plugin-release" ]]; then
+                plugin="${PLUGIN_FROM_DISPATCH}"
+                # Plugin-release MUST carry a client_payload.plugin name.
+                # A malformed/omitted payload should warn-and-skip, not
+                # silently fall back to the expensive all-plugins sweep.
+                # (Round-2 Copilot finding.)
+                if [[ -z "${plugin}" ]]; then
+                  echo "::warning::plugin-release dispatch received with empty client_payload.plugin; skipping (use workflow-release for full-sync intent)"
+                  echo "skip=1" >> "$GITHUB_OUTPUT"
+                  echo "plugin=" >> "$GITHUB_OUTPUT"
+                  exit 0
+                fi
+              fi
+              # workflow-release (or any other future action) → leave
+              # plugin="" so the downstream sync takes the full path.
+              ;;
+            workflow_dispatch)
+              plugin="${PLUGIN_FROM_INPUT}"
+              ;;
+          esac
+          # Defensive validation: only allow [A-Za-z0-9._-]+, no path separators.
+          # The concurrency group key uses the same value verbatim (Actions does
+          # NOT sanitise the key — it locks against an opaque string), so the
+          # bash step here is the real sanitisation boundary for filesystem refs.
+          # Round-2 Copilot finding: do NOT echo the raw plugin value back
+          # inside a ::warning:: workflow command. Newlines / %-sequences
+          # in client_payload.plugin could be interpreted as additional log
+          # commands (annotation injection). Log the rejection without
+          # quoting the value; the payload itself is in GitHub's webhook
+          # event log if forensic detail is needed.
+          if [[ -n "${plugin}" ]]; then
+            # Round-10 Copilot finding: regex `^[A-Za-z0-9._-]+$` admits "."
+            # and ".." (only dots). `plugins/.` is plugins/ itself and
+            # `plugins/..` is the repo root — both pass `[[ -d ]]`. A
+            # malicious / buggy dispatch could therefore bypass the
+            # plugin-directory guard. Reject these literals explicitly,
+            # and use manifest.json existence (not just dir-exists) as the
+            # canonical "is a real plugin" check.
+            if [[ "${plugin}" == "." || "${plugin}" == ".." ]]; then
+              echo "::warning::plugin-name '.'/'..' rejected (path traversal attempt); skipping"
+              echo "skip=1" >> "$GITHUB_OUTPUT"
+              echo "plugin=" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if [[ ! "${plugin}" =~ ^[A-Za-z0-9._-]+$ ]]; then
+              echo "::warning::plugin-name regex validation failed; ignoring this dispatch"
+              echo "skip=1" >> "$GITHUB_OUTPUT"
+              echo "plugin=" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if [[ ! -f "plugins/${plugin}/manifest.json" ]]; then
+              echo "::warning::dispatched plugin has no plugins/<name>/manifest.json; skipping"
+              echo "skip=1" >> "$GITHUB_OUTPUT"
+              echo "plugin=" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          echo "plugin=${plugin}" >> "$GITHUB_OUTPUT"
+          echo "skip=0" >> "$GITHUB_OUTPUT"
+
+      - name: Detect and update drifted manifests
+        if: steps.filter.outputs.skip != '1'
+        id: sync
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PLUGIN:   ${{ steps.filter.outputs.plugin }}
+        run: |
+          set -euo pipefail
+          if [[ -n "${PLUGIN}" ]]; then
+            echo "syncing single plugin: ${PLUGIN}"
+            scripts/sync-versions.sh --fix --plugin "${PLUGIN}"
+            # Skip sync-core-manifests.sh on filter path — that script
+            # syncs engine plugins sourced from the _workflow checkout
+            # and is irrelevant to an external-plugin dispatch.
+            scripts/generate-readme.sh
+          else
+            echo "syncing all plugins (cron / full run)"
+            scripts/sync-versions.sh --fix
+            WORKFLOW_REPO="$GITHUB_WORKSPACE/_workflow" scripts/sync-core-manifests.sh --fix
+            scripts/generate-readme.sh
+          fi
           if git diff --quiet -- plugins README.md; then
             echo "changed=0" >> "$GITHUB_OUTPUT"
           else
             echo "changed=1" >> "$GITHUB_OUTPUT"
           fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Open PR if manifests changed
-        if: steps.sync.outputs.changed != '0'
-        run: |
-          DATE=$(date +%Y-%m-%d)
-          BRANCH="chore/sync-registry-manifests-${DATE}"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git checkout -b "$BRANCH"
-          git add plugins/ README.md
-          git commit -m "chore: sync registry manifests to latest plugin releases (${DATE})"
-          git push origin "$BRANCH"
-          gh pr create \
-            --base main \
-            --head "$BRANCH" \
-            --title "chore: sync registry manifests to latest plugin releases (${DATE})" \
-            --body "Registry drift check detected plugin release, workflow core plugin, or README index changes. Auto-generated by sync-registry-manifests workflow. Closes GoCodeAlone/workflow-registry#37."
+        # I-5 (round-3): the && skip guard is REQUIRED. Without it, a
+        # skip=1 filter result causes the sync step to be skipped, which
+        # leaves steps.sync.outputs.changed as the empty string. The
+        # naked `!= '0'` check is true for empty strings, so the PR step
+        # would run with PLUGIN="", fall into the cron-path else branch,
+        # and crash on `git commit` with "nothing to commit". Belt-and-
+        # suspenders: mirror the sync step's own skip guard here.
+        if: steps.sync.outputs.changed != '0' && steps.filter.outputs.skip != '1'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN:        ${{ secrets.GITHUB_TOKEN }}
+          PLUGIN:          ${{ steps.filter.outputs.plugin }}
+          EVENT_NAME:      ${{ github.event_name }}
+          DISPATCH_ACTION: ${{ github.event.action }}
+        run: |
+          set -euo pipefail
+          DATE=$(date +%Y-%m-%d)
+
+          if [[ -n "${PLUGIN}" ]]; then
+            # Dispatch / single-plugin path. Concurrency group already
+            # ensures only one run executes per plugin at a time, so the
+            # branch-collision race is structurally eliminated. Branch
+            # name still includes the plugin-version for clarity.
+            version="$(jq -r '.version' "plugins/${PLUGIN}/manifest.json")"
+            version="${version#v}"   # belt-and-suspenders strip in case .version is v-prefixed
+            BRANCH="chore/sync-${PLUGIN}-v${version}"
+            TITLE="chore: sync ${PLUGIN} to v${version}"
+            # Round-3 Copilot: PR body must reflect the actual trigger
+            # (repository_dispatch vs manual workflow_dispatch) so
+            # reviewers/auditors aren't misled.
+            case "${EVENT_NAME}" in
+              repository_dispatch)
+                TRIGGER_DESC="repository_dispatch (event_type=${DISPATCH_ACTION})"
+                ;;
+              workflow_dispatch)
+                TRIGGER_DESC="manual workflow_dispatch with plugin=${PLUGIN}"
+                ;;
+              *)
+                TRIGGER_DESC="${EVENT_NAME}"
+                ;;
+            esac
+            BODY="Triggered by ${TRIGGER_DESC} for plugin '${PLUGIN}'. Updates \`plugins/${PLUGIN}/manifest.json\` to match the latest GitHub release. Auto-generated by sync-registry-manifests workflow. Refs GoCodeAlone/workflow-registry#79."
+          else
+            # Cron / full-run path — unchanged from prior behaviour.
+            BRANCH="chore/sync-registry-manifests-${DATE}"
+            TITLE="chore: sync registry manifests to latest plugin releases (${DATE})"
+            BODY="Registry drift check detected plugin release, workflow core plugin, or README index changes. Auto-generated by sync-registry-manifests workflow. Closes GoCodeAlone/workflow-registry#37."
+          fi
+
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+
+          # Re-run / stale-branch handling — three-case policy.
+          #
+          # The PR step only runs when sync detected drift (changed != 0).
+          # When we reach this point, the working tree has new manifest +
+          # README content that needs to land in a PR. The branch may or
+          # may not already exist on the remote.
+          #
+          # 1. Branch doesn't exist → create branch, commit, push, open PR.
+          # 2. Branch exists + open PR  → re-sync onto the PR's branch
+          #    head and append the new drift as an additional commit
+          #    (preserves PR review history; round-6 Copilot finding).
+          # 3. Branch exists + NO open PR → delete + recreate (round-4
+          #    finding: skipping would leave drift permanently unaddressed
+          #    if a previous run failed before PR creation or the PR was
+          #    closed without merging; no review state at risk).
+          #
+          # Each leg has its own decision rationale inlined below.
+          #
+          # Concurrency group serialises same-plugin / same-key dispatches
+          # at the Actions scheduler level, so two concurrent runs cannot
+          # reach this step simultaneously.
+          if git ls-remote --exit-code --heads origin "${BRANCH}" >/dev/null 2>&1; then
+            existing="$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')"
+            if [[ -n "${existing}" ]]; then
+              # Round-6 Copilot finding: open PR exists, but sync detected
+              # NEW drift in this run (we only reach this step when
+              # changed != 0). Skipping would silently drop the new drift
+              # until the PR is merged/closed. Instead, re-run the sync
+              # against the PR's branch state and append the result as an
+              # additional commit — preserves PR review history while
+              # ensuring the new drift lands.
+              echo "branch ${BRANCH} has open PR #${existing}; re-running sync against PR head to append new drift"
+              # Round-11 Copilot finding: the sync step that ran before
+              # this PR step left modified files in the working tree
+              # (plugins/* + README.md). `git checkout -B` would fail with
+              # "Your local changes would be overwritten" since the PR's
+              # branch differs from our current modified state. Discard
+              # those changes — we're about to re-run sync from the PR's
+              # branch state anyway, which will produce the same or newer
+              # output deterministically.
+              git reset --hard HEAD
+              git clean -fd plugins/ README.md
+              git fetch origin "${BRANCH}:refs/remotes/origin/${BRANCH}"
+              git checkout -B "${BRANCH}" "refs/remotes/origin/${BRANCH}"
+              if [[ -n "${PLUGIN}" ]]; then
+                scripts/sync-versions.sh --fix --plugin "${PLUGIN}"
+              else
+                scripts/sync-versions.sh --fix
+                WORKFLOW_REPO="$GITHUB_WORKSPACE/_workflow" scripts/sync-core-manifests.sh --fix
+              fi
+              scripts/generate-readme.sh
+              git add plugins/ README.md
+              if git diff --cached --quiet; then
+                echo "PR #${existing} already at expected state on re-sync; nothing new to append"
+                exit 0
+              fi
+              # Round-12 Copilot finding: TITLE/BODY/version were
+              # computed BEFORE the re-sync, against the original sync
+              # output. The re-sync may have produced a newer version
+              # (e.g. plugin author cut another tag between the first
+              # sync and this run). Recompute against the post-re-sync
+              # manifest so the commit message + updated PR metadata
+              # reflect the content actually being pushed.
+              if [[ -n "${PLUGIN}" ]]; then
+                new_version="$(jq -r '.version' "plugins/${PLUGIN}/manifest.json")"
+                new_version="${new_version#v}"
+                NEW_TITLE="chore: sync ${PLUGIN} to v${new_version}"
+                case "${EVENT_NAME}" in
+                  repository_dispatch) NEW_TRIGGER_DESC="repository_dispatch (event_type=${DISPATCH_ACTION})" ;;
+                  workflow_dispatch)   NEW_TRIGGER_DESC="manual workflow_dispatch with plugin=${PLUGIN}" ;;
+                  *)                   NEW_TRIGGER_DESC="${EVENT_NAME}" ;;
+                esac
+                NEW_BODY="Triggered by ${NEW_TRIGGER_DESC} for plugin '${PLUGIN}'. Updates \`plugins/${PLUGIN}/manifest.json\` to match the latest GitHub release. Auto-generated by sync-registry-manifests workflow. Refs GoCodeAlone/workflow-registry#79."
+              else
+                NEW_TITLE="${TITLE}"
+                NEW_BODY="${BODY}"
+              fi
+              git commit -m "${NEW_TITLE}"
+              git push origin "${BRANCH}"
+              # Update PR title/body to match the post-re-sync version.
+              gh pr edit "${existing}" --title "${NEW_TITLE}" --body "${NEW_BODY}"
+              echo "appended sync commit to PR #${existing} (post-re-sync metadata refreshed)"
+              exit 0
+            fi
+            # Round-4 Copilot finding: branch exists but no open PR. This
+            # is the "previous run pushed branch but failed before PR
+            # creation" OR "same-day cron branch with a closed PR" case.
+            # Skipping here would leave drift permanently unaddressed.
+            # Safe to delete + recreate because no open PR review state
+            # is at risk.
+            echo "branch ${BRANCH} exists with no open PR; deleting + recreating to re-publish drift"
+            git push origin --delete "${BRANCH}"
+          fi
+
+          git checkout -b "${BRANCH}"
+          git add plugins/ README.md
+          git commit -m "${TITLE}"
+          git push origin "${BRANCH}"
+          gh pr create --base main --head "${BRANCH}" --title "${TITLE}" --body "${BODY}"
