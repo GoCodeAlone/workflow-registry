@@ -2,25 +2,25 @@
 
 **Date:** 2026-05-21
 **Tracking:** workflow-registry#79 (Piece 2)
-**Scope:** Add `repository_dispatch: [plugin-release]` trigger to `sync-registry-manifests.yml`; sync only the named plugin when fired.
+**Scope:** Filter the EXISTING `repository_dispatch: [plugin-release]` listener in `sync-registry-manifests.yml` so it syncs only the named plugin (vs the current scan-all behaviour). The listener is already present; this PR adds the per-plugin branching, not the trigger itself.
 
 ## Goal
 
-Today, plugin manifests in `plugins/<name>/manifest.json` only refresh on the daily 06:00 UTC cron run of `sync-registry-manifests.yml`. A plugin tagged at 06:01 UTC must wait ~24h before the registry surfaces the new version. Add a real-time path: a plugin repo can fire `repository_dispatch event_type=plugin-release` after its release, and the registry syncs that one plugin immediately + opens a PR.
+Today, plugin manifests in `plugins/<name>/manifest.json` only refresh on the daily 06:00 UTC cron run of `sync-registry-manifests.yml`. A plugin tagged at 06:01 UTC must wait ~24h before the registry surfaces the new version. Make the existing `repository_dispatch: [plugin-release]` listener actually filter to one plugin when fired, so a plugin repo can dispatch after its release and the registry syncs that one plugin immediately + opens a PR.
 
 ## Mechanism
 
-`scripts/sync-versions.sh` already supports `--plugin <name>` (line 22-29) for single-plugin sync. The script change is zero. The workflow gains:
+The workflow already has `repository_dispatch: types: [plugin-release, workflow-release]` and the script `scripts/sync-versions.sh` already supports `--plugin <name>` (line 22-29) for single-plugin sync. What's missing is the filtering logic that reads `client_payload.plugin` and passes it to the script. The workflow gains:
 
-1. `repository_dispatch: [plugin-release]` event added to `on:` triggers.
-2. New step that branches on `${{ github.event_name }}`:
-   - `schedule` / `workflow_dispatch` → existing path (`sync-versions.sh --fix`, scan all).
-   - `repository_dispatch` → `sync-versions.sh --fix --plugin "${{ github.event.client_payload.plugin }}"`.
-3. PR branch + title incorporates the plugin name + tag on dispatch path, so concurrent dispatches don't collide:
-   - Branch: `chore/sync-<plugin>-<tag>` (e.g. `chore/sync-hover-v0.2.1`).
-   - Title: `chore: sync <plugin> to <tag>`.
+1. A `Resolve plugin filter from event` step that reads `client_payload.plugin` (or `workflow_dispatch.inputs.plugin`) via `env:` — NOT inline-interpolated into bash, to avoid script injection — then regex-validates the value (`^[A-Za-z0-9._-]+$`) + verifies the `plugins/<name>/` directory exists.
+2. The existing "Detect and update drifted manifests" step branches on the filter output:
+   - filter set → `sync-versions.sh --fix --plugin "${PLUGIN}"` (single-plugin path; skips `sync-core-manifests.sh` because the `_workflow` checkout is conditional-skipped on dispatch).
+   - filter empty → existing 3-script sweep (cron / full-run path), unchanged.
+3. PR branch + title takes the plugin name + manifest-version on dispatch path (after the fix script writes the new version), so concurrent dispatches for different plugins don't collide. Branch name: `chore/sync-<plugin>-v<version>` (version stripped of any leading `v`). Title: `chore: sync <plugin> to v<version>`.
 
 The cron path keeps its existing branch shape (`chore/sync-registry-manifests-<date>`).
+
+A job-level `concurrency: group: sync-<plugin-or-all>` block serialises same-plugin dispatches at the Actions scheduler level. The bash step is the real injection-sanitisation boundary; Actions does not sanitise the concurrency-group key.
 
 ## Dispatch payload contract
 

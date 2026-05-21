@@ -64,21 +64,37 @@ jobs:
           PLUGIN_FROM_DISPATCH: ${{ github.event.client_payload.plugin }}
           PLUGIN_FROM_INPUT:    ${{ github.event.inputs.plugin }}
           EVENT_NAME:           ${{ github.event_name }}
+          # github.event.action is the repository_dispatch event_type
+          # (e.g. "plugin-release" or "workflow-release"). Empty for other
+          # event triggers (schedule, workflow_dispatch).
+          DISPATCH_ACTION:      ${{ github.event.action }}
         run: |
           set -euo pipefail
           plugin=""
           case "${EVENT_NAME}" in
             repository_dispatch)
               plugin="${PLUGIN_FROM_DISPATCH}"
+              # Per Copilot review on #84: plugin-release MUST carry a
+              # client_payload.plugin name. A malformed/omitted payload
+              # should warn-and-skip, not silently fall back to the
+              # expensive all-plugins sweep. workflow-release intentionally
+              # carries no plugin field — it triggers the full sync, so we
+              # leave its empty value alone.
+              if [[ "${DISPATCH_ACTION}" == "plugin-release" && -z "${plugin}" ]]; then
+                echo "::warning::plugin-release dispatch received with empty client_payload.plugin; skipping (use workflow-release for full-sync intent)"
+                echo "skip=1" >> "$GITHUB_OUTPUT"
+                echo "plugin=" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
               ;;
             workflow_dispatch)
               plugin="${PLUGIN_FROM_INPUT}"
               ;;
           esac
           # Defensive validation: only allow [A-Za-z0-9._-]+, no path separators.
-          # Belt-and-suspenders even though concurrency group already ate the
-          # raw value (Actions sanitises keys; runner bash is the threat
-          # surface).
+          # The concurrency group key uses the same value verbatim (Actions does
+          # NOT sanitise the key — it locks against an opaque string), so the
+          # bash step here is the real sanitisation boundary for filesystem refs.
           if [[ -n "${plugin}" ]]; then
             if [[ ! "${plugin}" =~ ^[A-Za-z0-9._-]+$ ]]; then
               echo "::warning::rejecting plugin name '${plugin}' (invalid characters)"
@@ -159,24 +175,41 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
 
-          # Re-run / stale-branch handling (per round-2 I-4):
-          # The concurrency group serialises same-plugin runs at the
-          # scheduler level, so two simultaneous dispatches can't both
-          # be in this step. But a developer can manually re-run a
-          # previously-failed workflow run via the Actions UI, in which
-          # case the branch from the failed run may still exist on the
-          # remote. Detect that and reset it cleanly here, BEFORE the
-          # local checkout + push, instead of letting `git push` fail
-          # non-fast-forward.
+          # Re-run / stale-branch handling.
+          #
+          # Round-2 I-4 caught the original "push first, check later" bug.
+          # The fix used `git push origin --delete` to reset the branch
+          # cleanly, but Copilot review on #84 caught a follow-on: deleting
+          # the remote head branch closes any open PR pointing at it, breaking
+          # review/links. Better: fetch the existing branch into a local
+          # tracking ref, then push with --force-with-lease (the lease is
+          # NOT illusory here because we explicitly fetched the ref — its
+          # round-2 "illusory" framing applies only to fresh-checkout cases
+          # where no tracking ref was fetched).
+          #
+          # Concurrency group already serialises same-plugin runs at the
+          # scheduler level, so two simultaneous dispatches can't both reach
+          # this step.
           if git ls-remote --exit-code --heads origin "${BRANCH}" >/dev/null 2>&1; then
-            echo "branch ${BRANCH} exists on remote (likely a previous failed run); resetting it"
-            git push origin --delete "${BRANCH}"
+            echo "branch ${BRANCH} exists on remote (likely a previous failed run); fetching for lease-safe overwrite"
+            git fetch origin "${BRANCH}:refs/remotes/origin/${BRANCH}"
+            git checkout -B "${BRANCH}" "refs/remotes/origin/${BRANCH}"
+            # Reset working tree state to the synced manifests + README.
+            git checkout main -- plugins/ README.md
+            git add plugins/ README.md
+            # Amend (or new) commit on the existing branch.
+            if ! git diff --cached --quiet; then
+              git commit -m "${TITLE}"
+              git push origin "${BRANCH}" --force-with-lease="${BRANCH}:refs/remotes/origin/${BRANCH}"
+            else
+              echo "branch ${BRANCH} already at expected state; no push needed"
+            fi
+          else
+            git checkout -b "${BRANCH}"
+            git add plugins/ README.md
+            git commit -m "${TITLE}"
+            git push origin "${BRANCH}"
           fi
-
-          git checkout -b "${BRANCH}"
-          git add plugins/ README.md
-          git commit -m "${TITLE}"
-          git push origin "${BRANCH}"
 
           # Reuse existing PR if one is open (e.g. branch was deleted +
           # recreated; closed-then-reopened scenario is rare but covered).
