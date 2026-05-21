@@ -43,7 +43,7 @@ Three findings revised the plan baseline (verified against the actual file):
 |------|-------|-------|--------|
 | 1 | sync-registry-manifests: filter to single plugin on dispatch | Task 1, Task 2, Task 3, Task 4 | feat/dispatch-sync |
 
-**Status:** Draft
+**Status:** Locked 2026-05-21T07:54:18Z
 
 ---
 
