@@ -1,0 +1,65 @@
+{
+  "name": "workflow-plugin-product-capture",
+  "version": "0.1.0",
+  "description": "Product URL capture provider for workflow-compute",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.57.4",
+  "keywords": [
+    "product-capture",
+    "workflow-compute",
+    "amazon",
+    "wishlist"
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-product-capture",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-product-capture",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "cliCommands": [
+      {
+        "name": "product-capture",
+        "description": "Validate and inspect product capture provider requests",
+        "flags_passthrough": true,
+        "subcommands": [
+          {
+            "name": "probe",
+            "description": "Report provider capability status"
+          }
+        ]
+      }
+    ]
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.0/workflow-plugin-product-capture-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.0/workflow-plugin-product-capture-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.0/workflow-plugin-product-capture-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.0/workflow-plugin-product-capture-darwin-arm64.tar.gz"
+    },
+    {
+      "os": "windows",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.0/workflow-plugin-product-capture-windows-amd64.tar.gz"
+    }
+  ],
+  "status": "verified"
+}
