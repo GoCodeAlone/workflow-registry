@@ -38,6 +38,18 @@ emit_plugin_rows() {
     awk -F '\t' '{ printf "| %s | %s | %s |\n", $1, $2, $3 }'
 }
 
+emit_plugin_rows_two_columns() {
+  local filter="$1"
+
+  jq -r "$filter"' |
+    [
+      "[" + .dir + "](./plugins/" + .dir + "/manifest.json)",
+      (.description | gsub("\\|"; "\\|") | gsub("\n"; " "))
+    ] | @tsv' "${PLUGINS_DIR}"/*/manifest.json |
+    sort -f |
+    awk -F '\t' '{ printf "| %s | %s |\n", $1, $2 }'
+}
+
 template_description() {
   awk '
     /^description:/ {
@@ -52,29 +64,46 @@ template_description() {
 }
 
 {
-  awk '/^## (Built-in|Core) Plugins$/ { exit } { print }' "$README"
+  awk '/^## (Built-in Plugins|Core Plugins|First-party External Plugins|Community and Premium External Plugins)$/ { exit } { print }' "$README"
 
   cat <<'MARKDOWN'
-## Core Plugins
+## Built-in Plugins
 
-These plugins are maintained by GoCodeAlone as part of the core Workflow ecosystem. `builtin` plugins ship in the `GoCodeAlone/workflow` engine; `external` core plugins are maintained separately but treated as first-party platform capabilities.
+These plugins ship in the `GoCodeAlone/workflow` engine and are available without installing a separate plugin repository.
 
-| Plugin | Description | Type |
-|--------|-------------|------|
+| Plugin | Description |
+|--------|-------------|
 MARKDOWN
-  emit_plugin_rows '{
+  emit_plugin_rows_two_columns '{
       dir: (input_filename | split("/")[-2]),
       name,
       description: (.description // ""),
       type: (.type // ""),
       tier: (.tier // "")
-    } | select(.tier == "core")' "type"
+    } | select(.type == "builtin")'
 
   cat <<'MARKDOWN'
 
-## External Plugins
+## First-party External Plugins
 
-These plugins run outside the core engine process or are distributed from a separate plugin repository.
+These plugins are maintained by GoCodeAlone as core platform capabilities, but are distributed outside the engine repository.
+
+| Plugin | Description |
+|--------|-------------|
+MARKDOWN
+  emit_plugin_rows_two_columns '{
+      dir: (input_filename | split("/")[-2]),
+      name,
+      description: (.description // ""),
+      type: (.type // ""),
+      tier: (.tier // "")
+    } | select(.type == "external" and .tier == "core")'
+
+  cat <<'MARKDOWN'
+
+## Community and Premium External Plugins
+
+These plugins are distributed outside the engine repository and are maintained as community or commercial extensions.
 
 | Plugin | Description | Tier |
 |--------|-------------|------|
@@ -85,7 +114,7 @@ MARKDOWN
       description: (.description // ""),
       type: (.type // ""),
       tier: (.tier // "")
-    } | select(.type == "external")' "tier"
+    } | select(.type == "external" and .tier != "core")' "tier"
 
   cat <<'MARKDOWN'
 

@@ -7,15 +7,16 @@ The official plugin and template registry for the [GoCodeAlone/workflow](https:/
 
 **Registry API**: `https://gocodealone.github.io/workflow-registry/v1/`
 
-This registry catalogs all built-in plugins, community extensions, and reusable templates that can be used with the workflow engine. It serves as the source of truth for the `wfctl` CLI's marketplace and `wfctl publish` command.
+This registry catalogs built-in plugins, first-party external plugins, community extensions, and reusable templates that can be used with the workflow engine. It serves as the source of truth for the `wfctl` CLI's marketplace and `wfctl publish` command.
 
 ## Table of Contents
 
 - [What is this?](#what-is-this)
 - [Usage via wfctl](#usage-via-wfctl)
 - [Plugin Tiers](#plugin-tiers)
-- [Core Plugins](#core-plugins)
-- [External Plugins](#external-plugins)
+- [Built-in Plugins](#built-in-plugins)
+- [First-party External Plugins](#first-party-external-plugins)
+- [Community and Premium External Plugins](#community-and-premium-external-plugins)
 - [Templates](#templates)
 - [Schema](#schema)
 - [Submitting a Plugin](#submitting-a-plugin)
@@ -64,100 +65,99 @@ wfctl plugin update
 
 | Tier | Description |
 |------|-------------|
-| **core** | Maintained by GoCodeAlone, shipped with the engine, guaranteed compatibility |
+| **core** | Maintained by GoCodeAlone as a first-party capability with guaranteed compatibility |
 | **community** | Third-party plugins submitted via PR, reviewed by maintainers |
 | **premium** | Commercial plugins with additional licensing requirements |
+
+Manifest `type` describes distribution (`builtin` or `external`); `tier` describes ownership and support level.
 
 All plugins in this registry must pass manifest schema validation before merging.
 
 ---
 
-## Core Plugins
+## Built-in Plugins
 
-These plugins are maintained by GoCodeAlone as part of the core Workflow ecosystem. `builtin` plugins ship in the `GoCodeAlone/workflow` engine; `external` core plugins are maintained separately but treated as first-party platform capabilities.
+These plugins ship in the `GoCodeAlone/workflow` engine and are available without installing a separate plugin repository.
 
-| Plugin | Description | Type |
-|--------|-------------|------|
-| [actors](./plugins/actors/manifest.json) | Actor model support with goakt v4 | builtin |
-| [admin](./plugins/admin/manifest.json) | Admin dashboard UI and config-driven admin routes with embedded React UI. Provides user management, workflow management, settings, and real-time monitoring. | external |
-| [agent](./plugins/agent/manifest.json) | AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection, orchestration (SSE hub, scheduler, MCP client/server, approvals, sub-agents, webhooks, security auditing, JWT, bcrypt, OAuth) | builtin |
-| [ai](./plugins/ai/manifest.json) | AI pipeline steps (complete, classify, extract), dynamic components, and sub-workflow orchestration | builtin |
-| [api](./plugins/api/manifest.json) | REST API handlers, CQRS query/command, API gateway, and data transformation | builtin |
-| [approval](./plugins/approval/manifest.json) | Human-in-the-loop approval workflows with state machine | external |
-| [audit](./plugins/audit/manifest.json) | Compliance audit logging with EventBus collection and S3/database sinks | external |
-| [authz](./plugins/authz/manifest.json) | RBAC authorization plugin using Casbin | external |
-| [auth](./plugins/auth/manifest.json) | JWT authentication, OAuth2, user store, and auth middleware wiring | builtin |
-| [bento](./plugins/bento/manifest.json) | Stream processing via Bento — 100+ connectors, Bloblang transforms, at-least-once delivery | external |
-| [ci-generator](./plugins/ci-generator/manifest.json) | CI/CD config generator for GitHub Actions, GitLab CI, Jenkins, and CircleCI | external |
-| [cicd](./plugins/cicd/manifest.json) | CI/CD pipeline step types (shell exec, Docker, artifact management, security scanning, deploy, gate, build from config, git operations, AWS CodeBuild) | builtin |
-| [cloud](./plugins/cloud/manifest.json) | Cloud provider credentials and validation. Foundation for IaC modules. | builtin |
-| [configprovider](./plugins/configprovider/manifest.json) | Application configuration registry with schema validation, defaults, and source layering | builtin |
-| [crm](./plugins/crm/manifest.json) | Vendor-neutral CRM integration with Salesforce adapter | external |
-| [data-engineering](./plugins/data-engineering/manifest.json) | Data engineering: CDC, lakehouse (Iceberg), time-series (InfluxDB/TimescaleDB/ClickHouse/QuestDB/Druid), graph (Neo4j), data quality, migrations, catalog (DataHub/OpenMetadata) | external |
-| [datastores](./plugins/datastores/manifest.json) | NoSQL data store modules and pipeline steps | builtin |
-| [dlq](./plugins/dlq/manifest.json) | Dead letter queue service module for failed message management | builtin |
-| [erp](./plugins/erp/manifest.json) | Enterprise ERP integration via OData v4 with SAP adapter | external |
-| [eventstore](./plugins/eventstore/manifest.json) | Event store service module for execution event persistence | builtin |
-| [featureflags](./plugins/featureflags/manifest.json) | Feature flag service module and pipeline steps (feature_flag, ff_gate) | builtin |
-| [github](./plugins/github/manifest.json) | GitHub integration plugin: webhook handling, GitHub Actions, PRs, issues, releases, and deployments | external |
-| [gitlab](./plugins/gitlab/manifest.json) | GitLab CI integration: webhook receiver (gitlab.webhook), API client (gitlab.client), pipeline trigger/status steps, and MR management steps. | builtin |
-| [http](./plugins/http/manifest.json) | HTTP server, router, handlers, middleware, proxy, and static file serving | builtin |
-| [infra](./plugins/infra/manifest.json) | Abstract infra.* module types with IaCProvider delegation | builtin |
-| [integration](./plugins/integration/manifest.json) | Integration workflow handler for connector-based multi-system workflows | builtin |
-| [k8s](./plugins/k8s/manifest.json) | Native Kubernetes deployment support using client-go. Provides generate, apply, destroy, status, diff, and logs operations without requiring kubectl or Helm. | builtin |
-| [license](./plugins/license/manifest.json) | License validation with remote server, local cache, and grace period | builtin |
-| [marketplace](./plugins/marketplace/manifest.json) | Plugin marketplace steps for searching, installing, and managing workflow plugins | builtin |
-| [mcp](./plugins/mcp/manifest.json) | MCP tool triggers, workflow handlers, and server registry | builtin |
-| [messaging](./plugins/messaging/manifest.json) | Messaging subsystem: brokers, handlers, triggers, and workflows | builtin |
-| [modularcompat](./plugins/modularcompat/manifest.json) | GoCodeAlone/modular framework compatibility modules (scheduler, cache, jsonschema) | builtin |
-| [observability](./plugins/observability/manifest.json) | Metrics, health checks, log collection, OpenTelemetry tracing, and OpenAPI spec generation/consumption | builtin |
-| [openapi](./plugins/openapi/manifest.json) | OpenAPI v3 spec-driven HTTP route generation with request validation and Swagger UI | builtin |
-| [payments](./plugins/payments/manifest.json) | Multi-provider payment processing plugin (Stripe, PayPal) | external |
-| [pipelinesteps](./plugins/pipelinesteps/manifest.json) | Generic pipeline step types, pre-processing validators, and pipeline workflow handler (including base64_decode) | builtin |
-| [platform](./plugins/platform/manifest.json) | Platform infrastructure modules, workflow handler, reconciliation trigger, and template step | builtin |
-| [policy](./plugins/policy/manifest.json) | Policy engine plugin with mock backend for testing and development | builtin |
-| [scanner](./plugins/scanner/manifest.json) | Security scanner provider with pluggable backends | builtin |
-| [scheduler](./plugins/scheduler/manifest.json) | Scheduler workflow handler and schedule trigger for cron-based job execution | builtin |
-| [secrets](./plugins/secrets/manifest.json) | Secrets management modules (Vault, AWS Secrets Manager, OS Keychain) | builtin |
-| [sso](./plugins/sso/manifest.json) | Enterprise SSO via OpenID Connect with multi-provider support | external |
-| [statemachine](./plugins/statemachine/manifest.json) | State machine engine, tracker, connector modules and workflow handler | builtin |
-| [storage](./plugins/storage/manifest.json) | Storage, database, persistence, and cache modules with DB pipeline steps | builtin |
-| [timeline](./plugins/timeline/manifest.json) | Timeline and replay service module for execution visualization | builtin |
-| [tofu](./plugins/tofu/manifest.json) | OpenTofu/Terraform adapter: HCL generation from abstract infra specs, plan/apply execution, and state import/export | external |
-| [vectorstore](./plugins/vectorstore/manifest.json) | Vector database integration for RAG pipelines with Pinecone support | external |
-| [websocket](./plugins/websocket/manifest.json) | General-purpose WebSocket support — rooms, broadcast, send, close | external |
-| [workflow-plugin-auth](./plugins/workflow-plugin-auth/manifest.json) | Passwordless authentication plugin: WebAuthn/passkeys, TOTP, email magic links | external |
-| [workflow-plugin-supply-chain](./plugins/workflow-plugin-supply-chain/manifest.json) | Supply chain security: SBOM generation, keyless signing, SLSA provenance, vulnerability scanning, and wfctl CLI extensions | external |
+| Plugin | Description |
+|--------|-------------|
+| [actors](./plugins/actors/manifest.json) | Actor model support with goakt v4 |
+| [agent](./plugins/agent/manifest.json) | AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection, orchestration (SSE hub, scheduler, MCP client/server, approvals, sub-agents, webhooks, security auditing, JWT, bcrypt, OAuth) |
+| [ai](./plugins/ai/manifest.json) | AI pipeline steps (complete, classify, extract), dynamic components, and sub-workflow orchestration |
+| [api](./plugins/api/manifest.json) | REST API handlers, CQRS query/command, API gateway, and data transformation |
+| [auth](./plugins/auth/manifest.json) | JWT authentication, OAuth2, user store, and auth middleware wiring |
+| [cicd](./plugins/cicd/manifest.json) | CI/CD pipeline step types (shell exec, Docker, artifact management, security scanning, deploy, gate, build from config, git operations, AWS CodeBuild) |
+| [cloud](./plugins/cloud/manifest.json) | Cloud provider credentials and validation. Foundation for IaC modules. |
+| [configprovider](./plugins/configprovider/manifest.json) | Application configuration registry with schema validation, defaults, and source layering |
+| [datastores](./plugins/datastores/manifest.json) | NoSQL data store modules and pipeline steps |
+| [dlq](./plugins/dlq/manifest.json) | Dead letter queue service module for failed message management |
+| [eventstore](./plugins/eventstore/manifest.json) | Event store service module for execution event persistence |
+| [featureflags](./plugins/featureflags/manifest.json) | Feature flag service module and pipeline steps (feature_flag, ff_gate) |
+| [gitlab](./plugins/gitlab/manifest.json) | GitLab CI integration: webhook receiver (gitlab.webhook), API client (gitlab.client), pipeline trigger/status steps, and MR management steps. |
+| [http](./plugins/http/manifest.json) | HTTP server, router, handlers, middleware, proxy, and static file serving |
+| [infra](./plugins/infra/manifest.json) | Abstract infra.* module types with IaCProvider delegation |
+| [integration](./plugins/integration/manifest.json) | Integration workflow handler for connector-based multi-system workflows |
+| [k8s](./plugins/k8s/manifest.json) | Native Kubernetes deployment support using client-go. Provides generate, apply, destroy, status, diff, and logs operations without requiring kubectl or Helm. |
+| [license](./plugins/license/manifest.json) | License validation with remote server, local cache, and grace period |
+| [marketplace](./plugins/marketplace/manifest.json) | Plugin marketplace steps for searching, installing, and managing workflow plugins |
+| [mcp](./plugins/mcp/manifest.json) | MCP tool triggers, workflow handlers, and server registry |
+| [messaging](./plugins/messaging/manifest.json) | Messaging subsystem: brokers, handlers, triggers, and workflows |
+| [modularcompat](./plugins/modularcompat/manifest.json) | GoCodeAlone/modular framework compatibility modules (scheduler, cache, jsonschema) |
+| [observability](./plugins/observability/manifest.json) | Metrics, health checks, log collection, OpenTelemetry tracing, and OpenAPI spec generation/consumption |
+| [openapi](./plugins/openapi/manifest.json) | OpenAPI v3 spec-driven HTTP route generation with request validation and Swagger UI |
+| [pipelinesteps](./plugins/pipelinesteps/manifest.json) | Generic pipeline step types, pre-processing validators, and pipeline workflow handler (including base64_decode) |
+| [platform](./plugins/platform/manifest.json) | Platform infrastructure modules, workflow handler, reconciliation trigger, and template step |
+| [policy](./plugins/policy/manifest.json) | Policy engine plugin with mock backend for testing and development |
+| [scanner](./plugins/scanner/manifest.json) | Security scanner provider with pluggable backends |
+| [scheduler](./plugins/scheduler/manifest.json) | Scheduler workflow handler and schedule trigger for cron-based job execution |
+| [secrets](./plugins/secrets/manifest.json) | Secrets management modules (Vault, AWS Secrets Manager, OS Keychain) |
+| [statemachine](./plugins/statemachine/manifest.json) | State machine engine, tracker, connector modules and workflow handler |
+| [storage](./plugins/storage/manifest.json) | Storage, database, persistence, and cache modules with DB pipeline steps |
+| [timeline](./plugins/timeline/manifest.json) | Timeline and replay service module for execution visualization |
 
-## External Plugins
+## First-party External Plugins
 
-These plugins run outside the core engine process or are distributed from a separate plugin repository.
+These plugins are maintained by GoCodeAlone as core platform capabilities, but are distributed outside the engine repository.
+
+| Plugin | Description |
+|--------|-------------|
+| [admin](./plugins/admin/manifest.json) | Admin dashboard UI and config-driven admin routes with embedded React UI. Provides user management, workflow management, settings, and real-time monitoring. |
+| [approval](./plugins/approval/manifest.json) | Human-in-the-loop approval workflows with state machine |
+| [audit](./plugins/audit/manifest.json) | Compliance audit logging with EventBus collection and S3/database sinks |
+| [authz](./plugins/authz/manifest.json) | RBAC authorization plugin using Casbin |
+| [bento](./plugins/bento/manifest.json) | Stream processing via Bento — 100+ connectors, Bloblang transforms, at-least-once delivery |
+| [ci-generator](./plugins/ci-generator/manifest.json) | CI/CD config generator for GitHub Actions, GitLab CI, Jenkins, and CircleCI |
+| [crm](./plugins/crm/manifest.json) | Vendor-neutral CRM integration with Salesforce adapter |
+| [data-engineering](./plugins/data-engineering/manifest.json) | Data engineering: CDC, lakehouse (Iceberg), time-series (InfluxDB/TimescaleDB/ClickHouse/QuestDB/Druid), graph (Neo4j), data quality, migrations, catalog (DataHub/OpenMetadata) |
+| [erp](./plugins/erp/manifest.json) | Enterprise ERP integration via OData v4 with SAP adapter |
+| [github](./plugins/github/manifest.json) | GitHub integration plugin: webhook handling, GitHub Actions, PRs, issues, releases, and deployments |
+| [payments](./plugins/payments/manifest.json) | Multi-provider payment processing plugin (Stripe, PayPal) |
+| [sso](./plugins/sso/manifest.json) | Enterprise SSO via OpenID Connect with multi-provider support |
+| [tofu](./plugins/tofu/manifest.json) | OpenTofu/Terraform adapter: HCL generation from abstract infra specs, plan/apply execution, and state import/export |
+| [vectorstore](./plugins/vectorstore/manifest.json) | Vector database integration for RAG pipelines with Pinecone support |
+| [websocket](./plugins/websocket/manifest.json) | General-purpose WebSocket support — rooms, broadcast, send, close |
+| [workflow-plugin-auth](./plugins/workflow-plugin-auth/manifest.json) | Passwordless authentication plugin: WebAuthn/passkeys, TOTP, email magic links |
+| [workflow-plugin-supply-chain](./plugins/workflow-plugin-supply-chain/manifest.json) | Supply chain security: SBOM generation, keyless signing, SLSA provenance, vulnerability scanning, and wfctl CLI extensions |
+
+## Community and Premium External Plugins
+
+These plugins are distributed outside the engine repository and are maintained as community or commercial extensions.
 
 | Plugin | Description | Tier |
 |--------|-------------|------|
-| [admin](./plugins/admin/manifest.json) | Admin dashboard UI and config-driven admin routes with embedded React UI. Provides user management, workflow management, settings, and real-time monitoring. | core |
 | [analytics](./plugins/analytics/manifest.json) | Analytics and tag-manager injection for rendered HTML assets | community |
-| [approval](./plugins/approval/manifest.json) | Human-in-the-loop approval workflows with state machine | core |
 | [audit-chain](./plugins/audit-chain/manifest.json) | Tamper-evident hash-chained audit logging with periodic Merkle root anchoring (OpenTimestamps/Bitcoin, git, Sigstore) | community |
-| [audit](./plugins/audit/manifest.json) | Compliance audit logging with EventBus collection and S3/database sinks | core |
 | [authz-ui](./plugins/authz-ui/manifest.json) | Casbin authorization policy management UI (React SPA) | premium |
-| [authz](./plugins/authz/manifest.json) | RBAC authorization plugin using Casbin | core |
 | [aws](./plugins/aws/manifest.json) | AWS provider plugin for workflow IaC — manages ECS, EKS, RDS, ElastiCache, VPC, ALB, Route53, ECR, API Gateway, Security Groups, IAM, S3, and ACM resources | community |
 | [azure](./plugins/azure/manifest.json) | Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates | community |
-| [bento](./plugins/bento/manifest.json) | Stream processing via Bento — 100+ connectors, Bloblang transforms, at-least-once delivery | core |
 | [broker](./plugins/broker/manifest.json) | External plugin for the workflow engine. | community |
-| [ci-generator](./plugins/ci-generator/manifest.json) | CI/CD config generator for GitHub Actions, GitLab CI, Jenkins, and CircleCI | core |
 | [cloud-ui](./plugins/cloud-ui/manifest.json) | Cloud management UI plugin (React SPA) | premium |
 | [cms](./plugins/cms/manifest.json) | Multi-tenant CMS engine — TenantResolver + static-wins routing + WYSIWYG page authoring (TipTap default). Foundation of gocodealone-multisite. | community |
-| [crm](./plugins/crm/manifest.json) | Vendor-neutral CRM integration with Salesforce adapter | core |
-| [data-engineering](./plugins/data-engineering/manifest.json) | Data engineering: CDC, lakehouse (Iceberg), time-series (InfluxDB/TimescaleDB/ClickHouse/QuestDB/Druid), graph (Neo4j), data quality, migrations, catalog (DataHub/OpenMetadata) | core |
 | [datadog](./plugins/datadog/manifest.json) | Datadog monitoring and observability — metrics, events, monitors, dashboards, logs, synthetics, SLOs, incidents, and more | community |
 | [digitalocean](./plugins/digitalocean/manifest.json) | DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway | community |
 | [discord](./plugins/discord/manifest.json) | Discord messaging, bot automation, and voice channel support. Provides a provider module, pipeline steps for sending/editing/deleting messages and managing voice, and a WebSocket Gateway event trigger. | community |
-| [erp](./plugins/erp/manifest.json) | Enterprise ERP integration via OData v4 with SAP adapter | core |
 | [eventbus](./plugins/eventbus/manifest.json) | Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations. | community |
 | [gcp](./plugins/gcp/manifest.json) | GCP infrastructure provider plugin for workflow — manages Cloud Run, GKE, Cloud SQL, Memorystore, VPC, Load Balancer, Cloud DNS, Artifact Registry, API Gateway, Firewall, IAM, GCS, and Certificate Manager | community |
-| [github](./plugins/github/manifest.json) | GitHub integration plugin: webhook handling, GitHub Actions, PRs, issues, releases, and deployments | core |
 | [hover](./plugins/hover/manifest.json) | Hover DNS provider for workflow IaC (infra.dns). No official API; mimics the browser-side username+password+TOTP login flow used by pjslauta/hover-dyn-dns. | community |
 | [launchdarkly](./plugins/launchdarkly/manifest.json) | LaunchDarkly feature management — flags, segments, environments, projects, metrics, experiments, approvals, audit log, and more | community |
 | [messaging-core](./plugins/messaging-core/manifest.json) | Shared messaging interfaces for workflow platform plugins | community |
@@ -165,28 +165,21 @@ These plugins run outside the core engine process or are distributed from a sepa
 | [namecheap](./plugins/namecheap/manifest.json) | Namecheap DNS provider for workflow IaC (infra.dns) backed by the official go-namecheap-sdk. | community |
 | [okta](./plugins/okta/manifest.json) | Okta identity and access management — users, groups, applications, authorization servers, MFA, policies, and more | community |
 | [openlms](./plugins/openlms/manifest.json) | OpenLMS learning management — courses, enrollments, grades, assignments, quizzes, users, competencies, calendars, forums, and more | community |
-| [payments](./plugins/payments/manifest.json) | Multi-provider payment processing plugin (Stripe, PayPal) | core |
 | [ratchet](./plugins/ratchet/manifest.json) | Autonomous AI agent orchestration platform — custom EnginePlugin for building AI-powered workflow applications with agent coordination, task management, and intelligent pipeline execution | community |
 | [rooms](./plugins/rooms/manifest.json) | Room management plugin for workflow engine — join, leave, broadcast, members | community |
 | [salesforce](./plugins/salesforce/manifest.json) | Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more | community |
 | [security-scanner](./plugins/security-scanner/manifest.json) | Security scanner plugin for workflow engine — vulnerability scanning, secret detection, and compliance checks | community |
 | [security](./plugins/security/manifest.json) | Unified security plugin: WAF (Coraza/AWS/GCloud/Cloudflare), MFA/encryption (TOTP, AES-256-GCM, AWS KMS, GCP KMS, Vault Transit), authorization (Casbin RBAC, Permit.io), data protection (PII detection/masking), sandbox (WASM/wazero, Docker), and supply-chain security (signatures, vuln scanning, SBOM) | premium |
 | [slack](./plugins/slack/manifest.json) | Slack messaging and workspace automation. Provides a provider module backed by the Slack Web API and Socket Mode, pipeline steps for messages/blocks/reactions/files, and a Socket Mode event trigger. | community |
-| [sso](./plugins/sso/manifest.json) | Enterprise SSO via OpenID Connect with multi-provider support | core |
 | [steam](./plugins/steam/manifest.json) | External plugin for the workflow engine. | community |
 | [teams](./plugins/teams/manifest.json) | Microsoft Teams messaging and channel management via the Microsoft Graph API. Provides a provider module with Azure AD client credentials auth, pipeline steps for messages/cards/channels/members, and an HTTP webhook trigger for Graph change notifications. | community |
 | [template](./plugins/template/manifest.json) | Template repository for creating workflow engine external plugins | community |
-| [tofu](./plugins/tofu/manifest.json) | OpenTofu/Terraform adapter: HCL generation from abstract infra specs, plan/apply execution, and state import/export | core |
 | [turnio](./plugins/turnio/manifest.json) | turn.io WhatsApp API integration — messaging, contacts, templates, flows, and journeys | community |
 | [twilio](./plugins/twilio/manifest.json) | Comprehensive Twilio integration — SMS, Voice, Verify, Video, Conversations, TaskRouter, and 40+ products | community |
-| [vectorstore](./plugins/vectorstore/manifest.json) | Vector database integration for RAG pipelines with Pinecone support | core |
-| [websocket](./plugins/websocket/manifest.json) | General-purpose WebSocket support — rooms, broadcast, send, close | core |
 | [workflow-plugin-atlas-migrate](./plugins/workflow-plugin-atlas-migrate/manifest.json) | Atlas migration driver plugin for the workflow engine: ariga.io/atlas v1 backed Up/Down/Status/Goto with SQL-backed revision tracking and auto-generated atlas.sum | community |
-| [workflow-plugin-auth](./plugins/workflow-plugin-auth/manifest.json) | Passwordless authentication plugin: WebAuthn/passkeys, TOTP, email magic links | core |
 | [workflow-plugin-compute](./plugins/workflow-plugin-compute/manifest.json) | Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads | community |
 | [workflow-plugin-migrations](./plugins/workflow-plugin-migrations/manifest.json) | Database migration plugin for the workflow engine: golang-migrate + goose drivers, pre-deploy runner, wfctl migrate CLI, static lint tool, and tenant-ensure schema setup | community |
 | [workflow-plugin-product-capture](./plugins/workflow-plugin-product-capture/manifest.json) | Product URL capture provider for workflow-compute | community |
-| [workflow-plugin-supply-chain](./plugins/workflow-plugin-supply-chain/manifest.json) | Supply chain security: SBOM generation, keyless signing, SLSA provenance, vulnerability scanning, and wfctl CLI extensions | core |
 | [ws-auth](./plugins/ws-auth/manifest.json) | WebSocket HMAC authentication plugin for workflow engine | community |
 
 ## Templates
