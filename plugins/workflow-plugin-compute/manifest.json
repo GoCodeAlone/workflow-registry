@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-compute",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "community",
   "private": false,
-  "minEngineVersion": "0.57.4",
+  "minEngineVersion": "0.27.0",
   "keywords": [
     "workflow-compute",
     "distributed-compute",
@@ -17,6 +17,7 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-compute",
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
       "compute.provider",
       "compute.pool",
@@ -32,21 +33,22 @@
     "cliCommands": [
       {
         "name": "compute",
-        "description": "Operate a workflow-compute control plane",
-        "flags_passthrough": true
+        "description": "Operate a workflow-compute control plane"
       }
     ]
   },
   "downloads": [
     {
-      "os": "linux",
-      "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.2/workflow-plugin-compute-linux-amd64.tar.gz"
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "29c1be8339c7a681c0f1fae197c3d7474edd1678a61192f1ed1e56a37ab4eac3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.3/workflow-plugin-compute-darwin-arm64.tar.gz"
     },
     {
-      "os": "darwin",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.2/workflow-plugin-compute-darwin-arm64.tar.gz"
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "5dfdd6485814fffb71bab5aa4bd93cc82bee78c9431b7b7049efe20c259de808",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.3/workflow-plugin-compute-linux-amd64.tar.gz"
     }
   ],
   "status": "verified"
