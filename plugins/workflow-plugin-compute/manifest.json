@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-compute",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -41,12 +41,12 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.1/workflow-plugin-compute-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.2/workflow-plugin-compute-linux-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.1/workflow-plugin-compute-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.2/workflow-plugin-compute-darwin-arm64.tar.gz"
     }
   ],
   "status": "verified"
