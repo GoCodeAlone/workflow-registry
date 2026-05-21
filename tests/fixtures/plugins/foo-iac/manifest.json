@@ -14,10 +14,14 @@
   "keywords": ["dns", "iac"],
   "capabilities": {
     "moduleTypes": ["iac.provider.foo"],
+    "configProvider": true,
+    "iacStateBackends": ["spaces", "gcs"],
+    "serviceMethods": ["foo.collector/query", "foo.collector/stats"],
     "iacProvider": {
       "name": "foo",
       "resourceTypes": ["infra.dns", "infra.dns_delegation"],
-      "supportedCanonicalKeys": ["zone", "record"]
+      "supportedCanonicalKeys": ["zone", "record"],
+      "configSchema": {"infra.dns": {"ttl": {"type": "integer"}}}
     },
     "cliCommands": [
       {
