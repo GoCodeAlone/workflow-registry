@@ -219,11 +219,19 @@ jobs:
           if git ls-remote --exit-code --heads origin "${BRANCH}" >/dev/null 2>&1; then
             existing="$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')"
             if [[ -n "${existing}" ]]; then
+              # Open PR exists — preserve it (review/comments intact).
+              # Maintainer can land that PR or close it to allow a re-sync.
               echo "branch ${BRANCH} already has open PR #${existing}; skipping (further updates should land on that PR)"
-            else
-              echo "branch ${BRANCH} exists with no open PR; skipping (delete the branch manually if a re-sync for the same version is needed)"
+              exit 0
             fi
-            exit 0
+            # Round-4 Copilot finding: branch exists but no open PR. This
+            # is the "previous run pushed branch but failed before PR
+            # creation" OR "same-day cron branch with a closed PR" case.
+            # Skipping here would leave drift permanently unaddressed.
+            # Safe to delete + recreate because no open PR review state
+            # is at risk.
+            echo "branch ${BRANCH} exists with no open PR; deleting + recreating to re-publish drift"
+            git push origin --delete "${BRANCH}"
           fi
 
           git checkout -b "${BRANCH}"
