@@ -28,16 +28,30 @@ summaries="[]"
 while IFS= read -r manifest; do
   plugin_name="$(basename "$(dirname "${manifest}")")"
 
-  # Validate it's readable JSON
+  # Validate readable JSON.
   if ! jq empty "${manifest}" 2>/dev/null; then
     echo "warning: skipping invalid JSON at ${manifest}" >&2
     continue
   fi
 
-  # Extract summary fields.
-  # Use the directory name as the canonical "name" so that it matches the
-  # v1/plugins/<name>/ API path, even if the manifest's "name" field differs.
-  summary="$(jq --arg dir_name "${plugin_name}" '{
+  # ALWAYS copy per-plugin manifest, including for private:true.
+  # Authenticated wfctl consumers of /v1/plugins/<name>/manifest.json
+  # depend on this endpoint working for private plugins too.
+  dest_dir="${OUT_DIR}/plugins/${plugin_name}"
+  mkdir -p "${dest_dir}"
+  cp "${manifest}" "${dest_dir}/manifest.json"
+  echo "  copied plugins/${plugin_name}/manifest.json"
+
+  # Private plugins: do NOT append to the public bulk index.
+  is_private="$(jq -r '.private // false' "${manifest}")"
+  if [[ "${is_private}" == "true" ]]; then
+    echo "  skipped (private) plugins/${plugin_name}/"
+    continue
+  fi
+
+  # G3 markers go here — see Task 6.
+
+  summary="$(jq --arg dir_name "${plugin_name}" '({
     name:             $dir_name,
     description:      (.description // ""),
     version:          (.version // ""),
@@ -88,15 +102,19 @@ while IFS= read -r manifest; do
       }
       end
     )
-  }' "${manifest}")"
-
+  }
+  +
+  (
+    if (.required_secrets // null) == null then {}
+    else { required_secrets: [.required_secrets[] | {
+      name:        (.name // null),
+      sensitive:   (.sensitive // false),
+      description: (.description // null),
+      prompt:      (.prompt // null)
+    }]}
+    end
+  ))' "${manifest}")"
   summaries="$(echo "${summaries}" | jq --argjson s "${summary}" '. + [$s]')"
-
-  # Copy manifest to v1/plugins/<name>/manifest.json
-  dest_dir="${OUT_DIR}/plugins/${plugin_name}"
-  mkdir -p "${dest_dir}"
-  cp "${manifest}" "${dest_dir}/manifest.json"
-  echo "  copied plugins/${plugin_name}/manifest.json"
 done < <(find "${PLUGINS_DIR}" -name "manifest.json" | sort)
 
 # Sort summaries by name and write index
