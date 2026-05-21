@@ -45,6 +45,7 @@ Allowlist stays; we add explicit fields.
 | `capabilities.wiringHooks` | []string | unchanged | filter |
 | `capabilities.iacProvider.name` | string | **new** | filter (IaC providers by short name) |
 | `capabilities.iacProvider.resourceTypes` | []string | **new** | filter ("plugins managing infra.dns") |
+| `capabilities.iacProvider.supportedCanonicalKeys` | []string | **new** | filter ("plugins supporting canonical key X" — `wfctl plugin search --supports-key autoscaling`); already used in marker example + scope definition, codifying here per round-4 m3 |
 | `capabilities.cliCommands[].name` | []{name, description} | **new** | filter ("plugins providing wfctl <X>") |
 | `capabilities.migrationDrivers` | []string | **new** | filter (migration plugins) |
 | `iacProvider.computePlanVersion` | string | **new** | filter (v2-compatible IaC plugins) |
@@ -64,7 +65,7 @@ Explicitly NOT added (per security/correctness analysis):
 | `serviceMethods` | Not yet in `registry-schema.json`. Deferred — needs schema extension first. |
 | `portIntrospect` | Not in schema. Same deferral. |
 | `configProvider` | Not in schema. Same deferral. |
-| `buildHooks` | wfctl-internal build-time hook list. Not user-facing search. |
+| `capabilities.buildHooks` | wfctl-internal build-time hook list. Not user-facing search. (Round-4 I4: previously listed as unqualified `buildHooks` which would phantom-flag in the drift guard.) |
 
 (`contracts` was incorrectly listed in the round-2 example as an exclusion — it is NOT in `registry-schema.json` and therefore needs no marker. Removed.)
 
