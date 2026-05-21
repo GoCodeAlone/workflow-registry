@@ -1,23 +1,37 @@
 {
-  "name": "workflow-plugin-infra",
-  "version": "0.1.0",
   "author": "GoCodeAlone",
-  "description": "External plugin for the workflow engine.",
-  "source": "github.com/GoCodeAlone/workflow-plugin-infra",
-  "type": "external",
-  "tier": "community",
-  "license": "MIT",
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-infra",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-infra",
-  "private": false,
-  "status": "experimental",
   "capabilities": {
     "moduleTypes": [
+      "infra.api_gateway",
+      "infra.autoscaling_group",
       "infra.cache",
-      "infra.registry"
+      "infra.certificate",
+      "infra.container_service",
+      "infra.database",
+      "infra.dns",
+      "infra.firewall",
+      "infra.iam_role",
+      "infra.k8s_cluster",
+      "infra.load_balancer",
+      "infra.registry",
+      "infra.storage",
+      "infra.vpc"
     ],
     "stepTypes": [],
     "triggerTypes": [],
+    "wiringHooks": [],
     "workflowHandlers": []
-  }
+  },
+  "description": "Abstract infra.* module types with IaCProvider delegation",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "license": "MIT",
+  "name": "infra",
+  "path": "plugins/infra",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow",
+  "source": "github.com/GoCodeAlone/workflow",
+  "status": "experimental",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
 }

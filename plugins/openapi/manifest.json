@@ -2,26 +2,22 @@
   "author": "GoCodeAlone",
   "capabilities": {
     "moduleTypes": [
-      "mcp.registry"
+      "openapi"
     ],
     "stepTypes": [],
-    "triggerTypes": [
-      "mcp_tool"
+    "triggerTypes": [],
+    "wiringHooks": [
+      "openapi-route-registration"
     ],
-    "wiringHooks": [],
-    "workflowHandlers": [
-      "mcp"
-    ]
+    "workflowHandlers": []
   },
-  "description": "MCP tool triggers, workflow handlers, and server registry",
+  "description": "OpenAPI v3 spec-driven HTTP route generation with request validation and Swagger UI",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
-  "name": "workflow-plugin-mcp",
-  "path": "plugins/mcp",
-  "private": false,
+  "name": "workflow-plugin-openapi",
+  "path": "plugins/openapi",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "source": "github.com/GoCodeAlone/workflow",
-  "status": "experimental",
   "tier": "core",
   "type": "builtin",
   "version": "1.0.0"

@@ -1,14 +1,27 @@
 {
-  "name": "storage",
-  "version": "0.3.51",
   "author": "GoCodeAlone",
-  "description": "Storage, database, and persistence modules supporting S3, GCS, local filesystem, SQLite, and generic SQL databases",
-  "source": "github.com/GoCodeAlone/workflow",
-  "path": "plugins/storage",
-  "type": "builtin",
-  "tier": "core",
-  "license": "MIT",
-  "minEngineVersion": "0.2.0",
+  "capabilities": {
+    "moduleTypes": [
+      "cache.redis",
+      "database.partitioned",
+      "database.workflow",
+      "persistence.store",
+      "storage.artifact",
+      "storage.local",
+      "storage.sqlite"
+    ],
+    "stepTypes": [
+      "step.artifact_delete",
+      "step.artifact_download",
+      "step.artifact_list",
+      "step.artifact_upload"
+    ],
+    "triggerTypes": [],
+    "wiringHooks": [],
+    "workflowHandlers": []
+  },
+  "description": "Storage, database, persistence, and cache modules with DB pipeline steps",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
     "storage",
     "s3",
@@ -18,19 +31,13 @@
     "persistence",
     "sql"
   ],
-  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "license": "MIT",
+  "minEngineVersion": "0.2.0",
+  "name": "storage",
+  "path": "plugins/storage",
   "repository": "https://github.com/GoCodeAlone/workflow",
-  "capabilities": {
-    "moduleTypes": [
-      "storage.s3",
-      "storage.local",
-      "storage.gcs",
-      "storage.sqlite",
-      "database.workflow",
-      "persistence.store"
-    ],
-    "stepTypes": [],
-    "triggerTypes": [],
-    "workflowHandlers": []
-  }
+  "source": "github.com/GoCodeAlone/workflow",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
 }

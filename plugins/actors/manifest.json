@@ -2,26 +2,28 @@
   "author": "GoCodeAlone",
   "capabilities": {
     "moduleTypes": [
-      "mcp.registry"
+      "actor.pool",
+      "actor.system"
     ],
-    "stepTypes": [],
-    "triggerTypes": [
-      "mcp_tool"
+    "stepTypes": [
+      "step.actor_ask",
+      "step.actor_send"
     ],
-    "wiringHooks": [],
+    "triggerTypes": [],
+    "wiringHooks": [
+      "actors-handler-wiring"
+    ],
     "workflowHandlers": [
-      "mcp"
+      "actors"
     ]
   },
-  "description": "MCP tool triggers, workflow handlers, and server registry",
+  "description": "Actor model support with goakt v4",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
-  "name": "workflow-plugin-mcp",
-  "path": "plugins/mcp",
-  "private": false,
+  "name": "actors",
+  "path": "plugins/actors",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "source": "github.com/GoCodeAlone/workflow",
-  "status": "experimental",
   "tier": "core",
   "type": "builtin",
   "version": "1.0.0"

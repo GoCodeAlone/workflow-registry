@@ -1,27 +1,29 @@
 {
-  "name": "workflow-plugin-marketplace",
-  "version": "0.1.0",
   "author": "GoCodeAlone",
-  "description": "External plugin for the workflow engine.",
-  "source": "github.com/GoCodeAlone/workflow-plugin-marketplace",
-  "type": "external",
-  "tier": "community",
-  "license": "MIT",
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-marketplace",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-marketplace",
-  "private": false,
-  "status": "experimental",
   "capabilities": {
     "moduleTypes": [],
     "stepTypes": [
-      "step.marketplace_search",
       "step.marketplace_detail",
       "step.marketplace_install",
       "step.marketplace_installed",
+      "step.marketplace_search",
       "step.marketplace_uninstall",
       "step.marketplace_update"
     ],
     "triggerTypes": [],
+    "wiringHooks": [],
     "workflowHandlers": []
-  }
+  },
+  "description": "Plugin marketplace steps for searching, installing, and managing workflow plugins",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "license": "MIT",
+  "name": "marketplace",
+  "path": "plugins/marketplace",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow",
+  "source": "github.com/GoCodeAlone/workflow",
+  "status": "experimental",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
 }

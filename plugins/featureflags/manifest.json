@@ -1,24 +1,5 @@
 {
-  "name": "featureflags",
-  "version": "0.3.51",
   "author": "GoCodeAlone",
-  "description": "Feature flag service module and pipeline steps for runtime feature gating and gradual rollouts",
-  "source": "github.com/GoCodeAlone/workflow",
-  "path": "plugins/featureflags",
-  "type": "builtin",
-  "tier": "core",
-  "license": "MIT",
-  "minEngineVersion": "0.2.0",
-  "keywords": [
-    "feature-flags",
-    "flags",
-    "toggles",
-    "rollout",
-    "gating",
-    "sse"
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow",
-  "repository": "https://github.com/GoCodeAlone/workflow",
   "capabilities": {
     "moduleTypes": [
       "featureflag.service"
@@ -28,6 +9,26 @@
       "step.ff_gate"
     ],
     "triggerTypes": [],
+    "wiringHooks": [],
     "workflowHandlers": []
-  }
+  },
+  "description": "Feature flag service module and pipeline steps (feature_flag, ff_gate)",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "keywords": [
+    "feature-flags",
+    "flags",
+    "toggles",
+    "rollout",
+    "gating",
+    "sse"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.2.0",
+  "name": "feature-flags",
+  "path": "plugins/featureflags",
+  "repository": "https://github.com/GoCodeAlone/workflow",
+  "source": "github.com/GoCodeAlone/workflow",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
 }

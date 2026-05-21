@@ -2,28 +2,26 @@
   "author": "GoCodeAlone",
   "capabilities": {
     "moduleTypes": [
-      "cache.modular",
-      "jsonschema.modular",
-      "scheduler.modular"
+      "nosql.dynamodb",
+      "nosql.memory",
+      "nosql.mongodb",
+      "nosql.redis"
     ],
-    "stepTypes": [],
+    "stepTypes": [
+      "step.nosql_delete",
+      "step.nosql_get",
+      "step.nosql_put",
+      "step.nosql_query"
+    ],
     "triggerTypes": [],
     "wiringHooks": [],
     "workflowHandlers": []
   },
-  "description": "GoCodeAlone/modular framework compatibility modules (scheduler, cache, jsonschema)",
+  "description": "NoSQL data store modules and pipeline steps",
   "homepage": "https://github.com/GoCodeAlone/workflow",
-  "keywords": [
-    "modular",
-    "scheduler",
-    "cache",
-    "compatibility",
-    "framework"
-  ],
   "license": "MIT",
-  "minEngineVersion": "0.2.0",
-  "name": "modular-compat",
-  "path": "plugins/modularcompat",
+  "name": "datastores",
+  "path": "plugins/datastores",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
