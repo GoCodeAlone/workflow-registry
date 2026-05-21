@@ -26,6 +26,33 @@ jobs:
       - name: Validate all plugin manifests
         run: bash scripts/validate-manifests.sh
 
+  validate-core-manifests:
+    name: Validate core manifests against workflow plugins
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out registry
+        uses: actions/checkout@v4
+
+      - name: Check out workflow
+        uses: actions/checkout@v4
+        with:
+          repository: GoCodeAlone/workflow
+          path: _workflow
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+          cache-dependency-path: _workflow/go.sum
+
+      - name: Validate core plugin manifests
+        run: WORKFLOW_REPO="$GITHUB_WORKSPACE/_workflow" bash scripts/sync-core-manifests.sh
+
+      - name: Validate README is generated
+        run: bash scripts/generate-readme.sh --check
+
   validate-templates:
     name: Validate template plugin references
     runs-on: ubuntu-latest

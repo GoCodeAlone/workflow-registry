@@ -5,24 +5,13 @@
     "stepTypes": [],
     "triggerTypes": [],
     "wiringHooks": [],
-    "workflowHandlers": [
-      "integration"
-    ]
+    "workflowHandlers": []
   },
-  "description": "Integration workflow handler for connector-based multi-system workflows",
+  "description": "Native Kubernetes deployment support using client-go. Provides generate, apply, destroy, status, diff, and logs operations without requiring kubectl or Helm.",
   "homepage": "https://github.com/GoCodeAlone/workflow",
-  "keywords": [
-    "integration",
-    "connectors",
-    "multi-system",
-    "webhook",
-    "http",
-    "etl"
-  ],
   "license": "MIT",
-  "minEngineVersion": "0.2.0",
-  "name": "integration-plugin",
-  "path": "plugins/integration",
+  "name": "kubernetes-deploy",
+  "path": "plugins/k8s",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",

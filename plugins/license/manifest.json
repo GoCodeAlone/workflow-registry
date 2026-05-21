@@ -2,26 +2,22 @@
   "author": "GoCodeAlone",
   "capabilities": {
     "moduleTypes": [
-      "mcp.registry"
+      "license.validator"
     ],
     "stepTypes": [],
-    "triggerTypes": [
-      "mcp_tool"
+    "triggerTypes": [],
+    "wiringHooks": [
+      "license-validator-wiring"
     ],
-    "wiringHooks": [],
-    "workflowHandlers": [
-      "mcp"
-    ]
+    "workflowHandlers": []
   },
-  "description": "MCP tool triggers, workflow handlers, and server registry",
+  "description": "License validation with remote server, local cache, and grace period",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
-  "name": "workflow-plugin-mcp",
-  "path": "plugins/mcp",
-  "private": false,
+  "name": "license",
+  "path": "plugins/license",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "source": "github.com/GoCodeAlone/workflow",
-  "status": "experimental",
   "tier": "core",
   "type": "builtin",
   "version": "1.0.0"

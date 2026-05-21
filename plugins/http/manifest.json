@@ -1,14 +1,40 @@
 {
-  "name": "http",
-  "version": "0.3.51",
   "author": "GoCodeAlone",
+  "capabilities": {
+    "moduleTypes": [
+      "http.client",
+      "http.handler",
+      "http.middleware.auth",
+      "http.middleware.cors",
+      "http.middleware.logging",
+      "http.middleware.ratelimit",
+      "http.middleware.requestid",
+      "http.middleware.securityheaders",
+      "http.proxy",
+      "http.router",
+      "http.server",
+      "http.simple_proxy",
+      "reverseproxy",
+      "static.fileserver"
+    ],
+    "stepTypes": [
+      "step.circuit_breaker",
+      "step.rate_limit"
+    ],
+    "triggerTypes": [
+      "http"
+    ],
+    "wiringHooks": [
+      "http-auth-provider-wiring",
+      "http-cors-global-wiring",
+      "http-static-fileserver-registration"
+    ],
+    "workflowHandlers": [
+      "http"
+    ]
+  },
   "description": "HTTP server, router, handlers, middleware, proxy, and static file serving",
-  "source": "github.com/GoCodeAlone/workflow",
-  "path": "plugins/http",
-  "type": "builtin",
-  "tier": "core",
-  "license": "MIT",
-  "minEngineVersion": "0.2.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
     "http",
     "server",
@@ -20,41 +46,13 @@
     "ratelimit",
     "reverseproxy"
   ],
-  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "license": "MIT",
+  "minEngineVersion": "0.2.0",
+  "name": "workflow-plugin-http",
+  "path": "plugins/http",
   "repository": "https://github.com/GoCodeAlone/workflow",
-  "capabilities": {
-    "moduleTypes": [
-      "http.server",
-      "http.router",
-      "http.handler",
-      "http.proxy",
-      "reverseproxy",
-      "http.simple_proxy",
-      "static.fileserver",
-      "http.middleware.auth",
-      "http.middleware.logging",
-      "http.middleware.ratelimit",
-      "http.middleware.cors",
-      "http.middleware.requestid",
-      "http.middleware.securityheaders"
-    ],
-    "stepTypes": [
-      "step.rate_limit",
-      "step.circuit_breaker"
-    ],
-    "triggerTypes": [
-      "http"
-    ],
-    "workflowHandlers": [
-      "http"
-    ],
-    "wiringHooks": [
-      "http-auth-provider-wiring",
-      "http-static-fileserver-registration",
-      "http-health-endpoint-registration",
-      "http-metrics-endpoint-registration",
-      "http-log-endpoint-registration",
-      "http-openapi-endpoint-registration"
-    ]
-  }
+  "source": "github.com/GoCodeAlone/workflow",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
 }

@@ -1,14 +1,57 @@
 {
-  "name": "platform",
-  "version": "0.3.51",
   "author": "GoCodeAlone",
-  "description": "Platform infrastructure modules (provider, resource, context), reconciliation trigger, template step, and platform workflow handler",
-  "source": "github.com/GoCodeAlone/workflow",
-  "path": "plugins/platform",
-  "type": "builtin",
-  "tier": "core",
-  "license": "MIT",
-  "minEngineVersion": "0.2.0",
+  "capabilities": {
+    "moduleTypes": [
+      "app.container",
+      "argo.workflows",
+      "iac.state",
+      "platform.context",
+      "platform.dns",
+      "platform.kubernetes",
+      "platform.provider",
+      "platform.region",
+      "platform.region_router",
+      "platform.resource"
+    ],
+    "stepTypes": [
+      "step.app_deploy",
+      "step.app_rollback",
+      "step.app_status",
+      "step.argo_delete",
+      "step.argo_list",
+      "step.argo_logs",
+      "step.argo_status",
+      "step.argo_submit",
+      "step.dns_apply",
+      "step.dns_plan",
+      "step.dns_status",
+      "step.iac_apply",
+      "step.iac_destroy",
+      "step.iac_drift_detect",
+      "step.iac_plan",
+      "step.iac_status",
+      "step.k8s_apply",
+      "step.k8s_destroy",
+      "step.k8s_plan",
+      "step.k8s_status",
+      "step.platform_template",
+      "step.region_deploy",
+      "step.region_failover",
+      "step.region_promote",
+      "step.region_status",
+      "step.region_sync",
+      "step.region_weight"
+    ],
+    "triggerTypes": [
+      "reconciliation"
+    ],
+    "wiringHooks": [],
+    "workflowHandlers": [
+      "platform"
+    ]
+  },
+  "description": "Platform infrastructure modules, workflow handler, reconciliation trigger, and template step",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
     "platform",
     "infrastructure",
@@ -18,22 +61,13 @@
     "reconciliation",
     "terraform"
   ],
-  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "license": "MIT",
+  "minEngineVersion": "0.2.0",
+  "name": "platform",
+  "path": "plugins/platform",
   "repository": "https://github.com/GoCodeAlone/workflow",
-  "capabilities": {
-    "moduleTypes": [
-      "platform.provider",
-      "platform.resource",
-      "platform.context"
-    ],
-    "stepTypes": [
-      "step.platform_template"
-    ],
-    "triggerTypes": [
-      "reconciliation"
-    ],
-    "workflowHandlers": [
-      "platform"
-    ]
-  }
+  "source": "github.com/GoCodeAlone/workflow",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
 }

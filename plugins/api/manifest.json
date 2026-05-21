@@ -1,14 +1,22 @@
 {
-  "name": "api",
-  "version": "0.3.51",
   "author": "GoCodeAlone",
-  "description": "REST API handlers, CQRS query/command, API gateway, workflow registry, and data transformation modules",
-  "source": "github.com/GoCodeAlone/workflow",
-  "path": "plugins/api",
-  "type": "builtin",
-  "tier": "core",
-  "license": "MIT",
-  "minEngineVersion": "0.2.0",
+  "capabilities": {
+    "moduleTypes": [
+      "api.command",
+      "api.gateway",
+      "api.handler",
+      "api.query",
+      "data.transformer",
+      "processing.step",
+      "workflow.registry"
+    ],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "wiringHooks": [],
+    "workflowHandlers": []
+  },
+  "description": "REST API handlers, CQRS query/command, API gateway, and data transformation",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
     "api",
     "rest",
@@ -19,20 +27,13 @@
     "crud",
     "transformer"
   ],
-  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "license": "MIT",
+  "minEngineVersion": "0.2.0",
+  "name": "api",
+  "path": "plugins/api",
   "repository": "https://github.com/GoCodeAlone/workflow",
-  "capabilities": {
-    "moduleTypes": [
-      "api.query",
-      "api.command",
-      "api.handler",
-      "api.gateway",
-      "workflow.registry",
-      "data.transformer",
-      "processing.step"
-    ],
-    "stepTypes": [],
-    "triggerTypes": [],
-    "workflowHandlers": []
-  }
+  "source": "github.com/GoCodeAlone/workflow",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
 }

@@ -10,10 +10,17 @@ TEMPLATES_DIR="$REPO_ROOT/templates"
 
 errors=0
 
+if ! command -v jq >/dev/null 2>&1; then
+  echo "error: jq is required" >&2
+  exit 1
+fi
+
 # Build a lookup set of known plugin names from manifests
 declare -A known_plugins
 for manifest in "$PLUGINS_DIR"/*/manifest.json; do
-  plugin_name=$(grep -oP '"name"\s*:\s*"\K[^"]+' "$manifest" | head -1)
+  plugin_name=$(jq -r '.name // empty' "$manifest")
+  plugin_dir=$(basename "$(dirname "$manifest")")
+  known_plugins["$plugin_dir"]=1
   if [[ -n "$plugin_name" ]]; then
     known_plugins["$plugin_name"]=1
   fi

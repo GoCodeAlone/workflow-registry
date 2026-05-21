@@ -2,26 +2,25 @@
   "author": "GoCodeAlone",
   "capabilities": {
     "moduleTypes": [
-      "mcp.registry"
+      "policy.mock"
     ],
-    "stepTypes": [],
-    "triggerTypes": [
-      "mcp_tool"
+    "stepTypes": [
+      "step.policy_evaluate",
+      "step.policy_list",
+      "step.policy_load",
+      "step.policy_test"
     ],
+    "triggerTypes": [],
     "wiringHooks": [],
-    "workflowHandlers": [
-      "mcp"
-    ]
+    "workflowHandlers": []
   },
-  "description": "MCP tool triggers, workflow handlers, and server registry",
+  "description": "Policy engine plugin with mock backend for testing and development",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
-  "name": "workflow-plugin-mcp",
-  "path": "plugins/mcp",
-  "private": false,
+  "name": "policy",
+  "path": "plugins/policy",
   "repository": "https://github.com/GoCodeAlone/workflow",
   "source": "github.com/GoCodeAlone/workflow",
-  "status": "experimental",
   "tier": "core",
   "type": "builtin",
   "version": "1.0.0"
