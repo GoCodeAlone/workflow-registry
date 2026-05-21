@@ -1,0 +1,9 @@
+{
+  "name": "qux-no-secrets",
+  "version": "0.1.0",
+  "author": "Test",
+  "description": "Manifest with no required_secrets key at all — exercises the absent-key case that caused C-1.",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT"
+}

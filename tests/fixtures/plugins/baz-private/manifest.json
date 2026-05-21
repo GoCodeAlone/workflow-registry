@@ -1,0 +1,11 @@
+{
+  "name": "baz-private",
+  "version": "0.1.0",
+  "author": "Test",
+  "description": "Private fixture — must be absent from the index but present in per-plugin manifest copy.",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "private": true,
+  "required_secrets": [{"name": "BAZ_SECRET", "sensitive": true}]
+}

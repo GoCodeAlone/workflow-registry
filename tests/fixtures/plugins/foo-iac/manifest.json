@@ -1,0 +1,47 @@
+{
+  "name": "workflow-plugin-foo-overrideme",
+  "version": "1.2.3",
+  "author": "Test",
+  "description": "IaC fixture with all the new allowlist fields populated.",
+  "type": "external",
+  "tier": "community",
+  "status": "verified",
+  "license": "MIT",
+  "homepage": "https://example.com/foo",
+  "source": "github.com/example/foo",
+  "repository": "https://github.com/example/foo",
+  "minEngineVersion": "0.60.0",
+  "keywords": ["dns", "iac"],
+  "capabilities": {
+    "moduleTypes": ["iac.provider.foo"],
+    "iacProvider": {
+      "name": "foo",
+      "resourceTypes": ["infra.dns", "infra.dns_delegation"],
+      "supportedCanonicalKeys": ["zone", "record"]
+    },
+    "cliCommands": [
+      {
+        "name": "foo",
+        "description": "Manage foo DNS",
+        "flags_passthrough": true,
+        "subcommands": [{"name": "sync", "description": "Sync zone"}]
+      }
+    ],
+    "migrationDrivers": ["foo-migrate"]
+  },
+  "iacProvider": {
+    "name": "foo",
+    "resourceTypes": ["infra.dns"],
+    "computePlanVersion": "v2"
+  },
+  "required_secrets": [
+    {"name": "FOO_USER", "sensitive": false, "description": "Foo username"},
+    {"name": "FOO_PASS", "sensitive": true, "description": "Foo password"}
+  ],
+  "assets": {"ui": false, "config": true},
+  "dependencies": [{"name": "workflow-plugin-bar", "minVersion": "1.0.0"}],
+  "checksums": {"1.2.3": "deadbeef"},
+  "downloads": [{"os": "linux", "arch": "amd64", "url": "https://x/y"}],
+  "contracts": [{"name": "fake-contract"}],
+  "extra_undocumented_field": "should_not_leak"
+}

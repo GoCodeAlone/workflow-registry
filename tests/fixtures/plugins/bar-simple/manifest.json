@@ -1,0 +1,11 @@
+{
+  "name": "bar-simple",
+  "version": "0.1.0",
+  "author": "Test",
+  "description": "Minimal manifest exercising defaults; required_secrets is an explicit empty array.",
+  "type": "external",
+  "tier": "community",
+  "status": "experimental",
+  "license": "Apache-2.0",
+  "required_secrets": []
+}
