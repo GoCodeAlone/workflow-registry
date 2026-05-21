@@ -30,11 +30,12 @@ if [[ ! -f "${WORKFLOW_REPO}/go.mod" ]]; then
   exit 1
 fi
 
-inspect_go="$(mktemp "${TMPDIR:-/tmp}/workflow-core-inspect.XXXXXX.go")"
+inspect_dir="$(mktemp -d "${WORKFLOW_REPO}/.workflow-core-inspect.XXXXXX")"
+inspect_go="${inspect_dir}/main.go"
 actual_json="$(mktemp)"
 expected_json="$(mktemp)"
 current_json="$(mktemp)"
-trap 'rm -f "$inspect_go" "$actual_json" "$expected_json" "$current_json"' EXIT
+trap 'rm -rf "$inspect_dir"; rm -f "$actual_json" "$expected_json" "$current_json"' EXIT
 
 cat > "$inspect_go" <<'GO'
 package main
@@ -101,7 +102,7 @@ func main() {
 }
 GO
 
-(cd "$WORKFLOW_REPO" && GOWORK=off go run "$inspect_go") > "$actual_json"
+(cd "$WORKFLOW_REPO" && GOWORK=off go run "./$(basename "$inspect_dir")") > "$actual_json"
 
 manifest_path_for() {
   local name="$1"
