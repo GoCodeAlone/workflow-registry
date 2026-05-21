@@ -136,14 +136,27 @@ jobs:
           # quoting the value; the payload itself is in GitHub's webhook
           # event log if forensic detail is needed.
           if [[ -n "${plugin}" ]]; then
+            # Round-10 Copilot finding: regex `^[A-Za-z0-9._-]+$` admits "."
+            # and ".." (only dots). `plugins/.` is plugins/ itself and
+            # `plugins/..` is the repo root — both pass `[[ -d ]]`. A
+            # malicious / buggy dispatch could therefore bypass the
+            # plugin-directory guard. Reject these literals explicitly,
+            # and use manifest.json existence (not just dir-exists) as the
+            # canonical "is a real plugin" check.
+            if [[ "${plugin}" == "." || "${plugin}" == ".." ]]; then
+              echo "::warning::plugin-name '.'/'..' rejected (path traversal attempt); skipping"
+              echo "skip=1" >> "$GITHUB_OUTPUT"
+              echo "plugin=" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
             if [[ ! "${plugin}" =~ ^[A-Za-z0-9._-]+$ ]]; then
               echo "::warning::plugin-name regex validation failed; ignoring this dispatch"
               echo "skip=1" >> "$GITHUB_OUTPUT"
               echo "plugin=" >> "$GITHUB_OUTPUT"
               exit 0
             fi
-            if [[ ! -d "plugins/${plugin}" ]]; then
-              echo "::warning::dispatched plugin has no directory under plugins/; skipping"
+            if [[ ! -f "plugins/${plugin}/manifest.json" ]]; then
+              echo "::warning::dispatched plugin has no plugins/<name>/manifest.json; skipping"
               echo "skip=1" >> "$GITHUB_OUTPUT"
               echo "plugin=" >> "$GITHUB_OUTPUT"
               exit 0
