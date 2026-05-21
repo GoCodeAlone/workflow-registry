@@ -28,19 +28,18 @@ A job-level `concurrency: group: sync-<plugin-or-all>` block serialises same-plu
 {
   "event_type": "plugin-release",
   "client_payload": {
-    "plugin": "<directory-name-under-plugins/>",
-    "tag": "v<semver>"
+    "plugin": "<directory-name-under-plugins/>"
   }
 }
 ```
 
-`plugin` MUST match an existing `plugins/<name>/` directory. If missing or unknown, the step exits cleanly with a logged warning — does not fail the workflow run (a misfire from a not-yet-registered plugin should not break the registry).
+`plugin` MUST match an existing `plugins/<name>/` directory. If missing, malformed, or unknown, the step exits cleanly with a logged warning — does not fail the workflow run (a misfire from a not-yet-registered plugin should not break the registry).
 
-`tag` is informational; the script reads the latest release from GitHub regardless. Included so log messages + PR title can reference the triggering tag without an extra GH API call.
+Implementation does NOT consume any `tag` field; the branch / PR title pull the version from `plugins/<plugin>/manifest.json` AFTER `sync-versions.sh --fix --plugin <plugin>` runs, which itself reads the latest release from GitHub. Including a `tag` in the dispatch payload is harmless (extra fields are ignored) but adds no signal.
 
 ## Validation
 
-- Manual workflow_dispatch with `plugin=hover` + `tag=v0.2.0` (already-current — exercises the no-op path; should produce no PR).
+- Manual `workflow_dispatch` with `plugin=hover` (already-current — exercises the no-op path; should produce no PR).
 - Test by re-tagging a plugin (or use a `gh api dispatches` curl) after this lands.
 
 ## Out of scope

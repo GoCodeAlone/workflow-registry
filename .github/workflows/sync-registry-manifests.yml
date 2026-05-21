@@ -34,9 +34,16 @@ jobs:
         # client_payload.plugin, so it must keep its _workflow checkout +
         # Go setup. The negated-OR form below skips only when a non-empty
         # plugin is supplied via either dispatch source.
+        # Round-5 Copilot finding: `client_payload.plugin == ''` evaluates
+        # FALSE when the field is omitted (Actions expression coercion:
+        # null → 0, '' → NaN, NaN != 0). That would skip the step for
+        # `workflow-release` dispatches (which carry no plugin field),
+        # breaking sync-core-manifests. Use truthiness instead — both
+        # null and '' are falsy, so "skip only when a non-empty plugin
+        # is supplied" is expressed cleanly as the negated truthy form.
         if: >-
-          (github.event_name != 'repository_dispatch' || github.event.client_payload.plugin == '')
-          && (github.event_name != 'workflow_dispatch' || github.event.inputs.plugin == '')
+          !(github.event_name == 'repository_dispatch' && github.event.client_payload.plugin)
+          && !(github.event_name == 'workflow_dispatch' && github.event.inputs.plugin)
         uses: actions/checkout@v4
         with:
           repository: GoCodeAlone/workflow
@@ -49,9 +56,16 @@ jobs:
         # client_payload.plugin, so it must keep its _workflow checkout +
         # Go setup. The negated-OR form below skips only when a non-empty
         # plugin is supplied via either dispatch source.
+        # Round-5 Copilot finding: `client_payload.plugin == ''` evaluates
+        # FALSE when the field is omitted (Actions expression coercion:
+        # null → 0, '' → NaN, NaN != 0). That would skip the step for
+        # `workflow-release` dispatches (which carry no plugin field),
+        # breaking sync-core-manifests. Use truthiness instead — both
+        # null and '' are falsy, so "skip only when a non-empty plugin
+        # is supplied" is expressed cleanly as the negated truthy form.
         if: >-
-          (github.event_name != 'repository_dispatch' || github.event.client_payload.plugin == '')
-          && (github.event_name != 'workflow_dispatch' || github.event.inputs.plugin == '')
+          !(github.event_name == 'repository_dispatch' && github.event.client_payload.plugin)
+          && !(github.event_name == 'workflow_dispatch' && github.event.inputs.plugin)
         uses: actions/setup-go@v5
         with:
           go-version: '1.26'
