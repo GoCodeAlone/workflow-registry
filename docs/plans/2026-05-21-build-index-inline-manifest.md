@@ -34,7 +34,7 @@
 |------|-------|-------|--------|
 | 1 | Extend v1/index.json allowlist + add schema-drift guard | Task 1, Task 2, Task 3, Task 4, Task 5, Task 6, Task 7, Task 8 | feat/build-index-extended-summary |
 
-**Status:** Draft
+**Status:** Locked 2026-05-21T06:34:11Z
 
 ---
 
