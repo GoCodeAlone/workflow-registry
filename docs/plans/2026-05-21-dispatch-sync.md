@@ -158,6 +158,8 @@ Three defensive layers, in order:
 2. Regex whitelist `^[A-Za-z0-9._-]+$` → command-substitution/shell-meta chars rejected even though they couldn't reach bash via the env path.
 3. `[[ -d plugins/${plugin} ]]` → must be a known plugin; unknown names warn-and-skip rather than failing the workflow run (a misfire from a not-yet-registered plugin should not break the registry).
 
+Note on concurrency group key (per round-2 M-2): the `concurrency:` block evaluates `${{ github.event.client_payload.plugin || ... || 'all' }}` server-side as an opaque string. Actions does NOT sanitise the key — it locks against the literal string. A malformed payload produces an unusual-looking group key but no execution effect at that layer. The bash step here IS the real sanitisation boundary; the concurrency block only serialises by whatever key it gets.
+
 **Step 2: Validate YAML**
 
 ```bash
@@ -231,7 +233,7 @@ Place it ONCE, after the `run:` block. Drop the duplicate.
 
 ```yaml
       - name: Open PR if manifests changed
-        if: steps.sync.outputs.changed == '1'
+        if: steps.sync.outputs.changed != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PLUGIN:   ${{ steps.filter.outputs.plugin }}
@@ -258,18 +260,28 @@ Place it ONCE, after the `run:` block. Drop the duplicate.
 
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
+
+          # Re-run / stale-branch handling (per round-2 I-4):
+          # The concurrency group serialises same-plugin runs at the
+          # scheduler level, so two simultaneous dispatches can't both
+          # be in this step. But a developer can manually re-run a
+          # previously-failed workflow run via the Actions UI, in which
+          # case the branch from the failed run may still exist on the
+          # remote. Detect that and reset it cleanly here, BEFORE the
+          # local checkout + push, instead of letting `git push` fail
+          # non-fast-forward.
+          if git ls-remote --exit-code --heads origin "${BRANCH}" >/dev/null 2>&1; then
+            echo "branch ${BRANCH} exists on remote (likely a previous failed run); resetting it"
+            git push origin --delete "${BRANCH}"
+          fi
+
           git checkout -b "${BRANCH}"
           git add plugins/ README.md
           git commit -m "${TITLE}"
-          # Plain push. Concurrency group serialises same-plugin runs,
-          # so the branch shouldn't pre-exist. If a stale branch lingers
-          # from a previously-failed run, the push fails loudly — that's
-          # the correct signal to investigate. No --force-with-lease,
-          # which is illusory protection on a fresh CI checkout (the
-          # tracking ref isn't fetched).
           git push origin "${BRANCH}"
-          # If a PR for this branch already exists (re-run path), update it
-          # in place rather than failing on duplicate.
+
+          # Reuse existing PR if one is open (e.g. branch was deleted +
+          # recreated; closed-then-reopened scenario is rare but covered).
           existing="$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')"
           if [[ -n "${existing}" ]]; then
             echo "PR #${existing} already open for ${BRANCH}; new commit pushed."
