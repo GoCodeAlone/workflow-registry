@@ -87,20 +87,27 @@ jobs:
           plugin=""
           case "${EVENT_NAME}" in
             repository_dispatch)
-              plugin="${PLUGIN_FROM_DISPATCH}"
-              # Per Copilot review on #84: plugin-release MUST carry a
-              # client_payload.plugin name. A malformed/omitted payload
-              # should warn-and-skip, not silently fall back to the
-              # expensive all-plugins sweep. workflow-release intentionally
-              # carries no plugin field — it triggers the full sync, so we
-              # leave its empty value alone.
-              if [[ "${DISPATCH_ACTION}" == "plugin-release" && -z "${plugin}" ]]; then
-                # No raw value to echo (plugin is empty by definition). Safe.
-                echo "::warning::plugin-release dispatch received with empty client_payload.plugin; skipping (use workflow-release for full-sync intent)"
-                echo "skip=1" >> "$GITHUB_OUTPUT"
-                echo "plugin=" >> "$GITHUB_OUTPUT"
-                exit 0
+              # Only honor client_payload.plugin for plugin-release events.
+              # workflow-release MUST be full-sync — if it accidentally
+              # included a plugin field, the single-plugin path would skip
+              # the _workflow checkout + sync-core-manifests.sh that
+              # workflow-release exists to drive. Defense in depth.
+              # (Round-8 Copilot finding.)
+              if [[ "${DISPATCH_ACTION}" == "plugin-release" ]]; then
+                plugin="${PLUGIN_FROM_DISPATCH}"
+                # Plugin-release MUST carry a client_payload.plugin name.
+                # A malformed/omitted payload should warn-and-skip, not
+                # silently fall back to the expensive all-plugins sweep.
+                # (Round-2 Copilot finding.)
+                if [[ -z "${plugin}" ]]; then
+                  echo "::warning::plugin-release dispatch received with empty client_payload.plugin; skipping (use workflow-release for full-sync intent)"
+                  echo "skip=1" >> "$GITHUB_OUTPUT"
+                  echo "plugin=" >> "$GITHUB_OUTPUT"
+                  exit 0
+                fi
               fi
+              # workflow-release (or any other future action) → leave
+              # plugin="" so the downstream sync takes the full path.
               ;;
             workflow_dispatch)
               plugin="${PLUGIN_FROM_INPUT}"
