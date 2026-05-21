@@ -54,6 +54,10 @@
       "type": "object",
       "description": "Capability declarations for the plugin",
       "properties": {
+        "configProvider": {
+          "type": "boolean",
+          "description": "Whether the plugin implements the engine's ConfigProvider interface (provides config fragments via the plugin SDK). Mirrors RegistryCapabilities.ConfigProvider in workflow/cmd/wfctl/plugin_registry.go."
+        },
         "moduleTypes": {
           "type": "array",
           "items": { "type": "string" },
@@ -79,6 +83,16 @@
           "items": { "type": "string" },
           "description": "Post-init wiring hook names this plugin provides"
         },
+        "serviceMethods": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "gRPC service methods this plugin exposes via the engine (e.g. audit.collector/query). Mirrors RegistryCapabilities.ServiceMethods in workflow/cmd/wfctl/plugin_registry.go."
+        },
+        "iacStateBackends": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IaC state-storage backends this plugin's drivers can manage (e.g. spaces, gcs, s3). Provider-specific list — not all IaC providers expose a state backend, so this is separate from iacProvider.resourceTypes."
+        },
         "iacProvider": {
           "type": "object",
           "description": "IaC provider declaration — name and supported resource types",
@@ -96,6 +110,11 @@
               "type": "array",
               "items": { "type": "string" },
               "description": "Canonical config keys this provider's drivers can map (e.g. name, region, image, env_vars)"
+            },
+            "configSchema": {
+              "type": "object",
+              "description": "Provider-specific schema for resource configuration fragments, keyed by resource type (e.g. infra.container_service → { field: { type, enum, default, description } }). Free-form because each provider's per-resource schema is independent.",
+              "additionalProperties": true
             }
           },
           "required": ["name"],

@@ -83,6 +83,10 @@ while IFS= read -r manifest; do
   # G3-include: capabilities.workflowHandlers
   # G3-include: capabilities.wiringHooks
   # G3-include: capabilities.migrationDrivers
+  # G3-include: capabilities.configProvider
+  # G3-include: capabilities.iacStateBackends
+  # G3-exclude: capabilities.serviceMethods — engine-internal gRPC method names, not user-facing search
+  # G3-exclude: capabilities.iacProvider.configSchema — large free-form per-resource schema (DO's is ~10KB); per-plugin manifest carries it
   # G3-include: capabilities.iacProvider
   # G3-include: capabilities.iacProvider.name
   # G3-include: capabilities.iacProvider.resourceTypes
@@ -135,12 +139,14 @@ while IFS= read -r manifest; do
       }]
     ),
     capabilities: {
+      configProvider:   (.capabilities.configProvider   // false),
       moduleTypes:      (.capabilities.moduleTypes      // []),
       stepTypes:        (.capabilities.stepTypes        // []),
       triggerTypes:     (.capabilities.triggerTypes     // []),
       workflowHandlers: (.capabilities.workflowHandlers // []),
       wiringHooks:      (.capabilities.wiringHooks      // []),
       migrationDrivers: (.capabilities.migrationDrivers // []),
+      iacStateBackends: (.capabilities.iacStateBackends // []),
       iacProvider: (
         if .capabilities.iacProvider == null then null
         else {
