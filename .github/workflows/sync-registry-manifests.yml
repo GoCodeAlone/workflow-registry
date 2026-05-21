@@ -57,6 +57,45 @@ jobs:
           go-version: '1.26'
           cache-dependency-path: _workflow/go.sum
 
+      - name: Resolve plugin filter from event
+        id: filter
+        # Per round-1 C-1: do NOT inline ${{ ... }} into bash. Read from env.
+        env:
+          PLUGIN_FROM_DISPATCH: ${{ github.event.client_payload.plugin }}
+          PLUGIN_FROM_INPUT:    ${{ github.event.inputs.plugin }}
+          EVENT_NAME:           ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          plugin=""
+          case "${EVENT_NAME}" in
+            repository_dispatch)
+              plugin="${PLUGIN_FROM_DISPATCH}"
+              ;;
+            workflow_dispatch)
+              plugin="${PLUGIN_FROM_INPUT}"
+              ;;
+          esac
+          # Defensive validation: only allow [A-Za-z0-9._-]+, no path separators.
+          # Belt-and-suspenders even though concurrency group already ate the
+          # raw value (Actions sanitises keys; runner bash is the threat
+          # surface).
+          if [[ -n "${plugin}" ]]; then
+            if [[ ! "${plugin}" =~ ^[A-Za-z0-9._-]+$ ]]; then
+              echo "::warning::rejecting plugin name '${plugin}' (invalid characters)"
+              echo "skip=1" >> "$GITHUB_OUTPUT"
+              echo "plugin=" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if [[ ! -d "plugins/${plugin}" ]]; then
+              echo "::warning::plugin '${plugin}' has no directory under plugins/; skipping"
+              echo "skip=1" >> "$GITHUB_OUTPUT"
+              echo "plugin=" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          echo "plugin=${plugin}" >> "$GITHUB_OUTPUT"
+          echo "skip=0" >> "$GITHUB_OUTPUT"
+
       - name: Detect and update drifted manifests
         id: sync
         run: |
