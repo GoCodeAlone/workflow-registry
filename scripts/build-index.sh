@@ -49,7 +49,53 @@ while IFS= read -r manifest; do
     continue
   fi
 
-  # G3 markers go here — see Task 6.
+  # Allowlisted summary projection — see docs/plans/2026-05-21-build-index-inline-manifest-design.md.
+  # Every schema-allowed field below must appear here as G3-include OR G3-exclude.
+  # tests/test-schema-allowlist-coverage.sh enforces this on every PR.
+  # Marker format: dot-qualified, schema-relative (e.g. capabilities.iacProvider.name).
+  #
+  # G3-include: name
+  # G3-include: version
+  # G3-include: author
+  # G3-include: description
+  # G3-include: source
+  # G3-include: type
+  # G3-include: tier
+  # G3-include: status
+  # G3-include: license
+  # G3-include: minEngineVersion
+  # G3-include: keywords
+  # G3-include: homepage
+  # G3-include: repository
+  # G3-include: private
+  # G3-include: assets
+  # G3-include: dependencies
+  # G3-include: required_secrets
+  # G3-include: capabilities
+  # G3-include: capabilities.moduleTypes
+  # G3-include: capabilities.stepTypes
+  # G3-include: capabilities.triggerTypes
+  # G3-include: capabilities.workflowHandlers
+  # G3-include: capabilities.wiringHooks
+  # G3-include: capabilities.migrationDrivers
+  # G3-include: capabilities.iacProvider
+  # G3-include: capabilities.iacProvider.name
+  # G3-include: capabilities.iacProvider.resourceTypes
+  # G3-include: capabilities.iacProvider.supportedCanonicalKeys
+  # G3-include: capabilities.cliCommands
+  # G3-include: capabilities.cliCommands.name
+  # G3-include: capabilities.cliCommands.description
+  # G3-include: capabilities.cliCommands.flags_passthrough
+  # G3-include: capabilities.cliCommands.subcommands
+  # G3-include: iacProvider
+  # G3-include: iacProvider.name
+  # G3-include: iacProvider.resourceTypes
+  # G3-include: iacProvider.computePlanVersion
+  #
+  # G3-exclude: path — wfctl-internal subpackage path, not user-facing
+  # G3-exclude: downloads — stale relative to build-versions.sh latest.json
+  # G3-exclude: checksums — belongs in versions.json next to download list
+  # G3-exclude: capabilities.buildHooks — wfctl-internal build-time hook list
 
   summary="$(jq --arg dir_name "${plugin_name}" '({
     name:             $dir_name,
