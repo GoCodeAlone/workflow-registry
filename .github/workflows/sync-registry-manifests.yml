@@ -276,6 +276,16 @@ jobs:
               # additional commit — preserves PR review history while
               # ensuring the new drift lands.
               echo "branch ${BRANCH} has open PR #${existing}; re-running sync against PR head to append new drift"
+              # Round-11 Copilot finding: the sync step that ran before
+              # this PR step left modified files in the working tree
+              # (plugins/* + README.md). `git checkout -B` would fail with
+              # "Your local changes would be overwritten" since the PR's
+              # branch differs from our current modified state. Discard
+              # those changes — we're about to re-run sync from the PR's
+              # branch state anyway, which will produce the same or newer
+              # output deterministically.
+              git reset --hard HEAD
+              git clean -fd plugins/ README.md
               git fetch origin "${BRANCH}:refs/remotes/origin/${BRANCH}"
               git checkout -B "${BRANCH}" "refs/remotes/origin/${BRANCH}"
               if [[ -n "${PLUGIN}" ]]; then
