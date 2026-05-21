@@ -9,7 +9,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_ROOT="${REPO_ROOT:-$(cd "${SCRIPT_DIR}/.." && pwd)}"
 PLUGINS_DIR="${REPO_ROOT}/plugins"
 OUT_DIR="${REPO_ROOT}/v1"
 
@@ -43,18 +43,24 @@ while IFS= read -r manifest; do
     version:          (.version // ""),
     type:             (.type // ""),
     tier:             (.tier // ""),
+    status:           (.status // null),
     license:          (.license // ""),
     author:           (.author // ""),
     keywords:         (.keywords // []),
     private:          (.private // false),
+    homepage:         (.homepage // null),
+    source:           (.source // null),
     repository:       (.repository // null),
     minEngineVersion: (.minEngineVersion // null),
+    assets:           (.assets // null),
+    dependencies:     (.dependencies // []),
     capabilities: {
       moduleTypes:      (.capabilities.moduleTypes      // []),
       stepTypes:        (.capabilities.stepTypes        // []),
       triggerTypes:     (.capabilities.triggerTypes     // []),
       workflowHandlers: (.capabilities.workflowHandlers // []),
-      wiringHooks:      (.capabilities.wiringHooks      // [])
+      wiringHooks:      (.capabilities.wiringHooks      // []),
+      migrationDrivers: (.capabilities.migrationDrivers // [])
     }
   }' "${manifest}")"
 
