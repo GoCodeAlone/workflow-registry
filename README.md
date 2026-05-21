@@ -69,7 +69,7 @@ wfctl plugin update
 | **community** | Third-party plugins submitted via PR, reviewed by maintainers |
 | **premium** | Commercial plugins with additional licensing requirements |
 
-Manifest `type` describes distribution (`builtin` or `external`); `tier` describes ownership and support level.
+Manifest `type` describes distribution (`builtin`, `external`, or `ui`); `tier` describes ownership and support level.
 
 All plugins in this registry must pass manifest schema validation before merging.
 

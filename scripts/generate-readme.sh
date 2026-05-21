@@ -64,7 +64,7 @@ template_description() {
 }
 
 {
-  awk '/^## (Built-in Plugins|Core Plugins|First-party External Plugins|Community and Premium External Plugins)$/ { exit } { print }' "$README"
+  awk '/^## (Built-in Plugins|Core Plugins|External Plugins|First-party External Plugins|Community and Premium External Plugins)$/ { exit } { print }' "$README"
 
   cat <<'MARKDOWN'
 ## Built-in Plugins
