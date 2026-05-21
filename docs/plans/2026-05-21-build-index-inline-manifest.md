@@ -333,12 +333,74 @@ while IFS= read -r manifest; do
 
   # G3 markers go here — see Task 6.
 
-  summary="$(jq --arg dir_name "${plugin_name}" '<INLINE THE FULL Step 1 PROJECTION HERE, VERBATIM>' "${manifest}")"
+  summary="$(jq --arg dir_name "${plugin_name}" '({
+    name:             $dir_name,
+    description:      (.description // ""),
+    version:          (.version // ""),
+    type:             (.type // ""),
+    tier:             (.tier // ""),
+    status:           (.status // null),
+    license:          (.license // ""),
+    author:           (.author // ""),
+    keywords:         (.keywords // []),
+    private:          (.private // false),
+    homepage:         (.homepage // null),
+    source:           (.source // null),
+    repository:       (.repository // null),
+    minEngineVersion: (.minEngineVersion // null),
+    assets:           (.assets // null),
+    dependencies:     (.dependencies // []),
+    capabilities: {
+      moduleTypes:      (.capabilities.moduleTypes      // []),
+      stepTypes:        (.capabilities.stepTypes        // []),
+      triggerTypes:     (.capabilities.triggerTypes     // []),
+      workflowHandlers: (.capabilities.workflowHandlers // []),
+      wiringHooks:      (.capabilities.wiringHooks      // []),
+      migrationDrivers: (.capabilities.migrationDrivers // []),
+      iacProvider: (
+        if .capabilities.iacProvider == null then null
+        else {
+          name:                   (.capabilities.iacProvider.name // null),
+          resourceTypes:          (.capabilities.iacProvider.resourceTypes // []),
+          supportedCanonicalKeys: (.capabilities.iacProvider.supportedCanonicalKeys // [])
+        }
+        end
+      ),
+      cliCommands: (
+        [(.capabilities.cliCommands // [])[] | {
+          name:              (.name // null),
+          description:       (.description // null),
+          flags_passthrough: (.flags_passthrough // false),
+          subcommands:       (.subcommands // [])
+        }]
+      )
+    },
+    iacProvider: (
+      if .iacProvider == null then null
+      else {
+        name:               (.iacProvider.name // null),
+        resourceTypes:      (.iacProvider.resourceTypes // []),
+        computePlanVersion: (.iacProvider.computePlanVersion // null)
+      }
+      end
+    )
+  }
+  +
+  (
+    if (.required_secrets // null) == null then {}
+    else { required_secrets: [.required_secrets[] | {
+      name:        (.name // null),
+      sensitive:   (.sensitive // false),
+      description: (.description // null),
+      prompt:      (.prompt // null)
+    }]}
+    end
+  ))' "${manifest}")"
   summaries="$(echo "${summaries}" | jq --argjson s "${summary}" '. + [$s]')"
 done < <(find "${PLUGINS_DIR}" -name "manifest.json" | sort)
 ```
 
-**Implementer note:** Replace the `<INLINE THE FULL ... PROJECTION HERE, VERBATIM>` token with the entire Step 1 jq expression as a single argument. The script must work standalone — no references to "prior tasks".
+(The jq expression above is identical to Step 1's. It's repeated here so the loop body is copy-paste safe and runs standalone, per round-2 M-NEW-1.)
 
 **Step 3: Smoke-run with four fixtures (one private, one with absent `required_secrets` — covers the C-1 regression)**
 
@@ -762,15 +824,30 @@ if ! command -v jq &>/dev/null; then
   exit 1
 fi
 
-# Extract schema property paths in dot-qualified form.
+# Per round-2 M-NEW-2: explicit input-file existence guard. Without this,
+# a missing or moved schema file silently produces empty schema_props
+# output and the script exits 0 (false-pass).
+if [[ ! -f "${SCHEMA}" ]]; then
+  echo "error: schema file not found at ${SCHEMA}" >&2
+  exit 1
+fi
+if [[ ! -f "${BUILD_SCRIPT}" ]]; then
+  echo "error: build script not found at ${BUILD_SCRIPT}" >&2
+  exit 1
+fi
+
+# Extract schema property paths in dot-qualified form. Each nested path
+# uses `// {}` so a future schema refactor (e.g. switching iacProvider to
+# a $ref) returns an empty container instead of jq's "null has no keys"
+# error — which is then caught by the line-count guard below.
 schema_props() {
   jq -r '
     [
-      (.properties | keys[]),
-      (.properties.capabilities.properties | keys[] | "capabilities." + .),
-      (.properties.capabilities.properties.iacProvider.properties | keys[] | "capabilities.iacProvider." + .),
-      (.properties.capabilities.properties.cliCommands.items.properties | keys[] | "capabilities.cliCommands." + .),
-      (.properties.iacProvider.properties | keys[] | "iacProvider." + .)
+      ((.properties // {}) | keys[]),
+      ((.properties.capabilities.properties // {}) | keys[] | "capabilities." + .),
+      ((.properties.capabilities.properties.iacProvider.properties // {}) | keys[] | "capabilities.iacProvider." + .),
+      ((.properties.capabilities.properties.cliCommands.items.properties // {}) | keys[] | "capabilities.cliCommands." + .),
+      ((.properties.iacProvider.properties // {}) | keys[] | "iacProvider." + .)
     ] | .[]
   ' "${SCHEMA}" | sort -u
 }
@@ -788,6 +865,21 @@ trap 'rm -f "${schema_set}" "${marker_set}"' EXIT
 
 schema_props > "${schema_set}"
 marker_decisions > "${marker_set}"
+
+# Per round-2 I-NEW-1: explicit empty-output guard. `func > file` does
+# NOT reliably propagate the function's non-zero exit through `set -e`
+# (empirically verified). Without this guard, a jq parse error or
+# null-key crash produces an empty schema_set and the forward-trace loop
+# silently iterates zero times, returning OK — defeating the drift
+# guard's purpose on the day it would matter most.
+if [[ ! -s "${schema_set}" ]]; then
+  echo "FAIL: schema_props() produced no output — schema structure may have changed (path traversal hit a null), or jq failed silently" >&2
+  exit 1
+fi
+if [[ ! -s "${marker_set}" ]]; then
+  echo "FAIL: no G3-include/G3-exclude markers found in ${BUILD_SCRIPT}; was Task 6 applied?" >&2
+  exit 1
+fi
 
 fail=0
 
@@ -843,7 +935,18 @@ bash tests/test-schema-allowlist-coverage.sh
 mv scripts/build-index.sh.bak scripts/build-index.sh
 ```
 
-Re-run final pass — expected: PASS, exit 0. Do NOT commit either temporary break.
+c. Silent-pass guard (round-2 I-NEW-1 regression coverage): temporarily mangle the schema path to make jq return empty:
+
+```bash
+cp schema/registry-schema.json schema/registry-schema.json.bak
+echo '{}' > schema/registry-schema.json
+bash tests/test-schema-allowlist-coverage.sh
+# Expected: FAIL: schema_props() produced no output...
+# (NOT: "OK — passed (0 schema props ↔ N markers)")
+mv schema/registry-schema.json.bak schema/registry-schema.json
+```
+
+Re-run final pass — expected: PASS, exit 0. Do NOT commit any of the three temporary breaks.
 
 **Step 4: Commit**
 
