@@ -69,6 +69,14 @@ while IFS= read -r manifest; do
           supportedCanonicalKeys: (.capabilities.iacProvider.supportedCanonicalKeys // [])
         }
         end
+      ),
+      cliCommands: (
+        [(.capabilities.cliCommands // [])[] | {
+          name:              (.name // null),
+          description:       (.description // null),
+          flags_passthrough: (.flags_passthrough // false),
+          subcommands:       (.subcommands // [])
+        }]
       )
     },
     iacProvider: (
