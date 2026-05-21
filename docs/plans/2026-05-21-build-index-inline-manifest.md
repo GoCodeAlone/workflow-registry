@@ -221,23 +221,90 @@ git commit -m "feat(build-index): allowlist cliCommands sub-fields with per-item
 **Files:**
 - Modify: `scripts/build-index.sh:28-68` (the find loop body)
 
-**Step 1: Add `required_secrets` to projection**
+**Step 1: Add `required_secrets` to projection (conditional-merge pattern — C-1 fix)**
 
-Inside the outer object literal, after `dependencies`, add:
+`(.required_secrets // empty)` is unsafe inside the jq object literal: when the source key is absent or `null`, the entire enclosing object is dropped (jq treats `empty` at any field position as "produce no output"). 72 of 74 live manifests lack `required_secrets`, so this would crash `build-index.sh` on the next dispatch run with `invalid JSON text passed to --argjson` — silently regressing the GH Pages index. Verified empirically by running `echo '{"name":"x"}' | jq '{name:.name, x:(.x // empty)}'` (produces no output).
+
+Use a conditional-merge appended outside the main object literal, with per-item allowlist on `required_secrets[]` (mirrors Task 3's `cliCommands` treatment so unexpected sub-fields can't leak):
+
+The full Task 4 projection (final shape, supersedes Tasks 1-3 — see I-2 fix below):
 
 ```jq
-    required_secrets: (.required_secrets // empty)
+({
+    name:             $dir_name,
+    description:      (.description // ""),
+    version:          (.version // ""),
+    type:             (.type // ""),
+    tier:             (.tier // ""),
+    status:           (.status // null),
+    license:          (.license // ""),
+    author:           (.author // ""),
+    keywords:         (.keywords // []),
+    private:          (.private // false),
+    homepage:         (.homepage // null),
+    source:           (.source // null),
+    repository:       (.repository // null),
+    minEngineVersion: (.minEngineVersion // null),
+    assets:           (.assets // null),
+    dependencies:     (.dependencies // []),
+    capabilities: {
+      moduleTypes:      (.capabilities.moduleTypes      // []),
+      stepTypes:        (.capabilities.stepTypes        // []),
+      triggerTypes:     (.capabilities.triggerTypes     // []),
+      workflowHandlers: (.capabilities.workflowHandlers // []),
+      wiringHooks:      (.capabilities.wiringHooks      // []),
+      migrationDrivers: (.capabilities.migrationDrivers // []),
+      iacProvider: (
+        if .capabilities.iacProvider == null then null
+        else {
+          name:                   (.capabilities.iacProvider.name // null),
+          resourceTypes:          (.capabilities.iacProvider.resourceTypes // []),
+          supportedCanonicalKeys: (.capabilities.iacProvider.supportedCanonicalKeys // [])
+        }
+        end
+      ),
+      cliCommands: (
+        [(.capabilities.cliCommands // [])[] | {
+          name:              (.name // null),
+          description:       (.description // null),
+          flags_passthrough: (.flags_passthrough // false),
+          subcommands:       (.subcommands // [])
+        }]
+      )
+    },
+    iacProvider: (
+      if .iacProvider == null then null
+      else {
+        name:               (.iacProvider.name // null),
+        resourceTypes:      (.iacProvider.resourceTypes // []),
+        computePlanVersion: (.iacProvider.computePlanVersion // null)
+      }
+      end
+    )
+  }
+  +
+  (
+    if (.required_secrets // null) == null then {}
+    else { required_secrets: [.required_secrets[] | {
+      name:        (.name // null),
+      sensitive:   (.sensitive // false),
+      description: (.description // null),
+      prompt:      (.prompt // null)
+    }]}
+    end
+  )
+)
 ```
 
-`// empty` semantics:
-- key absent → field omitted from entry
-- explicit `null` → field omitted (jq treats null as empty)
-- explicit `[]` → preserved as `[]` (deliberate "needs no secrets" signal)
-- non-empty array → preserved
+Three-case semantics:
+- key absent → conditional yields `{}`, merge is a no-op, no `required_secrets` key on entry.
+- explicit `null` → same (`(.required_secrets // null) == null` is true).
+- explicit `[]` → conditional yields `{required_secrets: []}` (the array map over an empty array is `[]`), merged into entry as deliberate "needs no secrets" signal.
+- non-empty array → each item projected to the four schema-defined sub-fields (name, sensitive, description, prompt); unexpected sub-fields dropped.
 
-**Step 2: Restructure the find loop for the private filter**
+**Step 2: Restructure the find loop for the private filter (full final inline body — I-2 fix)**
 
-The current loop body (lines 28-68) does `summaries+=` then `cp`. Restructure so `cp` runs unconditionally, and `summaries+=` is gated by the `private` flag:
+The current loop body (lines 28-68) does `summaries+=` then `cp`. Restructure so `cp` runs unconditionally and `summaries+=` is gated by the `private` flag. The projection below is the COMPLETE jq expression from Step 1 — do NOT use a placeholder, expand it inline:
 
 ```bash
 while IFS= read -r manifest; do
@@ -258,52 +325,55 @@ while IFS= read -r manifest; do
   echo "  copied plugins/${plugin_name}/manifest.json"
 
   # Private plugins: do NOT append to the public bulk index.
-  # The bulk index is the broadest-reach surface; with required_secrets
-  # now in the allowlist, a future private plugin declaring secrets would
-  # leak names to the public internet. Filter here to make the disclosure
-  # impossible by construction.
   is_private="$(jq -r '.private // false' "${manifest}")"
   if [[ "${is_private}" == "true" ]]; then
     echo "  skipped (private) plugins/${plugin_name}/"
     continue
   fi
 
-  summary="$(jq --arg dir_name "${plugin_name}" '<projection>' "${manifest}")"
+  # G3 markers go here — see Task 6.
+
+  summary="$(jq --arg dir_name "${plugin_name}" '<INLINE THE FULL Step 1 PROJECTION HERE, VERBATIM>' "${manifest}")"
   summaries="$(echo "${summaries}" | jq --argjson s "${summary}" '. + [$s]')"
 done < <(find "${PLUGINS_DIR}" -name "manifest.json" | sort)
 ```
 
-(`<projection>` is the literal jq object expression from Tasks 1-3; keep it inline.)
+**Implementer note:** Replace the `<INLINE THE FULL ... PROJECTION HERE, VERBATIM>` token with the entire Step 1 jq expression as a single argument. The script must work standalone — no references to "prior tasks".
 
-**Step 3: Smoke-run with three fixtures (one private)**
+**Step 3: Smoke-run with four fixtures (one private, one with absent `required_secrets` — covers the C-1 regression)**
 
 ```bash
-mkdir -p /tmp/bi-smoke/plugins/{public-iac,public-simple,private-foo}
+mkdir -p /tmp/bi-smoke/plugins/{public-iac,public-simple,public-no-secrets,private-foo}
 cat > /tmp/bi-smoke/plugins/public-iac/manifest.json <<'EOF'
 {"name":"public-iac","version":"1.0.0","author":"x","description":"x","type":"external","tier":"community","license":"MIT","required_secrets":[{"name":"HOVER_USER","sensitive":false},{"name":"HOVER_PASS","sensitive":true}]}
 EOF
 cat > /tmp/bi-smoke/plugins/public-simple/manifest.json <<'EOF'
 {"name":"public-simple","version":"1.0.0","author":"x","description":"x","type":"external","tier":"community","license":"MIT","required_secrets":[]}
 EOF
+cat > /tmp/bi-smoke/plugins/public-no-secrets/manifest.json <<'EOF'
+{"name":"public-no-secrets","version":"1.0.0","author":"x","description":"x","type":"external","tier":"community","license":"MIT"}
+EOF
 cat > /tmp/bi-smoke/plugins/private-foo/manifest.json <<'EOF'
 {"name":"private-foo","version":"1.0.0","author":"x","description":"x","type":"external","tier":"community","license":"MIT","private":true,"required_secrets":[{"name":"PRIVATE_KEY","sensitive":true}]}
 EOF
 REPO_ROOT=/tmp/bi-smoke bash <repo>/scripts/build-index.sh
 
-# index has 2 entries, private absent
-jq 'length' /tmp/bi-smoke/v1/index.json   # 2
-jq 'map(.name)' /tmp/bi-smoke/v1/index.json  # ["public-iac","public-simple"]
+# 3 public entries; private absent
+jq 'length' /tmp/bi-smoke/v1/index.json   # 3
+jq 'map(.name)' /tmp/bi-smoke/v1/index.json  # ["public-iac","public-no-secrets","public-simple"]
 
-# per-plugin manifest COPIED for all three
-test -f /tmp/bi-smoke/v1/plugins/public-iac/manifest.json
-test -f /tmp/bi-smoke/v1/plugins/public-simple/manifest.json
-test -f /tmp/bi-smoke/v1/plugins/private-foo/manifest.json && echo "private cp ok"
+# per-plugin manifest copies for all four
+for p in public-iac public-simple public-no-secrets private-foo; do
+  test -f /tmp/bi-smoke/v1/plugins/$p/manifest.json && echo "$p cp ok"
+done
 
-# required_secrets: present for public-iac (non-empty), present for public-simple (empty array preserved)
-jq '.[] | {name, required_secrets}' /tmp/bi-smoke/v1/index.json
+# required_secrets three-case:
+jq '.[] | select(.name=="public-iac") | .required_secrets | length' /tmp/bi-smoke/v1/index.json   # 2
+jq '.[] | select(.name=="public-simple") | .required_secrets' /tmp/bi-smoke/v1/index.json         # []
+jq '.[] | select(.name=="public-no-secrets") | has("required_secrets")' /tmp/bi-smoke/v1/index.json  # false
 ```
 
-Expected: index has 2 entries (public-iac, public-simple); `private-foo` absent. All 3 per-plugin manifest copies exist. `public-iac.required_secrets` is a 2-item array; `public-simple.required_secrets` is `[]`.
+Expected: 3 public entries; `private-foo` absent; all 4 per-plugin copies present; `public-iac.required_secrets` is a 2-item array of allowlisted sub-fields; `public-simple.required_secrets` is `[]`; `public-no-secrets` entry has NO `required_secrets` key.
 
 **Step 4: Commit**
 
@@ -323,6 +393,7 @@ git commit -m "feat(build-index): allowlist required_secrets + skip private plug
 - Create: `tests/fixtures/plugins/foo-iac/manifest.json`
 - Create: `tests/fixtures/plugins/bar-simple/manifest.json`
 - Create: `tests/fixtures/plugins/baz-private/manifest.json`
+- Create: `tests/fixtures/plugins/qux-no-secrets/manifest.json`
 
 **Step 1: Write the fixtures**
 
@@ -410,6 +481,20 @@ git commit -m "feat(build-index): allowlist required_secrets + skip private plug
 }
 ```
 
+`tests/fixtures/plugins/qux-no-secrets/manifest.json`:
+
+```json
+{
+  "name": "qux-no-secrets",
+  "version": "0.1.0",
+  "author": "Test",
+  "description": "Manifest with no required_secrets key at all — exercises the absent-key case that caused C-1.",
+  "type": "external",
+  "tier": "community",
+  "license": "MIT"
+}
+```
+
 **Step 2: Write the test harness**
 
 `tests/test-build-index.sh`:
@@ -456,8 +541,8 @@ assert_jq() {
 }
 
 # === Structural assertions ===
-assert_jq "index has 2 entries (private filtered)" 'length' '2'
-assert_jq "names sorted ascending" 'map(.name)' '["bar-simple","foo-iac"]'
+assert_jq "index has 3 entries (private filtered)" 'length' '3'
+assert_jq "names sorted ascending" 'map(.name)' '["bar-simple","foo-iac","qux-no-secrets"]'
 
 # === Dir-name override ===
 assert_jq "foo-iac name comes from dir not manifest" \
@@ -496,6 +581,18 @@ assert_jq "bar-simple required_secrets preserved as []" \
 assert_jq "bar-simple status" \
   '.[] | select(.name=="bar-simple") | .status' '"experimental"'
 
+# === Absent-key omission (C-1 regression coverage) ===
+assert_jq "qux-no-secrets is present in index" \
+  'map(.name) | contains(["qux-no-secrets"])' 'true'
+if jq -e '.[] | select(.name=="qux-no-secrets") | has("required_secrets")' "${INDEX}" >/dev/null; then
+  fail "qux-no-secrets should have no required_secrets key (manifest omits it); C-1 regression"
+fi
+
+# === required_secrets per-item allowlist (extras dropped) ===
+assert_jq "required_secrets[0] item has exactly 4 known keys" \
+  '.[] | select(.name=="foo-iac") | .required_secrets[0] | keys_unsorted | sort' \
+  '["description","name","prompt","sensitive"]'
+
 # === Per-item allowlist on cliCommands (extras dropped) ===
 assert_jq "cliCommands item has exactly 4 known keys" \
   '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0] | keys_unsorted | sort' \
@@ -521,6 +618,7 @@ test -f "${tmp}/v1/plugins/baz-private/manifest.json" || \
   fail "private plugin baz-private per-plugin manifest copy missing"
 test -f "${tmp}/v1/plugins/foo-iac/manifest.json" || fail "foo-iac per-plugin manifest copy missing"
 test -f "${tmp}/v1/plugins/bar-simple/manifest.json" || fail "bar-simple per-plugin manifest copy missing"
+test -f "${tmp}/v1/plugins/qux-no-secrets/manifest.json" || fail "qux-no-secrets per-plugin manifest copy missing"
 
 echo "OK — test-build-index.sh passed"
 ```
@@ -579,19 +677,23 @@ Immediately before the `summary="$(jq ...` line, insert (use dot-qualified schem
   # G3-include: assets
   # G3-include: dependencies
   # G3-include: required_secrets
+  # G3-include: capabilities
   # G3-include: capabilities.moduleTypes
   # G3-include: capabilities.stepTypes
   # G3-include: capabilities.triggerTypes
   # G3-include: capabilities.workflowHandlers
   # G3-include: capabilities.wiringHooks
   # G3-include: capabilities.migrationDrivers
+  # G3-include: capabilities.iacProvider
   # G3-include: capabilities.iacProvider.name
   # G3-include: capabilities.iacProvider.resourceTypes
   # G3-include: capabilities.iacProvider.supportedCanonicalKeys
+  # G3-include: capabilities.cliCommands
   # G3-include: capabilities.cliCommands.name
   # G3-include: capabilities.cliCommands.description
   # G3-include: capabilities.cliCommands.flags_passthrough
   # G3-include: capabilities.cliCommands.subcommands
+  # G3-include: iacProvider
   # G3-include: iacProvider.name
   # G3-include: iacProvider.resourceTypes
   # G3-include: iacProvider.computePlanVersion
@@ -773,6 +875,8 @@ Append (or insert as a parallel job to `validate-manifests`) — exact YAML to a
   validate-index-projection:
     name: Validate v1/index.json allowlist projection
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
