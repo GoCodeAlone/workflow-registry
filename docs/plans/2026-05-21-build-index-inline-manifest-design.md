@@ -32,9 +32,10 @@ Allowlist stays; we add explicit fields.
 | `license` | string | unchanged | display |
 | `author` | string | unchanged | display |
 | `keywords` | []string | unchanged | search |
-| `private` | bool | unchanged | display |
+| `private` | bool | unchanged | display (also gates index inclusion — see Private filter section) |
 | `repository` | string | unchanged | display |
 | `homepage` | string | **new** | display (distinct from repository) |
+| `source` | string | **new** | Go module path; lets `wfctl plugin install` skip a per-plugin fetch when resolving source-build flow |
 | `minEngineVersion` | string | unchanged | compat filter |
 | `status` | string | **new** | filter (verified/experimental/deprecated) |
 | `capabilities.moduleTypes` | []string | unchanged | filter |
@@ -57,11 +58,13 @@ Explicitly NOT added (per security/correctness analysis):
 |---|---|
 | `downloads` | Conflicts with `build-versions.sh`'s `latest.json` as the install-source-of-truth; inlining the manifest's static (potentially stale) list creates a parallel install path that drifts from reality. |
 | `checksums` | Per-version SHA map. Belongs in `latest.json`/`versions.json` next to the actual download list, not the bulk index. |
-| `contracts` | wfctl-internal; not a search/filter axis. |
+| `path` | wfctl-internal build metadata (subpackage path within the source repo). Not a user-facing search axis; `source` alone is enough for source-build resolution. |
 | `serviceMethods` | Not yet in `registry-schema.json`. Deferred — needs schema extension first. |
 | `portIntrospect` | Not in schema. Same deferral. |
 | `configProvider` | Not in schema. Same deferral. |
 | `buildHooks` | wfctl-internal build-time hook list. Not user-facing search. |
+
+(`contracts` was incorrectly listed in the round-2 example as an exclusion — it is NOT in `registry-schema.json` and therefore needs no marker. Removed.)
 
 ## Components
 
@@ -72,9 +75,19 @@ Explicitly NOT added (per security/correctness analysis):
 | `tests/test-schema-allowlist-coverage.sh` (new) | **Drift check**: parses `registry-schema.json`'s top-level + `capabilities.*` property names; compares against build-index.sh's `G3-include`/`G3-exclude` markers; fails when a schema field is neither included nor explicitly excluded. Output: "schema field <X> has no allow/exclude decision in build-index.sh; add `# G3-include: <X>` or `# G3-exclude: <X> — <reason>`". |
 | `tests/fixtures/plugins/foo-iac/manifest.json` (new) | IaC-flavored fixture with required_secrets + iacProvider + cliCommands + a manifest-`name` that differs from dir name (validates override). |
 | `tests/fixtures/plugins/bar-simple/manifest.json` (new) | Minimal manifest exercising the default values + status. |
-| `.github/workflows/validate.yml` | Add two steps: `bash tests/test-build-index.sh` and `bash tests/test-schema-allowlist-coverage.sh`. |
+| `.github/workflows/validate.yml` | Add a NEW `validate-index-projection` job (ubuntu-latest, jq pre-installed, no Node setup needed) running both `bash tests/test-build-index.sh` and `bash tests/test-schema-allowlist-coverage.sh`. Keeps the bash/jq tests architecturally separate from the existing Node-based `validate-manifests` job. |
 
 `build-versions.sh` and the per-plugin `v1/plugins/<name>/manifest.json` copies stay unchanged — both already operate at full-manifest fidelity, which is correct for those surfaces. Only `v1/index.json` is allowlisted.
+
+## Private-plugin filter
+
+**Decision (resolves round-2 A4):** `private: true` plugins are skipped entirely from the public `v1/index.json` array. Their per-plugin `v1/plugins/<name>/manifest.json` copy still publishes (consistent with current behavior — those URLs are how authenticated wfctl consumers fetch private-plugin metadata), but they don't appear in the public bulk listing.
+
+Why: the bulk index is the broadest-reach surface. With `required_secrets[]` now in the allowlist, any future private plugin that declares secrets would surface its secret-name list to the entire internet on next build. Filtering at the `find` loop level eliminates the concern permanently and simplifies future allowlist evolution — we no longer have to ask "is this field safe for private plugins to expose publicly?" for every new field.
+
+Five plugins are `private: true` today (agent, authz-ui, cloud-ui, security, workflow-plugin-auth). None currently declare `required_secrets`, so the filter is invisible to today's consumers. The behavior change is forward-looking: future private-plugin authors don't need to remember to omit secrets to avoid disclosure.
+
+Implementation: jq `select(.private != true)` filter inside the `find` loop, before the projection. Test fixture must include a `private: true` manifest and assert it's absent from the index.
 
 ## Schema-allowlist drift guard (per user redirect)
 
@@ -82,11 +95,20 @@ The risk this mitigates: someone extends `registry-schema.json` with a new field
 
 **Mechanism:**
 
-1. Every property name allowed by `registry-schema.json` (top-level + `properties.capabilities.properties.*`) must appear in `build-index.sh` as either:
+1. Every property name allowed by `registry-schema.json` must appear in `build-index.sh` as either:
    - `# G3-include: <field>` — covered by the jq projection.
    - `# G3-exclude: <field> — <reason>` — intentionally not surfaced.
-2. `tests/test-schema-allowlist-coverage.sh` extracts both sets via jq + grep and asserts every schema property has a marker.
-3. CI runs the test on every PR. PR that adds a schema field without an allowlist decision fails.
+2. Coverage scope:
+   - **Top-level properties** (e.g., `name`, `version`, `source`, `path`).
+   - **`capabilities.*` direct children** (e.g., `moduleTypes`, `iacProvider`, `cliCommands`).
+   - **One level into the three sub-objects that matter** for the index:
+     - `capabilities.iacProvider.*` (name, resourceTypes, supportedCanonicalKeys).
+     - `capabilities.cliCommands[].items.*` (name, description, flags_passthrough, subcommands).
+     - top-level `iacProvider.*` (computePlanVersion).
+   - Anything deeper is full pass-through inside whatever container is included — and the container's inclusion is itself the deliberate decision.
+3. Bidirectional check: drift guard ALSO asserts every `G3-include`/`G3-exclude` marker corresponds to a real schema property — catches phantom markers (e.g., the round-2 `contracts` example).
+4. `tests/test-schema-allowlist-coverage.sh` extracts both sets via jq + grep; fails with: "schema field <X> has no allow/exclude decision in build-index.sh" OR "build-index.sh marker `<X>` does not correspond to a schema property — remove it".
+5. CI runs the test on every PR.
 
 **Why structured comments not a separate file:** the build script and the allowlist live in the same file. Keeping the markers inline means there's no "the file said X but the script said Y" failure mode.
 
@@ -100,13 +122,22 @@ The risk this mitigates: someone extends `registry-schema.json` with a new field
 # G3-include: name
 # G3-include: description
 # G3-include: version
+# G3-include: source
 # G3-include: status
 # G3-include: required_secrets
 # G3-exclude: downloads — stale relative to build-versions.sh latest.json
 # G3-exclude: checksums — belongs in versions.json, not bulk index
-# G3-exclude: contracts — wfctl-internal, not a user-facing search axis
+# G3-exclude: path — wfctl-internal subpackage path, not user-facing
 # G3-include: capabilities.iacProvider
-# G3-exclude: capabilities.serviceMethods — not in schema (deferred)
+# G3-include: capabilities.iacProvider.name
+# G3-include: capabilities.iacProvider.resourceTypes
+# G3-include: capabilities.iacProvider.supportedCanonicalKeys
+# G3-include: capabilities.cliCommands
+# G3-include: capabilities.cliCommands.name
+# G3-include: capabilities.cliCommands.description
+# G3-include: capabilities.cliCommands.flags_passthrough
+# G3-include: capabilities.cliCommands.subcommands
+# G3-include: iacProvider.computePlanVersion
 # ...
 
 summary="$(jq --arg dir_name "${plugin_name}" '{
@@ -141,7 +172,7 @@ wfctl plugin install      (uses latest.json + per-plugin manifest)
 
 Field-presence assertions:
 - IaC fixture entry has `required_secrets`, `iacProvider.computePlanVersion`, `capabilities.iacProvider.name`, `capabilities.iacProvider.resourceTypes`, `capabilities.cliCommands`, `status`, `assets`.
-- Simple fixture entry has `status` from the fixture; `required_secrets` is absent (since the source didn't declare any) — the field SHOULD be omitted not present-with-empty (`null`-tolerant `// empty` jq pattern).
+- Simple fixture entry has `status` from the fixture; `required_secrets` is absent when the source manifest omitted the key entirely. Semantics: `(.required_secrets // empty)` drops the field iff the source has no key at all OR has `null`. If a manifest explicitly sets `"required_secrets": []`, the empty array IS preserved (a deliberate "this plugin needs no secrets" signal differs from "this plugin's manifest predates the secrets convention"). Tests cover all three cases: key-absent → omitted; `null` → omitted; `[]` → preserved as `[]`.
 - Both entries' `name` equals the dir name, NOT the manifest's `.name`.
 - Array sorted ascending by `.name`.
 
@@ -171,13 +202,25 @@ Pure static rebuild. To revert:
 
 No persistent state, no client-side schema cache to expire, no migration. Blast radius: GH Pages contents.
 
-## Surfaced doubts after revisions
+## Surfaced doubts after revisions (closed)
 
-1. **A4 — `private: true` handling**: design doesn't verify whether `private: true` plugins land in the public index at all. If they do, broadcasting their secret-name list to the world is inadvertent disclosure. Need to check `scripts/build-index.sh` behavior for `private: true` AND extend the test fixture to cover it.
+1. **A4 — `private: true` handling**: **RESOLVED** — Private-plugin filter section above commits to filtering them out of the index entirely. No future secret-name disclosure risk.
 
-2. **Schema parity for new fields**: the design depends on `iacProvider.computePlanVersion`, `capabilities.iacProvider.name|resourceTypes`, `capabilities.cliCommands` being defined in `registry-schema.json`. Confirmed for the first three; `cliCommands` schema status needs verification before merge.
+2. **Schema parity for new fields**: **RESOLVED** — `iacProvider.computePlanVersion`, `capabilities.iacProvider.name|resourceTypes|supportedCanonicalKeys`, `capabilities.cliCommands` all verified present in `registry-schema.json`.
 
-3. **`status` enum**: design assumes `status` is one of `verified|experimental|deprecated`. The schema's actual enum needs to match this assumption; if `status` is a freeform string, search-by-status semantics are weaker than the table suggests.
+3. **`status` enum**: **RESOLVED** — schema enum is exactly `verified | experimental | deprecated`, matching the design assumption.
+
+## Adversarial review round 2 — findings addressed
+
+| Round-2 finding | Severity | Resolution |
+|---|---|---|
+| `source`/`path` missing allow/exclude decisions | Critical | `source` added to allowlist (Go module path; useful for source-build install resolution); `path` added to exclusion table (wfctl-internal subpackage path, not user-facing). |
+| Sub-property scope gap (capabilities.iacProvider.*, cliCommands sub-fields) | Important | Drift guard explicitly extended to one level deeper for the three relevant sub-objects (iacProvider, cliCommands, top-level iacProvider). Allowlist now enumerates each sub-field. |
+| `private: true` + `required_secrets` disclosure | Important | New Private-plugin filter section: `select(.private != true)` at the find loop excludes private plugins from the public index entirely. Per-plugin manifest copies still publish for authenticated consumers. |
+| Phantom `contracts` marker | Important | Removed from example. Drift guard now bidirectional: every marker MUST correspond to a real schema property, catching phantom entries automatically. |
+| CI step placement underspecified | Minor | New dedicated `validate-index-projection` job; bash/jq isolated from the Node-based `validate-manifests` job. |
+| jq `// empty` semantics ambiguity | Minor | Three cases enumerated: key-absent → omitted; `null` → omitted; explicit `[]` → preserved as `[]`. Tests cover all three. |
+| Doubt #2 (cliCommands schema status) | Minor | Resolved: schema defines it (lines 109-142); removed from open-doubts list. |
 
 ## Adversarial review round 1 — findings addressed
 
