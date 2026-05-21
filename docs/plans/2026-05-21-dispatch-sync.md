@@ -93,14 +93,30 @@ Modify the existing two steps:
 
 ```yaml
       - name: Check out workflow
-        if: github.event_name != 'repository_dispatch' && github.event.inputs.plugin == ''
+        # I-6 (round-4): guard must trigger only when a plugin name is in
+        # flight — NOT for any repository_dispatch. The `workflow-release`
+        # event type is also a repository_dispatch but sets no
+        # client_payload.plugin, so it must keep its _workflow checkout +
+        # Go setup. The negated-OR form below skips only when a non-empty
+        # plugin is supplied via either dispatch source.
+        if: >-
+          (github.event_name != 'repository_dispatch' || github.event.client_payload.plugin == '')
+          && (github.event_name != 'workflow_dispatch' || github.event.inputs.plugin == '')
         uses: actions/checkout@v4
         with:
           repository: GoCodeAlone/workflow
           path: _workflow
 
       - name: Set up Go
-        if: github.event_name != 'repository_dispatch' && github.event.inputs.plugin == ''
+        # I-6 (round-4): guard must trigger only when a plugin name is in
+        # flight — NOT for any repository_dispatch. The `workflow-release`
+        # event type is also a repository_dispatch but sets no
+        # client_payload.plugin, so it must keep its _workflow checkout +
+        # Go setup. The negated-OR form below skips only when a non-empty
+        # plugin is supplied via either dispatch source.
+        if: >-
+          (github.event_name != 'repository_dispatch' || github.event.client_payload.plugin == '')
+          && (github.event_name != 'workflow_dispatch' || github.event.inputs.plugin == '')
         uses: actions/setup-go@v5
         with:
           go-version: '1.26'
