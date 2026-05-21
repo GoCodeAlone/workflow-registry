@@ -69,7 +69,12 @@ while IFS= read -r manifest; do
   # G3-include: repository
   # G3-include: private
   # G3-include: assets
+  # G3-include: assets.ui
+  # G3-include: assets.config
   # G3-include: dependencies
+  # G3-include: dependencies.name
+  # G3-include: dependencies.minVersion
+  # G3-include: dependencies.maxVersion
   # G3-include: required_secrets
   # G3-include: capabilities
   # G3-include: capabilities.moduleTypes
@@ -87,6 +92,8 @@ while IFS= read -r manifest; do
   # G3-include: capabilities.cliCommands.description
   # G3-include: capabilities.cliCommands.flags_passthrough
   # G3-include: capabilities.cliCommands.subcommands
+  # G3-include: capabilities.cliCommands.subcommands.name
+  # G3-include: capabilities.cliCommands.subcommands.description
   # G3-include: iacProvider
   # G3-include: iacProvider.name
   # G3-include: iacProvider.resourceTypes
@@ -112,8 +119,21 @@ while IFS= read -r manifest; do
     source:           (.source // null),
     repository:       (.repository // null),
     minEngineVersion: (.minEngineVersion // null),
-    assets:           (.assets // null),
-    dependencies:     (.dependencies // []),
+    assets: (
+      if .assets == null then null
+      else {
+        ui:     (.assets.ui // false),
+        config: (.assets.config // false)
+      }
+      end
+    ),
+    dependencies: (
+      [(.dependencies // [])[] | {
+        name:       (.name // null),
+        minVersion: (.minVersion // null),
+        maxVersion: (.maxVersion // null)
+      }]
+    ),
     capabilities: {
       moduleTypes:      (.capabilities.moduleTypes      // []),
       stepTypes:        (.capabilities.stepTypes        // []),
@@ -135,7 +155,12 @@ while IFS= read -r manifest; do
           name:              (.name // null),
           description:       (.description // null),
           flags_passthrough: (.flags_passthrough // false),
-          subcommands:       (.subcommands // [])
+          subcommands: (
+            [(.subcommands // [])[] | {
+              name:        (.name // null),
+              description: (.description // null)
+            }]
+          )
         }]
       )
     },

@@ -15,7 +15,10 @@
 #   - capabilities.* direct children
 #   - capabilities.iacProvider.* (name, resourceTypes, supportedCanonicalKeys)
 #   - capabilities.cliCommands.items.* (name, description, flags_passthrough, subcommands)
+#   - capabilities.cliCommands.subcommands.items.* (name, description) — added round 2 per Copilot
 #   - iacProvider.* (top-level — name, resourceTypes, computePlanVersion)
+#   - assets.* (ui, config) — added round 2 per Copilot
+#   - dependencies.items.* (name, minVersion, maxVersion) — added round 2 per Copilot
 
 set -euo pipefail
 
@@ -52,7 +55,10 @@ schema_props() {
       ((.properties.capabilities.properties // {}) | keys[] | "capabilities." + .),
       ((.properties.capabilities.properties.iacProvider.properties // {}) | keys[] | "capabilities.iacProvider." + .),
       ((.properties.capabilities.properties.cliCommands.items.properties // {}) | keys[] | "capabilities.cliCommands." + .),
-      ((.properties.iacProvider.properties // {}) | keys[] | "iacProvider." + .)
+      ((.properties.capabilities.properties.cliCommands.items.properties.subcommands.items.properties // {}) | keys[] | "capabilities.cliCommands.subcommands." + .),
+      ((.properties.iacProvider.properties // {}) | keys[] | "iacProvider." + .),
+      ((.properties.assets.properties // {}) | keys[] | "assets." + .),
+      ((.properties.dependencies.items.properties // {}) | keys[] | "dependencies." + .)
     ] | .[]
   ' "${SCHEMA}" | sort -u
 }

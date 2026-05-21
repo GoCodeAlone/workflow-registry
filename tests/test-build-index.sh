@@ -96,6 +96,33 @@ assert_jq "cliCommands item has exactly 4 known keys" \
   '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0] | keys_unsorted | sort' \
   '["description","flags_passthrough","name","subcommands"]'
 
+# === Per-key allowlist on assets (round-2 Copilot — extras dropped) ===
+assert_jq "assets has exactly 2 known keys (ui, config)" \
+  '.[] | select(.name=="foo-iac") | .assets | keys_unsorted | sort' \
+  '["config","ui"]'
+if jq -e '.[] | select(.name=="foo-iac") | .assets | has("assets_leak")' "${INDEX}" >/dev/null; then
+  fail "G3 allowlist regression: assets leaked sub-field 'assets_leak'"
+fi
+
+# === Per-item allowlist on dependencies (round-2 Copilot — extras dropped) ===
+assert_jq "dependencies[0] item has exactly 3 known keys" \
+  '.[] | select(.name=="foo-iac") | .dependencies[0] | keys_unsorted | sort' \
+  '["maxVersion","minVersion","name"]'
+if jq -e '.[] | select(.name=="foo-iac") | .dependencies[0] | has("dep_leak")' "${INDEX}" >/dev/null; then
+  fail "G3 allowlist regression: dependencies item leaked sub-field 'dep_leak'"
+fi
+
+# === Per-item allowlist on cliCommands[].subcommands (round-2 Copilot — extras dropped) ===
+assert_jq "cliCommands[0].subcommands[0] has exactly 2 known keys" \
+  '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0].subcommands[0] | keys_unsorted | sort' \
+  '["description","name"]'
+if jq -e '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0].subcommands[0] | has("subcommand_leak")' "${INDEX}" >/dev/null; then
+  fail "G3 allowlist regression: subcommand item leaked sub-field 'subcommand_leak'"
+fi
+if jq -e '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0] | has("cli_extra_leak")' "${INDEX}" >/dev/null; then
+  fail "G3 allowlist regression: cliCommand item leaked sub-field 'cli_extra_leak'"
+fi
+
 # === Security: excluded fields MUST NOT appear ===
 for excluded_field in downloads checksums contracts extra_undocumented_field path serviceMethods portIntrospect configProvider; do
   if jq -e ".[] | select(.name==\"foo-iac\") | has(\"${excluded_field}\")" "${INDEX}" >/dev/null; then
