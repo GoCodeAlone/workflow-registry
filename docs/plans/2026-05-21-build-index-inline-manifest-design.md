@@ -48,6 +48,8 @@ Allowlist stays; we add explicit fields.
 | `capabilities.cliCommands[].name` | []{name, description} | **new** | filter ("plugins providing wfctl <X>") |
 | `capabilities.migrationDrivers` | []string | **new** | filter (migration plugins) |
 | `iacProvider.computePlanVersion` | string | **new** | filter (v2-compatible IaC plugins) |
+| `iacProvider.name` | string | **new** | filter — top-level mirror of `capabilities.iacProvider.name`; some plugin authors declare provider metadata at top level rather than nested under capabilities. Include both to avoid making consumers check two paths. |
+| `iacProvider.resourceTypes` | []string | **new** | same — top-level mirror of `capabilities.iacProvider.resourceTypes`. |
 | `required_secrets` | []{name, sensitive, description, prompt} | **new** | UX ("which plugins need credentials"); `wfctl plugin search` already fetches per-plugin manifest for setup, but surfacing this in the index lets `plugin search --needs-secret X` work without N round-trips |
 | `assets` | {ui: bool, config: bool} | **new** | UI hints |
 | `dependencies` | []{name, minVersion, maxVersion} | **new** | install-order resolver may want this without per-plugin fetch |
@@ -79,6 +81,33 @@ Explicitly NOT added (per security/correctness analysis):
 
 `build-versions.sh` and the per-plugin `v1/plugins/<name>/manifest.json` copies stay unchanged — both already operate at full-manifest fidelity, which is correct for those surfaces. Only `v1/index.json` is allowlisted.
 
+## Test as primary contract (per round-3 I1)
+
+The drift-guard check (`test-schema-allowlist-coverage.sh`) is **informational only**: it ensures every schema field has a documented decision via G3 markers, catching new schema additions that need triage. It does NOT enforce that the jq projection actually reflects those decisions — a marker can say `G3-include: foo` while the projection forgets to add `foo`, and the drift guard still passes.
+
+The **primary projection contract** is `tests/test-build-index.sh`: it asserts concrete present/absent assertions on real fixtures. Every allowlisted field must have a `must-be-present` assertion; every excluded field must have a `must-be-absent` assertion. This makes the jq projection itself the enforced contract, not the marker comments.
+
+In practice:
+
+| Layer | Enforces |
+|---|---|
+| `tests/test-build-index.sh` (primary) | jq projection emits exactly the allowed fields and no excluded fields. |
+| `tests/test-schema-allowlist-coverage.sh` (informational) | Every schema field has a decision; every marker corresponds to a real schema property. Catches new schema fields that need triage. |
+| G3 markers in `build-index.sh` | Document the decision for human readers + the informational drift guard. |
+
+If a developer adds a `G3-include: foo` marker but forgets to add `foo` to the jq object literal, the projection test catches it on next CI run (the assertion `must-be-present: foo` fails). The two tests are layered: schema → marker (drift guard) → projection (build-index test).
+
+## Marker format convention
+
+Use **dot-qualified, schema-relative** names throughout — match the schema's JSON-Pointer-style addressing:
+
+- Top-level field: `# G3-include: name` (no prefix).
+- `capabilities` direct children: `# G3-include: capabilities.moduleTypes`.
+- Sub-objects: `# G3-include: capabilities.iacProvider.name`.
+- Array-item sub-fields: `# G3-include: capabilities.cliCommands.name` (drop array notation; the schema uses `items.properties`).
+
+`tests/test-schema-allowlist-coverage.sh` extracts schema property paths in the same form. Both the exclusion table in this doc and the inline markers in `build-index.sh` use this convention. Round-2's example `# G3-exclude: contracts` (unqualified, also phantom) is the wrong format AND the wrong field — already removed.
+
 ## Private-plugin filter
 
 **Decision (resolves round-2 A4):** `private: true` plugins are skipped entirely from the public `v1/index.json` array. Their per-plugin `v1/plugins/<name>/manifest.json` copy still publishes (consistent with current behavior — those URLs are how authenticated wfctl consumers fetch private-plugin metadata), but they don't appear in the public bulk listing.
@@ -87,7 +116,41 @@ Why: the bulk index is the broadest-reach surface. With `required_secrets[]` now
 
 Five plugins are `private: true` today (agent, authz-ui, cloud-ui, security, workflow-plugin-auth). None currently declare `required_secrets`, so the filter is invisible to today's consumers. The behavior change is forward-looking: future private-plugin authors don't need to remember to omit secrets to avoid disclosure.
 
-Implementation: jq `select(.private != true)` filter inside the `find` loop, before the projection. Test fixture must include a `private: true` manifest and assert it's absent from the index.
+**Implementation (per round-3 I3 — explicit to avoid silent `continue`-style regression):**
+
+The build loop has TWO responsibilities — append to the index summary AND copy the per-plugin manifest to `v1/plugins/<name>/manifest.json`. The private filter applies ONLY to the first. Pseudocode:
+
+```bash
+for manifest in plugins/*/manifest.json; do
+    plugin_name="$(basename "$(dirname "${manifest}")")"
+
+    # Per-plugin manifest copy: ALWAYS runs, including for private:true.
+    # Authenticated consumers of /v1/plugins/<name>/manifest.json need
+    # this endpoint to keep working for private plugins.
+    dest_dir="${OUT_DIR}/plugins/${plugin_name}"
+    mkdir -p "${dest_dir}"
+    cp "${manifest}" "${dest_dir}/manifest.json"
+
+    # Index summary: SKIP private plugins. Their secret-name list +
+    # other metadata should not appear in the public bulk index.
+    is_private="$(jq -r '.private // false' "${manifest}")"
+    if [[ "${is_private}" == "true" ]]; then
+        echo "  skipped (private) plugins/${plugin_name}/"
+        continue
+    fi
+
+    summary="$(jq --arg dir_name "${plugin_name}" '<projection>' "${manifest}")"
+    summaries="$(echo "${summaries}" | jq --argjson s "${summary}" '. + [$s]')"
+done
+```
+
+Key point: `cp` happens BEFORE the private check; `continue` only skips the index-append, not the manifest copy.
+
+**Tests must assert BOTH branches:**
+
+- IaC + simple fixtures appear in `$tmp/v1/index.json[]`.
+- Private fixture (also added) is ABSENT from `$tmp/v1/index.json[]`.
+- All three fixtures' `$tmp/v1/plugins/<name>/manifest.json` files exist (including the private one).
 
 ## Schema-allowlist drift guard (per user redirect)
 
