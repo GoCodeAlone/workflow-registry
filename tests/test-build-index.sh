@@ -96,6 +96,19 @@ assert_jq "cliCommands item has exactly 4 known keys" \
   '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0] | keys_unsorted | sort' \
   '["description","flags_passthrough","name","subcommands"]'
 
+# === schema-extension-pr fields ===
+# configProvider + iacStateBackends are included; serviceMethods + iacProvider.configSchema are excluded.
+assert_jq "foo-iac capabilities.configProvider preserved" \
+  '.[] | select(.name=="foo-iac") | .capabilities.configProvider' 'true'
+assert_jq "foo-iac capabilities.iacStateBackends preserved" \
+  '.[] | select(.name=="foo-iac") | .capabilities.iacStateBackends' '["spaces","gcs"]'
+if jq -e '.[] | select(.name=="foo-iac") | .capabilities | has("serviceMethods")' "${INDEX}" >/dev/null; then
+  fail "G3 allowlist regression: capabilities.serviceMethods leaked into index (engine-internal)"
+fi
+if jq -e '.[] | select(.name=="foo-iac") | .capabilities.iacProvider | has("configSchema")' "${INDEX}" >/dev/null; then
+  fail "G3 allowlist regression: capabilities.iacProvider.configSchema leaked into index (large free-form payload)"
+fi
+
 # === Per-key allowlist on assets (round-2 Copilot — extras dropped) ===
 assert_jq "assets has exactly 2 known keys (ui, config)" \
   '.[] | select(.name=="foo-iac") | .assets | keys_unsorted | sort' \
