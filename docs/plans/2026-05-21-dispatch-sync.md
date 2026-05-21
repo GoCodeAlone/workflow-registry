@@ -2,9 +2,9 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Add `repository_dispatch: [plugin-release]` event handling to `sync-registry-manifests.yml` so plugin tags trigger immediate single-plugin sync + PR. Closes G2 / workflow-registry#79 Piece 2.
+**Goal:** Make the existing `repository_dispatch: [plugin-release]` listener actually filter the sync to one plugin when fired (vs scanning all). Closes G2 / workflow-registry#79 Piece 2.
 
-**Architecture:** Single workflow file edit. Branch on `${{ github.event_name }}` to switch between cron-all-plugins and dispatch-single-plugin paths. Script (`scripts/sync-versions.sh`) already supports `--plugin <name>`; no script change needed.
+**Architecture:** Single workflow file edit. Branch on `${{ github.event_name }}` to switch between cron-all-plugins and dispatch-single-plugin paths. The `client_payload.plugin` value is passed via env var, NOT inline interpolated (prevents script injection). Job-level `concurrency:` group serialises same-plugin dispatches.
 
 **Tech Stack:** GitHub Actions YAML. No language runtime.
 
@@ -14,45 +14,55 @@
 
 **Design doc:** `docs/plans/2026-05-21-dispatch-sync-design.md`
 
+## Current-state corrections (from round-1 plan-phase review)
+
+Three findings revised the plan baseline (verified against the actual file):
+
+1. **`repository_dispatch: types: [plugin-release, workflow-release]` already exists** on the workflow. No new `on:` trigger needed; the listener is in place. The plan adds *filter logic*, not a new event.
+2. **Existing sync step runs THREE scripts**: `sync-versions.sh --fix` + `sync-core-manifests.sh --fix` + `generate-readme.sh`, and diff-checks `plugins README.md`. The single-plugin path keeps `sync-versions.sh --fix --plugin <name>` + `generate-readme.sh` (README reflects the new manifest), and *skips* `sync-core-manifests.sh` (that script syncs engine-plugin manifests sourced from a separate `_workflow` checkout and is irrelevant to a single external-plugin dispatch).
+3. **Script-injection risk**: inline `${{ github.event.client_payload.plugin }}` rendered into bash is exploitable. Use env-var pattern (`env: PLUGIN_INPUT: …` then `"${PLUGIN_INPUT}"` in bash) per [GitHub's documented mitigation](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable).
+
 ---
 
 ## Scope Manifest
 
 **PR Count:** 1
-**Tasks:** 3
-**Estimated Lines of Change:** ~45 (informational)
+**Tasks:** 4
+**Estimated Lines of Change:** ~55 (informational)
 
 **Out of scope:**
 - Plugin-side `notify-registry` step (= G1, separate workstream / sweep across N plugin repos)
-- Changes to `build-pages.yml` (already accepts dispatch + rebuilds; the missing piece was source-manifest update which `sync-registry-manifests.yml` owns)
-- Multi-plugin batching from a single dispatch
-- Changes to `scripts/sync-versions.sh` (already supports `--plugin <name>` filter)
+- Changes to `build-pages.yml` (already accepts dispatch + rebuilds; manifest-update path is `sync-registry-manifests.yml` only)
+- Changes to `sync-versions.sh` (already supports `--plugin <name>` filter at line 22-29)
+- Modifications to the cron / all-plugin path (it stays bit-identical for cron firings)
+- `workflow-release` dispatch handling (existing event type, separate consumer; this PR only touches the `plugin-release` filter path)
 
 **PR Grouping:**
 
 | PR # | Title | Tasks | Branch |
 |------|-------|-------|--------|
-| 1 | sync-registry-manifests: react to plugin-release dispatch | Task 1, Task 2, Task 3 | feat/dispatch-sync |
+| 1 | sync-registry-manifests: filter to single plugin on dispatch | Task 1, Task 2, Task 3, Task 4 | feat/dispatch-sync |
 
 **Status:** Draft
 
 ---
 
-### Task 1: Add `repository_dispatch: [plugin-release]` trigger + plugin-name guard
+### Task 1: Add `workflow_dispatch.inputs.plugin` + job-level concurrency group
 
 **Files:**
 - Modify: `.github/workflows/sync-registry-manifests.yml`
 
-**Step 1: Edit `on:` triggers**
+**Step 1: Extend `workflow_dispatch:`**
 
-Add `repository_dispatch: types: [plugin-release]` between `schedule` and `workflow_dispatch`:
+Replace the bare `workflow_dispatch:` line:
 
 ```yaml
-on:
-  schedule:
-    - cron: '0 6 * * *'   # daily at 06:00 UTC
-  repository_dispatch:
-    types: [plugin-release]
+  workflow_dispatch:
+```
+
+with:
+
+```yaml
   workflow_dispatch:
     inputs:
       plugin:
@@ -61,142 +71,19 @@ on:
         default: ''
 ```
 
-(The new `workflow_dispatch.inputs.plugin` lets a human trigger a single-plugin sync from the Actions UI without a real release event — useful for testing.)
+This lets a human exercise the single-plugin path from the Actions UI without a real release.
 
-**Step 2: Add a step that resolves which plugin (if any) to sync**
+**Step 2: Add a job-level `concurrency` block**
 
-Above the existing "Detect and update drifted manifests" step, insert:
-
-```yaml
-      - name: Resolve plugin filter from event
-        id: filter
-        run: |
-          set -euo pipefail
-          plugin=""
-          case "${{ github.event_name }}" in
-            repository_dispatch)
-              plugin='${{ github.event.client_payload.plugin }}'
-              ;;
-            workflow_dispatch)
-              plugin='${{ github.event.inputs.plugin }}'
-              ;;
-          esac
-          # Guard: empty plugin → fall through to all-plugin sync (cron behaviour).
-          # Non-empty plugin → must match an existing directory; otherwise
-          # log + exit clean (a dispatch for a not-yet-registered plugin
-          # should not fail the workflow).
-          if [[ -n "${plugin}" ]]; then
-            if [[ ! -d "plugins/${plugin}" ]]; then
-              echo "::warning::plugin '${plugin}' has no directory under plugins/; skipping"
-              echo "skip=1" >> "$GITHUB_OUTPUT"
-              echo "plugin=" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-          fi
-          echo "plugin=${plugin}" >> "$GITHUB_OUTPUT"
-          echo "skip=0" >> "$GITHUB_OUTPUT"
-```
-
-**Step 3: Smoke-validate YAML**
-
-```bash
-python3 -c "import yaml; yaml.safe_load(open('.github/workflows/sync-registry-manifests.yml'))"
-```
-
-Expected: silent, exit 0.
-
-**Step 4: Commit**
-
-```bash
-git add .github/workflows/sync-registry-manifests.yml
-git commit -m "ci(sync-registry): add repository_dispatch trigger + plugin guard"
-```
-
----
-
-### Task 2: Branch the sync step on event type + add dispatch-specific PR title/branch
-
-**Files:**
-- Modify: `.github/workflows/sync-registry-manifests.yml`
-
-**Step 1: Update the "Detect and update drifted manifests" step**
-
-Replace the existing step body with a branching version that honors the filter:
+Above `runs-on: ubuntu-latest` inside the `sync:` job, insert:
 
 ```yaml
-      - name: Detect and update drifted manifests
-        if: steps.filter.outputs.skip != '1'
-        id: sync
-        run: |
-          set -euo pipefail
-          plugin='${{ steps.filter.outputs.plugin }}'
-          if [[ -n "${plugin}" ]]; then
-            echo "syncing single plugin: ${plugin}"
-            scripts/sync-versions.sh --fix --plugin "${plugin}"
-          else
-            echo "syncing all plugins (cron / manual full run)"
-            scripts/sync-versions.sh --fix
-          fi
-          if git diff --quiet -- plugins; then
-            echo "changed=0" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=1" >> "$GITHUB_OUTPUT"
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    concurrency:
+      group: sync-${{ github.event.client_payload.plugin || github.event.inputs.plugin || 'all' }}
+      cancel-in-progress: false
 ```
 
-**Step 2: Update the "Open PR" step with dispatch-aware branch + title**
-
-Replace the existing "Open PR if manifests changed" step:
-
-```yaml
-      - name: Open PR if manifests changed
-        if: steps.sync.outputs.changed == '1'
-        run: |
-          set -euo pipefail
-          plugin='${{ steps.filter.outputs.plugin }}'
-          DATE=$(date +%Y-%m-%d)
-
-          if [[ -n "${plugin}" ]]; then
-            # Dispatch / single-plugin path. Use plugin name + manifest
-            # version (post-fix) to avoid same-day branch collisions for
-            # successive dispatches of the same plugin.
-            version=$(jq -r '.version' "plugins/${plugin}/manifest.json")
-            BRANCH="chore/sync-${plugin}-v${version}"
-            TITLE="chore: sync ${plugin} to v${version}"
-            BODY="Triggered by repository_dispatch (event_type=plugin-release) for plugin '${plugin}'. Updates \`plugins/${plugin}/manifest.json\` to match the latest GitHub release. Auto-generated by sync-registry-manifests workflow. Refs GoCodeAlone/workflow-registry#79."
-          else
-            # Cron / full-run path (existing behaviour).
-            BRANCH="chore/sync-registry-manifests-${DATE}"
-            TITLE="chore: sync registry manifests to latest plugin releases (${DATE})"
-            BODY="Daily drift check detected version or download URL mismatches between plugin GitHub releases and registry manifests. Auto-generated by sync-registry-manifests workflow. Closes GoCodeAlone/workflow-registry#37."
-          fi
-
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git checkout -b "$BRANCH"
-          git add plugins/
-          git commit -m "$TITLE"
-          # If branch already exists upstream (same-tag duplicate dispatch),
-          # push with --force-with-lease so the previous identical branch is
-          # overwritten cleanly rather than failing the workflow run.
-          git push origin "$BRANCH" --force-with-lease
-          # Reuse an existing PR if one is already open for this branch.
-          if existing=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty'); then
-            if [[ -n "${existing}" ]]; then
-              echo "PR #${existing} already open for ${BRANCH}; pushed fresh commit."
-              exit 0
-            fi
-          fi
-          gh pr create --base main --head "$BRANCH" --title "$TITLE" --body "$BODY"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-```
-
-**Step 2.5: Step-level permission for PR write**
-
-Confirm the job-level `permissions:` block at the top of the file already declares `pull-requests: write`. (It does — lines 6-7 in current file. No edit needed.)
+The group key is the plugin name when filtered, or `all` for cron/full runs. Same-plugin concurrent dispatches now serialise at the Actions scheduler level — the second run waits for the first to finish before starting. Different-plugin dispatches run in parallel.
 
 **Step 3: Validate YAML**
 
@@ -210,14 +97,217 @@ Expected: silent, exit 0.
 
 ```bash
 git add .github/workflows/sync-registry-manifests.yml
-git commit -m "ci(sync-registry): branch sync + PR shape on event type"
+git commit -m "ci(sync-registry): workflow_dispatch plugin input + concurrency group"
+```
+
+---
+
+### Task 2: Add `Resolve plugin filter` step with env-var-sanitised input
+
+**Files:**
+- Modify: `.github/workflows/sync-registry-manifests.yml`
+
+**Step 1: Insert new step BEFORE "Detect and update drifted manifests"**
+
+After the "Set up Go" step, insert:
+
+```yaml
+      - name: Resolve plugin filter from event
+        id: filter
+        # Per round-1 C-1: do NOT inline ${{ ... }} into bash. Read from env.
+        env:
+          PLUGIN_FROM_DISPATCH: ${{ github.event.client_payload.plugin }}
+          PLUGIN_FROM_INPUT:    ${{ github.event.inputs.plugin }}
+          EVENT_NAME:           ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          plugin=""
+          case "${EVENT_NAME}" in
+            repository_dispatch)
+              plugin="${PLUGIN_FROM_DISPATCH}"
+              ;;
+            workflow_dispatch)
+              plugin="${PLUGIN_FROM_INPUT}"
+              ;;
+          esac
+          # Defensive validation: only allow [A-Za-z0-9._-]+, no path separators.
+          # Belt-and-suspenders even though concurrency group already ate the
+          # raw value (Actions sanitises keys; runner bash is the threat
+          # surface).
+          if [[ -n "${plugin}" ]]; then
+            if [[ ! "${plugin}" =~ ^[A-Za-z0-9._-]+$ ]]; then
+              echo "::warning::rejecting plugin name '${plugin}' (invalid characters)"
+              echo "skip=1" >> "$GITHUB_OUTPUT"
+              echo "plugin=" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if [[ ! -d "plugins/${plugin}" ]]; then
+              echo "::warning::plugin '${plugin}' has no directory under plugins/; skipping"
+              echo "skip=1" >> "$GITHUB_OUTPUT"
+              echo "plugin=" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          echo "plugin=${plugin}" >> "$GITHUB_OUTPUT"
+          echo "skip=0" >> "$GITHUB_OUTPUT"
+```
+
+Three defensive layers, in order:
+
+1. `env:` extraction → expression-layer sanitisation; the value never enters the bash source as a literal.
+2. Regex whitelist `^[A-Za-z0-9._-]+$` → command-substitution/shell-meta chars rejected even though they couldn't reach bash via the env path.
+3. `[[ -d plugins/${plugin} ]]` → must be a known plugin; unknown names warn-and-skip rather than failing the workflow run (a misfire from a not-yet-registered plugin should not break the registry).
+
+**Step 2: Validate YAML**
+
+```bash
+python3 -c "import yaml; yaml.safe_load(open('.github/workflows/sync-registry-manifests.yml'))"
+```
+
+Expected: silent, exit 0.
+
+**Step 3: Commit**
+
+```bash
+git add .github/workflows/sync-registry-manifests.yml
+git commit -m "ci(sync-registry): resolve plugin filter via env-var (anti-injection)"
+```
+
+---
+
+### Task 3: Branch sync step + PR step on filter, preserve cron path
+
+**Files:**
+- Modify: `.github/workflows/sync-registry-manifests.yml`
+
+**Step 1: Replace "Detect and update drifted manifests" step body**
+
+Existing body runs three scripts unconditionally. Replace with a branching version:
+
+```yaml
+      - name: Detect and update drifted manifests
+        if: steps.filter.outputs.skip != '1'
+        id: sync
+        env:
+          PLUGIN: ${{ steps.filter.outputs.plugin }}
+        run: |
+          set -euo pipefail
+          if [[ -n "${PLUGIN}" ]]; then
+            echo "syncing single plugin: ${PLUGIN}"
+            scripts/sync-versions.sh --fix --plugin "${PLUGIN}"
+            # Skip sync-core-manifests.sh on filter path — that script
+            # syncs engine plugins sourced from the _workflow checkout
+            # and is irrelevant to an external-plugin dispatch.
+            scripts/generate-readme.sh
+          else
+            echo "syncing all plugins (cron / full run)"
+            scripts/sync-versions.sh --fix
+            WORKFLOW_REPO="$GITHUB_WORKSPACE/_workflow" scripts/sync-core-manifests.sh --fix
+            scripts/generate-readme.sh
+          fi
+          if git diff --quiet -- plugins README.md; then
+            echo "changed=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=1" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PLUGIN:   ${{ steps.filter.outputs.plugin }}
+```
+
+Note: keep BOTH env entries — `GH_TOKEN` for `gh` calls inside the script, `PLUGIN` for the branching. (YAML accepts duplicate `env:` keys per step but it's cleaner to merge — fix below.)
+
+Actually, merge to a single `env:` block:
+
+```yaml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PLUGIN:   ${{ steps.filter.outputs.plugin }}
+```
+
+Place it ONCE, after the `run:` block. Drop the duplicate.
+
+**Step 2: Replace "Open PR if manifests changed" step body**
+
+```yaml
+      - name: Open PR if manifests changed
+        if: steps.sync.outputs.changed == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PLUGIN:   ${{ steps.filter.outputs.plugin }}
+        run: |
+          set -euo pipefail
+          DATE=$(date +%Y-%m-%d)
+
+          if [[ -n "${PLUGIN}" ]]; then
+            # Dispatch / single-plugin path. Concurrency group already
+            # ensures only one run executes per plugin at a time, so the
+            # branch-collision race is structurally eliminated. Branch
+            # name still includes the plugin-version for clarity.
+            version="$(jq -r '.version' "plugins/${PLUGIN}/manifest.json")"
+            version="${version#v}"   # belt-and-suspenders strip in case .version is v-prefixed
+            BRANCH="chore/sync-${PLUGIN}-v${version}"
+            TITLE="chore: sync ${PLUGIN} to v${version}"
+            BODY="Triggered by repository_dispatch (event_type=plugin-release) for plugin '${PLUGIN}'. Updates \`plugins/${PLUGIN}/manifest.json\` to match the latest GitHub release. Auto-generated by sync-registry-manifests workflow. Refs GoCodeAlone/workflow-registry#79."
+          else
+            # Cron / full-run path — unchanged from prior behaviour.
+            BRANCH="chore/sync-registry-manifests-${DATE}"
+            TITLE="chore: sync registry manifests to latest plugin releases (${DATE})"
+            BODY="Registry drift check detected plugin release, workflow core plugin, or README index changes. Auto-generated by sync-registry-manifests workflow. Closes GoCodeAlone/workflow-registry#37."
+          fi
+
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git checkout -b "${BRANCH}"
+          git add plugins/ README.md
+          git commit -m "${TITLE}"
+          # Plain push. Concurrency group serialises same-plugin runs,
+          # so the branch shouldn't pre-exist. If a stale branch lingers
+          # from a previously-failed run, the push fails loudly — that's
+          # the correct signal to investigate. No --force-with-lease,
+          # which is illusory protection on a fresh CI checkout (the
+          # tracking ref isn't fetched).
+          git push origin "${BRANCH}"
+          # If a PR for this branch already exists (re-run path), update it
+          # in place rather than failing on duplicate.
+          existing="$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')"
+          if [[ -n "${existing}" ]]; then
+            echo "PR #${existing} already open for ${BRANCH}; new commit pushed."
+            exit 0
+          fi
+          gh pr create --base main --head "${BRANCH}" --title "${TITLE}" --body "${BODY}"
+```
+
+**Step 3: Validate YAML**
+
+```bash
+python3 -c "import yaml; yaml.safe_load(open('.github/workflows/sync-registry-manifests.yml'))"
+```
+
+Expected: silent, exit 0.
+
+**Step 4: Sanity check that cron path is unchanged**
+
+`diff` the cron path block against the original step body:
+
+```bash
+git diff main -- .github/workflows/sync-registry-manifests.yml | grep -E "sync-core-manifests|generate-readme" || echo "no cron-path regression"
+```
+
+Expected: both lines still present in the `else` branch (cron path); no surprising deletions.
+
+**Step 5: Commit**
+
+```bash
+git add .github/workflows/sync-registry-manifests.yml
+git commit -m "ci(sync-registry): single-plugin sync + dispatch-shaped PR"
 ```
 
 **Rollback:** revert the PR. No persistent state.
 
 ---
 
-### Task 3: Push branch + open PR + add Copilot reviewer + manual workflow_dispatch validation
+### Task 4: Push branch + open PR + add Copilot + manual workflow_dispatch validation
 
 **Files:**
 - None (CI / PR / validation actions only)
@@ -233,33 +323,32 @@ git push -u origin feat/dispatch-sync
 ```bash
 gh pr create \
   --base main \
-  --title "ci(sync-registry): react to plugin-release dispatch (G2 / #79 Piece 2)" \
+  --title "ci(sync-registry): single-plugin sync on plugin-release dispatch (G2 / #79 Piece 2)" \
   --body "$(cat <<'EOF'
 ## Summary
 
-Adds `repository_dispatch: [plugin-release]` event handling to `sync-registry-manifests.yml` so a plugin repo can fire a dispatch on tag-publish and the registry syncs that one plugin immediately (vs waiting up to 24h for the daily cron).
+The existing `sync-registry-manifests.yml` workflow already listens on `repository_dispatch: [plugin-release]` (since #37), but does a full scan-all sweep regardless of trigger. This PR adds filter logic so a `client_payload.plugin=<name>` dispatch syncs only that plugin and opens a plugin-scoped PR. Closes G2 / refs #79.
 
 ## Mechanism
 
-- New event listener: `repository_dispatch: types: [plugin-release]`.
-- New `workflow_dispatch.inputs.plugin` for human-triggered single-plugin runs (mirrors the dispatch path).
-- `Resolve plugin filter from event` step reads `client_payload.plugin` (or input), validates the directory exists, sets a step output.
-- The existing sync step now passes `--plugin <name>` when filtered, falls back to scan-all on cron / blank input.
-- The PR step uses a plugin-specific branch + title for dispatch runs, preserves the date-based branch for cron runs.
+- New `workflow_dispatch.inputs.plugin` lets humans exercise the single-plugin path from the Actions UI.
+- New `Resolve plugin filter from event` step reads `client_payload.plugin` (or input) via env var (no inline `${{ ... }}` in bash — anti-injection), validates against a `[A-Za-z0-9._-]+` whitelist + `plugins/<name>/` directory existence, sets a step output.
+- Sync step branches on the filter: filtered → `sync-versions.sh --fix --plugin <name>` + `generate-readme.sh`. Cron / full → unchanged (three-script sweep).
+- PR step uses a plugin+version branch + title on the filtered path; cron path keeps the date-based branch shape.
+- Job-level `concurrency: group: sync-<plugin-or-all>` serialises same-plugin dispatches at the Actions scheduler level.
+
+## Security
+
+`client_payload.plugin` is passed via `env:`, not inline-interpolated. A malicious dispatcher cannot inject shell commands. The plugin name is also regex-validated before any filesystem reference.
 
 ## Validation
 
-- YAML parses (`python3 -c "yaml.safe_load(...)"`).
-- Manual workflow_dispatch with `plugin=hover` will exercise the single-plugin path (no-op expected since hover is currently in sync at v0.2.0).
+- YAML parses.
+- Manual workflow_dispatch with `plugin=hover` (in-sync at v0.2.0) will execute the filter path → no changes → no PR opens.
 
 ## Scope
 
 This is **G2 / Piece 2** of #79. **G1 / Piece 1** (plugin repos firing the dispatch) is a separate workstream sweeping the notify step across plugin release.yml files.
-
-## References
-
-- Refs GoCodeAlone/workflow-registry#79
-- Design: \`docs/plans/2026-05-21-dispatch-sync-design.md\`
 EOF
 )"
 ```
@@ -271,23 +360,23 @@ PR=$(gh pr view --json number --jq '.number')
 gh pr edit "$PR" --add-reviewer @copilot
 ```
 
-**Step 4: Trigger manual workflow_dispatch (no-op smoke)**
+**Step 4: Manual workflow_dispatch smoke (no-op path)**
 
-After the PR's CI passes — and BEFORE merge — manually fire the workflow against the PR branch with `plugin=hover` (currently in sync at v0.2.0). Confirm:
+After CI passes — and BEFORE merge — fire the workflow against the PR branch with `plugin=hover` (in sync at v0.2.0). Confirm the workflow runs the single-plugin path and exits cleanly without opening a PR.
 
 ```bash
 gh workflow run sync-registry-manifests.yml --ref feat/dispatch-sync -f plugin=hover
-sleep 30
-gh run list --workflow sync-registry-manifests.yml --branch feat/dispatch-sync --limit 1 --json status,conclusion
+sleep 60
+gh run list --workflow sync-registry-manifests.yml --branch feat/dispatch-sync --limit 1 --json status,conclusion,databaseId
 ```
 
-Expected: run completes with conclusion `success`, no new PR opens (hover already at v0.2.0).
+Expected: `status: completed, conclusion: success`. Then check the run log for `syncing single plugin: hover` and absence of any new `chore/sync-hover-*` branch.
 
 **Step 5: Report back**
 
-Print PR number + URL + the manual-dispatch run conclusion.
+Print PR number + URL + manual-dispatch run conclusion + the relevant log line.
 
-**Verification (CI workflow change):** The change runs on the PR via the actual GitHub Actions infrastructure; manual dispatch is the runtime-launch-validation step.
+**Verification (CI workflow change):** the change runs on the PR through GitHub Actions infrastructure; the manual dispatch is the runtime-launch-validation step.
 
 **Rollback:** revert the PR. No state.
 
@@ -297,10 +386,11 @@ Print PR number + URL + the manual-dispatch run conclusion.
 
 | Task | Change class | Verification |
 |---|---|---|
-| 1 | CI YAML edit | YAML parse + Task 3 dispatch |
-| 2 | CI YAML edit | YAML parse + Task 3 dispatch |
-| 3 | CI / PR | Manual workflow_dispatch (Step 4) returns success conclusion |
+| 1 | CI YAML edit | YAML parse + Task 4 dispatch |
+| 2 | CI YAML edit | YAML parse + Task 4 dispatch + step.outputs visible in run log |
+| 3 | CI YAML edit | YAML parse + Task 4 dispatch + cron-path diff sanity |
+| 4 | CI / PR | Manual workflow_dispatch returns `success`; run log shows `syncing single plugin: hover` |
 
 ## Rollback (overall)
 
-Single PR revert. The new triggers / branching are additive; reverting removes them. No persistent state.
+Single PR revert. The new filter + concurrency are additive; reverting removes them. No persistent state.
