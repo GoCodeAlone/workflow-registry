@@ -67,13 +67,52 @@ Explicitly NOT added (per security/correctness analysis):
 
 | File | Change |
 |---|---|
-| `scripts/build-index.sh` | Extend the jq projection to include the new allowlisted fields. Add `REPO_ROOT` env override (`REPO_ROOT="${REPO_ROOT:-$(cd "${SCRIPT_DIR}/.." && pwd)}"`) so tests can point it at a fixture dir. |
+| `scripts/build-index.sh` | Extend the jq projection to include the new allowlisted fields. Add `REPO_ROOT` env override (`REPO_ROOT="${REPO_ROOT:-$(cd "${SCRIPT_DIR}/.." && pwd)}"`) so tests can point it at a fixture dir. Add structured-comment markers `# G3-include: <field>` / `# G3-exclude: <field> — <reason>` so the schema-drift validator can parse them. |
 | `tests/test-build-index.sh` (new) | Bash + jq harness; tmp fixture dir; asserts field presence, dir-name override, sort order, and security-relevant *omissions* (downloads/checksums/contracts must NOT appear in the index). |
+| `tests/test-schema-allowlist-coverage.sh` (new) | **Drift check**: parses `registry-schema.json`'s top-level + `capabilities.*` property names; compares against build-index.sh's `G3-include`/`G3-exclude` markers; fails when a schema field is neither included nor explicitly excluded. Output: "schema field <X> has no allow/exclude decision in build-index.sh; add `# G3-include: <X>` or `# G3-exclude: <X> — <reason>`". |
 | `tests/fixtures/plugins/foo-iac/manifest.json` (new) | IaC-flavored fixture with required_secrets + iacProvider + cliCommands + a manifest-`name` that differs from dir name (validates override). |
 | `tests/fixtures/plugins/bar-simple/manifest.json` (new) | Minimal manifest exercising the default values + status. |
-| `.github/workflows/validate.yml` | Add a step running `bash tests/test-build-index.sh` so CI catches projection drift. |
+| `.github/workflows/validate.yml` | Add two steps: `bash tests/test-build-index.sh` and `bash tests/test-schema-allowlist-coverage.sh`. |
 
 `build-versions.sh` and the per-plugin `v1/plugins/<name>/manifest.json` copies stay unchanged — both already operate at full-manifest fidelity, which is correct for those surfaces. Only `v1/index.json` is allowlisted.
+
+## Schema-allowlist drift guard (per user redirect)
+
+The risk this mitigates: someone extends `registry-schema.json` with a new field (e.g. adds `serviceMethods` to capabilities) without making a decision about whether it lands in the public bulk index. Without a forcing function, the new field is silently allowed-by-schema but invisibly excluded-by-projection — or, worse, inlined later without an exclusion review.
+
+**Mechanism:**
+
+1. Every property name allowed by `registry-schema.json` (top-level + `properties.capabilities.properties.*`) must appear in `build-index.sh` as either:
+   - `# G3-include: <field>` — covered by the jq projection.
+   - `# G3-exclude: <field> — <reason>` — intentionally not surfaced.
+2. `tests/test-schema-allowlist-coverage.sh` extracts both sets via jq + grep and asserts every schema property has a marker.
+3. CI runs the test on every PR. PR that adds a schema field without an allowlist decision fails.
+
+**Why structured comments not a separate file:** the build script and the allowlist live in the same file. Keeping the markers inline means there's no "the file said X but the script said Y" failure mode.
+
+**Example marker placement in `build-index.sh`:**
+
+```bash
+# Allowlisted summary projection — see docs/plans/2026-05-21-build-index-...md
+# Every schema-allowed field must appear here as G3-include OR G3-exclude.
+# tests/test-schema-allowlist-coverage.sh enforces this on CI.
+#
+# G3-include: name
+# G3-include: description
+# G3-include: version
+# G3-include: status
+# G3-include: required_secrets
+# G3-exclude: downloads — stale relative to build-versions.sh latest.json
+# G3-exclude: checksums — belongs in versions.json, not bulk index
+# G3-exclude: contracts — wfctl-internal, not a user-facing search axis
+# G3-include: capabilities.iacProvider
+# G3-exclude: capabilities.serviceMethods — not in schema (deferred)
+# ...
+
+summary="$(jq --arg dir_name "${plugin_name}" '{
+  ...
+}' "${manifest}")"
+```
 
 ## Data flow
 
