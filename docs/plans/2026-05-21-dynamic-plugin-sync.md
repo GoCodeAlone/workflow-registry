@@ -34,7 +34,7 @@
 | 3 | feat(schema): add `category` enum to workflow-cloud-registry (parity) | Task 7 | feat/category-schema |
 | 4 | feat(plugins-page): scheduled sync from workflow-registry | Task 8, Task 9, Task 10, Task 11, Task 12, Task 13, Task 14 | feat/plugins-dynamic-sync |
 
-**Status:** Draft
+**Status:** Locked 2026-05-21T00:00:00Z
 
 ---
 
