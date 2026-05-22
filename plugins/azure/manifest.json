@@ -54,5 +54,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.0.0/workflow-plugin-azure-darwin-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "infrastructure"
 }

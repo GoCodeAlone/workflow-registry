@@ -34,5 +34,6 @@
     "triggerTypes": []
   },
   "downloads": [],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "data"
 }

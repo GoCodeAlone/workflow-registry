@@ -84,5 +84,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.2.8/workflow-plugin-hover-linux-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "infrastructure"
 }

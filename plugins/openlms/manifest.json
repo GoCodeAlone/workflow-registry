@@ -156,5 +156,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-openlms/releases/download/v0.1.2/workflow-plugin-openlms-darwin-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "integrations"
 }

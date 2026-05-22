@@ -74,5 +74,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.2/workflow-plugin-crm-windows-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "integrations"
 }

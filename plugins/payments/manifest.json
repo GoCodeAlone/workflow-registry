@@ -57,5 +57,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.6/workflow-plugin-payments-linux-arm64.tar.gz"
     }
   ],
-  "status": "verified"
+  "status": "verified",
+  "category": "payments"
 }

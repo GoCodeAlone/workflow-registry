@@ -63,5 +63,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.0/workflow-plugin-slack-linux-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "messaging"
 }

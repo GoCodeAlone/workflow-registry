@@ -180,5 +180,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.1/workflow-plugin-okta-darwin-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "integrations"
 }

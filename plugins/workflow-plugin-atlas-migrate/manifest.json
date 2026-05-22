@@ -175,5 +175,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.7/workflow-plugin-migrations-windows-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "data"
 }

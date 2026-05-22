@@ -89,5 +89,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.4/workflow-plugin-github-windows-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "integrations"
 }

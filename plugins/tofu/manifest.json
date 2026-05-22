@@ -76,5 +76,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.3/workflow-plugin-tofu-windows-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "infrastructure"
 }

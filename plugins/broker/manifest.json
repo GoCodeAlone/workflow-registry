@@ -21,5 +21,6 @@
     ],
     "triggerTypes": [],
     "workflowHandlers": []
-  }
+  },
+  "category": "messaging"
 }

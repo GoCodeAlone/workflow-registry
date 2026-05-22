@@ -76,5 +76,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.2/workflow-plugin-audit-windows-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "observability"
 }

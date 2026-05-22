@@ -155,5 +155,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly/releases/download/v0.1.1/workflow-plugin-launchdarkly-darwin-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "integrations"
 }

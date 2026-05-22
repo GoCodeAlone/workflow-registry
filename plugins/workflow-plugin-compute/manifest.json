@@ -49,5 +49,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.2/workflow-plugin-compute-darwin-arm64.tar.gz"
     }
   ],
-  "status": "verified"
+  "status": "verified",
+  "category": "core"
 }

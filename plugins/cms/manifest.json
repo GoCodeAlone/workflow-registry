@@ -31,5 +31,6 @@
     ],
     "triggerTypes": []
   },
-  "status": "experimental"
+  "status": "experimental",
+  "category": "core"
 }

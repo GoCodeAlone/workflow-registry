@@ -72,5 +72,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.1/workflow-plugin-turnio-darwin-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "messaging"
 }

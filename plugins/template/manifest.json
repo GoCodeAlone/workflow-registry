@@ -20,5 +20,6 @@
     ],
     "triggerTypes": [],
     "workflowHandlers": []
-  }
+  },
+  "category": "core"
 }

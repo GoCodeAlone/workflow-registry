@@ -59,5 +59,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-teams/releases/download/v0.1.2/workflow-plugin-teams-darwin-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "integrations"
 }

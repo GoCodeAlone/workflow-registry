@@ -11,9 +11,18 @@
   "minEngineVersion": "0.2.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-cloud-ui",
   "repository": "https://github.com/GoCodeAlone/workflow-cloud-ui",
-  "keywords": ["cloud", "ui", "dashboard", "management", "react", "spa"],
+  "keywords": [
+    "cloud",
+    "ui",
+    "dashboard",
+    "management",
+    "react",
+    "spa"
+  ],
   "capabilities": {
-    "moduleTypes": ["static.fileserver"],
+    "moduleTypes": [
+      "static.fileserver"
+    ],
     "stepTypes": [],
     "triggerTypes": [],
     "workflowHandlers": []
@@ -43,5 +52,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-cloud-ui/releases/download/v0.1.0/workflow-cloud-ui-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "category": "core"
 }

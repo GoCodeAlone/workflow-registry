@@ -88,5 +88,6 @@
       "url": "https://github.com/GoCodeAlone/ratchet/releases/download/v1.0.0/ratchet-darwin-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "core"
 }

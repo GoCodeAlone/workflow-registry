@@ -58,5 +58,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-ci-generator/releases/download/v0.1.4/workflow-plugin-ci-generator-linux-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "core"
 }

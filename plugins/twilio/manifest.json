@@ -147,5 +147,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.0/workflow-plugin-twilio-linux-arm64.tar.gz"
     }
   ],
-  "status": "verified"
+  "status": "verified",
+  "category": "messaging"
 }

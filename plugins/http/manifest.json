@@ -54,5 +54,6 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "category": "core"
 }

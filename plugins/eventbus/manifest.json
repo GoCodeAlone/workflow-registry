@@ -73,5 +73,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.5/workflow-plugin-eventbus-windows-arm64.tar.gz"
     }
   ],
-  "status": "verified"
+  "status": "verified",
+  "category": "infrastructure"
 }

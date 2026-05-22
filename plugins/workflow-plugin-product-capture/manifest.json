@@ -72,5 +72,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.1/workflow-plugin-product-capture-windows-arm64.tar.gz"
     }
   ],
-  "status": "verified"
+  "status": "verified",
+  "category": "core"
 }
