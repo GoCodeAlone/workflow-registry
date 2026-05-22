@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-digitalocean",
-  "version": "2.0.14",
+  "version": "2.0.15",
   "minEngineVersion": "0.60.7",
   "description": "DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway",
   "author": "GoCodeAlone",
@@ -199,26 +199,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "1a3ac84d957db5493b28c4c4755adb953430f057f18a9a2c7ec4b7f20bdefefd",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.0.14/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
+      "sha256": "67911973189f79d92780e6ea35dd24ce38cc0dd8f7f2137fe48d12b7c2dc2622",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.0.15/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "064155039ba7590b04fe3f85d9a04e7cc3070092dcc37606f75548344d628324",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.0.14/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
+      "sha256": "a83584a9612e6be24c069cd0d73cc69902ec2b6bdf5e6b63319568ab5f9ca705",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.0.15/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "0742ef74f82af94300ff823523ba7cd837035241b54ef69a1a427630486b4948",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.0.14/workflow-plugin-digitalocean-linux-amd64.tar.gz"
+      "sha256": "7753cbe8fd41d2e8fa8831892bfd6bed8cc108e52e7ef5712436acc01ad2a12b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.0.15/workflow-plugin-digitalocean-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "c719e96e501c2ee7da1284567e5d79696a3c5581c3a8c6f4eefa35b2a6e27307",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.0.14/workflow-plugin-digitalocean-linux-arm64.tar.gz"
+      "sha256": "dc478405a9090a7d6c3fe08bac9d1db7ec964d574394725d22901d06d6c27ade",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.0.15/workflow-plugin-digitalocean-linux-arm64.tar.gz"
     }
   ],
   "status": "verified",
