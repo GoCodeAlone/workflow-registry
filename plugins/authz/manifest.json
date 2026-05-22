@@ -61,5 +61,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.4/workflow-plugin-authz-linux-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "core"
 }

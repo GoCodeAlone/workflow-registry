@@ -63,5 +63,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.0/workflow-plugin-discord-linux-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "messaging"
 }

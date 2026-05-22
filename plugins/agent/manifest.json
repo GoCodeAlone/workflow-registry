@@ -11,7 +11,23 @@
   "minEngineVersion": "0.3.11",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-agent",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-agent",
-  "keywords": ["agent", "ai", "llm", "provider", "memory", "tools", "executor", "autonomous", "loop-detection", "orchestration", "mcp", "sse", "approvals", "jwt", "bcrypt"],
+  "keywords": [
+    "agent",
+    "ai",
+    "llm",
+    "provider",
+    "memory",
+    "tools",
+    "executor",
+    "autonomous",
+    "loop-detection",
+    "orchestration",
+    "mcp",
+    "sse",
+    "approvals",
+    "jwt",
+    "bcrypt"
+  ],
   "capabilities": {
     "moduleTypes": [
       "agent.provider",
@@ -45,5 +61,6 @@
     ],
     "triggerTypes": [],
     "workflowHandlers": []
-  }
+  },
+  "category": "ai"
 }

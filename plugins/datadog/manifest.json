@@ -174,5 +174,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-datadog/releases/download/v0.1.1/workflow-plugin-datadog-darwin-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "observability"
 }

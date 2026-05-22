@@ -82,5 +82,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.0/workflow-plugin-namecheap-linux-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "infrastructure"
 }

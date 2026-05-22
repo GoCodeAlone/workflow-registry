@@ -36,5 +36,6 @@
     ],
     "workflowHandlers": []
   },
-  "status": "experimental"
+  "status": "experimental",
+  "category": "messaging"
 }

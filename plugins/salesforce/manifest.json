@@ -126,5 +126,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.2/workflow-plugin-salesforce-linux-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "integrations"
 }

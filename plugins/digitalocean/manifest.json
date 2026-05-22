@@ -221,5 +221,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.0.11/workflow-plugin-digitalocean-linux-arm64.tar.gz"
     }
   ],
-  "status": "verified"
+  "status": "verified",
+  "category": "infrastructure"
 }

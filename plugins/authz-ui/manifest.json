@@ -11,9 +11,20 @@
   "minEngineVersion": "0.2.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui",
-  "keywords": ["authz", "casbin", "ui", "policy", "rbac", "authorization", "react", "spa"],
+  "keywords": [
+    "authz",
+    "casbin",
+    "ui",
+    "policy",
+    "rbac",
+    "authorization",
+    "react",
+    "spa"
+  ],
   "capabilities": {
-    "moduleTypes": ["static.fileserver"],
+    "moduleTypes": [
+      "static.fileserver"
+    ],
     "stepTypes": [],
     "triggerTypes": [],
     "workflowHandlers": []
@@ -43,5 +54,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v0.1.2/workflow-plugin-authz-ui-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "category": "core"
 }

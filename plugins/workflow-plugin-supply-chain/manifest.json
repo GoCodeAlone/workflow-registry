@@ -10,7 +10,18 @@
   "minEngineVersion": "0.18.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain",
-  "keywords": ["supply-chain", "security", "sbom", "vulnerability", "trivy", "grype", "cosign", "slsa", "syft", "sigstore"],
+  "keywords": [
+    "supply-chain",
+    "security",
+    "sbom",
+    "vulnerability",
+    "trivy",
+    "grype",
+    "cosign",
+    "slsa",
+    "syft",
+    "sigstore"
+  ],
   "capabilities": {
     "moduleTypes": [
       "security.plugin-verifier",
@@ -59,10 +70,22 @@
         "description": "Supply-chain verification and SBOM commands",
         "flags_passthrough": true,
         "subcommands": [
-          {"name": "scan",   "description": "Scan image with syft (OSV planned)"},
-          {"name": "verify", "description": "Verify cosign signature and SBOM"},
-          {"name": "sbom",   "description": "Generate CycloneDX SBOM"},
-          {"name": "report", "description": "Full supply-chain report"}
+          {
+            "name": "scan",
+            "description": "Scan image with syft (OSV planned)"
+          },
+          {
+            "name": "verify",
+            "description": "Verify cosign signature and SBOM"
+          },
+          {
+            "name": "sbom",
+            "description": "Generate CycloneDX SBOM"
+          },
+          {
+            "name": "report",
+            "description": "Full supply-chain report"
+          }
         ]
       },
       {
@@ -70,8 +93,14 @@
         "description": "Scaffold supply-chain config into app.yaml and CI",
         "flags_passthrough": true,
         "subcommands": [
-          {"name": "sbom", "description": "Add SBOM config to app.yaml + CI"},
-          {"name": "sign", "description": "Add signing config to app.yaml + CI"}
+          {
+            "name": "sbom",
+            "description": "Add SBOM config to app.yaml + CI"
+          },
+          {
+            "name": "sign",
+            "description": "Add signing config to app.yaml + CI"
+          }
         ]
       },
       {
@@ -79,7 +108,10 @@
         "description": "CI preflight and doctor commands",
         "flags_passthrough": true,
         "subcommands": [
-          {"name": "doctor", "description": "Run supply-chain preflight checks"}
+          {
+            "name": "doctor",
+            "description": "Run supply-chain preflight checks"
+          }
         ]
       }
     ]
@@ -109,5 +141,6 @@
       "arch": "arm64",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.3.0/workflow-plugin-supply-chain-darwin-arm64.tar.gz"
     }
-  ]
+  ],
+  "category": "security"
 }

@@ -72,5 +72,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-bento/releases/download/v1.1.3/workflow-plugin-bento-linux-arm64.tar.gz"
     }
   ],
-  "status": "experimental"
+  "status": "experimental",
+  "category": "core"
 }

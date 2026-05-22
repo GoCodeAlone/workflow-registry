@@ -64,5 +64,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.1.4/workflow-plugin-auth_0.1.4_darwin_arm64.tar.gz"
     }
   ],
-  "status": "verified"
+  "status": "verified",
+  "category": "core"
 }

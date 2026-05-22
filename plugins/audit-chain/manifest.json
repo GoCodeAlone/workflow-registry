@@ -76,5 +76,6 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-audit-chain/releases/download/v0.2.4/workflow-plugin-audit-chain-windows-arm64.tar.gz"
     }
   ],
-  "status": "verified"
+  "status": "verified",
+  "category": "security"
 }
