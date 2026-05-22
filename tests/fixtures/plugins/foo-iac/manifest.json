@@ -6,6 +6,7 @@
   "type": "external",
   "tier": "community",
   "status": "verified",
+  "category": "infrastructure",
   "license": "MIT",
   "homepage": "https://example.com/foo",
   "source": "github.com/example/foo",

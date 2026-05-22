@@ -62,6 +62,7 @@ while IFS= read -r manifest; do
   # G3-include: type
   # G3-include: tier
   # G3-include: status
+  # G3-include: category
   # G3-include: license
   # G3-include: minEngineVersion
   # G3-include: keywords
@@ -115,6 +116,7 @@ while IFS= read -r manifest; do
     type:             (.type // ""),
     tier:             (.tier // ""),
     status:           (.status // null),
+    category:         (.category // null),
     license:          (.license // ""),
     author:           (.author // ""),
     keywords:         (.keywords // []),

@@ -48,6 +48,7 @@ assert_jq "foo-iac name comes from dir not manifest" \
 
 # === Must-be-present (allowlisted new fields) ===
 assert_jq "foo-iac status" '.[] | select(.name=="foo-iac") | .status' '"verified"'
+assert_jq "foo-iac category" '.[] | select(.name=="foo-iac") | .category' '"infrastructure"'
 assert_jq "foo-iac homepage" '.[] | select(.name=="foo-iac") | .homepage' '"https://example.com/foo"'
 assert_jq "foo-iac source" '.[] | select(.name=="foo-iac") | .source' '"github.com/example/foo"'
 assert_jq "foo-iac assets" '.[] | select(.name=="foo-iac") | .assets' '{"ui":false,"config":true}'
@@ -78,6 +79,8 @@ assert_jq "bar-simple required_secrets preserved as []" \
   '.[] | select(.name=="bar-simple") | .required_secrets' '[]'
 assert_jq "bar-simple status" \
   '.[] | select(.name=="bar-simple") | .status' '"experimental"'
+assert_jq "bar-simple category is null (optional field, not set in fixture)" \
+  '.[] | select(.name=="bar-simple") | .category' 'null'
 
 # === Absent-key omission (C-1 regression coverage) ===
 assert_jq "qux-no-secrets is present in index" \

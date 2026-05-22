@@ -281,6 +281,12 @@
       },
       "additionalProperties": false
     },
+    "category": {
+      "type": "string",
+      "enum": ["core", "ai", "payments", "security", "infrastructure", "ide",
+               "messaging", "data", "integrations", "observability", "other"],
+      "description": "Coarse-grained category for UI grouping (e.g. the gocodealone-website plugins page). Optional — manifests without a category render under 'other'."
+    },
     "dependencies": {
       "type": "array",
       "description": "Other plugins that must be installed before this plugin can function",
