@@ -124,6 +124,8 @@ Workflow:
 
 The mapping table lives as a constant array in the bash script — one mapping per line, easy to read in the PR diff:
 
+**CATEGORY_MAP authored against the actual 86-dir plugin inventory** (round-2 I-1 fix — verified via `gh api repos/GoCodeAlone/workflow-registry/contents/plugins --jq '.[]|select(.type=="dir")|.name'`). One entry per real dir; no dead keys:
+
 ```bash
 declare -A CATEGORY_MAP=(
   [actors]="infrastructure"
@@ -133,9 +135,9 @@ declare -A CATEGORY_MAP=(
   [analytics]="integrations"
   [api]="core"
   [approval]="core"
-  [atlas-migrate]="data"
   [audit]="observability"
   [audit-chain]="security"
+  [auth]="core"
   [authz]="core"
   [authz-ui]="core"
   [aws]="infrastructure"
@@ -145,17 +147,13 @@ declare -A CATEGORY_MAP=(
   [ci-generator]="core"
   [cicd]="core"
   [cloud]="infrastructure"
+  [cloud-ui]="core"
   [cms]="core"
-  [compute]="core"
   [configprovider]="core"
   [crm]="integrations"
-  [data-engineering]="core"
-  [data-protection]="security"
+  [data-engineering]="data"
   [datadog]="observability"
-  [datalake]="data"
-  [datapool]="data"
   [datastores]="data"
-  [datawarehouse]="data"
   [digitalocean]="infrastructure"
   [discord]="messaging"
   [dlq]="messaging"
@@ -163,25 +161,24 @@ declare -A CATEGORY_MAP=(
   [eventbus]="infrastructure"
   [eventstore]="data"
   [featureflags]="integrations"
-  [gameserver]="infrastructure"
   [gcp]="infrastructure"
   [github]="integrations"
   [gitlab]="integrations"
   [hover]="infrastructure"
   [http]="core"
   [infra]="core"
+  [integration]="integrations"
   [k8s]="infrastructure"
-  [kubernetes-deploy]="infrastructure"
   [launchdarkly]="integrations"
   [license]="core"
   [marketplace]="core"
   [mcp]="ai"
+  [messaging]="messaging"
   [messaging-core]="core"
-  [migration]="data"
-  [migrations]="data"
   [modularcompat]="core"
   [monday]="integrations"
   [namecheap]="infrastructure"
+  [observability]="observability"
   [okta]="integrations"
   [openapi]="core"
   [openlms]="integrations"
@@ -189,11 +186,12 @@ declare -A CATEGORY_MAP=(
   [pipelinesteps]="core"
   [platform]="core"
   [policy]="security"
-  [product-capture]="core"
+  [ratchet]="core"
   [rooms]="core"
   [salesforce]="integrations"
-  [sandbox]="security"
+  [scanner]="security"
   [scheduler]="core"
+  [secrets]="security"
   [security]="security"
   [security-scanner]="security"
   [slack]="messaging"
@@ -201,7 +199,6 @@ declare -A CATEGORY_MAP=(
   [statemachine]="core"
   [steam]="integrations"
   [storage]="data"
-  [supply-chain]="security"
   [teams]="integrations"
   [template]="core"
   [timeline]="data"
@@ -209,19 +206,20 @@ declare -A CATEGORY_MAP=(
   [turnio]="messaging"
   [twilio]="messaging"
   [vectorstore]="data"
-  [waf]="security"
   [websocket]="messaging"
-  [ws-auth]="messaging"
   [workflow-plugin-atlas-migrate]="data"
   [workflow-plugin-auth]="core"
   [workflow-plugin-compute]="core"
   [workflow-plugin-migrations]="data"
   [workflow-plugin-product-capture]="core"
   [workflow-plugin-supply-chain]="security"
+  [ws-auth]="messaging"
 )
 ```
 
-If a plugin dir lacks an entry → `category: null` → CI assertion fails ("plugin <name> missing category in CATEGORY_MAP — add it to scripts/categorize-manifests.sh"). Forces future plugin additions to consciously assign a category.
+86 entries matching 86 real plugin dirs. Round-1's draft had dead keys (data-protection, datalake, gameserver, sandbox, supply-chain, waf, etc — these are plugin REPO names but not dir names in the registry; the dirs are namespaced differently). Round-2 I-1 fix: walked actual `plugins/` directory and authored 1:1 mapping. No omissions, no dead keys.
+
+If a plugin dir is added to the registry without a matching CATEGORY_MAP entry → script writes `category: null` → CI assertion fails ("plugin <name> missing category in CATEGORY_MAP — add it to scripts/categorize-manifests.sh"). Forces future plugin additions to consciously assign a category.
 
 ## Build-pages dispatch (DROPPED — round-1 C-1 + C-2 fix)
 
@@ -298,14 +296,19 @@ try {
 }
 ```
 
-`package.json` `scripts`:
+`package.json` `scripts` (round-2 I-2 fix — no `prebuild`):
 
 ```json
-"prebuild": "node scripts/sync-plugins.mjs",
+"sync-plugins": "node scripts/sync-plugins.mjs",
 "build": "tsc -b --noCheck && vite build"
 ```
 
-(`prebuild` runs automatically before `build` per npm convention.)
+The `sync-plugins` script is explicit, NOT auto-invoked by `npm run build`. This means:
+- Local + CI builds use the committed `src/data/plugins.json` unchanged.
+- The `release.yml` tag-triggered build deploys the snapshot that was committed in main (no surprise live fetch).
+- Only the cron workflow runs `npm run sync-plugins` explicitly.
+
+Round-1 used `prebuild`, which would have made every `npm run build` invocation (incl. CI on every PR + release builds) silently refetch the live index and potentially deploy a different snapshot than committed. Round-2 I-2 fix decouples this.
 
 `src/data/plugins.json` (committed snapshot of current index.json at PR-merge time).
 
@@ -360,6 +363,8 @@ The existing "Browse Registry" CTA at the bottom stays unchanged (points to work
 
 ## Website registry-sync workflow (PR 4 — formerly PR 5)
 
+**Round-2 C-1 fix:** gocodealone-website's main branch has an active ruleset requiring PR + last-push-approval for any change. Direct `git push origin main` from a cron is blocked. Switch to PR-based opening (matches workflow-registry's existing `sync-registry-manifests.yml` pattern for chore/sync-* PRs).
+
 `.github/workflows/registry-sync.yml`:
 
 ```yaml
@@ -370,7 +375,8 @@ on:
   workflow_dispatch: {}        # manual trigger
 
 permissions:
-  contents: write              # to commit + push the snapshot update
+  contents: write
+  pull-requests: write
 
 jobs:
   sync:
@@ -380,30 +386,69 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Fetch + write plugin snapshot
         run: node scripts/sync-plugins.mjs
-      - name: Commit + push if snapshot changed
+      - name: Open or update PR if snapshot changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           if git diff --quiet -- src/data/plugins.json; then
             echo "no snapshot change; nothing to commit"
             exit 0
           fi
+
+          BRANCH="chore/sync-plugins-snapshot"
+          TITLE="chore: sync plugin snapshot from workflow-registry"
+          BODY="Auto-generated snapshot refresh from https://gocodealone.github.io/workflow-registry/index.json (cron + manual workflow_dispatch). Renders into PluginsPage.tsx after merge + next deploy."
+
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
+
+          # Re-run / existing-branch handling matches the 3-case pattern
+          # from workflow-registry#84's sync-registry-manifests.yml:
+          # 1. Branch doesn't exist → create + push + open PR
+          # 2. Branch exists + open PR → re-sync on PR head + amend commit + push
+          # 3. Branch exists + no open PR → delete + recreate
+          if git ls-remote --exit-code --heads origin "${BRANCH}" >/dev/null 2>&1; then
+            existing="$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')"
+            if [[ -n "${existing}" ]]; then
+              # Update existing PR: discard working tree, fetch branch, re-sync onto its head.
+              git reset --hard HEAD
+              git clean -fd src/data/plugins.json
+              git fetch origin "${BRANCH}:refs/remotes/origin/${BRANCH}"
+              git checkout -B "${BRANCH}" "refs/remotes/origin/${BRANCH}"
+              node scripts/sync-plugins.mjs
+              if git diff --quiet -- src/data/plugins.json; then
+                echo "open PR ${existing} already at expected snapshot; no append"
+                exit 0
+              fi
+              git add src/data/plugins.json
+              git commit -m "${TITLE}"
+              git push origin "${BRANCH}"
+              echo "appended sync commit to PR #${existing}"
+              exit 0
+            fi
+            echo "branch exists with no open PR; recreating"
+            git push origin --delete "${BRANCH}"
+          fi
+
+          git checkout -b "${BRANCH}"
           git add src/data/plugins.json
-          git commit -m "chore: sync plugin snapshot from workflow-registry"
-          git push origin main
-          echo "snapshot updated + pushed to main"
+          git commit -m "${TITLE}"
+          git push origin "${BRANCH}"
+          gh pr create --base main --head "${BRANCH}" --title "${TITLE}" --body "${BODY}"
+          # If branch protection allows GitHub-Actions-bot auto-merge, enable it:
+          gh pr merge --auto --squash --delete-branch || \
+            echo "auto-merge not enabled; PR will require manual review"
 ```
 
-The `ci.yml` workflow (triggered on push to main) then runs lint + build, validating the new snapshot. The website's existing `release.yml` (triggered on tag push) deploys to the live site whenever the maintainer cuts the next release. This matches the existing manual-deploy pattern; no infrastructure changes.
+The PR uses the workflow's default `GITHUB_TOKEN`, which has push access to non-default branches AND can create PRs (via `pull-requests: write` permission). The ruleset blocks direct push to main but not PR creation. Auto-merge is attempted; if disabled, the PR awaits review.
 
-Round-1 deploy-coupling question is dropped: deploys remain manual via existing tag flow. Data indexing in `main` is the gain.
+The website's existing `release.yml` (triggered on tag push) handles deploy. After the snapshot PR merges, deploy lands on the next manual tag push — same as today.
 
 ## Fields PluginsPage consumes
 
@@ -450,6 +495,16 @@ Each PR independently revertible:
 - PR 4: revert restores hardcoded PluginsPage.tsx + removes prebuild script + drops registry-sync.yml. The cron stops; next deploy reverts to the hardcoded list.
 
 No persistent state, no migrations, no client-side cache to expire.
+
+## Round-2 adversarial review fixes
+
+| Finding | Severity | Resolution |
+|---|---|---|
+| C-1: gocodealone-website main has active ruleset blocking GITHUB_TOKEN direct push | Critical | Switched from `git push origin main` to PR-based commit pattern (matches workflow-registry#84's sync-registry-manifests.yml three-case branch policy). Cron opens/updates `chore/sync-plugins-snapshot` PR; auto-merge attempted; falls back to manual review if disabled. |
+| I-1: CATEGORY_MAP missing 8 real plugin dirs + had 14 dead keys | Important | Re-authored CATEGORY_MAP against actual 86-dir inventory (gh api list). All 86 real dirs mapped; no dead keys. |
+| I-2: `prebuild` injects live fetch into every CI/release build → snapshot drift between commit and deploy | Important | Renamed npm script from `prebuild` to `sync-plugins` (not auto-invoked). Only the cron workflow runs it explicitly. Local + CI + release builds use the committed snapshot unchanged. |
+| M-1: `release.yml` references non-existent `checkout@v5` + `setup-node@v6` | Minor | Pre-existing defect in website's release.yml; flagged for separate fix PR (out of this design's scope). |
+| M-2: 50% regression threshold too coarse | Minor | Accepted as round-2 caveat. The committed snapshot is the actual safety net; this is a "WARN" log only, not a fail gate. |
 
 ## Round-1 adversarial review fixes
 
