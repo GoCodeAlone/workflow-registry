@@ -26,6 +26,9 @@ jobs:
       - name: Validate all plugin manifests
         run: bash scripts/validate-manifests.sh
 
+      - name: Validate every plugin has a category assigned
+        run: bash scripts/categorize-manifests.sh --check
+
   validate-core-manifests:
     name: Validate core manifests against workflow plugins
     runs-on: ubuntu-latest
