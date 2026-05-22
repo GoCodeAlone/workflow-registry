@@ -72,14 +72,14 @@ Category taxonomy (10 + "other") — round-1 revised assignments:
 
 | Category | Plugins (dir name in `plugins/` under workflow-registry) |
 |---|---|
-| `core` | admin, auth, authz, authz-ui, bento, pipelinesteps, cms, approval, rooms, template, platform, marketplace, infra (engine-level), http, api, statemachine, scheduler, configprovider, openapi, ci-generator, cicd, license, compute, modularcompat, messaging-core, data-engineering, product-capture |
+| `core` | admin, auth, authz, authz-ui, bento, pipelinesteps, cms, approval, rooms, template, platform, marketplace, infra (engine-level), http, api, statemachine, scheduler, configprovider, openapi, ci-generator, cicd, license, compute, modularcompat, messaging-core, product-capture, ratchet, cloud-ui |
 | `ai` | agent, mcp, ai |
 | `payments` | payments |
 | `security` | waf, security, sandbox, supply-chain, data-protection, security-scanner, policy, audit-chain (security-first per round-1 acknowledgment) |
 | `infrastructure` | aws, gcp, azure, digitalocean, tofu, namecheap, hover, k8s, kubernetes-deploy, eventbus (IaC-provisioning primary — round-1 I-2 fix), gameserver, cloud, actors |
 | `ide` | (reserved — no current plugins) |
 | `messaging` | slack, discord, twilio, turnio, websocket, ws-auth, broker, dlq |
-| `data` | vectorstore, datastores, datalake, datawarehouse, datapool, migrations, migration, storage, eventstore, timeline, atlas-migrate |
+| `data` | vectorstore, datastores, storage, eventstore, timeline, atlas-migrate, data-engineering |
 | `integrations` | github, gitlab, salesforce, monday, openlms, launchdarkly, okta, steam, teams, sso, analytics, featureflags, erp, crm |
 | `observability` | datadog (round-1 M-1 fix), audit |
 | `other` | (fallback for unclear; ideally empty after sweep) |
@@ -220,6 +220,16 @@ declare -A CATEGORY_MAP=(
 86 entries matching 86 real plugin dirs. Round-1's draft had dead keys (data-protection, datalake, gameserver, sandbox, supply-chain, waf, etc — these are plugin REPO names but not dir names in the registry; the dirs are namespaced differently). Round-2 I-1 fix: walked actual `plugins/` directory and authored 1:1 mapping. No omissions, no dead keys.
 
 If a plugin dir is added to the registry without a matching CATEGORY_MAP entry → script writes `category: null` → CI assertion fails ("plugin <name> missing category in CATEGORY_MAP — add it to scripts/categorize-manifests.sh"). Forces future plugin additions to consciously assign a category.
+
+**Round-3 I-3 fix — wire the CI assertion explicitly.** Schema validation allows `category: null` (the field is optional in the JSON schema). To actually enforce category coverage on PRs, PR 2 ALSO adds a new validate.yml step:
+
+```yaml
+- name: Validate every plugin has a category assigned
+  run: |
+    bash scripts/categorize-manifests.sh --check
+```
+
+Where `categorize-manifests.sh --check` mode reads each `plugins/*/manifest.json` and exits non-zero if any has `.category` missing or null. Without this wiring the assertion only exists in the design narrative; the round-3 fix makes it real.
 
 ## Build-pages dispatch (DROPPED — round-1 C-1 + C-2 fix)
 
@@ -378,6 +388,13 @@ permissions:
   contents: write
   pull-requests: write
 
+# Round-3 fix: concurrency group matches workflow-registry#84 pattern.
+# Prevents an overlapping workflow_dispatch from racing the cron-triggered
+# run on the same chore/sync-plugins-snapshot branch.
+concurrency:
+  group: registry-snapshot-sync
+  cancel-in-progress: false
+
 jobs:
   sync:
     name: Sync plugin snapshot from workflow-registry
@@ -441,12 +458,9 @@ jobs:
           git commit -m "${TITLE}"
           git push origin "${BRANCH}"
           gh pr create --base main --head "${BRANCH}" --title "${TITLE}" --body "${BODY}"
-          # If branch protection allows GitHub-Actions-bot auto-merge, enable it:
-          gh pr merge --auto --squash --delete-branch || \
-            echo "auto-merge not enabled; PR will require manual review"
 ```
 
-The PR uses the workflow's default `GITHUB_TOKEN`, which has push access to non-default branches AND can create PRs (via `pull-requests: write` permission). The ruleset blocks direct push to main but not PR creation. Auto-merge is attempted; if disabled, the PR awaits review.
+The PR uses the workflow's default `GITHUB_TOKEN`, which has push access to non-default branches AND can create PRs (via `pull-requests: write` permission). The ruleset blocks direct push to main but not PR creation. Round-3 fix: removed the `gh pr merge --auto` call — the reference `sync-registry-manifests.yml` in workflow-registry doesn't call auto-merge either; the repo's auto-merge configuration (if globally enabled) handles it natively, otherwise the PR awaits review per the user's manual-merge fallback acceptance.
 
 The website's existing `release.yml` (triggered on tag push) handles deploy. After the snapshot PR merges, deploy lands on the next manual tag push — same as today.
 
@@ -478,7 +492,8 @@ Other fields available from index.json are unused for now (`capabilities`, `depe
 | A4 | gocodealone-website's existing release.yml deploy path stays unchanged. The cron in registry-sync.yml only updates the snapshot in main; deploys happen on the next manual `git tag v*` push as today. | If user expected sub-5-min deploy lag: design pivot makes that out of scope. User's stated word was "indexed", which is met. |
 | A5 | Explicit dir-name → category mapping is the source of truth; no heuristics. Authors maintain the mapping when adding plugins. Round-1 I-1 fix. | Mapping requires manual maintenance; CI assertion catches unmapped plugins immediately. |
 | A6 | Adding an optional schema field with a constrained enum does not break any existing manifest validation (manifests without `category` validate; manifests with unknown values rejected by ajv) | If existing manifests had a stray `category` key with non-enum value, validation breaks. Mitigation: PR 1 includes a pre-sweep `ajv validate` pass on all current manifests to catch any pre-existing key. |
-| A7 | `secrets.GITHUB_TOKEN` in registry-sync.yml has push access to main (default for actions runs in the same repo). | If branch-protection rules require PRs for main: cron's commit fails; workflow surfaces an actionable error. Mitigation: registry-sync.yml could open a PR instead of pushing directly. Out of MVP scope; flagged as Phase 2 option. |
+| A7 | `secrets.GITHUB_TOKEN` in registry-sync.yml can open + push to a feat branch + create PRs (default for in-repo Actions runs with `pull-requests: write`). | Verified resolved by round-2 C-1 PR-based pattern; the assumption stands. Round-3 cleanup: PR-based flow IS the current design, NOT a Phase 2 option. The direct-push concern (round-1 implicit) was addressed in round-2 by adopting the workflow-registry's sync-registry-manifests.yml 3-case branch policy. |
+| A8 | `github-actions[bot]` is on the gocodealone-website main-branch ruleset bypass list OR the repo has auto-merge globally enabled OR a maintainer reviews the bot's PR within the 15-minute indexing window. | If none of the above: snapshot PRs queue waiting for human review; the "indexed in 15 min" goal degrades to "PR opened in 15 min, merged when a human acts." Per user clarification ("as long as the scheduled run can be manually executed, that's fine"), the manual-merge fallback is acceptable. Verification of which case is active happens at PR 4 open; not blocking. |
 
 ## Top 3 doubts (round-1 revised)
 
@@ -495,6 +510,18 @@ Each PR independently revertible:
 - PR 4: revert restores hardcoded PluginsPage.tsx + removes prebuild script + drops registry-sync.yml. The cron stops; next deploy reverts to the hardcoded list.
 
 No persistent state, no migrations, no client-side cache to expire.
+
+## Round-3 adversarial review fixes (PASS verdict; pre-implementation cleanups)
+
+Round-3 verdict was PASS with zero Critical + 3 Important findings flagged as pre-implementation document/wiring cleanups:
+
+| Finding | Severity | Resolution |
+|---|---|---|
+| I-1: A7 narrative stale (described direct-push as MVP + PR-based as Phase 2; reality is PR-based IS the design) | Important (doc) | Rewrote A7 to reflect PR-based flow as the current design; added new A8 for the auto-merge-bypass conditional. |
+| I-2: auto-merge bypass exemption unverified | Important | Acknowledged in A8 as "PR opened in 15 min, merged when human acts" fallback per user's "scheduled run can be manually executed" approval. Removed the `gh pr merge --auto` invocation since the reference workflow doesn't use it; repo-level auto-merge config (if enabled) handles it natively. |
+| I-3: "CI assertion" for category:null not wired into validate.yml | Important | Added explicit validate.yml step in PR 2: `bash scripts/categorize-manifests.sh --check`. Script's `--check` mode exits non-zero on any plugin missing a category. The forcing-function is now real, not aspirational. |
+| M-1: narrative table contradicted CATEGORY_MAP on `data-engineering` | Minor | Fixed narrative table: `data-engineering` is now under `data`; `ratchet` + `cloud-ui` added under `core`. CATEGORY_MAP remains authoritative. |
+| Concurrency block missing on registry-sync.yml | Round-3 option 2 | Added `concurrency: group: registry-snapshot-sync, cancel-in-progress: false` matching reference pattern. |
 
 ## Round-2 adversarial review fixes
 
