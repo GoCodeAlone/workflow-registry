@@ -128,6 +128,16 @@ for manifest in "$PLUGINS_DIR"/*/manifest.json; do
     continue
   fi
 
+  # workflow#758: strict-semver gate. Reject plugins whose upstream release
+  # tag does not match the release-grade semver whitelist (engine ParseSemver
+  # requires flat vN.N.N — prerelease tags break downstream parsers). Catches
+  # plugins that bypass release.yml (manual upload, self-hosted runner,
+  # force-push). Same regex as `wfctl plugin validate-contract --for-publish`.
+  if [[ ! "$latest_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "  REJECT  $plugin_name — upstream release tag $latest_tag is not release-grade semver (engine ParseSemver requires flat M.m.p)"
+    continue
+  fi
+
   # Strip leading 'v' prefix
   latest_version="${latest_tag#v}"
 
