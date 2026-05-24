@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-vectorstore",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vector database integration for RAG pipelines with Pinecone support",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "core",
   "private": false,
-  "minEngineVersion": "1.13.0",
+  "minEngineVersion": "0.51.7",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
   "keywords": [
@@ -19,21 +19,59 @@
     "similarity-search"
   ],
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
       "vectorstore.provider"
     ],
     "stepTypes": [
       "step.vector_upsert",
       "step.vector_query",
-      "step.vector_delete",
       "step.vector_fetch",
-      "step.vector_list_indexes",
+      "step.vector_delete",
       "step.vector_create_index",
-      "step.vector_delete_index"
+      "step.vector_list_indexes",
+      "step.vector_describe_index"
     ],
     "triggerTypes": []
   },
-  "downloads": [],
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "219476c9ad69ec53f3ecb4c0fb46a3ab0d1097e5b1afcbcf1cd692be2b803400",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.2/workflow-plugin-vectorstore-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "3882f9753329140c2453e1815240b66146ed500ec5cec1df344aeecad8472125",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.2/workflow-plugin-vectorstore-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "ee30c418f7852f031a39cd4a5dafe60f391e783ca9317f22abd3e635beb61a95",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.2/workflow-plugin-vectorstore-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "10d336bd5e37db09e5b9b88b301857484173301d1854ba52e6949088a585720f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.2/workflow-plugin-vectorstore-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "bf56e19836f26368119f2587083bc7df580a6d0528c358a1457df371e8c818ca",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.2/workflow-plugin-vectorstore-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "608b28ad2e7e6c239d125ae3bf26e274d5d1484f9187fe9845dd15679d5816e8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.2/workflow-plugin-vectorstore-windows-arm64.tar.gz"
+    }
+  ],
   "status": "experimental",
   "category": "data"
 }
