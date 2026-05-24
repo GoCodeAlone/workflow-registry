@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-security-scanner",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "author": "GoCodeAlone",
   "description": "Security scanner plugin for workflow engine — vulnerability scanning, secret detection, and compliance checks",
   "source": "github.com/GoCodeAlone/workflow-plugin-security-scanner",
@@ -12,14 +12,55 @@
   "private": false,
   "status": "experimental",
   "capabilities": {
-    "moduleTypes": [],
+    "configProvider": false,
+    "moduleTypes": [
+      "security.scanner"
+    ],
     "stepTypes": [
       "step.sast_scan",
       "step.container_scan",
       "step.deps_scan"
     ],
-    "triggerTypes": [],
-    "workflowHandlers": []
+    "triggerTypes": []
   },
-  "category": "security"
+  "category": "security",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "db519351d547ceac8defa41578577ebdf936a96a950822a05d47bb4c5d7adb06",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner/releases/download/v1.0.4/workflow-plugin-security-scanner-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "b76435374190a7c49ecfa23814e101bf0e76a6b89b37704c1a5b7650a8782a16",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner/releases/download/v1.0.4/workflow-plugin-security-scanner-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "b8231619209226120e7c6ff84968f3fc42ac72511a4235b8a0a5271f2ab168af",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner/releases/download/v1.0.4/workflow-plugin-security-scanner-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "663b747c011923599ee60e32f64f07cc30aa0af93b6055fc59655c6efbd72ff7",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner/releases/download/v1.0.4/workflow-plugin-security-scanner-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "b04067aef2796c9983ef52745f51ed2bb452cf40cce5c13e4abb3fe11cb01649",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner/releases/download/v1.0.4/workflow-plugin-security-scanner-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "28dab8e6ead4bc7e3f174da058f5985359dcaae768742a77930316b00b2c7606",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner/releases/download/v1.0.4/workflow-plugin-security-scanner-windows-arm64.tar.gz"
+    }
+  ],
+  "minEngineVersion": "0.51.7"
 }
