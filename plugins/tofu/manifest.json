@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-tofu",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "OpenTofu/Terraform adapter: HCL generation from abstract infra specs, plan/apply execution, and state import/export",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -42,38 +42,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "f33e48eba56c37dbbb5a7a76bb8b75f1901d075f7b48b9679d5b5b63f098bb6e",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.3/workflow-plugin-tofu-darwin-amd64.tar.gz"
+      "sha256": "e0b02a10a83f39059b195731b0849261bd5662520f1d94e4e7ce0ec83439230a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.4/workflow-plugin-tofu-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "f9b1adffa31a5615e3f8e44e05cc9ce092aa9b7243cf557c08d74c6ba025f202",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.3/workflow-plugin-tofu-darwin-arm64.tar.gz"
+      "sha256": "4d4ac9b738462281acd565a0cc0215cfb997c046e518a006b2c4d2b013da0ca9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.4/workflow-plugin-tofu-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "13ed6187e4385e14a03a96783a1193c16d89132bedde0db213f6657b3aaf3257",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.3/workflow-plugin-tofu-linux-amd64.tar.gz"
+      "sha256": "6a36868be237236aede1f0c3d91d283459f843c9cba859152c3720269b461628",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.4/workflow-plugin-tofu-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "695e8fe4ff004f20a245056dd539339a0a1903c23fdf24840fee368b601ad654",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.3/workflow-plugin-tofu-linux-arm64.tar.gz"
+      "sha256": "58f0810fb4a51e4ded6705eaec25ffaa365a760ef8e055292aa97f148fec2c17",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.4/workflow-plugin-tofu-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "a2bced0b83496e73abbe5afc0ca4c7ede1db5d4a3b0df4ef13b07398f35070d8",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.3/workflow-plugin-tofu-windows-amd64.tar.gz"
+      "sha256": "759f40354f15d5fb9b961f435e39459980251fe5140e81c0e5a7d453cfa9e41b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.4/workflow-plugin-tofu-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "8f84a8abf4331eb8ee1706705e0b89d3926f70974ad8662afa05afd5f9db31f4",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.3/workflow-plugin-tofu-windows-arm64.tar.gz"
+      "sha256": "86523dac8b9290a3a99a9f4c5092d85aa643a14d5472dbee6dab714ca779e540",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-tofu/releases/download/v0.1.4/workflow-plugin-tofu-windows-arm64.tar.gz"
     }
   ],
   "status": "experimental",
