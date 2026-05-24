@@ -1,6 +1,6 @@
 {
   "name": "data-engineering",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "author": "GoCodeAlone",
   "description": "Data engineering: CDC, lakehouse (Iceberg), time-series (InfluxDB/TimescaleDB/ClickHouse/QuestDB/Druid), graph (Neo4j), data quality, migrations, catalog (DataHub/OpenMetadata)",
   "source": "github.com/GoCodeAlone/workflow-plugin-data-engineering",
@@ -9,7 +9,7 @@
   "tier": "core",
   "license": "MIT",
   "private": false,
-  "minEngineVersion": "0.3.56",
+  "minEngineVersion": "0.51.7",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering",
   "keywords": [
@@ -41,93 +41,14 @@
     }
   ],
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
-      "cdc.source",
-      "data.tenancy",
-      "catalog.iceberg",
-      "lakehouse.table",
-      "timeseries.influxdb",
-      "timeseries.timescaledb",
-      "timeseries.clickhouse",
-      "timeseries.questdb",
-      "timeseries.druid",
-      "catalog.schema_registry",
-      "graph.neo4j",
-      "catalog.datahub",
-      "catalog.openmetadata",
-      "quality.checks",
-      "migrate.schema"
+      "cdc.source"
     ],
     "stepTypes": [
-      "step.cdc_start",
-      "step.cdc_stop",
-      "step.cdc_status",
-      "step.cdc_snapshot",
-      "step.cdc_schema_history",
-      "step.tenant_provision",
-      "step.tenant_deprovision",
-      "step.tenant_migrate",
-      "step.lakehouse_create_table",
-      "step.lakehouse_evolve_schema",
-      "step.lakehouse_write",
-      "step.lakehouse_compact",
-      "step.lakehouse_snapshot",
-      "step.lakehouse_query",
-      "step.lakehouse_expire_snapshots",
-      "step.ts_write",
-      "step.ts_write_batch",
-      "step.ts_query",
-      "step.ts_downsample",
-      "step.ts_retention",
-      "step.ts_continuous_query",
-      "step.ts_druid_ingest",
-      "step.ts_druid_query",
-      "step.ts_druid_datasource",
-      "step.ts_druid_compact",
-      "step.schema_register",
-      "step.schema_validate",
-      "step.graph_query",
-      "step.graph_write",
-      "step.graph_import",
-      "step.graph_extract_entities",
-      "step.graph_link",
-      "step.catalog_register",
-      "step.catalog_search",
-      "step.contract_validate",
-      "step.quality_check",
-      "step.quality_schema_validate",
-      "step.quality_profile",
-      "step.quality_compare",
-      "step.quality_anomaly",
-      "step.quality_dbt_test",
-      "step.quality_soda_check",
-      "step.quality_ge_validate",
-      "step.migrate_plan",
-      "step.migrate_apply",
-      "step.migrate_run",
-      "step.migrate_rollback",
-      "step.migrate_status",
-      "step.migrate_expand",
-      "step.migrate_contract",
-      "step.migrate_expand_status",
-      "step.schema_evolve_pipeline",
-      "step.schema_evolve_verify",
-      "step.catalog_lineage",
-      "step.catalog_lineage_query",
-      "step.ts_archive",
-      "step.ts_tier_status",
-      "step.ts_clickhouse_view",
-      "step.graph_extract_entities_llm",
-      "step.tenant_evaluate_promotion",
-      "step.tenant_promote",
-      "step.tenant_demote",
-      "step.cdc_backpressure",
-      "step.cdc_monitor"
+      "step.cdc_start"
     ],
-    "triggerTypes": [
-      "cdc"
-    ],
-    "workflowHandlers": []
+    "triggerTypes": []
   },
   "assets": {
     "ui": false,
@@ -135,24 +56,28 @@
   },
   "downloads": [
     {
-      "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.1/workflow-plugin-data-engineering-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.1/workflow-plugin-data-engineering-linux-arm64.tar.gz"
-    },
-    {
       "os": "darwin",
+      "sha256": "bd245004131a5274a8d1e3f1f02fbb3c421ad32da19c98f550d89253203a14ec",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.3/workflow-plugin-data-engineering-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "f996441c875491987df8cc0d4952a9a8405ecb936125d8d06d003e486d8bdefc",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.3/workflow-plugin-data-engineering-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.1/workflow-plugin-data-engineering-darwin-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "06bb891911be22423cbc9f530a7209b625f8197851165659d49f226d25c204b5",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.3/workflow-plugin-data-engineering-linux-amd64.tar.gz"
     },
     {
-      "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.1/workflow-plugin-data-engineering-darwin-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "5ad18c47ba66dc3da006349175aae44227dc098cd2d6a70faae02b9ebd6e55c2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-data-engineering/releases/download/v0.3.3/workflow-plugin-data-engineering-linux-arm64.tar.gz"
     }
   ],
   "status": "experimental",
