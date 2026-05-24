@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-sso",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Enterprise SSO via OpenID Connect with multi-provider support",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "core",
   "private": false,
-  "minEngineVersion": "1.13.0",
+  "minEngineVersion": "0.51.7",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-sso",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-sso",
   "keywords": [
@@ -19,6 +19,7 @@
     "enterprise"
   ],
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
       "sso.oidc"
     ],
@@ -30,7 +31,44 @@
     ],
     "triggerTypes": []
   },
-  "downloads": [],
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "42a1dc5399ad07d19c857f7c1881d25fc4e8186044d409bac63a630be63d6498",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.4/workflow-plugin-sso-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "96cfc6a8904b7722956377efec1fd31ec4c8d1bee45cbfef89e5a6e44aefe348",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.4/workflow-plugin-sso-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "833670f338e848f7ae602116d301a34ad5d89d361da2e37173868efa052c9898",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.4/workflow-plugin-sso-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "d5aa238bb25c2d825d9e89984944b377b4d67512d9032a81bcbc7ea644271eb0",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.4/workflow-plugin-sso-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "3bca7a89b279ecce75fd6a802d9b8264f6855a9588a18edc31b32a291be9808a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.4/workflow-plugin-sso-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "7ec80ce641d91240462201ebb99ad0818149da25d4f00fb5cbde684b1b7cc5ae",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.4/workflow-plugin-sso-windows-arm64.tar.gz"
+    }
+  ],
   "status": "experimental",
   "category": "integrations"
 }
