@@ -89,6 +89,15 @@ jobs:
           go-version: '1.26'
           cache-dependency-path: _workflow/go.sum
 
+      # workflow#762 Layer (a') parity cycle — install wfctl so registry-sync
+      # subcommand can run in dry-run alongside the authoritative bash. After
+      # one cron cycle of zero-diff parity, a follow-up PR deletes the bash
+      # scripts and swaps --fix ownership to Go.
+      - name: Set up wfctl (workflow#762 parity)
+        uses: GoCodeAlone/setup-wfctl@v1
+        with:
+          version: v0.62.0
+
       - name: Resolve plugin filter from event
         id: filter
         # Per round-1 C-1: do NOT inline ${{ ... }} into bash. Read from env.
@@ -192,11 +201,42 @@ jobs:
             WORKFLOW_REPO="$GITHUB_WORKSPACE/_workflow" scripts/sync-core-manifests.sh --fix
             scripts/generate-readme.sh
           fi
+          # workflow#762 Layer (a') parity cycle — run wfctl plugin
+          # registry-sync IN DRY-RUN ALONGSIDE the authoritative bash;
+          # capture outputs for parity-diff. Bash remains authoritative
+          # for the registry mutations. After one cron cycle confirms
+          # zero diff, a follow-up PR deletes the bash scripts and swaps
+          # --fix ownership to Go.
+          mkdir -p /tmp/parity
+          if command -v wfctl >/dev/null 2>&1; then
+            echo "parity: running wfctl plugin registry-sync dry-run alongside bash"
+            if [[ -n "${PLUGIN}" ]]; then
+              wfctl plugin registry-sync --plugin "${PLUGIN}" --registry-dir . > /tmp/parity/go-versions.txt 2>&1 || true
+            else
+              wfctl plugin registry-sync --registry-dir . > /tmp/parity/go-versions.txt 2>&1 || true
+            fi
+            # core + readme sub-modes shell out to existing bash during parity
+            # window per workflow#762 plan (native ports follow-up).
+          else
+            echo "parity: wfctl not available; skipping parity-diff"
+          fi
           if git diff --quiet -- plugins README.md; then
             echo "changed=0" >> "$GITHUB_OUTPUT"
           else
             echo "changed=1" >> "$GITHUB_OUTPUT"
           fi
+
+      # workflow#762 Layer (a') — upload parity artifacts for human review
+      # during the cron-cycle observation window. Once Go output matches
+      # bash output, the bash scripts get deleted in a follow-up PR.
+      - name: Upload registry-sync parity artifacts
+        if: always() && steps.filter.outputs.skip != '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: parity-cycle-${{ github.run_id }}
+          path: /tmp/parity/*.txt
+          if-no-files-found: ignore
+          retention-days: 30
 
       - name: Open PR if manifests changed
         # I-5 (round-3): the && skip guard is REQUIRED. Without it, a
