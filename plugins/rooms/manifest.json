@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-rooms",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": "GoCodeAlone",
   "description": "Room management plugin for workflow engine — join, leave, broadcast, members",
   "source": "github.com/GoCodeAlone/workflow-plugin-rooms",
@@ -12,15 +12,56 @@
   "private": false,
   "status": "experimental",
   "capabilities": {
-    "moduleTypes": [],
+    "configProvider": false,
+    "moduleTypes": [
+      "rooms.manager"
+    ],
     "stepTypes": [
       "step.room_join",
       "step.room_leave",
       "step.room_broadcast",
       "step.room_members"
     ],
-    "triggerTypes": [],
-    "workflowHandlers": []
+    "triggerTypes": []
   },
-  "category": "core"
+  "category": "core",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "dedc41850b982bbe81e94d399177652b49d7c8cd06c7e6e55503b67fed28551d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-rooms/releases/download/v0.1.6/workflow-plugin-rooms-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "33c5e8c76612fdbdd1d9c040ae7813e3350d5b7772ae80cfb09e4ca7143cd3f3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-rooms/releases/download/v0.1.6/workflow-plugin-rooms-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "eaa3d5dbe5770b4243624f5fe104834eb9a4437e1108082cb791076f30fd6155",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-rooms/releases/download/v0.1.6/workflow-plugin-rooms-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "7e11f864fe6deae14d941dc59fa54b17080d8a1b16d3bad850846f1cbb88bb5a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-rooms/releases/download/v0.1.6/workflow-plugin-rooms-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "6fc448cae44107d076359ef97b1d8ef1c52060d6556a0ba7988a472351f09b44",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-rooms/releases/download/v0.1.6/workflow-plugin-rooms-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "9d7b1549b5674b2902bda1dd1f1b531573c598dbff52524c5e512951bc1decc1",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-rooms/releases/download/v0.1.6/workflow-plugin-rooms-windows-arm64.tar.gz"
+    }
+  ],
+  "minEngineVersion": "0.51.7"
 }

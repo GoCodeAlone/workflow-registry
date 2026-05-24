@@ -173,7 +173,6 @@ These plugins are distributed outside the engine repository and are maintained a
 | [slack](./plugins/slack/manifest.json) | Slack messaging and workspace automation. Provides a provider module backed by the Slack Web API and Socket Mode, pipeline steps for messages/blocks/reactions/files, and a Socket Mode event trigger. | community |
 | [steam](./plugins/steam/manifest.json) | External plugin for the workflow engine. | community |
 | [teams](./plugins/teams/manifest.json) | Microsoft Teams messaging and channel management via the Microsoft Graph API. Provides a provider module with Azure AD client credentials auth, pipeline steps for messages/cards/channels/members, and an HTTP webhook trigger for Graph change notifications. | community |
-| [template](./plugins/template/manifest.json) | Template repository for creating workflow engine external plugins | community |
 | [turnio](./plugins/turnio/manifest.json) | turn.io WhatsApp API integration — messaging, contacts, templates, flows, and journeys | community |
 | [twilio](./plugins/twilio/manifest.json) | Comprehensive Twilio integration — SMS, Voice, Verify, Video, Conversations, TaskRouter, and 40+ products | community |
 | [workflow-plugin-atlas-migrate](./plugins/workflow-plugin-atlas-migrate/manifest.json) | Atlas migration driver plugin for the workflow engine: ariga.io/atlas v1 backed Up/Down/Status/Goto with SQL-backed revision tracking and auto-generated atlas.sum | community |
