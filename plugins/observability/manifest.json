@@ -21,7 +21,6 @@
     "wiringHooks": [
       "observability.health-endpoints",
       "observability.log-endpoint",
-      "observability.metrics-endpoint",
       "observability.openapi-endpoints",
       "observability.otel-middleware",
       "observability.telemetry-bridge"
