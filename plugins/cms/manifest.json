@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-cms",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0",
   "description": "Multi-tenant CMS engine — TenantResolver + static-wins routing + WYSIWYG page authoring (TipTap default). Foundation of gocodealone-multisite.",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "community",
   "private": false,
-  "minEngineVersion": "0.60.0",
+  "minEngineVersion": "0.64.4",
   "keywords": [
     "cms",
     "multi-tenant",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-cms",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-cms",
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
       "cms.tenant_resolver",
       "cms.static_serve_before_dynamic",
@@ -32,5 +33,31 @@
     "triggerTypes": []
   },
   "status": "experimental",
-  "category": "core"
+  "category": "core",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "5f1a163ab7002a351239b3fca64dcda1de9bf016b1889da5f2be4799cca9817d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.0/workflow-plugin-cms-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "f96ef05f8f94e4716e39a0b9c1103fcece72122c39d3acd6b652b6d2afc7ae86",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.0/workflow-plugin-cms-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "9384151d5c1afec324e7819fc60abd7cfa6684a128a3f13adaf9331a2b0cc9de",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.0/workflow-plugin-cms-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "43a692dafd05e007f5d7cfec066f12b3ffe9de661549f095a62fc83b8ba39e41",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.0/workflow-plugin-cms-linux-arm64.tar.gz"
+    }
+  ]
 }
