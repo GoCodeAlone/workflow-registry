@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-approval",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Human-in-the-loop approval workflows with state machine",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "core",
   "private": false,
-  "minEngineVersion": "1.13.0",
+  "minEngineVersion": "0.19.0-alpha.5",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-approval",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-approval",
   "keywords": [
@@ -18,20 +18,66 @@
     "workflow"
   ],
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
       "approval.engine"
     ],
     "stepTypes": [
       "step.approval_request",
       "step.approval_check",
-      "step.approval_cancel",
       "step.approval_decide",
+      "step.approval_list",
       "step.approval_escalate",
-      "step.approval_list"
+      "step.approval_wait"
+    ],
+    "serviceMethods": [
+      "approval.engine/create",
+      "approval.engine/get",
+      "approval.engine/decide",
+      "approval.engine/list",
+      "approval.engine/escalate",
+      "approval.engine/check_expiry"
     ],
     "triggerTypes": []
   },
-  "downloads": [],
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "49ef5e84a21844dcdda4d5a15da4fe7fc8313e619955d1bbfe96f3c96966add6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-approval/releases/download/v0.1.4/workflow-plugin-approval-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "ad529da6b1f5ad9198675a818c84e288db52810b4f10fd395fe5f450a4026971",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-approval/releases/download/v0.1.4/workflow-plugin-approval-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "cc42e01f4cbcabe04c47b981763b7d95f2d2735d8dd69bb6166ce1899ed850a2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-approval/releases/download/v0.1.4/workflow-plugin-approval-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "15f74d6bc512f0422974c78c70b0a6506834328254596e271d9019fff5030e73",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-approval/releases/download/v0.1.4/workflow-plugin-approval-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "86b413d824050e281330d946a942d84c13adefe90562d229c15d8de5fe5adda8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-approval/releases/download/v0.1.4/workflow-plugin-approval-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "12a45b02d385999e36dbc0bd5720a1c7bd0b68a23af4a68a4085c88cb66fabc9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-approval/releases/download/v0.1.4/workflow-plugin-approval-windows-arm64.tar.gz"
+    }
+  ],
   "status": "experimental",
   "category": "core"
 }

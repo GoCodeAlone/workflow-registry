@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-steam",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "author": "GoCodeAlone",
   "description": "External plugin for the workflow engine.",
   "source": "github.com/GoCodeAlone/workflow-plugin-steam",
@@ -12,15 +12,57 @@
   "private": false,
   "status": "experimental",
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [],
     "stepTypes": [
       "step.steam_auth",
       "step.steam_achievement_set",
       "step.steam_achievement_sync",
-      "step.steam_stat_set"
+      "step.steam_stat_set",
+      "step.steam_leaderboard_push",
+      "step.steam_presence_set",
+      "step.steam_friends_list",
+      "step.steam_invite_send",
+      "step.steam_workshop_publish",
+      "step.steam_workshop_query",
+      "step.steam_workshop_vote",
+      "step.steam_workshop_download",
+      "step.steam_workshop_unsubscribe",
+      "step.steam_workshop_report",
+      "step.steam_workshop_takedown",
+      "step.steam_workshop_check_update",
+      "step.steam_workshop_collection_query",
+      "step.steam_workshop_validate",
+      "step.steam_workshop_modcheck"
     ],
-    "triggerTypes": [],
-    "workflowHandlers": []
+    "triggerTypes": []
   },
-  "category": "integrations"
+  "category": "integrations",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "494a24402f38bac4f48973a5c0c8b74d73c0cd39ede0598347025f42065d3306",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.3.4/workflow-plugin-steam-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "60e613ef35802d01718f8c33bf9081acf42453c306cc7392c5194b53b1755c08",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.3.4/workflow-plugin-steam-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "a85eab0e46e0c57891aac23511639bcfdcbf580a37bc7856d4a0b25c1f2b1f01",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.3.4/workflow-plugin-steam-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "f16bcc4b1696016fdcbc30715e1f5c4d484941ec196e14acf65d1be53723aa2d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.3.4/workflow-plugin-steam-linux-arm64.tar.gz"
+    }
+  ],
+  "minEngineVersion": "0.51.7"
 }

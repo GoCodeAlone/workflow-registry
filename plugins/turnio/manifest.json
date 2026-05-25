@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-turnio",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "turn.io WhatsApp API integration — messaging, contacts, templates, flows, and journeys",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "community",
   "private": false,
-  "minEngineVersion": "0.3.30",
+  "minEngineVersion": "0.51.7",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-turnio",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-turnio",
   "keywords": [
@@ -18,58 +18,40 @@
     "chatbot"
   ],
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
       "turnio.provider"
     ],
     "stepTypes": [
-      "step.turnio_send_text",
       "step.turnio_send_media",
-      "step.turnio_send_template",
-      "step.turnio_send_interactive",
-      "step.turnio_send_location",
-      "step.turnio_list_messages",
-      "step.turnio_check_contact",
-      "step.turnio_upload_contacts",
-      "step.turnio_update_profile",
-      "step.turnio_upload_media",
-      "step.turnio_get_media",
-      "step.turnio_delete_media",
-      "step.turnio_create_template",
-      "step.turnio_list_templates",
-      "step.turnio_fetch_template",
-      "step.turnio_update_template",
-      "step.turnio_delete_template",
-      "step.turnio_configure_webhook",
-      "step.turnio_create_flow",
-      "step.turnio_list_flows",
-      "step.turnio_send_flow",
-      "step.turnio_list_journeys",
-      "step.turnio_trigger_journey",
-      "step.turnio_get_context",
-      "step.turnio_set_context"
+      "step.turnio_send_text"
     ],
     "triggerTypes": []
   },
   "downloads": [
     {
-      "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.1/workflow-plugin-turnio-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.1/workflow-plugin-turnio-linux-arm64.tar.gz"
-    },
-    {
       "os": "darwin",
+      "sha256": "757ca3dd4e68894020c7cdaa8b9b92331dab3b835fe4575628c76c96c1bdf1e4",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.3/workflow-plugin-turnio-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "ca4a1c90d257991feb238c69a93e3e5e6153daeaf4b87e41a5ae4e8e0117cfa5",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.3/workflow-plugin-turnio-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.1/workflow-plugin-turnio-darwin-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "8c4d71b695cd42f547d5ce0380f50265020366e2d527c2a27ef9ff6aa9823c79",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.3/workflow-plugin-turnio-linux-amd64.tar.gz"
     },
     {
-      "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.1/workflow-plugin-turnio-darwin-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "a0ed8d1c398cf36eaf8f41b8f51cd5a5c22327332c6c574af24d509ca1a9426f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-turnio/releases/download/v0.1.3/workflow-plugin-turnio-linux-arm64.tar.gz"
     }
   ],
   "status": "experimental",
