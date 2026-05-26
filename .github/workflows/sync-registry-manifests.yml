@@ -371,6 +371,11 @@ jobs:
               git push origin "${BRANCH}"
               # Update PR title/body to match the post-re-sync version.
               gh pr edit "${existing}" --title "${NEW_TITLE}" --body "${NEW_BODY}"
+              if [[ -n "${PLUGIN}" ]]; then
+                scripts/reconcile-sync-prs.sh --current-pr "${existing}" --mode plugin --plugin "${PLUGIN}"
+              else
+                scripts/reconcile-sync-prs.sh --current-pr "${existing}" --mode full
+              fi
               echo "appended sync commit to PR #${existing} (post-re-sync metadata refreshed)"
               exit 0
             fi
@@ -388,4 +393,10 @@ jobs:
           git add plugins/ README.md
           git commit -m "${TITLE}"
           git push origin "${BRANCH}"
-          gh pr create --base main --head "${BRANCH}" --title "${TITLE}" --body "${BODY}"
+          pr_url="$(gh pr create --base main --head "${BRANCH}" --title "${TITLE}" --body "${BODY}")"
+          pr_number="${pr_url##*/}"
+          if [[ -n "${PLUGIN}" ]]; then
+            scripts/reconcile-sync-prs.sh --current-pr "${pr_number}" --mode plugin --plugin "${PLUGIN}"
+          else
+            scripts/reconcile-sync-prs.sh --current-pr "${pr_number}" --mode full
+          fi
