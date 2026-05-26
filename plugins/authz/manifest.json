@@ -1,6 +1,6 @@
 {
   "name": "authz",
-  "version": "0.5.4",
+  "version": "0.5.6",
   "author": "GoCodeAlone",
   "description": "RBAC authorization plugin using Casbin",
   "source": "github.com/GoCodeAlone/workflow-plugin-authz",
@@ -39,26 +39,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "90197fb56b89ea68aa10a1be4e4ef1210b775eb1cdbbc658f0cb0da30156d1f8",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.4/workflow-plugin-authz-darwin-amd64.tar.gz"
+      "sha256": "b0df527013d56bf141d95af4f9ea8b2512bb098170fe183f0dd20b9e84ea64e8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.6/workflow-plugin-authz-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "10b3323194ad29e0462094b42bdb2022ad07338ed34400b823e8bf7c920f0a45",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.4/workflow-plugin-authz-darwin-arm64.tar.gz"
+      "sha256": "d7dd15660571ed719d621eee6e4bf0b0b0b2a0f0b29d1cc7841c0635d71ffb8d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.6/workflow-plugin-authz-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "cfa4e21675af5032e20709073d987801f3bdd682321e4fdc8ec385e6ecc9c27a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.4/workflow-plugin-authz-linux-amd64.tar.gz"
+      "sha256": "a96a8d33c74b5cdb08830c46182d2e325fb98596d7ae45ec70307e0d3dbf268b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.6/workflow-plugin-authz-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "a2f55391e2c8abc615087e183d9b0a347d099ff478d3ca1a67de599134acf944",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.4/workflow-plugin-authz-linux-arm64.tar.gz"
+      "sha256": "7665bb5abd8d8f3110642ecde315801b862f48a43be51eebf6d4dd27e706e3af",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.6/workflow-plugin-authz-linux-arm64.tar.gz"
     }
   ],
   "status": "experimental",

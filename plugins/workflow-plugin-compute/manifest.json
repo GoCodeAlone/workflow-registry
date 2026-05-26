@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-compute",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "description": "Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "community",
   "private": false,
-  "minEngineVersion": "0.57.4",
+  "minEngineVersion": "0.27.0",
   "keywords": [
     "workflow-compute",
     "distributed-compute",
@@ -17,6 +17,7 @@
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-compute",
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
       "compute.provider",
       "compute.pool",
@@ -25,28 +26,28 @@
     "stepTypes": [
       "step.compute_dispatch",
       "step.compute_wait",
-      "step.compute_map",
-      "step.compute_product_capture"
+      "step.compute_map"
     ],
     "triggerTypes": [],
     "cliCommands": [
       {
         "name": "compute",
-        "description": "Operate a workflow-compute control plane",
-        "flags_passthrough": true
+        "description": "Operate a workflow-compute control plane"
       }
     ]
   },
   "downloads": [
     {
-      "os": "linux",
-      "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.2/workflow-plugin-compute-linux-amd64.tar.gz"
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "341d401e129e9e220ae2d7b5dad1831b90f81c9b2453872d3f46bc3260984c8d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.6/workflow-plugin-compute-darwin-arm64.tar.gz"
     },
     {
-      "os": "darwin",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.2/workflow-plugin-compute-darwin-arm64.tar.gz"
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "9e7f384f69d78a14096d45e1191f167524671f7ebafe1f9a005b010911601897",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.6/workflow-plugin-compute-linux-amd64.tar.gz"
     }
   ],
   "status": "verified",

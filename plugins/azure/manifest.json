@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-azure",
-  "version": "2.0.0",
+  "version": "2.1.3",
   "description": "Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "community",
   "private": false,
-  "minEngineVersion": "0.57.0",
+  "minEngineVersion": "0.64.3",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-azure",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-azure",
   "keywords": [
@@ -24,9 +24,15 @@
     "apim"
   ],
   "capabilities": {
-    "moduleTypes": [],
+    "configProvider": false,
+    "moduleTypes": [
+      "iac.provider"
+    ],
     "stepTypes": [],
-    "triggerTypes": []
+    "triggerTypes": [],
+    "iacStateBackends": [
+      "azure_blob"
+    ]
   },
   "assets": {
     "ui": false,
@@ -34,24 +40,28 @@
   },
   "downloads": [
     {
-      "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.0.0/workflow-plugin-azure-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.0.0/workflow-plugin-azure-linux-arm64.tar.gz"
-    },
-    {
       "os": "darwin",
+      "sha256": "e26fba371cad881ce6d60341d23d88df043d019ebb68e86c3bc87fee9260fc99",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.1.3/workflow-plugin-azure-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "e74a9bdd4d94611ecc58ff7573238207c43bb7bdaa2af2dda44563683f13b868",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.1.3/workflow-plugin-azure-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.0.0/workflow-plugin-azure-darwin-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "57bbb2e0181af26d8ed115145f15889eed8887083e003ca017da23891cca4c0e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.1.3/workflow-plugin-azure-linux-amd64.tar.gz"
     },
     {
-      "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.0.0/workflow-plugin-azure-darwin-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "56cd78888cc9233dffe589bd4b1216243534cb2ecfcd3ddfcd84a8054f10bcaa",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.1.3/workflow-plugin-azure-linux-arm64.tar.gz"
     }
   ],
   "status": "experimental",

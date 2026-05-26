@@ -1,13 +1,13 @@
 {
   "name": "discord",
-  "version": "0.1.0",
+  "version": "0.1.7",
   "author": "GoCodeAlone",
   "description": "Discord messaging, bot automation, and voice channel support. Provides a provider module, pipeline steps for sending/editing/deleting messages and managing voice, and a WebSocket Gateway event trigger.",
   "source": "github.com/GoCodeAlone/workflow-plugin-discord",
   "type": "external",
   "tier": "community",
   "license": "MIT",
-  "minEngineVersion": "0.1.0",
+  "minEngineVersion": "0.51.7",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-discord",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-discord",
   "keywords": [
@@ -31,7 +31,8 @@
       "step.discord_upload_file",
       "step.discord_create_thread",
       "step.discord_voice_join",
-      "step.discord_voice_leave"
+      "step.discord_voice_leave",
+      "step.discord_voice_play"
     ],
     "triggerTypes": [
       "trigger.discord"
@@ -41,26 +42,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "9e2391cf3f706c1d1ddc12cc2b3bbfcbed7270093eb5e158a1204e4d5b363900",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.0/workflow-plugin-discord-darwin-amd64.tar.gz"
+      "sha256": "21b152cf59cdec07ac65d93a459abeebb3878d234ac5b8df48cde12229ae6515",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.7/workflow-plugin-discord-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "31cc94004477e603b4f3390de02e23f8afebdf80b5af4e3240efc69340c1ba82",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.0/workflow-plugin-discord-darwin-arm64.tar.gz"
+      "sha256": "ceea8b3242049148de271518081540920f0027f6848d9b8fc58a336a711b1676",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.7/workflow-plugin-discord-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "2a7b4fc46ecd72dc8cc2748b8bd9474755ab6d15d855c179e39c5853130e0481",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.0/workflow-plugin-discord-linux-amd64.tar.gz"
+      "sha256": "f6a1e5460fcf4c350975425f95d943032d013c58ec1e648b2c6b60727f845a78",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.7/workflow-plugin-discord-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "f63a11b2cdab8f2a27edfc37cf64355d8c998616f87aaa9a43228457287bfe5b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.0/workflow-plugin-discord-linux-arm64.tar.gz"
+      "sha256": "1494a41598573639595d2e88aa1ff6f2b70f52bf35f3e48bb4756076e55973c5",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.7/workflow-plugin-discord-linux-arm64.tar.gz"
     }
   ],
   "status": "experimental",
