@@ -21,12 +21,13 @@
     "wiringHooks": [
       "observability.health-endpoints",
       "observability.log-endpoint",
-      "observability.metrics-endpoint",
       "observability.openapi-endpoints",
-      "observability.otel-middleware"
+      "observability.otel-middleware",
+      "observability.telemetry-bridge"
     ],
     "workflowHandlers": []
   },
+  "category": "observability",
   "description": "Metrics, health checks, log collection, OpenTelemetry tracing, and OpenAPI spec generation/consumption",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -47,6 +48,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "observability"
+  "version": "1.0.0"
 }

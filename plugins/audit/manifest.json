@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-audit",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Compliance audit logging with EventBus collection and S3/database sinks",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "core",
   "private": false,
-  "minEngineVersion": "0.19.0",
+  "minEngineVersion": "0.51.7",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-audit",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-audit",
   "keywords": [
@@ -42,38 +42,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "e9ad2d38cd4a144900b616bde099ce1f08fcd2e9a7aecfc46083b4db12e78c9b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.2/workflow-plugin-audit-darwin-amd64.tar.gz"
+      "sha256": "23460e5b46d269c9e1203f12adb3c16d5658ca29ed342c0b98c660d486859805",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.4/workflow-plugin-audit-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "c176ea3e9ad7613548130f60b8349b90322784310f1335b646413f3946904261",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.2/workflow-plugin-audit-darwin-arm64.tar.gz"
+      "sha256": "fea3e04bc516cda29cb5e88a789da99b6efefda116ce80f44016116923ad4780",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.4/workflow-plugin-audit-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "0e22669858038958cee34e75eaa4e543ab6e22dfe20cf4a17f132874e6fc154b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.2/workflow-plugin-audit-linux-amd64.tar.gz"
+      "sha256": "f874a739c146422297d84adbca121cd23c778b73c5ed69e7b1b33e92de27ae9d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.4/workflow-plugin-audit-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "ca8480dcf71178e96a08df8c368417f73070ad6bf8ef57175f600a862ca38741",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.2/workflow-plugin-audit-linux-arm64.tar.gz"
+      "sha256": "fb83c65354e0ff753595f2d99ef3f570ea71dbe815fe8f8c5dee639d02234a99",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.4/workflow-plugin-audit-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "0b509f4b5eb5b6dd018937425db01cf957c1ad914853284f455f99e4ac05b50d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.2/workflow-plugin-audit-windows-amd64.tar.gz"
+      "sha256": "2ad7ab897731a75e0ef2c42c1a422d9b437fc6c3fc51d561f6a521a166739a98",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.4/workflow-plugin-audit-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "f6c434209d4a8a01eda0b8823523bb97d58f00080e2cbcb22f76aa7064fef236",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.2/workflow-plugin-audit-windows-arm64.tar.gz"
+      "sha256": "9f7f849a809e81c31f1f0f0e2a93184d9762c3db4b89005536fa5fdd3b15a581",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-audit/releases/download/v0.1.4/workflow-plugin-audit-windows-arm64.tar.gz"
     }
   ],
   "status": "experimental",

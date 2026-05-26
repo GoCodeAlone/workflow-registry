@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-ws-auth",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "author": "GoCodeAlone",
   "description": "WebSocket HMAC authentication plugin for workflow engine",
   "source": "github.com/GoCodeAlone/workflow-plugin-ws-auth",
@@ -12,12 +12,53 @@
   "private": false,
   "status": "experimental",
   "capabilities": {
-    "moduleTypes": [],
+    "configProvider": false,
+    "moduleTypes": [
+      "ws_auth.hmac"
+    ],
     "stepTypes": [
       "step.ws_auth_identity"
     ],
-    "triggerTypes": [],
-    "workflowHandlers": []
+    "triggerTypes": []
   },
-  "category": "messaging"
+  "category": "messaging",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "ec9ccedb24f08e139bbbf76b781610840cfef56e85073d6c8340bedea619b48e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth/releases/download/v0.1.6/workflow-plugin-ws-auth-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "ceab0605190e237e9ce342d0ded25d52d9a194366dfb7314362efa205191d0a2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth/releases/download/v0.1.6/workflow-plugin-ws-auth-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "2c750050da71d66258e12d02bf9fa59dda339955c374810e51f34b83938b4386",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth/releases/download/v0.1.6/workflow-plugin-ws-auth-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "0746cc141474b8ff562a38d5b26833aa4a7ee7da5766080ea68d8d995332054a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth/releases/download/v0.1.6/workflow-plugin-ws-auth-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "3aa703a2793956a7efde1426c8f43dda1ab67148e47e2f9f1d64bf034c9c3953",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth/releases/download/v0.1.6/workflow-plugin-ws-auth-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "35caeaef0e9952f4276ca1f2a0ab5d2eda31752b6e0fc4d7eaf134f186c0ab6e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-ws-auth/releases/download/v0.1.6/workflow-plugin-ws-auth-windows-arm64.tar.gz"
+    }
+  ],
+  "minEngineVersion": "0.51.7"
 }

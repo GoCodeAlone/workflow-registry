@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-crm",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Vendor-neutral CRM integration with Salesforce adapter",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "core",
   "private": false,
-  "minEngineVersion": "0.3.55",
+  "minEngineVersion": "0.51.7",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-crm",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-crm",
   "keywords": [
@@ -40,38 +40,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "880c40774040374e361a210bda79cebba1e22bd2274da8c3f8767d11ba646854",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.2/workflow-plugin-crm-darwin-amd64.tar.gz"
+      "sha256": "beceb1cb64574c92fd5b86921de9c03c34e7cc588edf9cb37bd6ade760c555bf",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.4/workflow-plugin-crm-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "1d2936ac394405ff8d6f64106783ff0326026ed4d75ce69be2ffd5d8e0dc133a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.2/workflow-plugin-crm-darwin-arm64.tar.gz"
+      "sha256": "0a5e7d8a8834fdc19096ab636a060d7799bdf93677d0c1bcc776a66b1ef2d14f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.4/workflow-plugin-crm-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "3b86eb0743bba9b461ab0dad4a3bbbe67914104c2ae8271cab84d06c10745701",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.2/workflow-plugin-crm-linux-amd64.tar.gz"
+      "sha256": "7810d038d30a8068752dff310f75e6cd1208ba06376d0be67027afe8c998469e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.4/workflow-plugin-crm-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "8df3b46a814beaa65eaaec55ebb52d474454d8b2b8753c53df19b07c41309b89",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.2/workflow-plugin-crm-linux-arm64.tar.gz"
+      "sha256": "16ebb33e349c93301d5b915f85c94bd01098a5436c313c6d27a81517616139f1",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.4/workflow-plugin-crm-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "d5e897a2355d34dabc16623e49396fea12dbe12408d94361966cf7ae5b8fac88",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.2/workflow-plugin-crm-windows-amd64.tar.gz"
+      "sha256": "d77b8dbe95c8707107100276f09795eb46809948264f780abae5224df08f62d0",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.4/workflow-plugin-crm-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "6c46f683c76808ff7af9f7c2f3a4d459dac783c281b1b3ab6ba20a8716e6f522",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.2/workflow-plugin-crm-windows-arm64.tar.gz"
+      "sha256": "69757ab13a8648bc59b7bf5011a27d488345a0f083e19348b91572957a83482e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-crm/releases/download/v0.1.4/workflow-plugin-crm-windows-arm64.tar.gz"
     }
   ],
   "status": "experimental",

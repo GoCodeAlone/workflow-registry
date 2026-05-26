@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-erp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Enterprise ERP integration via OData v4 with SAP adapter",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "core",
   "private": false,
-  "minEngineVersion": "1.13.0",
+  "minEngineVersion": "0.51.7",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-erp",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-erp",
   "keywords": [
@@ -19,23 +19,61 @@
     "integration"
   ],
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
       "erp.provider"
     ],
     "stepTypes": [
-      "step.erp_read_entity",
-      "step.erp_create_entity",
-      "step.erp_update_entity",
-      "step.erp_delete_entity",
-      "step.erp_query",
+      "step.erp_entity_read",
+      "step.erp_entity_query",
+      "step.erp_entity_create",
+      "step.erp_entity_update",
+      "step.erp_entity_delete",
       "step.erp_batch",
-      "step.erp_function_import",
-      "step.erp_get_metadata",
-      "step.erp_expand"
+      "step.erp_function_call",
+      "step.erp_metadata",
+      "step.erp_raw_request"
     ],
     "triggerTypes": []
   },
-  "downloads": [],
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "49263707ade9d012929d340d573a18ff0dc0cf42ed42280f1a25a8a298f141ef",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-erp/releases/download/v0.1.2/workflow-plugin-erp-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "ead330b06ea0e9c7cf062982d56109f6175d5db6c9e21cc41ef3290842414765",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-erp/releases/download/v0.1.2/workflow-plugin-erp-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "601ba59621a0f9a2a657177648e63cfc9d082854741ec3ee6c1c52e8020ac463",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-erp/releases/download/v0.1.2/workflow-plugin-erp-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "a893aae885bce9e3b1f6c055c67852e3437fc0804b3922296aa0e289003627cd",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-erp/releases/download/v0.1.2/workflow-plugin-erp-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "1d201bc9ab10a4c6d1ed3c11c441fe7fcc70328623728c375dec21870beb616e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-erp/releases/download/v0.1.2/workflow-plugin-erp-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "0a4c16b7f1b371ea8bf332d4a4d6ca410d1e35303c285c076b4b090913ae3b12",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-erp/releases/download/v0.1.2/workflow-plugin-erp-windows-arm64.tar.gz"
+    }
+  ],
   "status": "experimental",
   "category": "integrations"
 }

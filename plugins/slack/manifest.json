@@ -1,13 +1,13 @@
 {
   "name": "slack",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "author": "GoCodeAlone",
   "description": "Slack messaging and workspace automation. Provides a provider module backed by the Slack Web API and Socket Mode, pipeline steps for messages/blocks/reactions/files, and a Socket Mode event trigger.",
   "source": "github.com/GoCodeAlone/workflow-plugin-slack",
   "type": "external",
   "tier": "community",
   "license": "MIT",
-  "minEngineVersion": "0.3.40",
+  "minEngineVersion": "0.51.7",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-slack",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-slack",
   "keywords": [
@@ -41,26 +41,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "ed82f85b63fcb48094b83f6016c329b339d8d396f733e382af6029faef30011c",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.0/workflow-plugin-slack-darwin-amd64.tar.gz"
+      "sha256": "639c1ce41a0cba9cd88217d2f12fd952de2bb56375c4316313af6d931b1064a5",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.6/workflow-plugin-slack-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "11ea36ec08556b55feb302f396d985c57b66535131c108a9f48a402c24a51334",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.0/workflow-plugin-slack-darwin-arm64.tar.gz"
+      "sha256": "76665335616658562a6ab487b6d4be03346c02386b2d6d4265c8f759dd35605b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.6/workflow-plugin-slack-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "17ad59f096f8728fc5347e4578cbc1a60a691548b75f55179a365197ffe47bdc",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.0/workflow-plugin-slack-linux-amd64.tar.gz"
+      "sha256": "26f2326993ee8ca368bcda2803c03bb6ff8dcfbbac0c0e5c697a76a318e12a10",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.6/workflow-plugin-slack-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "78843ca8fd84a0ce0f4b8a2dbbf260fc944965e84308e01c9417cdf72bfdcb09",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.0/workflow-plugin-slack-linux-arm64.tar.gz"
+      "sha256": "c705cad5cb7d9b5618baa7337225b91d2929a412eec537d50615ee3ac2b1a14a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.6/workflow-plugin-slack-linux-arm64.tar.gz"
     }
   ],
   "status": "experimental",
