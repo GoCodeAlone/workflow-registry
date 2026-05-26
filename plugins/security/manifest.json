@@ -1,6 +1,6 @@
 {
   "name": "security",
-  "version": "0.2.2",
+  "version": "2.0.3",
   "author": "GoCodeAlone",
   "description": "Unified security plugin: WAF (Coraza/AWS/GCloud/Cloudflare), MFA/encryption (TOTP, AES-256-GCM, AWS KMS, GCP KMS, Vault Transit), authorization (Casbin RBAC, Permit.io), data protection (PII detection/masking), sandbox (WASM/wazero, Docker), and supply-chain security (signatures, vuln scanning, SBOM)",
   "source": "github.com/GoCodeAlone/workflow-plugin-security",
@@ -8,7 +8,7 @@
   "tier": "premium",
   "license": "Proprietary",
   "private": true,
-  "minEngineVersion": "0.3.0",
+  "minEngineVersion": "0.53.0",
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-security",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-security",
   "keywords": [
@@ -32,6 +32,7 @@
     "sbom"
   ],
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [
       "security.waf",
       "security.waf.aws",
@@ -91,8 +92,7 @@
       "step.sbom_generate",
       "step.sbom_check"
     ],
-    "triggerTypes": [],
-    "workflowHandlers": []
+    "triggerTypes": []
   },
   "assets": {
     "ui": false,
@@ -100,24 +100,28 @@
   },
   "downloads": [
     {
-      "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.2.2/workflow-plugin-security-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.2.2/workflow-plugin-security-linux-arm64.tar.gz"
-    },
-    {
       "os": "darwin",
+      "sha256": "be097b3079b0a166acdda02e64697373d0c680328a9316f51d059dcbbc6e7dd7",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.3/workflow-plugin-security-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "b35fb4c80b51775bc020c858a82de4b92791f3357fb3cca8d76630a083c016eb",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.3/workflow-plugin-security-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.2.2/workflow-plugin-security-darwin-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "ccbca3de9b94e738155a8c61bea8250dc7e442af080232b2d0969b30fe908fc3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.3/workflow-plugin-security-linux-amd64.tar.gz"
     },
     {
-      "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v0.2.2/workflow-plugin-security-darwin-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "90e3ad6851a9502c6a7d7acc92a208dca54babadbb140571464597b0c38ccb7f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.3/workflow-plugin-security-linux-arm64.tar.gz"
     }
   ],
   "category": "security"
