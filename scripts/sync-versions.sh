@@ -99,6 +99,90 @@ fetch_plugin_json() {
   gh api "repos/$gh_repo/contents/plugin.json?ref=$tag" --jq '.content' 2>/dev/null | base64 -d 2>/dev/null || true
 }
 
+normalize_plugin_json_for_registry() {
+  local plugin_name="$1"
+  jq -c --arg plugin "$plugin_name" '
+    def clean_iac_provider:
+      if . == null then null
+      else {
+        name: .name,
+        resourceTypes: .resourceTypes,
+        computePlanVersion: .computePlanVersion
+      } | with_entries(select(.value != null))
+      end;
+
+    def clean_capability_iac_provider:
+      if . == null then null
+      else {
+        name: .name,
+        resourceTypes: .resourceTypes,
+        supportedCanonicalKeys: .supportedCanonicalKeys,
+        configSchema: .configSchema
+      } | with_entries(select(.value != null))
+      end;
+
+    def provider_name($caps):
+      (
+        $caps.iacProvider.name?
+        // .iacProvider.name?
+        // (($caps.moduleTypes // [])[]? | select(startswith("iac.provider.")) | sub("^iac.provider\\."; ""))
+        // ($plugin | sub("^workflow-plugin-"; ""))
+      );
+
+    def clean_cli_commands:
+      [
+        .[]? |
+        {
+          name: .name,
+          description: .description,
+          flags_passthrough: (
+            if has("flags_passthrough") then .flags_passthrough
+            elif has("flagsPassthrough") then .flagsPassthrough
+            else null
+            end
+          ),
+          subcommands: (
+            if .subcommands == null then null
+            else [.subcommands[]? | {name: .name, description: .description} | with_entries(select(.value != null))]
+            end
+          )
+        } | with_entries(select(.value != null))
+      ];
+
+    def clean_capabilities:
+      (.capabilities // {}) as $caps |
+      {}
+      + (if $caps.configProvider != null then {configProvider: $caps.configProvider} else {} end)
+      + (if $caps.moduleTypes != null then {moduleTypes: $caps.moduleTypes} else {} end)
+      + (if $caps.stepTypes != null then {stepTypes: $caps.stepTypes} else {} end)
+      + (if $caps.triggerTypes != null then {triggerTypes: $caps.triggerTypes} else {} end)
+      + (if $caps.workflowHandlers != null then {workflowHandlers: $caps.workflowHandlers} else {} end)
+      + (if $caps.wiringHooks != null then {wiringHooks: $caps.wiringHooks} else {} end)
+      + (if $caps.migrationDrivers != null then {migrationDrivers: $caps.migrationDrivers} else {} end)
+      + (if $caps.iacStateBackends != null then {iacStateBackends: $caps.iacStateBackends} else {} end)
+      + (if $caps.serviceMethods != null then {serviceMethods: $caps.serviceMethods} else {} end)
+      + (if $caps.buildHooks != null then {buildHooks: $caps.buildHooks} else {} end)
+      + (if $caps.cliCommands != null then {cliCommands: ($caps.cliCommands | clean_cli_commands)} else {} end)
+      + (
+          if $caps.iacProvider != null or $caps.resourceTypes != null then
+            {
+              iacProvider: (
+                (($caps.iacProvider // {}) | clean_capability_iac_provider // {})
+                + (if $caps.resourceTypes != null then {name: provider_name($caps), resourceTypes: $caps.resourceTypes} else {} end)
+              )
+            }
+          else {}
+          end
+        );
+
+    {
+      capabilities: (clean_capabilities | if . == {} then null else . end),
+      minEngineVersion: (.minEngineVersion // null),
+      iacProvider: (.iacProvider | clean_iac_provider)
+    }
+  '
+}
+
 mismatches=0
 
 for manifest in "$PLUGINS_DIR"/*/manifest.json; do
@@ -198,11 +282,7 @@ for manifest in "$PLUGINS_DIR"/*/manifest.json; do
       caps_synced=""
       if [[ -n "$plugin_json" ]]; then
         tmp_caps="$(mktemp)"
-        echo "$plugin_json" | jq -c '{
-          capabilities: (.capabilities // null),
-          minEngineVersion: (.minEngineVersion // null),
-          iacProvider: (.iacProvider // null)
-        }' > "$tmp_caps" 2>/dev/null || true
+        echo "$plugin_json" | normalize_plugin_json_for_registry "$plugin_name" > "$tmp_caps" 2>/dev/null || true
         if [[ -s "$tmp_caps" ]]; then
           tmp2="$(mktemp)"
           jq --slurpfile src "$tmp_caps" '
