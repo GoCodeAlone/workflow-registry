@@ -22,10 +22,13 @@
     ],
     "stepTypes": [],
     "triggerTypes": [],
-    "resourceTypes": [
-      "infra.dns",
-      "infra.domain_transfer"
-    ]
+    "iacProvider": {
+      "name": "namecheap",
+      "resourceTypes": [
+        "infra.dns",
+        "infra.domain_transfer"
+      ]
+    }
   },
   "required_secrets": [
     {

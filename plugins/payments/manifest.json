@@ -47,7 +47,7 @@
       {
         "name": "payments",
         "description": "Payment provider operations (webhook ensure, …)",
-        "flagsPassthrough": true
+        "flags_passthrough": true
       }
     ]
   },
