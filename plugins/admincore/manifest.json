@@ -1,0 +1,23 @@
+{
+  "author": "GoCodeAlone",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "wiringHooks": [],
+    "workflowHandlers": []
+  },
+  "category": "core",
+  "description": "Core admin-console UI navigation pages, provided as a built-in native plugin",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "keywords": ["admin", "ui", "console", "navigation", "native"],
+  "license": "MIT",
+  "minEngineVersion": "0.2.0",
+  "name": "admincore",
+  "path": "plugins/admincore",
+  "repository": "https://github.com/GoCodeAlone/workflow",
+  "source": "github.com/GoCodeAlone/workflow",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
+}

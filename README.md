@@ -82,6 +82,7 @@ These plugins ship in the `GoCodeAlone/workflow` engine and are available withou
 | Plugin | Description |
 |--------|-------------|
 | [actors](./plugins/actors/manifest.json) | Actor model support with goakt v4 |
+| [admincore](./plugins/admincore/manifest.json) | Core admin-console UI navigation pages, provided as a built-in native plugin |
 | [agent](./plugins/agent/manifest.json) | AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection, orchestration (SSE hub, scheduler, MCP client/server, approvals, sub-agents, webhooks, security auditing, JWT, bcrypt, OAuth) |
 | [ai](./plugins/ai/manifest.json) | AI pipeline steps (complete, classify, extract), dynamic components, and sub-workflow orchestration |
 | [api](./plugins/api/manifest.json) | REST API handlers, CQRS query/command, API gateway, and data transformation |
@@ -91,6 +92,7 @@ These plugins ship in the `GoCodeAlone/workflow` engine and are available withou
 | [configprovider](./plugins/configprovider/manifest.json) | Application configuration registry with schema validation, defaults, and source layering |
 | [datastores](./plugins/datastores/manifest.json) | NoSQL data store modules and pipeline steps |
 | [dlq](./plugins/dlq/manifest.json) | Dead letter queue service module for failed message management |
+| [docmanager](./plugins/docmanager/manifest.json) | Markdown documentation management HTTP API (documents and categories), provided as a built-in native plugin |
 | [eventstore](./plugins/eventstore/manifest.json) | Event store service module for execution event persistence |
 | [featureflags](./plugins/featureflags/manifest.json) | Feature flag service module and pipeline steps (feature_flag, ff_gate) |
 | [gitlab](./plugins/gitlab/manifest.json) | GitLab CI integration: webhook receiver (gitlab.webhook), API client (gitlab.client), pipeline trigger/status steps, and MR management steps. |
@@ -113,6 +115,7 @@ These plugins ship in the `GoCodeAlone/workflow` engine and are available withou
 | [secrets](./plugins/secrets/manifest.json) | Secrets management modules (Vault, AWS Secrets Manager, OS Keychain) |
 | [statemachine](./plugins/statemachine/manifest.json) | State machine engine, tracker, connector modules and workflow handler |
 | [storage](./plugins/storage/manifest.json) | Storage, database, persistence, and cache modules with DB pipeline steps |
+| [storebrowser](./plugins/storebrowser/manifest.json) | Read-only browser for engine stores (tables, events, dead-letter queue) with a parameterized SQL query endpoint, provided as a built-in native plugin |
 | [timeline](./plugins/timeline/manifest.json) | Timeline and replay service module for execution visualization |
 
 ## First-party External Plugins

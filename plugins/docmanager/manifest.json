@@ -1,0 +1,23 @@
+{
+  "author": "GoCodeAlone",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "wiringHooks": [],
+    "workflowHandlers": []
+  },
+  "category": "core",
+  "description": "Markdown documentation management HTTP API (documents and categories), provided as a built-in native plugin",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "keywords": ["docs", "markdown", "documentation", "native"],
+  "license": "MIT",
+  "minEngineVersion": "0.2.0",
+  "name": "docmanager",
+  "path": "plugins/docmanager",
+  "repository": "https://github.com/GoCodeAlone/workflow",
+  "source": "github.com/GoCodeAlone/workflow",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
+}
