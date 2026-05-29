@@ -1,0 +1,23 @@
+{
+  "author": "GoCodeAlone",
+  "capabilities": {
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": [],
+    "wiringHooks": [],
+    "workflowHandlers": []
+  },
+  "category": "core",
+  "description": "Read-only browser for engine stores (tables, events, dead-letter queue) with a parameterized SQL query endpoint, provided as a built-in native plugin",
+  "homepage": "https://github.com/GoCodeAlone/workflow",
+  "keywords": ["store", "browser", "sql", "events", "dlq", "admin", "native"],
+  "license": "MIT",
+  "minEngineVersion": "0.2.0",
+  "name": "storebrowser",
+  "path": "plugins/storebrowser",
+  "repository": "https://github.com/GoCodeAlone/workflow",
+  "source": "github.com/GoCodeAlone/workflow",
+  "tier": "core",
+  "type": "builtin",
+  "version": "1.0.0"
+}
