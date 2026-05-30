@@ -2,6 +2,14 @@
   "name": "workflow-plugin-digitalocean",
   "version": "2.1.7",
   "minEngineVersion": "0.64.3",
+  "required_secrets": [
+    {
+      "name": "DIGITALOCEAN_TOKEN",
+      "sensitive": true,
+      "description": "DigitalOcean API token with read/write scope (DNS + infra via godo).",
+      "prompt": "DigitalOcean API token"
+    }
+  ],
   "description": "DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -141,7 +149,7 @@
           }
         },
         "infra.firewall": {
-          "description": "DigitalOcean cloud firewall. Attaches to Droplets by ID or by tag (which auto-attaches future Droplets / DOKS pools that receive the tag). Either `droplet_ids` or `tags` is REQUIRED; `wfctl infra apply` rejects firewalls with no targets before any DO API call. NOTE: DO firewalls do not attach to App Platform apps — for App-Platform-only deployments, use `expose: internal` services plus `trusted_sources` on managed databases.",
+          "description": "DigitalOcean cloud firewall. Attaches to Droplets by ID or by tag (which auto-attaches future Droplets / DOKS pools that receive the tag). Either `droplet_ids` or `tags` is REQUIRED; `wfctl infra apply` rejects firewalls with no targets before any DO API call. NOTE: DO firewalls do not attach to App Platform apps \u2014 for App-Platform-only deployments, use `expose: internal` services plus `trusted_sources` on managed databases.",
           "fields": {
             "droplet_ids": {
               "type": "array<int>",
