@@ -1,0 +1,93 @@
+{
+  "name": "workflow-plugin-scalekit",
+  "version": "0.1.0",
+  "description": "Scalekit enterprise SSO and Directory Sync provider plugin",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.64.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-scalekit",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-scalekit",
+  "keywords": [
+    "scalekit",
+    "sso",
+    "saml",
+    "oidc",
+    "scim",
+    "directory-sync"
+  ],
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [
+      "scalekit.provider"
+    ],
+    "stepTypes": [
+      "step.scalekit_auth_provider_describe",
+      "step.scalekit_connection_create",
+      "step.scalekit_connection_get",
+      "step.scalekit_connection_list",
+      "step.scalekit_connection_enable",
+      "step.scalekit_connection_disable",
+      "step.scalekit_connection_delete",
+      "step.scalekit_directory_create",
+      "step.scalekit_directory_get",
+      "step.scalekit_directory_list",
+      "step.scalekit_directory_enable",
+      "step.scalekit_directory_disable",
+      "step.scalekit_directory_delete",
+      "step.scalekit_directory_user_list",
+      "step.scalekit_directory_group_list"
+    ],
+    "triggerTypes": []
+  },
+  "required_secrets": [
+    {
+      "name": "SCALEKIT_ENVIRONMENT_URL",
+      "sensitive": false,
+      "description": "Scalekit environment URL. Referenced as ${SCALEKIT_ENVIRONMENT_URL}.",
+      "prompt": "Scalekit environment URL"
+    },
+    {
+      "name": "SCALEKIT_CLIENT_ID",
+      "sensitive": false,
+      "description": "Scalekit client ID. Referenced as ${SCALEKIT_CLIENT_ID}.",
+      "prompt": "Scalekit client ID"
+    },
+    {
+      "name": "SCALEKIT_CLIENT_SECRET",
+      "sensitive": true,
+      "description": "Scalekit client secret. Referenced as ${SCALEKIT_CLIENT_SECRET}.",
+      "prompt": "Scalekit client secret"
+    }
+  ],
+  "downloads": [
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "sha256": "9da66a090180df18baa0027fe5f87399fb2fe98bfe80416c3b05a960408babb9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.0/workflow-plugin-scalekit-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "sha256": "1199eeb6e28310880ade6779c9ecf9b1f8a12089b6bf67f04f206a9fb9ac2467",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.0/workflow-plugin-scalekit-darwin-arm64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "sha256": "49f1cb09e4602a62c29a677048bb75ddbf646a54c584cfb5f5735630de3cfd4f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.0/workflow-plugin-scalekit-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "sha256": "7fc966b361d9c79c73abc750ac0c8bb42697b8c4eeac76131ac5c4cba56b487c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.0/workflow-plugin-scalekit-linux-arm64.tar.gz"
+    }
+  ],
+  "status": "experimental",
+  "category": "integrations"
+}
