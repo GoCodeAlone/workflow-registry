@@ -8,6 +8,20 @@
   "tier": "core",
   "private": false,
   "minEngineVersion": "0.53.0",
+  "required_secrets": [
+    {
+      "name": "STRIPE_SECRET_KEY",
+      "sensitive": true,
+      "description": "Stripe secret API key (provider: stripe). PayPal deployments instead provision PAYPAL_CLIENT_ID + PAYPAL_CLIENT_SECRET. Referenced as ${STRIPE_SECRET_KEY}.",
+      "prompt": "Stripe secret key"
+    },
+    {
+      "name": "STRIPE_WEBHOOK_SECRET",
+      "sensitive": true,
+      "description": "Stripe webhook signing secret; required for step.payment_webhook_verify. Referenced as ${STRIPE_WEBHOOK_SECRET}.",
+      "prompt": "Stripe webhook signing secret"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-payments",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-payments",
   "keywords": [

@@ -8,6 +8,20 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.51.2",
+  "required_secrets": [
+    {
+      "name": "TWILIO_ACCOUNT_SID",
+      "sensitive": false,
+      "description": "Twilio Account SID (identifier). Referenced as ${TWILIO_ACCOUNT_SID}.",
+      "prompt": "Twilio Account SID"
+    },
+    {
+      "name": "TWILIO_AUTH_TOKEN",
+      "sensitive": true,
+      "description": "Twilio auth token (primary auth path; API-key path uses TWILIO_API_KEY + TWILIO_API_SECRET instead). Referenced as ${TWILIO_AUTH_TOKEN}.",
+      "prompt": "Twilio auth token"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-twilio",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-twilio",
   "keywords": [

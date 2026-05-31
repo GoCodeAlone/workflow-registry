@@ -8,6 +8,14 @@
   "tier": "community",
   "license": "MIT",
   "minEngineVersion": "0.51.7",
+  "required_secrets": [
+    {
+      "name": "DISCORD_BOT_TOKEN",
+      "sensitive": true,
+      "description": "Discord bot token. Referenced as ${DISCORD_BOT_TOKEN} in the provider token config.",
+      "prompt": "Discord bot token"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-discord",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-discord",
   "keywords": [

@@ -8,6 +8,20 @@
   "tier": "community",
   "license": "MIT",
   "minEngineVersion": "0.51.7",
+  "required_secrets": [
+    {
+      "name": "SLACK_BOT_TOKEN",
+      "sensitive": true,
+      "description": "Slack bot token (xoxb-…). Referenced as ${SLACK_BOT_TOKEN}.",
+      "prompt": "Slack bot token"
+    },
+    {
+      "name": "SLACK_APP_TOKEN",
+      "sensitive": true,
+      "description": "Slack app-level token (xapp-…) for Socket Mode. Referenced as ${SLACK_APP_TOKEN}.",
+      "prompt": "Slack app token"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-slack",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-slack",
   "keywords": [
