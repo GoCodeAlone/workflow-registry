@@ -8,6 +8,32 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.64.3",
+  "required_secrets": [
+    {
+      "name": "AZURE_CLIENT_ID",
+      "sensitive": false,
+      "description": "Azure AD app (service principal) client ID for DefaultAzureCredential. Referenced as ${AZURE_CLIENT_ID}.",
+      "prompt": "Azure client ID"
+    },
+    {
+      "name": "AZURE_CLIENT_SECRET",
+      "sensitive": true,
+      "description": "Azure AD app client secret. Referenced as ${AZURE_CLIENT_SECRET}.",
+      "prompt": "Azure client secret"
+    },
+    {
+      "name": "AZURE_TENANT_ID",
+      "sensitive": false,
+      "description": "Azure AD tenant ID. Referenced as ${AZURE_TENANT_ID}.",
+      "prompt": "Azure tenant ID"
+    },
+    {
+      "name": "AZURE_SUBSCRIPTION_ID",
+      "sensitive": false,
+      "description": "Azure subscription ID for IaC operations. Referenced as ${AZURE_SUBSCRIPTION_ID}.",
+      "prompt": "Azure subscription ID"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-azure",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-azure",
   "keywords": [
