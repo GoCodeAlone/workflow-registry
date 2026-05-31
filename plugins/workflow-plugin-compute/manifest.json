@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-compute",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -40,14 +40,14 @@
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "341d401e129e9e220ae2d7b5dad1831b90f81c9b2453872d3f46bc3260984c8d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.6/workflow-plugin-compute-darwin-arm64.tar.gz"
+      "sha256": "53e5d60485de99086aaf38fe22dd7d8ee55e1002a16f2f3de25b30a9f8749817",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.7/workflow-plugin-compute-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "9e7f384f69d78a14096d45e1191f167524671f7ebafe1f9a005b010911601897",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.6/workflow-plugin-compute-linux-amd64.tar.gz"
+      "sha256": "c693b5122c65f2a39de36ecbbc5b1bfb1f39e66aa0987725ce86d2e7acd33747",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.7/workflow-plugin-compute-linux-amd64.tar.gz"
     }
   ],
   "status": "verified",

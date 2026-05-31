@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-okta",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "description": "Okta identity and access management — users, groups, applications, authorization servers, MFA, policies, and more",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -164,26 +164,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "cebfe7f921b0db0530eccf1dc5876555e3396727f9a2d83e0e1c83fd8e2039a1",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.4/workflow-plugin-okta-darwin-amd64.tar.gz"
+      "sha256": "a9851f27f93695c105adab783758808bf79e0dbfeb0790cd3afb39dcf0a58b88",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.6/workflow-plugin-okta-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "4c3bbeeed0ba687d4bf5b61fe4c3cfc5b8c5f6412ecd7deb84208742195d2c25",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.4/workflow-plugin-okta-darwin-arm64.tar.gz"
+      "sha256": "d9d7b94ade4259958d6381240ca2ca484b423ff6a8e46d0c6fdbc8b8e7cef131",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.6/workflow-plugin-okta-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "d98053d2eac754e27ee2881df4a7806eabf7862593a6861e5e528f09e3511abc",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.4/workflow-plugin-okta-linux-amd64.tar.gz"
+      "sha256": "6b90573db5f8bc0ced004ac340666ed4e722066f4972c340c633cef36605f633",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.6/workflow-plugin-okta-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "7e60ea57480ee4f184f84ae8061f4424d1b869c32f6cf760892da653615eb4a6",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.4/workflow-plugin-okta-linux-arm64.tar.gz"
+      "sha256": "0f3ac4c7a2de600539a3b9cf8f154ee7dfc81c68ac04c26a20e5c9648f401b88",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.6/workflow-plugin-okta-linux-arm64.tar.gz"
     }
   ],
   "status": "experimental",
