@@ -8,6 +8,14 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.51.7",
+  "required_secrets": [
+    {
+      "name": "MONDAY_API_TOKEN",
+      "sensitive": true,
+      "description": "Monday.com API token. Referenced as ${MONDAY_API_TOKEN} in apiToken.",
+      "prompt": "Monday.com API token"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-monday",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-monday",
   "keywords": [

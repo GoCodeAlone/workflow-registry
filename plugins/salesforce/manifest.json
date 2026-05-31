@@ -8,6 +8,20 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.51.7",
+  "required_secrets": [
+    {
+      "name": "SALESFORCE_CLIENT_ID",
+      "sensitive": false,
+      "description": "Salesforce connected-app consumer key (OAuth path; alternate path uses accessToken + instanceUrl). Referenced as ${SALESFORCE_CLIENT_ID}.",
+      "prompt": "Salesforce client ID"
+    },
+    {
+      "name": "SALESFORCE_CLIENT_SECRET",
+      "sensitive": true,
+      "description": "Salesforce connected-app consumer secret. Referenced as ${SALESFORCE_CLIENT_SECRET}.",
+      "prompt": "Salesforce client secret"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-salesforce",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-salesforce",
   "keywords": [
