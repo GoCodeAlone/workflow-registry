@@ -8,6 +8,14 @@
   "tier": "core",
   "private": false,
   "minEngineVersion": "0.51.7",
+  "required_secrets": [
+    {
+      "name": "PINECONE_API_KEY",
+      "sensitive": true,
+      "description": "Pinecone API key (provider: pinecone). Other vector providers (e.g. Milvus) use their own auth. Referenced as ${PINECONE_API_KEY}.",
+      "prompt": "Pinecone API key"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
   "keywords": [

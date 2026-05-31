@@ -8,6 +8,20 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.3.30",
+  "required_secrets": [
+    {
+      "name": "DATADOG_API_KEY",
+      "sensitive": true,
+      "description": "Datadog API key. Referenced as ${DATADOG_API_KEY} in apiKey.",
+      "prompt": "Datadog API key"
+    },
+    {
+      "name": "DATADOG_APP_KEY",
+      "sensitive": true,
+      "description": "Datadog application key (required alongside the API key). Referenced as ${DATADOG_APP_KEY} in appKey.",
+      "prompt": "Datadog application key"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-datadog",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-datadog",
   "keywords": [

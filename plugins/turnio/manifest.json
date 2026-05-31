@@ -8,6 +8,14 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.51.7",
+  "required_secrets": [
+    {
+      "name": "TURNIO_API_TOKEN",
+      "sensitive": true,
+      "description": "Turn.io API token. Referenced as ${TURNIO_API_TOKEN} in apiToken.",
+      "prompt": "Turn.io API token"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-turnio",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-turnio",
   "keywords": [

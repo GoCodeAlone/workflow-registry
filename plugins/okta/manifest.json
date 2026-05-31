@@ -8,6 +8,20 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.51.7",
+  "required_secrets": [
+    {
+      "name": "OKTA_ORG_URL",
+      "sensitive": false,
+      "description": "Okta org URL (e.g. https://example.okta.com). Referenced as ${OKTA_ORG_URL}.",
+      "prompt": "Okta org URL"
+    },
+    {
+      "name": "OKTA_API_TOKEN",
+      "sensitive": true,
+      "description": "Okta API token (primary auth path; OAuth path uses clientId + privateKey instead). Referenced as ${OKTA_API_TOKEN}.",
+      "prompt": "Okta API token"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-okta",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-okta",
   "keywords": [
