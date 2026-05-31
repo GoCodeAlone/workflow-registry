@@ -8,6 +8,14 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.51.7",
+  "required_secrets": [
+    {
+      "name": "LAUNCHDARKLY_API_KEY",
+      "sensitive": true,
+      "description": "LaunchDarkly REST API (management) key. Referenced as ${LAUNCHDARKLY_API_KEY} in apiKey.",
+      "prompt": "LaunchDarkly API key"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-launchdarkly",
   "keywords": [

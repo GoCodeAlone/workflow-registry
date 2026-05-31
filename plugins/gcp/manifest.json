@@ -8,6 +8,14 @@
   "tier": "community",
   "private": false,
   "minEngineVersion": "0.57.0",
+  "required_secrets": [
+    {
+      "name": "GCP_SERVICE_ACCOUNT_JSON",
+      "sensitive": true,
+      "description": "GCP service-account JSON key (inline blob). For the credentials.service_account_json path; ADC / Workload Identity deployments may skip. Referenced as ${GCP_SERVICE_ACCOUNT_JSON}.",
+      "prompt": "GCP service-account JSON"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-gcp",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-gcp",
   "keywords": [
