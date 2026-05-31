@@ -1,0 +1,96 @@
+{
+  "name": "workflow-plugin-auth0",
+  "version": "0.1.0",
+  "description": "Auth0 identity and access management provider plugin",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.64.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-auth0",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-auth0",
+  "keywords": [
+    "auth0",
+    "identity",
+    "iam",
+    "sso",
+    "oidc",
+    "rbac"
+  ],
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [
+      "auth0.provider"
+    ],
+    "stepTypes": [
+      "step.auth0_auth_provider_describe",
+      "step.auth0_user_create",
+      "step.auth0_user_get",
+      "step.auth0_user_list",
+      "step.auth0_user_update",
+      "step.auth0_user_delete",
+      "step.auth0_role_create",
+      "step.auth0_role_list",
+      "step.auth0_role_assign_users",
+      "step.auth0_client_create",
+      "step.auth0_client_get",
+      "step.auth0_client_list",
+      "step.auth0_client_update",
+      "step.auth0_client_delete",
+      "step.auth0_connection_list",
+      "step.auth0_organization_create",
+      "step.auth0_organization_get",
+      "step.auth0_organization_list"
+    ],
+    "triggerTypes": []
+  },
+  "required_secrets": [
+    {
+      "name": "AUTH0_DOMAIN",
+      "sensitive": false,
+      "description": "Auth0 tenant domain (e.g. example.us.auth0.com). Referenced as ${AUTH0_DOMAIN}.",
+      "prompt": "Auth0 domain"
+    },
+    {
+      "name": "AUTH0_CLIENT_ID",
+      "sensitive": false,
+      "description": "Auth0 M2M application client ID. Referenced as ${AUTH0_CLIENT_ID}.",
+      "prompt": "Auth0 client ID"
+    },
+    {
+      "name": "AUTH0_CLIENT_SECRET",
+      "sensitive": true,
+      "description": "Auth0 M2M application client secret (client-credentials path; static-token path uses a management token instead). Referenced as ${AUTH0_CLIENT_SECRET}.",
+      "prompt": "Auth0 client secret"
+    }
+  ],
+  "downloads": [
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "sha256": "2bfd9e8083b96747e1c14c2161b9a5b2ed3b0baf97afacfcd5513d0350efd7c8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.0/workflow-plugin-auth0-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "sha256": "2552a900f699d47515f539596acee89b821a8ddc1dfacf9fdb2e996cac91a0f4",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.0/workflow-plugin-auth0-darwin-arm64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "sha256": "fc9649d7af13963dd08ca06fd099d1b0925d172c234b537fc46648af4823e8b2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.0/workflow-plugin-auth0-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "sha256": "69762b2f256b54105d745c949f149497b910a35ecbeb433337fe1bdef1f58c0c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.0/workflow-plugin-auth0-linux-arm64.tar.gz"
+    }
+  ],
+  "status": "experimental",
+  "category": "integrations"
+}

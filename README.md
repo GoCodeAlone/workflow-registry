@@ -150,6 +150,7 @@ These plugins are distributed outside the engine repository and are maintained a
 |--------|-------------|------|
 | [analytics](./plugins/analytics/manifest.json) | Analytics and tag-manager injection for rendered HTML assets | community |
 | [audit-chain](./plugins/audit-chain/manifest.json) | Tamper-evident hash-chained audit logging with periodic Merkle root anchoring (OpenTimestamps/Bitcoin, git, Sigstore) | community |
+| [auth0](./plugins/auth0/manifest.json) | Auth0 identity and access management provider plugin | community |
 | [authz-ui](./plugins/authz-ui/manifest.json) | Casbin authorization policy management UI (React SPA) | premium |
 | [aws](./plugins/aws/manifest.json) | AWS provider plugin for workflow IaC — manages ECS, EKS, RDS, ElastiCache, VPC, ALB, Route53, ECR, API Gateway, Security Groups, IAM, S3, and ACM resources | community |
 | [azure](./plugins/azure/manifest.json) | Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates | community |
@@ -160,6 +161,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [datadog](./plugins/datadog/manifest.json) | Datadog monitoring and observability — metrics, events, monitors, dashboards, logs, synthetics, SLOs, incidents, and more | community |
 | [digitalocean](./plugins/digitalocean/manifest.json) | DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway | community |
 | [discord](./plugins/discord/manifest.json) | Discord messaging, bot automation, and voice channel support. Provides a provider module, pipeline steps for sending/editing/deleting messages and managing voice, and a WebSocket Gateway event trigger. | community |
+| [entra](./plugins/entra/manifest.json) | Microsoft Entra ID management provider plugin | community |
 | [eventbus](./plugins/eventbus/manifest.json) | Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations. | community |
 | [gcp](./plugins/gcp/manifest.json) | GCP infrastructure provider plugin for workflow — manages Cloud Run, GKE, Cloud SQL, Memorystore, VPC, Load Balancer, Cloud DNS, Artifact Registry, API Gateway, Firewall, IAM, GCS, and Certificate Manager | community |
 | [hover](./plugins/hover/manifest.json) | Hover DNS provider for workflow IaC (infra.dns). No official API; mimics the browser-side username+password+TOTP login flow used by pjslauta/hover-dyn-dns. | community |
@@ -172,6 +174,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [ratchet](./plugins/ratchet/manifest.json) | Autonomous AI agent orchestration platform — custom EnginePlugin for building AI-powered workflow applications with agent coordination, task management, and intelligent pipeline execution | community |
 | [rooms](./plugins/rooms/manifest.json) | Room management plugin for workflow engine — join, leave, broadcast, members | community |
 | [salesforce](./plugins/salesforce/manifest.json) | Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more | community |
+| [scalekit](./plugins/scalekit/manifest.json) | Scalekit enterprise SSO and Directory Sync provider plugin | community |
 | [security-scanner](./plugins/security-scanner/manifest.json) | Security scanner plugin for workflow engine — vulnerability scanning, secret detection, and compliance checks | community |
 | [security](./plugins/security/manifest.json) | Unified security plugin: WAF (Coraza/AWS/GCloud/Cloudflare), MFA/encryption (TOTP, AES-256-GCM, AWS KMS, GCP KMS, Vault Transit), authorization (Casbin RBAC, Permit.io), data protection (PII detection/masking), sandbox (WASM/wazero, Docker), and supply-chain security (signatures, vuln scanning, SBOM) | premium |
 | [slack](./plugins/slack/manifest.json) | Slack messaging and workspace automation. Provides a provider module backed by the Slack Web API and Socket Mode, pipeline steps for messages/blocks/reactions/files, and a Socket Mode event trigger. | community |

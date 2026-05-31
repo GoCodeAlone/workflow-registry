@@ -1,0 +1,96 @@
+{
+  "name": "workflow-plugin-entra",
+  "version": "0.1.0",
+  "description": "Microsoft Entra ID management provider plugin",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.64.0",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-entra",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-entra",
+  "keywords": [
+    "entra",
+    "microsoft-graph",
+    "identity",
+    "iam",
+    "sso",
+    "oidc"
+  ],
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [
+      "entra.provider"
+    ],
+    "stepTypes": [
+      "step.entra_auth_provider_describe",
+      "step.entra_user_create",
+      "step.entra_user_get",
+      "step.entra_user_list",
+      "step.entra_user_update",
+      "step.entra_user_delete",
+      "step.entra_group_create",
+      "step.entra_group_get",
+      "step.entra_group_list",
+      "step.entra_group_add_member",
+      "step.entra_group_remove_member",
+      "step.entra_application_create",
+      "step.entra_application_get",
+      "step.entra_application_list",
+      "step.entra_application_update",
+      "step.entra_application_delete",
+      "step.entra_directory_role_list",
+      "step.entra_service_principal_list"
+    ],
+    "triggerTypes": []
+  },
+  "required_secrets": [
+    {
+      "name": "ENTRA_TENANT_ID",
+      "sensitive": false,
+      "description": "Microsoft Entra ID tenant ID. Referenced as ${ENTRA_TENANT_ID} in the provider tenant_id config.",
+      "prompt": "Entra tenant ID"
+    },
+    {
+      "name": "ENTRA_CLIENT_ID",
+      "sensitive": false,
+      "description": "Entra app client ID. Referenced as ${ENTRA_CLIENT_ID} in client_id.",
+      "prompt": "Entra client ID"
+    },
+    {
+      "name": "ENTRA_CLIENT_SECRET",
+      "sensitive": true,
+      "description": "Entra app client secret. Referenced as ${ENTRA_CLIENT_SECRET} in client_secret.",
+      "prompt": "Entra client secret"
+    }
+  ],
+  "downloads": [
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "sha256": "7f2cb1748e654c615ec1baf5e05ab83e55e9404417b65c1bf41b9fa29e90db29",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.0/workflow-plugin-entra-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "sha256": "390ffd0ee57f96ddd97db93f1461d133b69838dfeb73f835b74149fd6ab14f68",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.0/workflow-plugin-entra-darwin-arm64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "sha256": "95c780770247438c848b40a2352ecabc5b2271f616331ddc44a2427bb8f42a74",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.0/workflow-plugin-entra-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "sha256": "44af7c207487888ea721584d27630a306bc9696532beb7dc3983869e80e2c67e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.0/workflow-plugin-entra-linux-arm64.tar.gz"
+    }
+  ],
+  "status": "experimental",
+  "category": "integrations"
+}
