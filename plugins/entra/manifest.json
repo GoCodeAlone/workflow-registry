@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-entra",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Microsoft Entra ID management provider plugin",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -67,28 +67,28 @@
   ],
   "downloads": [
     {
-      "os": "darwin",
       "arch": "amd64",
-      "sha256": "7f2cb1748e654c615ec1baf5e05ab83e55e9404417b65c1bf41b9fa29e90db29",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.0/workflow-plugin-entra-darwin-amd64.tar.gz"
-    },
-    {
       "os": "darwin",
-      "arch": "arm64",
-      "sha256": "390ffd0ee57f96ddd97db93f1461d133b69838dfeb73f835b74149fd6ab14f68",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.0/workflow-plugin-entra-darwin-arm64.tar.gz"
+      "sha256": "3e962959e5d3ae2db75a17d6092c531679cbdb8b8a312638e82db765c61c2c45",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.2/workflow-plugin-entra-darwin-amd64.tar.gz"
     },
     {
-      "os": "linux",
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "26b72e9115e4b41ea403853851c865a92880b2ebd25521b99cf7e167da2dfc17",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.2/workflow-plugin-entra-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "sha256": "95c780770247438c848b40a2352ecabc5b2271f616331ddc44a2427bb8f42a74",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.0/workflow-plugin-entra-linux-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "e96d859ee740bae6d7d2bbe7bd976ba5aabd090dbde613c580496b31766629fe",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.2/workflow-plugin-entra-linux-amd64.tar.gz"
     },
     {
-      "os": "linux",
       "arch": "arm64",
-      "sha256": "44af7c207487888ea721584d27630a306bc9696532beb7dc3983869e80e2c67e",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.0/workflow-plugin-entra-linux-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "8b756b218ed08deebd4a80d1e9f3719afe80875f3f2550b68ad5afba6ea49aec",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.2/workflow-plugin-entra-linux-arm64.tar.gz"
     }
   ],
   "status": "experimental",
