@@ -1,7 +1,7 @@
 {
   "name": "workflow-plugin-digitalocean",
-  "version": "2.1.7",
-  "minEngineVersion": "0.64.3",
+  "version": "2.1.8",
+  "minEngineVersion": "0.69.1",
   "required_secrets": [
     {
       "name": "DIGITALOCEAN_TOKEN",
@@ -149,7 +149,7 @@
           }
         },
         "infra.firewall": {
-          "description": "DigitalOcean cloud firewall. Attaches to Droplets by ID or by tag (which auto-attaches future Droplets / DOKS pools that receive the tag). Either `droplet_ids` or `tags` is REQUIRED; `wfctl infra apply` rejects firewalls with no targets before any DO API call. NOTE: DO firewalls do not attach to App Platform apps \u2014 for App-Platform-only deployments, use `expose: internal` services plus `trusted_sources` on managed databases.",
+          "description": "DigitalOcean cloud firewall. Attaches to Droplets by ID or by tag (which auto-attaches future Droplets / DOKS pools that receive the tag). Either `droplet_ids` or `tags` is REQUIRED; `wfctl infra apply` rejects firewalls with no targets before any DO API call. NOTE: DO firewalls do not attach to App Platform apps — for App-Platform-only deployments, use `expose: internal` services plus `trusted_sources` on managed databases.",
           "fields": {
             "droplet_ids": {
               "type": "array<int>",
@@ -207,26 +207,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "d5430c3bcf2f9f7e1959d06a311741252dc1378fcab63593dbfb8b65aeb8743d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.7/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
+      "sha256": "74bee29d2274554ec61d0829a9c3cdc9cb33c9f33c034648ee3f2944cd256b28",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.8/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "9b22be0b7566e18ce11dbd978e0ecb93ca84fd1409182d8542fdf150796c6deb",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.7/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
+      "sha256": "bff3658c954d236c6fdcbd3700ab0f428100acec67e7d319e24520a1320fab13",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.8/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "f7f2eb3e768f1c3045b7a7df647a6c4ca34826dff27c509030db557cdb367330",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.7/workflow-plugin-digitalocean-linux-amd64.tar.gz"
+      "sha256": "f22b36487b3d2487c5b45e7c1788bfb27c344ea7d4a04723961387687c5e5b74",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.8/workflow-plugin-digitalocean-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "729bedbf3c8d4961c44a2564d553413ed62e52a8eaa4a716f1f9a768e6e98260",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.7/workflow-plugin-digitalocean-linux-arm64.tar.gz"
+      "sha256": "060f67118baa3627e81bc9981ebd637fc9e45eb8aeffc4957f877663016315da",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.8/workflow-plugin-digitalocean-linux-arm64.tar.gz"
     }
   ],
   "status": "verified",
