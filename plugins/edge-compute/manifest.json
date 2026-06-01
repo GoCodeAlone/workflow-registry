@@ -1,0 +1,28 @@
+{
+  "name": "workflow-plugin-edge-compute",
+  "version": "0.1.0",
+  "description": "Edge WASM provider contracts for workflow-compute",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": false,
+  "minEngineVersion": "0.57.4",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-edge-compute",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-edge-compute",
+  "keywords": [
+    "edge",
+    "wasm",
+    "workflow-compute",
+    "cdn",
+    "lambda"
+  ],
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": []
+  },
+  "status": "experimental",
+  "category": "infrastructure"
+}

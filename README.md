@@ -161,6 +161,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [datadog](./plugins/datadog/manifest.json) | Datadog monitoring and observability — metrics, events, monitors, dashboards, logs, synthetics, SLOs, incidents, and more | community |
 | [digitalocean](./plugins/digitalocean/manifest.json) | DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway | community |
 | [discord](./plugins/discord/manifest.json) | Discord messaging, bot automation, and voice channel support. Provides a provider module, pipeline steps for sending/editing/deleting messages and managing voice, and a WebSocket Gateway event trigger. | community |
+| [edge-compute](./plugins/edge-compute/manifest.json) | Edge WASM provider contracts for workflow-compute | community |
 | [entra](./plugins/entra/manifest.json) | Microsoft Entra ID management provider plugin | community |
 | [eventbus](./plugins/eventbus/manifest.json) | Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations. | community |
 | [gcp](./plugins/gcp/manifest.json) | GCP infrastructure provider plugin for workflow — manages Cloud Run, GKE, Cloud SQL, Memorystore, VPC, Load Balancer, Cloud DNS, Artifact Registry, API Gateway, Firewall, IAM, GCS, and Certificate Manager | community |
