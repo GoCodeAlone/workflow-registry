@@ -31,6 +31,18 @@ if ! command -v gh &>/dev/null; then
   exit 1
 fi
 
+GH_TIMEOUT_SECONDS="${GH_TIMEOUT_SECONDS:-45}"
+release_cache_root="$(mktemp -d "${TMPDIR:-/tmp}/workflow-registry-releases.XXXXXX")"
+trap 'rm -rf "${release_cache_root}"' EXIT
+
+run_gh() {
+  if command -v timeout &>/dev/null; then
+    timeout "${GH_TIMEOUT_SECONDS}s" gh "$@"
+  else
+    gh "$@"
+  fi
+}
+
 echo "Building version data..."
 
 mkdir -p "${OUT_DIR}/plugins"
@@ -54,18 +66,25 @@ while IFS= read -r manifest; do
 
   # Extract owner/repo from URL, normalizing trailing slashes, .git suffix, and extra path segments
   gh_repo="$(echo "${repository}" | sed 's|https://github.com/||; s|http://github.com/||; s|github.com/||; s|\.git$||; s|/$||' | cut -d/ -f1,2)"
+  repo_cache_dir="${release_cache_root}/$(echo "${gh_repo}" | tr '/:' '__')"
+  mkdir -p "${repo_cache_dir}"
 
   echo "  ${plugin_name}: fetching releases for ${gh_repo}..."
 
   # List releases (tagName + publishedAt only; assets not available in list output)
-  if ! releases_list="$(gh release list \
-    --repo "${gh_repo}" \
-    --limit 100 \
-    --json tagName,publishedAt \
-    2>&1)"; then
-    echo "    WARNING: failed to list releases for ${gh_repo}: ${releases_list}" >&2
-    releases_list="[]"
+  releases_cache="${repo_cache_dir}/releases.json"
+  if [[ ! -f "${releases_cache}" ]]; then
+    if ! releases_list="$(run_gh release list \
+      --repo "${gh_repo}" \
+      --limit 100 \
+      --json tagName,publishedAt \
+      2>&1)"; then
+      echo "    WARNING: failed to list releases for ${gh_repo}: ${releases_list}" >&2
+      releases_list="[]"
+    fi
+    printf '%s\n' "${releases_list}" > "${releases_cache}"
   fi
+  releases_list="$(cat "${releases_cache}")"
 
   if [[ "${releases_list}" == "[]" ]] || [[ "$(echo "${releases_list}" | jq 'length')" == "0" ]]; then
     echo "    no releases found"
@@ -82,13 +101,19 @@ while IFS= read -r manifest; do
     ver="$(echo "${tag}" | sed 's/^v//')"
 
     # gh release view returns assets with a `digest` field (sha256:... format)
-    if ! release_detail="$(gh release view "${tag}" \
-      --repo "${gh_repo}" \
-      --json assets \
-      2>&1)"; then
-      echo "    WARNING: failed to fetch assets for ${gh_repo}@${tag}: ${release_detail}" >&2
-      release_detail='{"assets":[]}'
+    tag_cache_key="$(echo "${tag}" | sed 's/[^A-Za-z0-9._-]/_/g')"
+    release_detail_cache="${repo_cache_dir}/${tag_cache_key}.json"
+    if [[ ! -f "${release_detail_cache}" ]]; then
+      if ! release_detail="$(run_gh release view "${tag}" \
+        --repo "${gh_repo}" \
+        --json assets \
+        2>&1)"; then
+        echo "    WARNING: failed to fetch assets for ${gh_repo}@${tag}: ${release_detail}" >&2
+        release_detail='{"assets":[]}'
+      fi
+      printf '%s\n' "${release_detail}" > "${release_detail_cache}"
     fi
+    release_detail="$(cat "${release_detail_cache}")"
 
     version_entry="$(echo "${release_detail}" | jq \
       --arg ver "${ver}" \
