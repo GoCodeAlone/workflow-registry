@@ -22,7 +22,70 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "core",
   "description": "Abstract infra.* module types with IaCProvider delegation",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/wfctl-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/wfctl-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/wfctl-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/wfctl-linux-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/workflow-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/workflow-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/workflow-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/workflow-linux-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/workflow-lsp-server-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/workflow-lsp-server-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/workflow-lsp-server-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.70.0/workflow-lsp-server-linux-arm64"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
   "name": "infra",
@@ -33,6 +96,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "0.70.0"
 }
