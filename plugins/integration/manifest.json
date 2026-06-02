@@ -9,6 +9,7 @@
       "integration"
     ]
   },
+  "category": "integrations",
   "description": "Integration workflow handler for connector-based multi-system workflows",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -27,6 +28,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "integrations"
+  "version": "1.0.0"
 }

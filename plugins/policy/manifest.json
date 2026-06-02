@@ -14,6 +14,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "security",
   "description": "Policy engine plugin with mock backend for testing and development",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
@@ -23,6 +24,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "security"
+  "version": "1.0.0"
 }

@@ -9,8 +9,78 @@
   },
   "category": "core",
   "description": "Read-only browser for engine stores (tables, events, dead-letter queue) with a parameterized SQL query endpoint, provided as a built-in native plugin",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/wfctl-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/wfctl-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/wfctl-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/wfctl-linux-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-linux-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-lsp-server-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-lsp-server-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-lsp-server-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-lsp-server-linux-arm64"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
-  "keywords": ["store", "browser", "sql", "events", "dlq", "admin", "native"],
+  "keywords": [
+    "store",
+    "browser",
+    "sql",
+    "events",
+    "dlq",
+    "admin",
+    "native"
+  ],
   "license": "MIT",
   "minEngineVersion": "0.2.0",
   "name": "storebrowser",
@@ -19,5 +89,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0"
+  "version": "0.69.6"
 }

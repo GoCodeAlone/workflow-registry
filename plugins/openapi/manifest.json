@@ -11,6 +11,7 @@
     ],
     "workflowHandlers": []
   },
+  "category": "core",
   "description": "OpenAPI v3 spec-driven HTTP route generation with request validation and Swagger UI",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
@@ -20,6 +21,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "1.0.0"
 }

@@ -20,6 +20,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "integrations",
   "description": "GitLab CI integration: webhook receiver (gitlab.webhook), API client (gitlab.client), pipeline trigger/status steps, and MR management steps.",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -41,6 +42,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "integrations"
+  "version": "1.0.0"
 }

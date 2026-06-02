@@ -41,6 +41,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "core",
   "description": "CI/CD pipeline step types (shell exec, Docker, artifact management, security scanning, deploy, gate, build from config, git operations, AWS CodeBuild)",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -68,6 +69,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "1.0.0"
 }

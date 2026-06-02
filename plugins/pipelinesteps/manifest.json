@@ -65,6 +65,7 @@
       "pipeline"
     ]
   },
+  "category": "core",
   "description": "Generic pipeline step types, pre-processing validators, and pipeline workflow handler (including base64_decode)",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -93,6 +94,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "1.0.0"
 }

@@ -50,6 +50,7 @@
       "platform"
     ]
   },
+  "category": "core",
   "description": "Platform infrastructure modules, workflow handler, reconciliation trigger, and template step",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -69,6 +70,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "1.0.0"
 }

@@ -20,6 +20,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "data",
   "description": "Storage, database, persistence, and cache modules with DB pipeline steps",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -39,6 +40,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "data"
+  "version": "1.0.0"
 }

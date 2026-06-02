@@ -9,8 +9,75 @@
   },
   "category": "core",
   "description": "Markdown documentation management HTTP API (documents and categories), provided as a built-in native plugin",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/wfctl-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/wfctl-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/wfctl-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/wfctl-linux-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-linux-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-lsp-server-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-lsp-server-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-lsp-server-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.6/workflow-lsp-server-linux-arm64"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
-  "keywords": ["docs", "markdown", "documentation", "native"],
+  "keywords": [
+    "docs",
+    "markdown",
+    "documentation",
+    "native"
+  ],
   "license": "MIT",
   "minEngineVersion": "0.2.0",
   "name": "docmanager",
@@ -19,5 +86,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0"
+  "version": "0.69.6"
 }
