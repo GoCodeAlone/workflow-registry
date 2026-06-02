@@ -18,3 +18,8 @@ if ! grep -Fq 'release_cache_root=' "$script" || ! grep -Fq 'repo_cache_dir=' "$
   echo "build-versions must cache release API responses by repository" >&2
   exit 1
 fi
+
+if grep -Fq -- '--argjson versions "${final_versions}"' "$script"; then
+  echo "build-versions must not pass large version arrays as command-line args" >&2
+  exit 1
+fi
