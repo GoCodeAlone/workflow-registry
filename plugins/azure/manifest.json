@@ -1,41 +1,45 @@
 {
-  "name": "workflow-plugin-azure",
-  "version": "2.1.3",
-  "description": "Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates",
+  "assets": {
+    "config": true,
+    "ui": false
+  },
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.64.3",
-  "required_secrets": [
+  "capabilities": {
+    "configProvider": false,
+    "iacStateBackends": [
+      "azure_blob"
+    ],
+    "moduleTypes": [
+      "iac.provider"
+    ],
+    "stepTypes": [],
+    "triggerTypes": []
+  },
+  "category": "infrastructure",
+  "description": "Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates",
+  "downloads": [
     {
-      "name": "AZURE_CLIENT_ID",
-      "sensitive": false,
-      "description": "Azure AD app (service principal) client ID for DefaultAzureCredential. Referenced as ${AZURE_CLIENT_ID}.",
-      "prompt": "Azure client ID"
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.2.0/workflow-plugin-azure-darwin-amd64.tar.gz"
     },
     {
-      "name": "AZURE_CLIENT_SECRET",
-      "sensitive": true,
-      "description": "Azure AD app client secret. Referenced as ${AZURE_CLIENT_SECRET}.",
-      "prompt": "Azure client secret"
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.2.0/workflow-plugin-azure-darwin-arm64.tar.gz"
     },
     {
-      "name": "AZURE_TENANT_ID",
-      "sensitive": false,
-      "description": "Azure AD tenant ID. Referenced as ${AZURE_TENANT_ID}.",
-      "prompt": "Azure tenant ID"
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.2.0/workflow-plugin-azure-linux-amd64.tar.gz"
     },
     {
-      "name": "AZURE_SUBSCRIPTION_ID",
-      "sensitive": false,
-      "description": "Azure subscription ID for IaC operations. Referenced as ${AZURE_SUBSCRIPTION_ID}.",
-      "prompt": "Azure subscription ID"
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.2.0/workflow-plugin-azure-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-azure",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-azure",
   "keywords": [
     "azure",
     "iac",
@@ -49,47 +53,39 @@
     "acr",
     "apim"
   ],
-  "capabilities": {
-    "configProvider": false,
-    "moduleTypes": [
-      "iac.provider"
-    ],
-    "stepTypes": [],
-    "triggerTypes": [],
-    "iacStateBackends": [
-      "azure_blob"
-    ]
-  },
-  "assets": {
-    "ui": false,
-    "config": true
-  },
-  "downloads": [
+  "license": "MIT",
+  "minEngineVersion": "0.69.1",
+  "name": "workflow-plugin-azure",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-azure",
+  "required_secrets": [
     {
-      "arch": "amd64",
-      "os": "darwin",
-      "sha256": "e26fba371cad881ce6d60341d23d88df043d019ebb68e86c3bc87fee9260fc99",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.1.3/workflow-plugin-azure-darwin-amd64.tar.gz"
+      "description": "Azure AD app (service principal) client ID for DefaultAzureCredential. Referenced as ${AZURE_CLIENT_ID}.",
+      "name": "AZURE_CLIENT_ID",
+      "prompt": "Azure client ID",
+      "sensitive": false
     },
     {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "e74a9bdd4d94611ecc58ff7573238207c43bb7bdaa2af2dda44563683f13b868",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.1.3/workflow-plugin-azure-darwin-arm64.tar.gz"
+      "description": "Azure AD app client secret. Referenced as ${AZURE_CLIENT_SECRET}.",
+      "name": "AZURE_CLIENT_SECRET",
+      "prompt": "Azure client secret",
+      "sensitive": true
     },
     {
-      "arch": "amd64",
-      "os": "linux",
-      "sha256": "57bbb2e0181af26d8ed115145f15889eed8887083e003ca017da23891cca4c0e",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.1.3/workflow-plugin-azure-linux-amd64.tar.gz"
+      "description": "Azure AD tenant ID. Referenced as ${AZURE_TENANT_ID}.",
+      "name": "AZURE_TENANT_ID",
+      "prompt": "Azure tenant ID",
+      "sensitive": false
     },
     {
-      "arch": "arm64",
-      "os": "linux",
-      "sha256": "56cd78888cc9233dffe589bd4b1216243534cb2ecfcd3ddfcd84a8054f10bcaa",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.1.3/workflow-plugin-azure-linux-arm64.tar.gz"
+      "description": "Azure subscription ID for IaC operations. Referenced as ${AZURE_SUBSCRIPTION_ID}.",
+      "name": "AZURE_SUBSCRIPTION_ID",
+      "prompt": "Azure subscription ID",
+      "sensitive": false
     }
   ],
   "status": "experimental",
-  "category": "infrastructure"
+  "tier": "community",
+  "type": "external",
+  "version": "2.2.0"
 }
