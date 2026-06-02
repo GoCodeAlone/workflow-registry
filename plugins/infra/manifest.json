@@ -22,6 +22,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "core",
   "description": "Abstract infra.* module types with IaCProvider delegation",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
@@ -33,6 +34,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "1.0.0"
 }

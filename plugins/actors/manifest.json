@@ -17,6 +17,7 @@
       "actors"
     ]
   },
+  "category": "infrastructure",
   "description": "Actor model support with goakt v4",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
@@ -26,6 +27,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "infrastructure"
+  "version": "1.0.0"
 }

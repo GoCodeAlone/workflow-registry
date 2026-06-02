@@ -14,6 +14,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "ai",
   "description": "AI pipeline steps (complete, classify, extract), dynamic components, and sub-workflow orchestration",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -34,6 +35,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "ai"
+  "version": "1.0.0"
 }

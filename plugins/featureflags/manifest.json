@@ -12,6 +12,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "integrations",
   "description": "Feature flag service module and pipeline steps (feature_flag, ff_gate)",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -30,6 +31,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "integrations"
+  "version": "1.0.0"
 }

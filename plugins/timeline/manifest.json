@@ -9,6 +9,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "data",
   "description": "Timeline and replay service module for execution visualization",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
@@ -18,6 +19,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "data"
+  "version": "1.0.0"
 }
