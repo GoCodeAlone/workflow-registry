@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-auth",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "Passwordless authentication plugin: WebAuthn/passkeys, TOTP, email magic links",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -23,22 +23,22 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.2.7/workflow-plugin-auth_0.2.7_linux_amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.0/workflow-plugin-auth_0.3.0_linux_amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.2.7/workflow-plugin-auth_0.2.7_linux_arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.0/workflow-plugin-auth_0.3.0_linux_arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.2.7/workflow-plugin-auth_0.2.7_darwin_amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.0/workflow-plugin-auth_0.3.0_darwin_amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.2.7/workflow-plugin-auth_0.2.7_darwin_arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.0/workflow-plugin-auth_0.3.0_darwin_arm64.tar.gz"
     }
   ],
   "capabilities": {
@@ -66,12 +66,18 @@
       "step.auth_policy_gate",
       "step.auth_methods_response",
       "step.auth_policy_audit",
+      "step.auth_provider_catalog",
+      "step.auth_admin_contribution_describe",
+      "step.auth_admin_config_describe",
+      "step.auth_admin_config_validate",
       "step.auth_oauth_provider_config",
       "step.auth_oauth_start",
       "step.auth_oauth_exchange",
       "step.auth_oauth_userinfo",
       "step.auth_credential_list",
-      "step.auth_credential_revoke"
+      "step.auth_credential_revoke",
+      "step.auth_bootstrap_redeem",
+      "step.auth_jwt_issue"
     ],
     "triggerTypes": []
   }
