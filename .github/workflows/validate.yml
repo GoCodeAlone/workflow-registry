@@ -50,11 +50,16 @@ jobs:
           go-version: '1.26'
           cache-dependency-path: _workflow/go.sum
 
+      - name: Set up wfctl
+        uses: GoCodeAlone/setup-wfctl@v1
+        with:
+          version: v0.69.5
+
       - name: Validate core plugin manifests
-        run: WORKFLOW_REPO="$GITHUB_WORKSPACE/_workflow" bash scripts/sync-core-manifests.sh
+        run: wfctl plugin registry-sync core --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
 
       - name: Validate README is generated
-        run: bash scripts/generate-readme.sh --check
+        run: wfctl plugin registry-sync readme --check --registry-dir .
 
   validate-templates:
     name: Validate template plugin references
