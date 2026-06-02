@@ -226,13 +226,13 @@ npx ajv-cli validate --spec=draft2020 -s schema/registry-schema.json -d plugins/
 bash scripts/validate-manifests.sh
 
 # Validate built-in core manifests against workflow plugin declarations
-WORKFLOW_REPO=/path/to/workflow bash scripts/sync-core-manifests.sh
+wfctl plugin registry-sync core --workflow-repo /path/to/workflow --registry-dir .
 
 # Validate template plugin references
 bash scripts/validate-templates.sh
 
 # Validate the README plugin/template index is current
-bash scripts/generate-readme.sh --check
+wfctl plugin registry-sync readme --check --registry-dir .
 ```
 
 ---
@@ -259,7 +259,7 @@ Every pull request and push to `main` triggers the [Validate Registry](.github/w
 3. Checks that `README.md` matches the generated registry index
 4. Checks that every plugin referenced in `templates/*.yaml` has a corresponding manifest
 
-The [Sync Registry Manifests](.github/workflows/sync-registry-manifests.yml) workflow runs daily, manually, and on `plugin-release` or `workflow-release` dispatch events. It updates release metadata, syncs built-in core manifests from `GoCodeAlone/workflow`, regenerates this README, and opens a PR when tracked registry files change.
+The [Sync Registry Manifests](.github/workflows/sync-registry-manifests.yml) workflow runs daily, manually, and on `plugin-release` or `workflow-release` dispatch events. It uses `wfctl plugin registry-sync` to update release metadata, sync built-in core manifests from `GoCodeAlone/workflow`, regenerate this README, and open a PR when tracked registry files change. The old `scripts/sync-versions.sh`, `scripts/sync-core-manifests.sh`, and `scripts/generate-readme.sh` entrypoints are compatibility wrappers around the same `wfctl` commands.
 
 The [Build & Deploy](.github/workflows/build-pages.yml) workflow runs on every push to `main`, on a daily schedule, and whenever a plugin sends a `plugin-release` dispatch event. It:
 
