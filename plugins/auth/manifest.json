@@ -19,7 +19,70 @@
     ],
     "workflowHandlers": []
   },
+  "category": "core",
   "description": "JWT authentication, OAuth2, user store, and auth middleware wiring",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/wfctl-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/wfctl-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/wfctl-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/wfctl-linux-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/workflow-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/workflow-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/workflow-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/workflow-linux-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/workflow-lsp-server-darwin-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/workflow-lsp-server-darwin-arm64"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/workflow-lsp-server-linux-amd64"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow/releases/download/v0.69.7/workflow-lsp-server-linux-arm64"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
     "auth",
@@ -37,6 +100,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "0.69.7"
 }
