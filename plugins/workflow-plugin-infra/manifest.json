@@ -81,7 +81,6 @@
   "license": "MIT",
   "minEngineVersion": "0.70.0",
   "name": "workflow-plugin-infra",
-  "path": "plugins/workflow-plugin-infra",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-infra",
   "source": "github.com/GoCodeAlone/workflow-plugin-infra",
