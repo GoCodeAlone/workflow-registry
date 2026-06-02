@@ -20,32 +20,32 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.7/workflow-plugin-sso-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.8/workflow-plugin-sso-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.7/workflow-plugin-sso-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.8/workflow-plugin-sso-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.7/workflow-plugin-sso-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.8/workflow-plugin-sso-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.7/workflow-plugin-sso-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.8/workflow-plugin-sso-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.7/workflow-plugin-sso-windows-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.8/workflow-plugin-sso-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.7/workflow-plugin-sso-windows-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-sso/releases/download/v0.1.8/workflow-plugin-sso-windows-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-sso",
@@ -65,5 +65,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "external",
-  "version": "0.1.7"
+  "version": "0.1.8"
 }
