@@ -1,13 +1,13 @@
 {
   "name": "workflow-plugin-gcp",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "description": "GCP infrastructure provider plugin for workflow — manages Cloud Run, GKE, Cloud SQL, Memorystore, VPC, Load Balancer, Cloud DNS, Artifact Registry, API Gateway, Firewall, IAM, GCS, and Certificate Manager",
   "author": "GoCodeAlone",
   "license": "MIT",
   "type": "external",
   "tier": "community",
   "private": false,
-  "minEngineVersion": "0.57.0",
+  "minEngineVersion": "0.69.1",
   "required_secrets": [
     {
       "name": "GCP_SERVICE_ACCOUNT_JSON",
@@ -30,9 +30,18 @@
     "gcs"
   ],
   "capabilities": {
-    "moduleTypes": [],
+    "configProvider": false,
+    "moduleTypes": [
+      "iac.provider",
+      "gcp.credentials",
+      "storage.gcs"
+    ],
     "stepTypes": [],
-    "triggerTypes": []
+    "triggerTypes": [],
+    "workflowHandlers": [],
+    "iacStateBackends": [
+      "gcs"
+    ]
   },
   "assets": {
     "ui": false,
@@ -42,22 +51,38 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.0.0/workflow-plugin-gcp-linux-amd64.tar.gz"
+      "sha256": "a98c4af2fcb65a4a6b1197813dfd729ea37bab4693b55911e1438db572aa6fa3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.2.0/workflow-plugin-gcp_2.2.0_linux_amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.0.0/workflow-plugin-gcp-linux-arm64.tar.gz"
+      "sha256": "aabe9b14d0c774046867cc3c45e522b155a89fc19ad6fb761a764294d21cfd5a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.2.0/workflow-plugin-gcp_2.2.0_linux_arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.0.0/workflow-plugin-gcp-darwin-amd64.tar.gz"
+      "sha256": "6d12f4aa00d52e0a8df64e22fe040ae38b9da8d088cf874bae00cdebb0a6cec6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.2.0/workflow-plugin-gcp_2.2.0_darwin_amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.0.0/workflow-plugin-gcp-darwin-arm64.tar.gz"
+      "sha256": "04af86d3c21f5003c423df058c58427d6cc1f7f36a39d6f5ebe61b38f5493a8d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.2.0/workflow-plugin-gcp_2.2.0_darwin_arm64.tar.gz"
+    },
+    {
+      "os": "windows",
+      "arch": "amd64",
+      "sha256": "b226606ce81186ceceba932da5f4bcc83dd7447bf0476459e2ad7dfc0d2416d8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.2.0/workflow-plugin-gcp_2.2.0_windows_amd64.tar.gz"
+    },
+    {
+      "os": "windows",
+      "arch": "arm64",
+      "sha256": "fec3dde88cc96e205e4d2b609842cc8f931dbdb24cd983eb23d78bb59493ac40",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.2.0/workflow-plugin-gcp_2.2.0_windows_arm64.tar.gz"
     }
   ],
   "status": "experimental",
