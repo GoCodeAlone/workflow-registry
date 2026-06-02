@@ -9,6 +9,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "core",
   "description": "Application configuration registry with schema validation, defaults, and source layering",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
@@ -18,6 +19,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "1.0.0"
 }

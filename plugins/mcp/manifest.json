@@ -13,6 +13,7 @@
       "mcp"
     ]
   },
+  "category": "ai",
   "description": "MCP tool triggers, workflow handlers, and server registry",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
@@ -24,6 +25,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "ai"
+  "version": "1.0.0"
 }

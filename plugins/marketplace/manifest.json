@@ -14,6 +14,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "core",
   "description": "Plugin marketplace steps for searching, installing, and managing workflow plugins",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
@@ -25,6 +26,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "1.0.0"
 }

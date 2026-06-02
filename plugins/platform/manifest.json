@@ -35,6 +35,12 @@
       "step.iac_provider_destroy",
       "step.iac_provider_drift",
       "step.iac_plan",
+      "step.iac_provider_apply",
+      "step.iac_provider_catalog",
+      "step.iac_provider_destroy",
+      "step.iac_provider_drift",
+      "step.iac_provider_list",
+      "step.iac_provider_plan",
       "step.iac_status",
       "step.k8s_apply",
       "step.k8s_destroy",
@@ -56,6 +62,7 @@
       "platform"
     ]
   },
+  "category": "core",
   "description": "Platform infrastructure modules, workflow handler, reconciliation trigger, and template step",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "keywords": [
@@ -75,6 +82,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "core"
+  "version": "1.0.0"
 }

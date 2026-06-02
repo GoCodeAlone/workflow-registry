@@ -11,6 +11,7 @@
     "wiringHooks": [],
     "workflowHandlers": []
   },
+  "category": "infrastructure",
   "description": "Cloud provider credentials and validation. Foundation for IaC modules.",
   "homepage": "https://github.com/GoCodeAlone/workflow",
   "license": "MIT",
@@ -20,6 +21,5 @@
   "source": "github.com/GoCodeAlone/workflow",
   "tier": "core",
   "type": "builtin",
-  "version": "1.0.0",
-  "category": "infrastructure"
+  "version": "1.0.0"
 }
