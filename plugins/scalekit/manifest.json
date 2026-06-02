@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-scalekit",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Scalekit enterprise SSO and Directory Sync provider plugin",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -64,28 +64,28 @@
   ],
   "downloads": [
     {
-      "os": "darwin",
       "arch": "amd64",
-      "sha256": "9da66a090180df18baa0027fe5f87399fb2fe98bfe80416c3b05a960408babb9",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.0/workflow-plugin-scalekit-darwin-amd64.tar.gz"
-    },
-    {
       "os": "darwin",
-      "arch": "arm64",
-      "sha256": "1199eeb6e28310880ade6779c9ecf9b1f8a12089b6bf67f04f206a9fb9ac2467",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.0/workflow-plugin-scalekit-darwin-arm64.tar.gz"
+      "sha256": "f621f45d22eba1a1b8026598a343cb9da65b0dc4c3b913bcf41ae4346efd1c79",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.2/workflow-plugin-scalekit-darwin-amd64.tar.gz"
     },
     {
-      "os": "linux",
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "532ea4c53f204536136ebf4607c23ac0a891db19251dc094a4d47b2788fbcdc2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.2/workflow-plugin-scalekit-darwin-arm64.tar.gz"
+    },
+    {
       "arch": "amd64",
-      "sha256": "49f1cb09e4602a62c29a677048bb75ddbf646a54c584cfb5f5735630de3cfd4f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.0/workflow-plugin-scalekit-linux-amd64.tar.gz"
+      "os": "linux",
+      "sha256": "1de2a7b4488d7ebeadcc5e29ffc32adf0e171adb6d56cbeef2a7c735d673b3f1",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.2/workflow-plugin-scalekit-linux-amd64.tar.gz"
     },
     {
-      "os": "linux",
       "arch": "arm64",
-      "sha256": "7fc966b361d9c79c73abc750ac0c8bb42697b8c4eeac76131ac5c4cba56b487c",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.0/workflow-plugin-scalekit-linux-arm64.tar.gz"
+      "os": "linux",
+      "sha256": "3a22df8144382f0265d1f9023b4101419bb2f51bbfbe2c8f0dd348e68fffa4f9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-scalekit/releases/download/v0.1.2/workflow-plugin-scalekit-linux-arm64.tar.gz"
     }
   ],
   "status": "experimental",
