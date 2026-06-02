@@ -94,7 +94,8 @@ while IFS= read -r manifest; do
   fi
 
   # For each release tag, fetch full asset list (includes digest/sha256)
-  final_versions="[]"
+  final_versions_file="${release_cache_root}/versions-$(echo "${plugin_name}" | sed 's/[^A-Za-z0-9._-]/_/g').json"
+  printf '[]\n' > "${final_versions_file}"
   while IFS= read -r release_entry; do
     tag="$(echo "${release_entry}" | jq -r '.tagName')"
     published_at="$(echo "${release_entry}" | jq -r '.publishedAt')"
@@ -115,7 +116,8 @@ while IFS= read -r manifest; do
     fi
     release_detail="$(cat "${release_detail_cache}")"
 
-    version_entry="$(echo "${release_detail}" | jq \
+    version_entry_file="${release_cache_root}/version-entry-$(echo "${plugin_name}-${tag}" | sed 's/[^A-Za-z0-9._-]/_/g').json"
+    echo "${release_detail}" | jq \
       --arg ver "${ver}" \
       --arg published_at "${published_at}" \
       --arg minEng "${min_engine}" '
@@ -136,23 +138,26 @@ while IFS= read -r manifest; do
           }
         ]
       }
-    ')"
+    ' > "${version_entry_file}"
 
-    final_versions="$(echo "${final_versions}" | jq --argjson v "${version_entry}" '. + [$v]')"
+    next_versions_file="${final_versions_file}.next"
+    jq --slurpfile v "${version_entry_file}" '. + [$v[0]]' \
+      "${final_versions_file}" > "${next_versions_file}"
+    mv "${next_versions_file}" "${final_versions_file}"
   done < <(echo "${releases_list}" | jq -c '.[]')
 
   # Write versions.json (newest-first order preserved from gh release list)
   jq -n \
     --arg name "${plugin_name}" \
-    --argjson versions "${final_versions}" \
-    '{"name": $name, "versions": $versions}' \
+    --slurpfile versions "${final_versions_file}" \
+    '{"name": $name, "versions": $versions[0]}' \
     > "${dest_dir}/versions.json"
 
-  version_count="$(echo "${final_versions}" | jq 'length')"
+  version_count="$(jq 'length' "${final_versions_file}")"
   echo "    wrote ${version_count} version(s)"
 
   # Write latest.json (first/newest version entry)
-  latest="$(echo "${final_versions}" | jq 'first // null')"
+  latest="$(jq 'first // null' "${final_versions_file}")"
   if [[ "${latest}" != "null" ]]; then
     echo "${latest}" > "${dest_dir}/latest.json"
     echo "    latest: $(echo "${latest}" | jq -r '.version')"
