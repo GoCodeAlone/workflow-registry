@@ -36,22 +36,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-darwin-amd64.tar.gz",
+      "sha256": "6a23106ae30da8ab64bb95c012d622f4640b1f1526807123d757465dc70ab809"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-darwin-arm64.tar.gz",
+      "sha256": "1a9824a566b638fdf929e3aea6ede57db1cdd6f8a770493287a83ce4f036f53d"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-linux-amd64.tar.gz",
+      "sha256": "6af99857939e455717c66f2713201c23a044af50e29726b50d013edb8869ef8a"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-linux-arm64.tar.gz",
+      "sha256": "2f20caac8623355bb62756461284e13850b88f45f68abdfa5f09528cf3948146"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-azure",

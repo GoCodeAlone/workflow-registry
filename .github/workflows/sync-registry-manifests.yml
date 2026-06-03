@@ -48,7 +48,7 @@ jobs:
       - name: Set up wfctl
         uses: GoCodeAlone/setup-wfctl@v1
         with:
-          version: v0.73.1
+          version: v0.74.1
 
       - name: Resolve plugin filter from event
         id: filter

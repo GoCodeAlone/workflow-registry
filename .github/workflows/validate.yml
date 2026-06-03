@@ -53,7 +53,7 @@ jobs:
       - name: Set up wfctl
         uses: GoCodeAlone/setup-wfctl@v1
         with:
-          version: v0.69.5
+          version: v0.74.1
 
       - name: Validate core plugin manifests
         run: wfctl plugin registry-sync core --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
