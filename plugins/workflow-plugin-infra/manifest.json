@@ -26,43 +26,43 @@
     "triggerTypes": []
   },
   "category": "core",
-  "description": "Abstract infra.* module types with IaCProvider delegation + the infra.admin React SPA (admin interface for IaC, plugs into workflow-plugin-admin)",
+  "description": "Abstract infra.* module types with IaCProvider delegation + dynamic plan/apply SPA, exec-env, and reconcile (plugs into workflow-plugin-admin)",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "732cd700261946f2b9fe407cf12b158d65c9c5bfdd72129dc3856c5cb84c5fa1",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.1.0/workflow-plugin-infra_1.1.0_darwin_amd64.tar.gz"
+      "sha256": "ccd3680fdfc1b0a01ce665bf0b7347e30c71af6a02bcd825030dee332f01b04e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.2.0/workflow-plugin-infra_1.2.0_darwin_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "e5cf35371befdf2c4ce49f37be2656aee94ffe13918345719e00e57800845284",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.1.0/workflow-plugin-infra_1.1.0_darwin_arm64.tar.gz"
+      "sha256": "0f24f48f9ede3584cd30fcd793626501bc31f07b7032a682325561c9f7af3efd",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.2.0/workflow-plugin-infra_1.2.0_darwin_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "aa82389bc21e1d39648c0bbbbf86c7f74d8e688914c8c205e7b44923e3fa84aa",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.1.0/workflow-plugin-infra_1.1.0_linux_amd64.tar.gz"
+      "sha256": "445d0227f0be71d4328880c51324f7d72811ca17190a95c094460f81c929315c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.2.0/workflow-plugin-infra_1.2.0_linux_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "6abf1e31458daaa888db93c59d0ac3bce2168214d7f35595b2a51027da8ac128",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.1.0/workflow-plugin-infra_1.1.0_linux_arm64.tar.gz"
+      "sha256": "b32166ea5502e5fc4602dda8fd726a66f8dd877df858f2e49aaa4b8f3c6b8662",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.2.0/workflow-plugin-infra_1.2.0_linux_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "3d8c1eb135fa9768aaf7fafead5849211291be47f2111f99b791a00f1a06702f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.1.0/workflow-plugin-infra_1.1.0_windows_amd64.tar.gz"
+      "sha256": "a4b7ad009fba7a695c69f2bd1413085c6abb1629503087c6856783bff6869141",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.2.0/workflow-plugin-infra_1.2.0_windows_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "865bca4afd7a01df2577bb3d604d6f07b33d127bf3af92381fc46478e0e2c6ca",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.1.0/workflow-plugin-infra_1.1.0_windows_arm64.tar.gz"
+      "sha256": "794f13320f6504b943d25213eaa18d27598879544ad7c03b7d9ec162c24a0a43",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.2.0/workflow-plugin-infra_1.2.0_windows_arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-infra",
@@ -79,7 +79,7 @@
     "dns"
   ],
   "license": "MIT",
-  "minEngineVersion": "0.70.0",
+  "minEngineVersion": "0.72.0",
   "name": "workflow-plugin-infra",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-infra",
@@ -87,5 +87,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "1.1.0"
+  "version": "1.2.0"
 }
