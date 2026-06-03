@@ -1,15 +1,47 @@
 {
-  "name": "admin",
-  "version": "1.0.0",
+  "assets": {
+    "config": true,
+    "ui": true
+  },
   "author": "GoCodeAlone",
+  "capabilities": {
+    "configProvider": true,
+    "moduleTypes": [
+      "admin.dashboard"
+    ],
+    "stepTypes": [
+      "step.admin_register_contribution",
+      "step.admin_list_contributions",
+      "step.admin_authorize_action",
+      "step.admin_resource_action"
+    ],
+    "triggerTypes": []
+  },
+  "category": "core",
   "description": "Admin dashboard UI and config-driven admin routes with embedded React UI. Provides user management, workflow management, settings, and real-time monitoring.",
-  "source": "github.com/GoCodeAlone/workflow-plugin-admin",
-  "type": "external",
-  "tier": "core",
-  "license": "MIT",
-  "minEngineVersion": "0.3.0",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.9/workflow-plugin-admin_darwin_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.9/workflow-plugin-admin_darwin_arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.9/workflow-plugin-admin_linux_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.9/workflow-plugin-admin_linux_arm64.tar.gz"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-admin",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-admin",
   "keywords": [
     "admin",
     "dashboard",
@@ -19,42 +51,13 @@
     "auth",
     "settings"
   ],
-  "capabilities": {
-    "moduleTypes": [],
-    "stepTypes": [],
-    "triggerTypes": [],
-    "workflowHandlers": []
-  },
-  "assets": {
-    "ui": true,
-    "config": true
-  },
-  "downloads": [
-    {
-      "arch": "amd64",
-      "os": "darwin",
-      "sha256": "99e8fd98fd93151428909bcd5737671953f7b12da5b05d783cb8d973f3002f4b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.0.0/workflow-plugin-admin-darwin-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "d2c054fe60fa660e41da4c0644606a1a196db9e685c5b6be6b2568f5888b99ff",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.0.0/workflow-plugin-admin-darwin-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "linux",
-      "sha256": "f8bcdd803635a8009ab16d2cfa1ed7df58bf1842a1d7cd03de5b3fa44b3547f1",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.0.0/workflow-plugin-admin-linux-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "linux",
-      "sha256": "a3f7bba9abbf9c936bbc396ff8015d8d9277aafa59031939c7851390080e8b8d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.0.0/workflow-plugin-admin-linux-arm64.tar.gz"
-    }
-  ],
+  "license": "MIT",
+  "minEngineVersion": "0.53.0",
+  "name": "admin",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-admin",
+  "source": "github.com/GoCodeAlone/workflow-plugin-admin",
   "status": "experimental",
-  "category": "core"
+  "tier": "core",
+  "type": "external",
+  "version": "1.1.9"
 }

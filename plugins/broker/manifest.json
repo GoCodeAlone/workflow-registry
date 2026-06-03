@@ -1,26 +1,47 @@
 {
-  "name": "workflow-plugin-broker",
-  "version": "0.2.2",
   "author": "GoCodeAlone",
-  "description": "External plugin for the workflow engine.",
-  "source": "github.com/GoCodeAlone/workflow-plugin-broker",
-  "type": "external",
-  "tier": "community",
-  "license": "MIT",
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-broker",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-broker",
-  "private": false,
-  "status": "experimental",
   "capabilities": {
     "moduleTypes": [
-      "messaging.broker.workflow"
+      "broker.nats"
     ],
     "stepTypes": [
       "step.broker_publish",
       "step.broker_subscribe"
-    ],
-    "triggerTypes": [],
-    "workflowHandlers": []
+    ]
   },
-  "category": "messaging"
+  "category": "messaging",
+  "description": "External plugin for the workflow engine.",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-broker/releases/download/v0.2.4/workflow-plugin-broker_darwin_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-broker/releases/download/v0.2.4/workflow-plugin-broker_darwin_arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-broker/releases/download/v0.2.4/workflow-plugin-broker_linux_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-broker/releases/download/v0.2.4/workflow-plugin-broker_linux_arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-broker",
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "workflow-plugin-broker",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-broker",
+  "source": "github.com/GoCodeAlone/workflow-plugin-broker",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.2.4"
 }

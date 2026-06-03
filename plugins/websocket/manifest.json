@@ -1,16 +1,42 @@
 {
-  "name": "workflow-plugin-websocket",
-  "version": "0.5.4",
   "author": "GoCodeAlone",
+  "capabilities": {
+    "moduleTypes": [
+      "ws.server"
+    ],
+    "stepTypes": [
+      "step.ws_send",
+      "step.ws_close"
+    ],
+    "triggerTypes": [
+      "websocket"
+    ]
+  },
+  "category": "messaging",
   "description": "General-purpose WebSocket support — rooms, broadcast, send, close",
-  "source": "github.com/GoCodeAlone/workflow-plugin-websocket",
-  "type": "external",
-  "tier": "core",
-  "license": "Apache-2.0",
-  "private": false,
-  "minEngineVersion": "0.3.30",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-websocket/releases/download/v0.5.6/workflow-plugin-websocket_darwin_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-websocket/releases/download/v0.5.6/workflow-plugin-websocket_darwin_arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-websocket/releases/download/v0.5.6/workflow-plugin-websocket_linux_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-websocket/releases/download/v0.5.6/workflow-plugin-websocket_linux_arm64.tar.gz"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-websocket",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-websocket",
   "keywords": [
     "websocket",
     "ws",
@@ -19,23 +45,14 @@
     "broadcast",
     "multiplayer"
   ],
-  "capabilities": {
-    "moduleTypes": [
-      "ws.server"
-    ],
-    "stepTypes": [
-      "step.ws_send",
-      "step.ws_broadcast",
-      "step.ws_room_join",
-      "step.ws_room_leave",
-      "step.ws_room_list",
-      "step.ws_close"
-    ],
-    "triggerTypes": [
-      "websocket"
-    ],
-    "workflowHandlers": []
-  },
+  "license": "Apache-2.0",
+  "minEngineVersion": "0.51.7",
+  "name": "workflow-plugin-websocket",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-websocket",
+  "source": "github.com/GoCodeAlone/workflow-plugin-websocket",
   "status": "experimental",
-  "category": "messaging"
+  "tier": "core",
+  "type": "external",
+  "version": "0.5.6"
 }
