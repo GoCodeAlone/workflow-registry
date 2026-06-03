@@ -1,7 +1,9 @@
 {
   "author": "GoCodeAlone",
   "capabilities": {
-    "moduleTypes": [],
+    "moduleTypes": [
+      "sandbox.remote_runners"
+    ],
     "stepTypes": [
       "step.auth_validate",
       "step.authz_check",
