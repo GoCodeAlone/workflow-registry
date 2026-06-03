@@ -12,6 +12,21 @@
     "moduleTypes": [
       "iac.provider"
     ],
+    "serviceMethods": [
+      "workflow.plugin.external.iac.IaCProviderRequired",
+      "workflow.plugin.external.iac.IaCProviderEnumerator",
+      "workflow.plugin.external.iac.IaCProviderDriftDetector",
+      "workflow.plugin.external.iac.IaCProviderCredentialRevoker",
+      "workflow.plugin.external.iac.IaCProviderMigrationRepairer",
+      "workflow.plugin.external.iac.IaCProviderValidator",
+      "workflow.plugin.external.iac.IaCProviderDriftConfigDetector",
+      "workflow.plugin.external.iac.IaCProviderRequirementMapper",
+      "workflow.plugin.external.iac.IaCProviderRegionLister",
+      "workflow.plugin.external.iac.IaCProviderOwnership",
+      "workflow.plugin.external.iac.ResourceDriver",
+      "workflow.plugin.external.iac.IaCProviderRunner",
+      "workflow.plugin.external.iac.IaCStateBackend"
+    ],
     "stepTypes": [],
     "triggerTypes": []
   },
@@ -21,26 +36,22 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "2b5b10874e93251fb89a7401bfda71e0bff9bb9552429b40fc840a32c1b45f55",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.2.0/workflow-plugin-azure-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "793cbf57da78cc072e9efd2edef9205d781d998d99fb68ba77d37ea8f05b51d6",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.2.0/workflow-plugin-azure-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "673bd793336b63d82a889c3b7ca55701057d14a4474e1eceeb664b3a73a94830",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.2.0/workflow-plugin-azure-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "2fdc74ef335a5d3bbe31ccbfa934c130606448b78ea2747715813d59622967f2",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.2.0/workflow-plugin-azure-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.0/workflow-plugin-azure-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-azure",
@@ -58,7 +69,7 @@
     "apim"
   ],
   "license": "MIT",
-  "minEngineVersion": "0.69.1",
+  "minEngineVersion": "0.73.0",
   "name": "workflow-plugin-azure",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-azure",
@@ -91,5 +102,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "2.2.0"
+  "version": "2.3.0"
 }
