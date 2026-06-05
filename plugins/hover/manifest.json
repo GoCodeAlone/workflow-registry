@@ -1,15 +1,52 @@
 {
-  "name": "workflow-plugin-hover",
-  "version": "0.5.0",
-  "minEngineVersion": "0.60.6",
-  "description": "Hover DNS provider for workflow IaC (infra.dns). No official API; mimics the browser-side username+password+TOTP login flow used by pjslauta/hover-dyn-dns.",
+  "assets": {
+    "config": true,
+    "ui": false
+  },
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
+  "capabilities": {
+    "moduleTypes": [
+      "iac.provider.hover"
+    ],
+    "resourceTypes": [
+      "infra.dns",
+      "infra.dns_delegation"
+    ],
+    "stepTypes": [],
+    "triggerTypes": []
+  },
+  "category": "infrastructure",
+  "description": "Hover DNS provider for workflow IaC (infra.dns). No official API; mimics the browser-side username+password+TOTP login flow used by pjslauta/hover-dyn-dns.",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "86fd19b012eb46e63669157ce6b9c8de55558660254757f5f43b54f056c50ac3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.3/workflow-plugin-hover-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "24b3290a10de88f2c8e165779a6d32b743b1c099f1eaa78d73256573d7d288d0",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.3/workflow-plugin-hover-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "f7fd57695626e375ac1242a389a85e9f36abf49a8c829e5475139f9723da80b3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.3/workflow-plugin-hover-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "63d3aa3c6b0cb3043981ae3473b9161d92b9d0a8b338cdd179d9d41cfc9aa9cd",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.3/workflow-plugin-hover-linux-arm64.tar.gz"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-hover",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-hover",
+  "iacProvider": {
+    "computePlanVersion": "v2"
+  },
   "keywords": [
     "dns",
     "hover",
@@ -17,73 +54,33 @@
     "infra.dns",
     "totp"
   ],
-  "capabilities": {
-    "moduleTypes": [
-      "iac.provider.hover"
-    ],
-    "stepTypes": [],
-    "triggerTypes": [],
-    "iacProvider": {
-      "name": "hover",
-      "resourceTypes": [
-        "infra.dns",
-        "infra.dns_delegation"
-      ]
-    }
-  },
+  "license": "MIT",
+  "minEngineVersion": "0.60.6",
+  "name": "workflow-plugin-hover",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-hover",
   "required_secrets": [
     {
-      "name": "HOVER_USERNAME",
-      "sensitive": false,
       "description": "Hover account username",
-      "prompt": "Hover username"
+      "name": "HOVER_USERNAME",
+      "prompt": "Hover username",
+      "sensitive": false
     },
     {
-      "name": "HOVER_PASSWORD",
-      "sensitive": true,
       "description": "Hover account password",
-      "prompt": "Hover password"
+      "name": "HOVER_PASSWORD",
+      "prompt": "Hover password",
+      "sensitive": true
     },
     {
-      "name": "HOVER_TOTP_SECRET",
-      "sensitive": true,
       "description": "Base32-encoded TOTP seed from Hover 2FA setup. Plugin generates 6-digit codes per RFC 6238 on each login.",
-      "prompt": "Hover TOTP seed (base32)"
-    }
-  ],
-  "iacProvider": {
-    "computePlanVersion": "v2"
-  },
-  "assets": {
-    "ui": false,
-    "config": true
-  },
-  "downloads": [
-    {
-      "arch": "amd64",
-      "os": "darwin",
-      "sha256": "7422e05d9e3eae6510150c2aeec6b6e7e27d88da7ef3cdd6ef253bcba535299a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.0/workflow-plugin-hover-darwin-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "71fa7eb8ec310b35c23fbde1b962dd08524090454c1d09ad393079466c1f6f84",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.0/workflow-plugin-hover-darwin-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "linux",
-      "sha256": "7aa275e704322242515b8d8122ea3b259c2b54cbc4608b40c769827f4406bc39",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.0/workflow-plugin-hover-linux-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "linux",
-      "sha256": "c3c67fb3cc64b781ac05ca10eb8e11614f3fdb83814c2f1a3be35360df9930fc",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.0/workflow-plugin-hover-linux-arm64.tar.gz"
+      "name": "HOVER_TOTP_SECRET",
+      "prompt": "Hover TOTP seed (base32)",
+      "sensitive": true
     }
   ],
   "status": "experimental",
-  "category": "infrastructure"
+  "tier": "community",
+  "type": "external",
+  "version": "0.5.3"
 }
