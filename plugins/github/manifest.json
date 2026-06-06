@@ -1,34 +1,9 @@
 {
-  "name": "github",
-  "version": "1.0.6",
+  "assets": {
+    "config": true,
+    "ui": false
+  },
   "author": "GoCodeAlone",
-  "description": "GitHub integration plugin: webhook handling, GitHub Actions, PRs, issues, releases, and deployments",
-  "source": "github.com/GoCodeAlone/workflow-plugin-github",
-  "type": "external",
-  "tier": "core",
-  "license": "MIT",
-  "minEngineVersion": "0.61.0",
-  "required_secrets": [
-    {
-      "name": "GITHUB_APP_PRIVATE_KEY",
-      "sensitive": true,
-      "description": "GitHub App private key (PEM) for the github.app module. Referenced as ${GITHUB_APP_PRIVATE_KEY} in private_key. (Step-level operations may also use a GITHUB_TOKEN.)",
-      "prompt": "GitHub App private key (PEM)"
-    }
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-github",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-github",
-  "keywords": [
-    "github",
-    "webhook",
-    "git",
-    "actions",
-    "ci",
-    "cd",
-    "integration",
-    "pull-request",
-    "release"
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -57,48 +32,73 @@
     ],
     "triggerTypes": []
   },
-  "assets": {
-    "ui": false,
-    "config": true
-  },
+  "category": "integrations",
+  "description": "GitHub integration plugin: webhook handling, GitHub Actions, PRs, issues, releases, and deployments",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "369809b6c5821300312c5d0961aaa1ae4a5bd1cc3f7168c0cd85f9e88e74f735",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.6/workflow-plugin-github-darwin-amd64.tar.gz"
+      "sha256": "1a165d1591710621baddfdaa5709e54806cb1367a179cde1da7fcc227d2719fc",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.7/workflow-plugin-github-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "0e77c3772249a795d8288ddc8ea28aa7f8addc080af0ea8e6f0704035041f48b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.6/workflow-plugin-github-darwin-arm64.tar.gz"
+      "sha256": "99d5ad0dd1ba10ae62ca4a33fda2b7772b05fd5e0a49533f4d1238e39c37346f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.7/workflow-plugin-github-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "2a7fb7ff39b2e1c651a3aef069925b0b933ccdbaa6476e1078ff17d8b8b838cf",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.6/workflow-plugin-github-linux-amd64.tar.gz"
+      "sha256": "feab134a66da617f7609776785fd4dd9cdc334341462c2e342aa4bc8b037e5bf",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.7/workflow-plugin-github-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "de63272ce4ac0c8a01ff5ca10d61841b989261c1a05a70d6be97c5a47669fade",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.6/workflow-plugin-github-linux-arm64.tar.gz"
+      "sha256": "a5f0c76bfe533c99e77bb3a50c22aa94d4be98a415f0fc24e442d27157b5f822",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.7/workflow-plugin-github-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "98b23020025cda9418669878b210e1ec311ba8772085c55fdbbdb003902ce064",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.6/workflow-plugin-github-windows-amd64.tar.gz"
+      "sha256": "5518590f895647273bf802687bfdb09e93cedfbd05ffd4313a70fb6df9fb0cc6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.7/workflow-plugin-github-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "1b58c39d9160530d197f4b11b5370bcc645bb16818543a580b07fae2eb8d2042",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.6/workflow-plugin-github-windows-arm64.tar.gz"
+      "sha256": "42ae66b0b01d3adb7fd89a494af305fb2f61885f15f4eae61c6bc7184d88bd44",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.7/workflow-plugin-github-windows-arm64.tar.gz"
     }
   ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-github",
+  "keywords": [
+    "github",
+    "webhook",
+    "git",
+    "actions",
+    "ci",
+    "cd",
+    "integration",
+    "pull-request",
+    "release"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.61.0",
+  "name": "github",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-github",
+  "required_secrets": [
+    {
+      "description": "GitHub App private key (PEM) for the github.app module. Referenced as ${GITHUB_APP_PRIVATE_KEY} in private_key. (Step-level operations may also use a GITHUB_TOKEN.)",
+      "name": "GITHUB_APP_PRIVATE_KEY",
+      "prompt": "GitHub App private key (PEM)",
+      "sensitive": true
+    }
+  ],
+  "source": "github.com/GoCodeAlone/workflow-plugin-github",
   "status": "experimental",
-  "category": "integrations"
+  "tier": "core",
+  "type": "external",
+  "version": "1.0.7"
 }
