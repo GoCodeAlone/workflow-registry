@@ -8,10 +8,13 @@
     "moduleTypes": [
       "iac.provider.hover"
     ],
-    "resourceTypes": [
-      "infra.dns",
-      "infra.dns_delegation"
-    ],
+    "iacProvider": {
+      "name": "hover",
+      "resourceTypes": [
+        "infra.dns",
+        "infra.dns_delegation"
+      ]
+    },
     "stepTypes": [],
     "triggerTypes": []
   },
