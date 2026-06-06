@@ -1,38 +1,17 @@
 {
-  "name": "workflow-plugin-payments",
-  "version": "0.4.8",
-  "description": "Multi-provider payment processing plugin (Stripe, PayPal)",
+  "assets": {
+    "config": true,
+    "ui": false
+  },
   "author": "GoCodeAlone",
-  "license": "Apache-2.0",
-  "type": "external",
-  "tier": "core",
-  "private": false,
-  "minEngineVersion": "0.53.0",
-  "required_secrets": [
-    {
-      "name": "STRIPE_SECRET_KEY",
-      "sensitive": true,
-      "description": "Stripe secret API key (provider: stripe). PayPal deployments instead provision PAYPAL_CLIENT_ID + PAYPAL_CLIENT_SECRET. Referenced as ${STRIPE_SECRET_KEY}.",
-      "prompt": "Stripe secret key"
-    },
-    {
-      "name": "STRIPE_WEBHOOK_SECRET",
-      "sensitive": true,
-      "description": "Stripe webhook signing secret; required for step.payment_webhook_verify. Referenced as ${STRIPE_WEBHOOK_SECRET}.",
-      "prompt": "Stripe webhook signing secret"
-    }
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-payments",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-payments",
-  "keywords": [
-    "payment",
-    "stripe",
-    "paypal",
-    "billing",
-    "subscription",
-    "marketplace"
-  ],
   "capabilities": {
+    "cliCommands": [
+      {
+        "description": "Payment provider operations (webhook ensure, …)",
+        "flags_passthrough": true,
+        "name": "payments"
+      }
+    ],
     "configProvider": false,
     "moduleTypes": [
       "payments.provider"
@@ -56,45 +35,66 @@
       "step.payment_method_attach",
       "step.payment_method_list"
     ],
-    "triggerTypes": [],
-    "cliCommands": [
-      {
-        "name": "payments",
-        "description": "Payment provider operations (webhook ensure, …)",
-        "flags_passthrough": true
-      }
-    ]
+    "triggerTypes": []
   },
-  "assets": {
-    "ui": false,
-    "config": true
-  },
+  "category": "payments",
+  "description": "Multi-provider payment processing plugin (Stripe, PayPal)",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "ae9bfd6fe3096b69109b5aa67f589a699acada5678abfa91a74264bd9549b85a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.8/workflow-plugin-payments-darwin-amd64.tar.gz"
+      "sha256": "d42620f76dddb125c9c21f5dced4c125ed85b9fa52050733e2e9028bddc96ca8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.10/workflow-plugin-payments-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "a54bb7c162e409edabf5a6b84c3abc5b75a27f1c7e8d9ebc5c9ee24bbbe55a29",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.8/workflow-plugin-payments-darwin-arm64.tar.gz"
+      "sha256": "31515f3ee60e2b8beb7e0693065b91eb6d71a92413e08191c231d0a887575dfa",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.10/workflow-plugin-payments-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "97c17549fc9257de6a315c2679036aba17a4f9cb107de0ee7e635d629fc09425",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.8/workflow-plugin-payments-linux-amd64.tar.gz"
+      "sha256": "0a4b09ce2e6dbdb870ea04846627a87e3e36963fffbb721c39b036ea414ecbd8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.10/workflow-plugin-payments-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "620c13921a54716718a80d3d2349c17acf26abdb1ea00eb6faa2183b1d067b78",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.8/workflow-plugin-payments-linux-arm64.tar.gz"
+      "sha256": "e127293e584ac85e502ea7b061d564f0046cb16e5c0353e97e4144ee8fd8c4ef",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-payments/releases/download/v0.4.10/workflow-plugin-payments-linux-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-payments",
+  "keywords": [
+    "payment",
+    "stripe",
+    "paypal",
+    "billing",
+    "subscription",
+    "marketplace"
+  ],
+  "license": "Apache-2.0",
+  "minEngineVersion": "0.53.0",
+  "name": "workflow-plugin-payments",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-payments",
+  "required_secrets": [
+    {
+      "description": "Stripe secret API key (provider: stripe). PayPal deployments instead provision PAYPAL_CLIENT_ID + PAYPAL_CLIENT_SECRET. Referenced as ${STRIPE_SECRET_KEY}.",
+      "name": "STRIPE_SECRET_KEY",
+      "prompt": "Stripe secret key",
+      "sensitive": true
+    },
+    {
+      "description": "Stripe webhook signing secret; required for step.payment_webhook_verify. Referenced as ${STRIPE_WEBHOOK_SECRET}.",
+      "name": "STRIPE_WEBHOOK_SECRET",
+      "prompt": "Stripe webhook signing secret",
+      "sensitive": true
     }
   ],
   "status": "verified",
-  "category": "payments"
+  "tier": "core",
+  "type": "external",
+  "version": "0.4.10"
 }
