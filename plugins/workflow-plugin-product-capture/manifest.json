@@ -27,38 +27,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "0437710535a42091c029d800ad2de2ee68b5e1d28170ed757da19aa6cffc37de",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.11/workflow-plugin-product-capture-darwin-amd64.tar.gz"
+      "sha256": "6e78239736d5da005c4a698d363d49550b75638a20295972198a99b48d9eb905",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.13/workflow-plugin-product-capture-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "ac19435de933dae2e0364a1f559d723855bf321ba4b22a9c188631aa14278818",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.11/workflow-plugin-product-capture-darwin-arm64.tar.gz"
+      "sha256": "a037b82f8d5e15232cfd03ed067814cfa9f40719273b8cb431fdb8e416430b9c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.13/workflow-plugin-product-capture-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "4b4df0ed1feb8fd6826f7641c2fc2bc1e404f36559e0bb2107012f5c9004218a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.11/workflow-plugin-product-capture-linux-amd64.tar.gz"
+      "sha256": "91022c648069eb06325268064389df2d1a7319a65ca573aebba10581513e08bd",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.13/workflow-plugin-product-capture-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "f8eabc18730dae44a4f6c7dfa44dd0d29dc700ed4cd624be1444b7476f2fa558",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.11/workflow-plugin-product-capture-linux-arm64.tar.gz"
+      "sha256": "c1ebffc908007d8623d6a5c0fd57832962df50b15da73a15b17dfdd36986ae62",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.13/workflow-plugin-product-capture-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "3f7183bcd8a92f57ed6feeb04de43ecca631b553cb580810b65bed9196077c1a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.11/workflow-plugin-product-capture-windows-amd64.tar.gz"
+      "sha256": "4646c22ee10b4cc3071e48c0ea89da633fcd102d7badbebea6f7c2fdb258e334",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.13/workflow-plugin-product-capture-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "b7fd68da564e792b72729404fa4b56485bfc17a5d38bb0e13d93b50640d789a6",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.11/workflow-plugin-product-capture-windows-arm64.tar.gz"
+      "sha256": "7eae154aca245f70521094eda5ba3d73b71e4c89863c2f87a4493eaddf7b594c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-product-capture/releases/download/v0.1.13/workflow-plugin-product-capture-windows-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-product-capture",
@@ -76,5 +76,5 @@
   "status": "verified",
   "tier": "community",
   "type": "external",
-  "version": "0.1.11"
+  "version": "0.1.13"
 }
