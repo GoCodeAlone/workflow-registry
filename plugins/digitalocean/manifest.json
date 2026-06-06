@@ -1,49 +1,143 @@
 {
-  "name": "workflow-plugin-digitalocean",
-  "version": "2.1.8",
-  "minEngineVersion": "0.69.1",
-  "required_secrets": [
-    {
-      "name": "DIGITALOCEAN_TOKEN",
-      "sensitive": true,
-      "description": "DigitalOcean API token with read/write scope (DNS + infra via godo).",
-      "prompt": "DigitalOcean API token"
-    }
-  ],
-  "description": "DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway",
+  "assets": {
+    "config": true,
+    "ui": false
+  },
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean",
-  "keywords": [
-    "digitalocean",
-    "iac",
-    "infra",
-    "kubernetes",
-    "database",
-    "app-platform",
-    "spaces",
-    "redis",
-    "doks",
-    "block-storage"
-  ],
   "capabilities": {
     "configProvider": false,
-    "moduleTypes": [
-      "iac.provider"
-    ],
-    "stepTypes": [
-      "step.iac_logs",
-      "step.iac_scale"
-    ],
-    "triggerTypes": [],
-    "iacStateBackends": [
-      "spaces"
-    ],
     "iacProvider": {
+      "configSchema": {
+        "infra.app_domain": {
+          "description": "DigitalOcean App Platform domain binding. Updates only AppSpec.Domains on an existing App Platform app so DNS/domain aliases can be reconciled without rebuilding service images or runtime environment variables.",
+          "fields": {
+            "app": {
+              "description": "Existing App Platform app name. Required unless app_id is set.",
+              "required": false,
+              "type": "string"
+            },
+            "app_id": {
+              "description": "Existing App Platform app UUID. Required unless app is set.",
+              "required": false,
+              "type": "string"
+            },
+            "certificate": {
+              "description": "Certificate ID to attach when using a custom certificate.",
+              "required": false,
+              "type": "string"
+            },
+            "domain": {
+              "description": "Fully qualified domain name to attach to the app.",
+              "required": true,
+              "type": "string"
+            },
+            "minimum_tls_version": {
+              "description": "Minimum TLS version for this domain.",
+              "enum": [
+                "1.2",
+                "1.3"
+              ],
+              "required": false,
+              "type": "string"
+            },
+            "type": {
+              "description": "App Platform custom domain type. Use PRIMARY for the app's primary custom domain or ALIAS for a non-primary custom domain.",
+              "enum": [
+                "PRIMARY",
+                "ALIAS"
+              ],
+              "required": false,
+              "type": "string"
+            },
+            "wildcard": {
+              "description": "Whether the domain is a wildcard binding.",
+              "required": false,
+              "type": "bool"
+            },
+            "zone": {
+              "description": "DigitalOcean DNS zone for provider-managed DNS validation.",
+              "required": false,
+              "type": "string"
+            }
+          }
+        },
+        "infra.container_service": {
+          "expose": {
+            "default": "public",
+            "description": "Whether the service has a public edge route (public, default) or is reachable only from sibling components via DO App Platform internal DNS (\u003cname\u003e.internal:\u003cport\u003e) (internal).",
+            "enum": [
+              "public",
+              "internal"
+            ],
+            "type": "string"
+          }
+        },
+        "infra.dns": {
+          "description": "DigitalOcean DNS zone and record reconciliation. Declared records are upserted; absent_records deletes targeted stale records without making the whole zone authoritative.",
+          "fields": {
+            "absent_records": {
+              "description": "Records to delete when present. Each entry supports type, name, and optional data for exact-value matching.",
+              "required": false,
+              "type": "array\u003cobject\u003e"
+            },
+            "domain": {
+              "description": "DNS zone name.",
+              "required": true,
+              "type": "string"
+            },
+            "records": {
+              "description": "Records to create or update. Each record supports type, name, data, ttl, and type-specific fields.",
+              "required": false,
+              "type": "array\u003cobject\u003e"
+            }
+          }
+        },
+        "infra.firewall": {
+          "description": "DigitalOcean cloud firewall. Attaches to Droplets by ID or by tag (which auto-attaches future Droplets / DOKS pools that receive the tag). Either `droplet_ids` or `tags` is REQUIRED; `wfctl infra apply` rejects firewalls with no targets before any DO API call. NOTE: DO firewalls do not attach to App Platform apps — for App-Platform-only deployments, use `expose: internal` services plus `trusted_sources` on managed databases.",
+          "examples": [
+            {
+              "comment": "Tag-based attachment so future Droplets / DOKS pools auto-join.",
+              "name": "tag-based-firewall",
+              "spec": {
+                "inbound_rules": [
+                  {
+                    "ports": "443",
+                    "protocol": "tcp",
+                    "sources": [
+                      "0.0.0.0/0"
+                    ]
+                  }
+                ],
+                "tags": [
+                  "bmw-prod"
+                ]
+              }
+            }
+          ],
+          "fields": {
+            "droplet_ids": {
+              "description": "Droplet IDs the firewall attaches to. At least one of `droplet_ids` or `tags` must be set.",
+              "required": false,
+              "type": "array\u003cint\u003e"
+            },
+            "inbound_rules": {
+              "description": "Each rule: {protocol: tcp|udp|icmp, ports: \"\u003cn\u003e|\u003ca-b\u003e|all\", sources: [\u003cCIDR\u003e...]}.",
+              "required": false,
+              "type": "array\u003cobject\u003e"
+            },
+            "outbound_rules": {
+              "description": "Each rule: {protocol: tcp|udp|icmp, ports: \"\u003cn\u003e|\u003ca-b\u003e|all\", destinations: [\u003cCIDR\u003e...]}.",
+              "required": false,
+              "type": "array\u003cobject\u003e"
+            },
+            "tags": {
+              "description": "Droplet/DOKS-pool tag strings. Resources receiving any listed tag auto-join the firewall. Example: [\"bmw-prod\"].",
+              "required": false,
+              "type": "array\u003cstring\u003e"
+            }
+          }
+        }
+      },
       "name": "digitalocean",
       "resourceTypes": [
         "infra.container_service",
@@ -62,173 +156,95 @@
         "infra.volume",
         "infra.iam_role",
         "infra.api_gateway"
-      ],
-      "configSchema": {
-        "infra.container_service": {
-          "expose": {
-            "type": "string",
-            "enum": [
-              "public",
-              "internal"
-            ],
-            "default": "public",
-            "description": "Whether the service has a public edge route (public, default) or is reachable only from sibling components via DO App Platform internal DNS (<name>.internal:<port>) (internal)."
-          }
-        },
-        "infra.app_domain": {
-          "description": "DigitalOcean App Platform domain binding. Updates only AppSpec.Domains on an existing App Platform app so DNS/domain aliases can be reconciled without rebuilding service images or runtime environment variables.",
-          "fields": {
-            "app": {
-              "type": "string",
-              "required": false,
-              "description": "Existing App Platform app name. Required unless app_id is set."
-            },
-            "app_id": {
-              "type": "string",
-              "required": false,
-              "description": "Existing App Platform app UUID. Required unless app is set."
-            },
-            "domain": {
-              "type": "string",
-              "required": true,
-              "description": "Fully qualified domain name to attach to the app."
-            },
-            "type": {
-              "type": "string",
-              "required": false,
-              "enum": [
-                "PRIMARY",
-                "ALIAS"
-              ],
-              "description": "App Platform custom domain type. Use PRIMARY for the app's primary custom domain or ALIAS for a non-primary custom domain."
-            },
-            "zone": {
-              "type": "string",
-              "required": false,
-              "description": "DigitalOcean DNS zone for provider-managed DNS validation."
-            },
-            "wildcard": {
-              "type": "bool",
-              "required": false,
-              "description": "Whether the domain is a wildcard binding."
-            },
-            "certificate": {
-              "type": "string",
-              "required": false,
-              "description": "Certificate ID to attach when using a custom certificate."
-            },
-            "minimum_tls_version": {
-              "type": "string",
-              "required": false,
-              "enum": [
-                "1.2",
-                "1.3"
-              ],
-              "description": "Minimum TLS version for this domain."
-            }
-          }
-        },
-        "infra.dns": {
-          "description": "DigitalOcean DNS zone and record reconciliation. Declared records are upserted; absent_records deletes targeted stale records without making the whole zone authoritative.",
-          "fields": {
-            "domain": {
-              "type": "string",
-              "required": true,
-              "description": "DNS zone name."
-            },
-            "records": {
-              "type": "array<object>",
-              "required": false,
-              "description": "Records to create or update. Each record supports type, name, data, ttl, and type-specific fields."
-            },
-            "absent_records": {
-              "type": "array<object>",
-              "required": false,
-              "description": "Records to delete when present. Each entry supports type, name, and optional data for exact-value matching."
-            }
-          }
-        },
-        "infra.firewall": {
-          "description": "DigitalOcean cloud firewall. Attaches to Droplets by ID or by tag (which auto-attaches future Droplets / DOKS pools that receive the tag). Either `droplet_ids` or `tags` is REQUIRED; `wfctl infra apply` rejects firewalls with no targets before any DO API call. NOTE: DO firewalls do not attach to App Platform apps — for App-Platform-only deployments, use `expose: internal` services plus `trusted_sources` on managed databases.",
-          "fields": {
-            "droplet_ids": {
-              "type": "array<int>",
-              "required": false,
-              "description": "Droplet IDs the firewall attaches to. At least one of `droplet_ids` or `tags` must be set."
-            },
-            "tags": {
-              "type": "array<string>",
-              "required": false,
-              "description": "Droplet/DOKS-pool tag strings. Resources receiving any listed tag auto-join the firewall. Example: [\"bmw-prod\"]."
-            },
-            "inbound_rules": {
-              "type": "array<object>",
-              "required": false,
-              "description": "Each rule: {protocol: tcp|udp|icmp, ports: \"<n>|<a-b>|all\", sources: [<CIDR>...]}."
-            },
-            "outbound_rules": {
-              "type": "array<object>",
-              "required": false,
-              "description": "Each rule: {protocol: tcp|udp|icmp, ports: \"<n>|<a-b>|all\", destinations: [<CIDR>...]}."
-            }
-          },
-          "examples": [
-            {
-              "name": "tag-based-firewall",
-              "comment": "Tag-based attachment so future Droplets / DOKS pools auto-join.",
-              "spec": {
-                "tags": [
-                  "bmw-prod"
-                ],
-                "inbound_rules": [
-                  {
-                    "protocol": "tcp",
-                    "ports": "443",
-                    "sources": [
-                      "0.0.0.0/0"
-                    ]
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      }
-    }
+      ]
+    },
+    "iacStateBackends": [
+      "spaces"
+    ],
+    "moduleTypes": [
+      "iac.provider"
+    ],
+    "serviceMethods": [
+      "workflow.plugin.external.iac.IaCProviderRequired",
+      "workflow.plugin.external.iac.IaCProviderEnumerator",
+      "workflow.plugin.external.iac.IaCProviderDriftDetector",
+      "workflow.plugin.external.iac.IaCProviderCredentialRevoker",
+      "workflow.plugin.external.iac.IaCProviderMigrationRepairer",
+      "workflow.plugin.external.iac.IaCProviderValidator",
+      "workflow.plugin.external.iac.IaCProviderDriftConfigDetector",
+      "workflow.plugin.external.iac.IaCProviderLogCapture",
+      "workflow.plugin.external.iac.IaCProviderRequirementMapper",
+      "workflow.plugin.external.iac.IaCProviderRegionLister",
+      "workflow.plugin.external.iac.IaCProviderOwnership",
+      "workflow.plugin.external.iac.IaCProviderFinalizer",
+      "workflow.plugin.external.iac.ResourceDriver",
+      "workflow.plugin.external.iac.IaCStateBackend"
+    ],
+    "stepTypes": [
+      "step.iac_logs",
+      "step.iac_scale"
+    ],
+    "triggerTypes": []
   },
-  "iacProvider": {
-    "computePlanVersion": "v2"
-  },
-  "assets": {
-    "ui": false,
-    "config": true
-  },
+  "category": "infrastructure",
+  "description": "DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "74bee29d2274554ec61d0829a9c3cdc9cb33c9f33c034648ee3f2944cd256b28",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.8/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
+      "sha256": "e30002909549b528b95a2c6ad8de99ef76a659da7f75394662ec962193a54e0f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.9/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "bff3658c954d236c6fdcbd3700ab0f428100acec67e7d319e24520a1320fab13",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.8/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
+      "sha256": "7f8b72f178c72f98ee299ca7fbd01575b41fdc6798b67a7cc2d6e3eb7b3850b0",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.9/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "f22b36487b3d2487c5b45e7c1788bfb27c344ea7d4a04723961387687c5e5b74",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.8/workflow-plugin-digitalocean-linux-amd64.tar.gz"
+      "sha256": "8decfa82b40dbf4ff0b629a0c96cef6da6d2afc509473869c7f6bd11bd88a4f7",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.9/workflow-plugin-digitalocean-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "060f67118baa3627e81bc9981ebd637fc9e45eb8aeffc4957f877663016315da",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.8/workflow-plugin-digitalocean-linux-arm64.tar.gz"
+      "sha256": "07a7d4e467e069c85071f69cf9a82be924a7f01d6e4b4d46b6b575940c4fba43",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.9/workflow-plugin-digitalocean-linux-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean",
+  "iacProvider": {
+    "computePlanVersion": "v2"
+  },
+  "keywords": [
+    "digitalocean",
+    "iac",
+    "infra",
+    "kubernetes",
+    "database",
+    "app-platform",
+    "spaces",
+    "redis",
+    "doks",
+    "block-storage"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.69.1",
+  "name": "workflow-plugin-digitalocean",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean",
+  "required_secrets": [
+    {
+      "description": "DigitalOcean API token with read/write scope (DNS + infra via godo).",
+      "name": "DIGITALOCEAN_TOKEN",
+      "prompt": "DigitalOcean API token",
+      "sensitive": true
     }
   ],
   "status": "verified",
-  "category": "infrastructure"
+  "tier": "community",
+  "type": "external",
+  "version": "2.1.9"
 }

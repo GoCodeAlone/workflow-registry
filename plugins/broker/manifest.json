@@ -1,26 +1,51 @@
 {
-  "name": "workflow-plugin-broker",
-  "version": "0.2.2",
   "author": "GoCodeAlone",
-  "description": "External plugin for the workflow engine.",
-  "source": "github.com/GoCodeAlone/workflow-plugin-broker",
-  "type": "external",
-  "tier": "community",
-  "license": "MIT",
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-broker",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-broker",
-  "private": false,
-  "status": "experimental",
   "capabilities": {
     "moduleTypes": [
-      "messaging.broker.workflow"
+      "broker.nats"
     ],
     "stepTypes": [
       "step.broker_publish",
       "step.broker_subscribe"
-    ],
-    "triggerTypes": [],
-    "workflowHandlers": []
+    ]
   },
-  "category": "messaging"
+  "category": "messaging",
+  "description": "External plugin for the workflow engine.",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "0dfa0aa3407aa744bc4b489920de91f35151f904ec3bacd53328a329c28ddafd",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-broker/releases/download/v0.2.4/workflow-plugin-broker_darwin_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "ca230d4ec594a475bf9337bb48c1866c9d6d75f2f386b726ad06e3fde0505d12",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-broker/releases/download/v0.2.4/workflow-plugin-broker_darwin_arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "128b9641108ae42ffacd9de1dd7f670f405b214fcd822a5d29b46c0e3203dd73",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-broker/releases/download/v0.2.4/workflow-plugin-broker_linux_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "386dbf6a9af5ac74e78104d5a4225bd1e952a843d7b6be5eba7a90bc9e4e47ca",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-broker/releases/download/v0.2.4/workflow-plugin-broker_linux_arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-broker",
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "workflow-plugin-broker",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-broker",
+  "source": "github.com/GoCodeAlone/workflow-plugin-broker",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.2.4"
 }
