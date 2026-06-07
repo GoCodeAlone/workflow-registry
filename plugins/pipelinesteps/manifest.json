@@ -42,6 +42,7 @@
       "step.regex_match",
       "step.request_parse",
       "step.resilient_circuit_breaker",
+      "step.response",
       "step.retry_with_backoff",
       "step.sandbox_exec",
       "step.secret_fetch",
