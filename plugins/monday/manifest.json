@@ -1,30 +1,5 @@
 {
-  "name": "workflow-plugin-monday",
-  "version": "0.1.4",
-  "description": "Comprehensive monday.com integration — boards, items, columns, groups, workspaces, and all resources via GraphQL",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.51.7",
-  "required_secrets": [
-    {
-      "name": "MONDAY_API_TOKEN",
-      "sensitive": true,
-      "description": "Monday.com API token. Referenced as ${MONDAY_API_TOKEN} in apiToken.",
-      "prompt": "Monday.com API token"
-    }
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-monday",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-monday",
-  "keywords": [
-    "monday",
-    "monday.com",
-    "project-management",
-    "boards",
-    "graphql"
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -91,32 +66,57 @@
     ],
     "triggerTypes": []
   },
+  "category": "integrations",
+  "description": "Comprehensive monday.com integration — boards, items, columns, groups, workspaces, and all resources via GraphQL",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "50ba9cea60c862770c66fa262b033930878cc2b9ce73bba9d5405b461bb16430",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.4/workflow-plugin-monday-darwin-amd64.tar.gz"
+      "sha256": "2e558d4dfa53b86508601bcd69370ea8325dc38fc80e170abdc11fce43718198",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.5/workflow-plugin-monday-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "411f21a3e1f606f689cd4d43201ba04d45ff67e0b5657103b2012f4759153dac",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.4/workflow-plugin-monday-darwin-arm64.tar.gz"
+      "sha256": "c6ee9f2d1141d01fc63f885d662e14fdcb966b2aba143d256fe75ccdf5717c08",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.5/workflow-plugin-monday-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "9bb07b299909406548a259f6adc417f7a324349ff83f2271f832dab119a9a429",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.4/workflow-plugin-monday-linux-amd64.tar.gz"
+      "sha256": "021d47dda34d7e757c19244d071aafa48527b111880c2ff2d5ef300eadb5af8f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.5/workflow-plugin-monday-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "1ee3062b6fef2e8e8996c5419d237f9ebf18278a1b19a50bc602ecd7aa68b4b8",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.4/workflow-plugin-monday-linux-arm64.tar.gz"
+      "sha256": "3e0aa7306ead9a84ae4a2d8bb53014be31603b6db8f6e6c9b421d1107470077f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-monday/releases/download/v0.1.5/workflow-plugin-monday-linux-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-monday",
+  "keywords": [
+    "monday",
+    "monday.com",
+    "project-management",
+    "boards",
+    "graphql"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "workflow-plugin-monday",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-monday",
+  "required_secrets": [
+    {
+      "description": "Monday.com API token. Referenced as ${MONDAY_API_TOKEN} in apiToken.",
+      "name": "MONDAY_API_TOKEN",
+      "prompt": "Monday.com API token",
+      "sensitive": true
     }
   ],
   "status": "experimental",
-  "category": "integrations"
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.5"
 }
