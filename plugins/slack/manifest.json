@@ -1,37 +1,5 @@
 {
-  "name": "slack",
-  "version": "0.1.6",
   "author": "GoCodeAlone",
-  "description": "Slack messaging and workspace automation. Provides a provider module backed by the Slack Web API and Socket Mode, pipeline steps for messages/blocks/reactions/files, and a Socket Mode event trigger.",
-  "source": "github.com/GoCodeAlone/workflow-plugin-slack",
-  "type": "external",
-  "tier": "community",
-  "license": "MIT",
-  "minEngineVersion": "0.51.7",
-  "required_secrets": [
-    {
-      "name": "SLACK_BOT_TOKEN",
-      "sensitive": true,
-      "description": "Slack bot token (xoxb-…). Referenced as ${SLACK_BOT_TOKEN}.",
-      "prompt": "Slack bot token"
-    },
-    {
-      "name": "SLACK_APP_TOKEN",
-      "sensitive": true,
-      "description": "Slack app-level token (xapp-…) for Socket Mode. Referenced as ${SLACK_APP_TOKEN}.",
-      "prompt": "Slack app token"
-    }
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-slack",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-slack",
-  "keywords": [
-    "slack",
-    "messaging",
-    "chat",
-    "notifications",
-    "bot",
-    "webhook"
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -51,32 +19,64 @@
       "trigger.slack"
     ]
   },
+  "category": "messaging",
+  "description": "Slack messaging and workspace automation. Provides a provider module backed by the Slack Web API and Socket Mode, pipeline steps for messages/blocks/reactions/files, and a Socket Mode event trigger.",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "639c1ce41a0cba9cd88217d2f12fd952de2bb56375c4316313af6d931b1064a5",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.6/workflow-plugin-slack-darwin-amd64.tar.gz"
+      "sha256": "a1236e3ee6dbfb99de5ad678d177053f7954a8ad05de0e23dbb169c1868c9959",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.8/workflow-plugin-slack-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "76665335616658562a6ab487b6d4be03346c02386b2d6d4265c8f759dd35605b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.6/workflow-plugin-slack-darwin-arm64.tar.gz"
+      "sha256": "5e802f520aa1e5c771250dfafd1511de5e16edbcd3fb1a6c5eb55b020130dc83",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.8/workflow-plugin-slack-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "26f2326993ee8ca368bcda2803c03bb6ff8dcfbbac0c0e5c697a76a318e12a10",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.6/workflow-plugin-slack-linux-amd64.tar.gz"
+      "sha256": "d830644258bc568c7c0408791197f8ed59cf43c224e96eb06c5882d4aa6dc006",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.8/workflow-plugin-slack-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "c705cad5cb7d9b5618baa7337225b91d2929a412eec537d50615ee3ac2b1a14a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.6/workflow-plugin-slack-linux-arm64.tar.gz"
+      "sha256": "3f7e9d4a36681f072ef751bde10ae8ef430c61e2640687868b71f84cc5686a15",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-slack/releases/download/v0.1.8/workflow-plugin-slack-linux-arm64.tar.gz"
     }
   ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-slack",
+  "keywords": [
+    "slack",
+    "messaging",
+    "chat",
+    "notifications",
+    "bot",
+    "webhook"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "slack",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-slack",
+  "required_secrets": [
+    {
+      "description": "Slack bot token (xoxb-…). Referenced as ${SLACK_BOT_TOKEN}.",
+      "name": "SLACK_BOT_TOKEN",
+      "prompt": "Slack bot token",
+      "sensitive": true
+    },
+    {
+      "description": "Slack app-level token (xapp-…) for Socket Mode. Referenced as ${SLACK_APP_TOKEN}.",
+      "name": "SLACK_APP_TOKEN",
+      "prompt": "Slack app token",
+      "sensitive": true
+    }
+  ],
+  "source": "github.com/GoCodeAlone/workflow-plugin-slack",
   "status": "experimental",
-  "category": "messaging"
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.8"
 }
