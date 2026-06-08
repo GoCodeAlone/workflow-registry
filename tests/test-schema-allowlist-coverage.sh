@@ -19,6 +19,7 @@
 #   - iacProvider.* (top-level — name, resourceTypes, computePlanVersion)
 #   - assets.* (ui, config) — added round 2 per Copilot
 #   - dependencies.items.* (name, minVersion, maxVersion) — added round 2 per Copilot
+#   - secret_targets.items.* (provider, scopes, description)
 
 set -euo pipefail
 
@@ -58,7 +59,8 @@ schema_props() {
       ((.properties.capabilities.properties.cliCommands.items.properties.subcommands.items.properties // {}) | keys[] | "capabilities.cliCommands.subcommands." + .),
       ((.properties.iacProvider.properties // {}) | keys[] | "iacProvider." + .),
       ((.properties.assets.properties // {}) | keys[] | "assets." + .),
-      ((.properties.dependencies.items.properties // {}) | keys[] | "dependencies." + .)
+      ((.properties.dependencies.items.properties // {}) | keys[] | "dependencies." + .),
+      ((.properties.secret_targets.items.properties // {}) | keys[] | "secret_targets." + .)
     ] | .[]
   ' "${SCHEMA}" | sort -u
 }

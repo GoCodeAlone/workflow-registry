@@ -75,6 +75,12 @@ assert_jq "foo-iac iacProvider.computePlanVersion" \
   '.[] | select(.name=="foo-iac") | .iacProvider.computePlanVersion' '"v2"'
 assert_jq "foo-iac required_secrets has 2 items" \
   '.[] | select(.name=="foo-iac") | .required_secrets | length' '2'
+assert_jq "foo-iac secret_targets has 1 item" \
+  '.[] | select(.name=="foo-iac") | .secret_targets | length' '1'
+assert_jq "foo-iac secret_targets[0].provider" \
+  '.[] | select(.name=="foo-iac") | .secret_targets[0].provider' '"github"'
+assert_jq "foo-iac secret_targets[0].scopes" \
+  '.[] | select(.name=="foo-iac") | .secret_targets[0].scopes' '["repo","env"]'
 
 # === Empty-array preservation ===
 assert_jq "bar-simple required_secrets preserved as []" \
@@ -90,11 +96,22 @@ assert_jq "qux-no-secrets is present in index" \
 if jq -e '.[] | select(.name=="qux-no-secrets") | has("required_secrets")' "${INDEX}" >/dev/null; then
   fail "qux-no-secrets should have no required_secrets key (manifest omits it); C-1 regression"
 fi
+if jq -e '.[] | select(.name=="qux-no-secrets") | has("secret_targets")' "${INDEX}" >/dev/null; then
+  fail "qux-no-secrets should have no secret_targets key (manifest omits it)"
+fi
 
 # === required_secrets per-item allowlist (extras dropped) ===
 assert_jq "required_secrets[0] item has exactly 4 known keys" \
   '.[] | select(.name=="foo-iac") | .required_secrets[0] | keys_unsorted | sort' \
   '["description","name","prompt","sensitive"]'
+
+# === secret_targets per-item allowlist (extras dropped) ===
+assert_jq "secret_targets[0] item has exactly 3 known keys" \
+  '.[] | select(.name=="foo-iac") | .secret_targets[0] | keys_unsorted | sort' \
+  '["description","provider","scopes"]'
+if jq -e '.[] | select(.name=="foo-iac") | .secret_targets[0] | has("target_leak")' "${INDEX}" >/dev/null; then
+  fail "G3 allowlist regression: secret_targets item leaked sub-field 'target_leak'"
+fi
 
 # === Per-item allowlist on cliCommands (extras dropped) ===
 assert_jq "cliCommands item has exactly 4 known keys" \
