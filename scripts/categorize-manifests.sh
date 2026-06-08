@@ -103,6 +103,7 @@ declare -A CATEGORY_MAP=(
   [workflow-plugin-atlas-migrate]="data"
   [workflow-plugin-auth]="core"
   [workflow-plugin-compute]="core"
+  [workflow-plugin-gitlab]="integrations"
   [workflow-plugin-migrations]="data"
   [workflow-plugin-product-capture]="core"
   [workflow-plugin-supply-chain]="security"

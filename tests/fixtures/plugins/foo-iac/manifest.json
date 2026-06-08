@@ -51,6 +51,14 @@
     {"name": "FOO_USER", "sensitive": false, "description": "Foo username"},
     {"name": "FOO_PASS", "sensitive": true, "description": "Foo password"}
   ],
+  "secret_targets": [
+    {
+      "provider": "github",
+      "scopes": ["repo", "env"],
+      "description": "Foo credentials stored in GitHub Actions secrets",
+      "target_leak": "should_not_appear"
+    }
+  ],
   "assets": {"ui": false, "config": true, "assets_leak": "should_not_appear"},
   "dependencies": [
     {

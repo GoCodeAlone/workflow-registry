@@ -343,6 +343,30 @@
         },
         "additionalProperties": false
       }
+    },
+    "secret_targets": {
+      "type": "array",
+      "description": "Secret provider targets this plugin supports. Consumed by wfctl to present provider-owned scopes such as GitHub repo/org/env, GitLab project/group/env, Vault mount, or local file-backed stores.",
+      "items": {
+        "type": "object",
+        "required": ["provider", "scopes"],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "Canonical secret provider name (e.g. github, gitlab, vault, file, keychain, env)"
+          },
+          "scopes": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Provider-owned scope identifiers supported by this target"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable target description shown by wfctl"
+          }
+        },
+        "additionalProperties": false
+      }
     }
   },
   "additionalProperties": false

@@ -77,6 +77,10 @@ while IFS= read -r manifest; do
   # G3-include: dependencies.minVersion
   # G3-include: dependencies.maxVersion
   # G3-include: required_secrets
+  # G3-include: secret_targets
+  # G3-include: secret_targets.provider
+  # G3-include: secret_targets.scopes
+  # G3-include: secret_targets.description
   # G3-include: capabilities
   # G3-include: capabilities.moduleTypes
   # G3-include: capabilities.stepTypes
@@ -192,6 +196,16 @@ while IFS= read -r manifest; do
       sensitive:   (.sensitive // false),
       description: (.description // null),
       prompt:      (.prompt // null)
+    }]}
+    end
+  )
+  +
+  (
+    if (.secret_targets // null) == null then {}
+    else { secret_targets: [.secret_targets[] | {
+      provider:    (.provider // null),
+      scopes:      (.scopes // []),
+      description: (.description // null)
     }]}
     end
   ))' "${manifest}")"
