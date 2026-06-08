@@ -59,9 +59,24 @@ jobs:
             ${{ runner.os }}-go-1.26.4-
 
       - name: Set up wfctl
-        uses: GoCodeAlone/setup-wfctl@bcd880980f5bbe8d192d0c20ff6279d25331f956 # v1
-        with:
-          version: v0.74.6
+        env:
+          WFCTL_VERSION: v0.78.0
+        run: |
+          set -euo pipefail
+          install_dir="${RUNNER_TEMP}/wfctl-bin"
+          work_dir="${RUNNER_TEMP}/wfctl-download"
+          mkdir -p "${install_dir}" "${work_dir}"
+          base_url="https://github.com/GoCodeAlone/workflow/releases/download/${WFCTL_VERSION}"
+          curl -fsSL --retry 5 --retry-delay 2 \
+            -o "${work_dir}/wfctl-linux-amd64" \
+            "${base_url}/wfctl-linux-amd64"
+          curl -fsSL --retry 5 --retry-delay 2 \
+            -o "${work_dir}/checksums.txt" \
+            "${base_url}/checksums.txt"
+          (cd "${work_dir}" && grep ' wfctl-linux-amd64$' checksums.txt | sha256sum -c -)
+          install -m 0755 "${work_dir}/wfctl-linux-amd64" "${install_dir}/wfctl"
+          echo "${install_dir}" >> "${GITHUB_PATH}"
+          "${install_dir}/wfctl" version
 
       - name: Resolve plugin filter from event
         id: filter
@@ -120,15 +135,34 @@ jobs:
           PLUGIN:   ${{ steps.filter.outputs.plugin }}
         run: |
           set -euo pipefail
+          run_wfctl() {
+            local attempt max output status
+            max=6
+            for attempt in $(seq 1 "${max}"); do
+              set +e
+              output="$("$@" 2>&1)"
+              status=$?
+              set -e
+              printf '%s\n' "${output}"
+              if [[ ${status} -eq 0 ]] && ! grep -Eq '(^|[[:space:]])ERROR[[:space:]]' <<<"${output}"; then
+                return 0
+              fi
+              if [[ ${attempt} -eq ${max} ]]; then
+                echo "::error::wfctl command failed after ${max} attempts: $*"
+                return 1
+              fi
+              sleep "$((attempt * 10))"
+            done
+          }
           if [[ -n "${PLUGIN}" ]]; then
             echo "syncing single plugin: ${PLUGIN}"
-            wfctl plugin registry-sync --fix --plugin "${PLUGIN}" --registry-dir .
-            wfctl plugin registry-sync readme --registry-dir .
+            run_wfctl wfctl plugin registry-sync --fix --plugin "${PLUGIN}" --registry-dir .
+            run_wfctl wfctl plugin registry-sync readme --registry-dir .
           else
             echo "syncing all plugins (cron / full run)"
-            wfctl plugin registry-sync --fix --registry-dir .
-            wfctl plugin registry-sync core --fix --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
-            wfctl plugin registry-sync readme --registry-dir .
+            run_wfctl wfctl plugin registry-sync --fix --registry-dir .
+            run_wfctl wfctl plugin registry-sync core --fix --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
+            run_wfctl wfctl plugin registry-sync readme --registry-dir .
           fi
           if git diff --quiet -- plugins README.md; then
             echo "changed=0" >> "$GITHUB_OUTPUT"
@@ -153,6 +187,25 @@ jobs:
           DISPATCH_ACTION: ${{ github.event.action }}
         run: |
           set -euo pipefail
+          run_wfctl() {
+            local attempt max output status
+            max=6
+            for attempt in $(seq 1 "${max}"); do
+              set +e
+              output="$("$@" 2>&1)"
+              status=$?
+              set -e
+              printf '%s\n' "${output}"
+              if [[ ${status} -eq 0 ]] && ! grep -Eq '(^|[[:space:]])ERROR[[:space:]]' <<<"${output}"; then
+                return 0
+              fi
+              if [[ ${attempt} -eq ${max} ]]; then
+                echo "::error::wfctl command failed after ${max} attempts: $*"
+                return 1
+              fi
+              sleep "$((attempt * 10))"
+            done
+          }
           DATE=$(date +%Y-%m-%d)
 
           if [[ -n "${PLUGIN}" ]]; then
@@ -233,13 +286,15 @@ jobs:
               git clean -fd plugins/ README.md
               git fetch origin "${BRANCH}:refs/remotes/origin/${BRANCH}"
               git checkout -B "${BRANCH}" "refs/remotes/origin/${BRANCH}"
+              GH_TOKEN="${WFCTL_GH_TOKEN}"
+              export GH_TOKEN
               if [[ -n "${PLUGIN}" ]]; then
-                GH_TOKEN="${WFCTL_GH_TOKEN}" wfctl plugin registry-sync --fix --plugin "${PLUGIN}" --registry-dir .
+                run_wfctl wfctl plugin registry-sync --fix --plugin "${PLUGIN}" --registry-dir .
               else
-                GH_TOKEN="${WFCTL_GH_TOKEN}" wfctl plugin registry-sync --fix --registry-dir .
-                wfctl plugin registry-sync core --fix --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
+                run_wfctl wfctl plugin registry-sync --fix --registry-dir .
+                run_wfctl wfctl plugin registry-sync core --fix --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
               fi
-              wfctl plugin registry-sync readme --registry-dir .
+              run_wfctl wfctl plugin registry-sync readme --registry-dir .
               git add plugins/ README.md
               if git diff --cached --quiet; then
                 echo "PR #${existing} already at expected state on re-sync; nothing new to append"

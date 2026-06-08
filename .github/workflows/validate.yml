@@ -61,9 +61,24 @@ jobs:
             ${{ runner.os }}-go-1.26.4-
 
       - name: Set up wfctl
-        uses: GoCodeAlone/setup-wfctl@bcd880980f5bbe8d192d0c20ff6279d25331f956 # v1
-        with:
-          version: v0.74.6
+        env:
+          WFCTL_VERSION: v0.78.0
+        run: |
+          set -euo pipefail
+          install_dir="${RUNNER_TEMP}/wfctl-bin"
+          work_dir="${RUNNER_TEMP}/wfctl-download"
+          mkdir -p "${install_dir}" "${work_dir}"
+          base_url="https://github.com/GoCodeAlone/workflow/releases/download/${WFCTL_VERSION}"
+          curl -fsSL --retry 5 --retry-delay 2 \
+            -o "${work_dir}/wfctl-linux-amd64" \
+            "${base_url}/wfctl-linux-amd64"
+          curl -fsSL --retry 5 --retry-delay 2 \
+            -o "${work_dir}/checksums.txt" \
+            "${base_url}/checksums.txt"
+          (cd "${work_dir}" && grep ' wfctl-linux-amd64$' checksums.txt | sha256sum -c -)
+          install -m 0755 "${work_dir}/wfctl-linux-amd64" "${install_dir}/wfctl"
+          echo "${install_dir}" >> "${GITHUB_PATH}"
+          "${install_dir}/wfctl" version
 
       - name: Validate core plugin manifests
         run: wfctl plugin registry-sync core --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
