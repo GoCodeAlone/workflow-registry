@@ -1,29 +1,42 @@
 {
-  "name": "workflow-plugin-twilio",
-  "version": "0.2.2",
-  "description": "Comprehensive Twilio integration — SMS, Voice, Verify, Video, Conversations, TaskRouter, and 40+ products",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.51.2",
-  "required_secrets": [
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [
+      "twilio.provider"
+    ],
+    "stepTypes": [],
+    "triggerTypes": []
+  },
+  "category": "messaging",
+  "description": "Comprehensive Twilio integration — SMS, Voice, Verify, Video, Conversations, TaskRouter, and 40+ products",
+  "downloads": [
     {
-      "name": "TWILIO_ACCOUNT_SID",
-      "sensitive": false,
-      "description": "Twilio Account SID (identifier). Referenced as ${TWILIO_ACCOUNT_SID}.",
-      "prompt": "Twilio Account SID"
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "df804cd0ddcb17cf15e5dc7179d8c230f8feb29828a0c63e8b31571b2d1ade60",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.3/workflow-plugin-twilio-darwin-amd64.tar.gz"
     },
     {
-      "name": "TWILIO_AUTH_TOKEN",
-      "sensitive": true,
-      "description": "Twilio auth token (primary auth path; API-key path uses TWILIO_API_KEY + TWILIO_API_SECRET instead). Referenced as ${TWILIO_AUTH_TOKEN}.",
-      "prompt": "Twilio auth token"
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "436d36ca7574202729bc7e4640c74c4c1b909c1c0b28f48c7325b0ef5c0df9d2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.3/workflow-plugin-twilio-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "19f3251eb002b5f8bb25ffb6c349d194d80ac1c318a51bbba88349617f781125",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.3/workflow-plugin-twilio-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "0cf30ecbaf7ac47c2c04fde0544d74c96fbaf86b7e5e85b6826c9a3b555078a7",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.3/workflow-plugin-twilio-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-twilio",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-twilio",
   "keywords": [
     "twilio",
     "sms",
@@ -34,40 +47,27 @@
     "conversations",
     "whatsapp"
   ],
-  "capabilities": {
-    "configProvider": false,
-    "moduleTypes": [
-      "twilio.provider"
-    ],
-    "stepTypes": [],
-    "triggerTypes": []
-  },
-  "downloads": [
+  "license": "MIT",
+  "minEngineVersion": "0.51.2",
+  "name": "workflow-plugin-twilio",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-twilio",
+  "required_secrets": [
     {
-      "arch": "amd64",
-      "os": "darwin",
-      "sha256": "d7ecff29f78b1eb90d6fcc2b6c8c8f498464516c8f6e1ea2b66aa6ca6f59dac9",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.2/workflow-plugin-twilio-darwin-amd64.tar.gz"
+      "description": "Twilio Account SID (identifier). Referenced as ${TWILIO_ACCOUNT_SID}.",
+      "name": "TWILIO_ACCOUNT_SID",
+      "prompt": "Twilio Account SID",
+      "sensitive": false
     },
     {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "11a6d04676691669531a893fa4e4b938db526a9bef9c120e8f013025ef5c839a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.2/workflow-plugin-twilio-darwin-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "linux",
-      "sha256": "8bc96ed82dc88cb2590617c3166f4334a5c43f786a2f9ac9d53be69fcaa52d3b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.2/workflow-plugin-twilio-linux-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "linux",
-      "sha256": "6226be6d06f200cc40424015e26fdff02a25b7107b72a1281176e97db05fe81c",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-twilio/releases/download/v0.2.2/workflow-plugin-twilio-linux-arm64.tar.gz"
+      "description": "Twilio auth token (primary auth path; API-key path uses TWILIO_API_KEY + TWILIO_API_SECRET instead). Referenced as ${TWILIO_AUTH_TOKEN}.",
+      "name": "TWILIO_AUTH_TOKEN",
+      "prompt": "Twilio auth token",
+      "sensitive": true
     }
   ],
   "status": "verified",
-  "category": "messaging"
+  "tier": "community",
+  "type": "external",
+  "version": "0.2.3"
 }
