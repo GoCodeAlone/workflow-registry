@@ -1,38 +1,5 @@
 {
-  "name": "workflow-plugin-okta",
-  "version": "0.2.6",
-  "description": "Okta identity and access management — users, groups, applications, authorization servers, MFA, policies, and more",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.51.7",
-  "required_secrets": [
-    {
-      "name": "OKTA_ORG_URL",
-      "sensitive": false,
-      "description": "Okta org URL (e.g. https://example.okta.com). Referenced as ${OKTA_ORG_URL}.",
-      "prompt": "Okta org URL"
-    },
-    {
-      "name": "OKTA_API_TOKEN",
-      "sensitive": true,
-      "description": "Okta API token (primary auth path; OAuth path uses clientId + privateKey instead). Referenced as ${OKTA_API_TOKEN}.",
-      "prompt": "Okta API token"
-    }
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-okta",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-okta",
-  "keywords": [
-    "okta",
-    "identity",
-    "iam",
-    "sso",
-    "mfa",
-    "authentication",
-    "authorization"
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -174,32 +141,65 @@
     ],
     "triggerTypes": []
   },
+  "category": "integrations",
+  "description": "Okta identity and access management — users, groups, applications, authorization servers, MFA, policies, and more",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "a9851f27f93695c105adab783758808bf79e0dbfeb0790cd3afb39dcf0a58b88",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.6/workflow-plugin-okta-darwin-amd64.tar.gz"
+      "sha256": "5091a71ce599b6055ce19ef4874990aedd5e40da38cff5c72031a68768749607",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.7/workflow-plugin-okta-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "d9d7b94ade4259958d6381240ca2ca484b423ff6a8e46d0c6fdbc8b8e7cef131",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.6/workflow-plugin-okta-darwin-arm64.tar.gz"
+      "sha256": "d15920a9c46777c9a057d35b38de82b73e56053b32ca1579f9c962fbad55f384",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.7/workflow-plugin-okta-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "6b90573db5f8bc0ced004ac340666ed4e722066f4972c340c633cef36605f633",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.6/workflow-plugin-okta-linux-amd64.tar.gz"
+      "sha256": "02b214d509c424ee87c43231960bf628b3b19d4be743c462a8affb9b68e755ea",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.7/workflow-plugin-okta-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "0f3ac4c7a2de600539a3b9cf8f154ee7dfc81c68ac04c26a20e5c9648f401b88",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.6/workflow-plugin-okta-linux-arm64.tar.gz"
+      "sha256": "0499e59f31f0d2562585d8e9b97bbe508b429d00ebe9deed153e562f83104953",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.7/workflow-plugin-okta-linux-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-okta",
+  "keywords": [
+    "okta",
+    "identity",
+    "iam",
+    "sso",
+    "mfa",
+    "authentication",
+    "authorization"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "workflow-plugin-okta",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-okta",
+  "required_secrets": [
+    {
+      "description": "Okta org URL (e.g. https://example.okta.com). Referenced as ${OKTA_ORG_URL}.",
+      "name": "OKTA_ORG_URL",
+      "prompt": "Okta org URL",
+      "sensitive": false
+    },
+    {
+      "description": "Okta API token (primary auth path; OAuth path uses clientId + privateKey instead). Referenced as ${OKTA_API_TOKEN}.",
+      "name": "OKTA_API_TOKEN",
+      "prompt": "Okta API token",
+      "sensitive": true
     }
   ],
   "status": "experimental",
-  "category": "integrations"
+  "tier": "community",
+  "type": "external",
+  "version": "0.2.7"
 }
