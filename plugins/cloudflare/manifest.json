@@ -1,76 +1,73 @@
 {
-  "name": "workflow-plugin-cloudflare",
-  "version": "0.1.1",
-  "minEngineVersion": "0.60.8",
-  "description": "Cloudflare DNS provider for workflow IaC (infra.dns)",
+  "assets": {
+    "config": true,
+    "ui": false
+  },
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
+  "capabilities": {
+    "moduleTypes": [
+      "iac.provider.cloudflare"
+    ],
+    "resourceTypes": [
+      "infra.dns",
+      "infra.domain"
+    ],
+    "stepTypes": [],
+    "triggerTypes": []
+  },
+  "category": "infrastructure",
+  "description": "Cloudflare DNS provider for workflow IaC (infra.dns)",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "36b5e99d42e0d0a740be9afe0ee4cfa354eea4e4012d947d88041e71a348f17b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.3/workflow-plugin-cloudflare-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "0fa8fea4e6e73c0c451ccc55b3445e67376f8fd07b4cdbba925610bcc5b19140",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.3/workflow-plugin-cloudflare-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "99e6c5720a6e3c23ad845bd7bc782996302704ec2a772044851ce8fd48da911d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.3/workflow-plugin-cloudflare-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "a605363d7e68f32bbd95b4ab5ac7cdae45817c126ff9af8ae1eda716578be561",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.3/workflow-plugin-cloudflare-linux-arm64.tar.gz"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare",
+  "iacProvider": {
+    "computePlanVersion": "v2"
+  },
   "keywords": [
     "cloudflare",
     "dns",
     "iac",
     "infra.dns"
   ],
-  "capabilities": {
-    "moduleTypes": [
-      "iac.provider.cloudflare"
-    ],
-    "stepTypes": [],
-    "triggerTypes": [],
-    "iacProvider": {
-      "name": "cloudflare",
-      "resourceTypes": [
-        "infra.dns",
-        "infra.domain"
-      ]
-    }
-  },
+  "license": "MIT",
+  "minEngineVersion": "0.60.8",
+  "name": "workflow-plugin-cloudflare",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare",
   "required_secrets": [
     {
-      "name": "CLOUDFLARE_API_TOKEN",
-      "sensitive": true,
       "description": "Cloudflare API token with Zone:Read and DNS:Edit for managed zones; registrar import/status also requires Registrar read access and auto-renew updates require Registrar edit access.",
-      "prompt": "Cloudflare API token"
-    }
-  ],
-  "iacProvider": {
-    "computePlanVersion": "v2"
-  },
-  "assets": {
-    "ui": false,
-    "config": true
-  },
-  "downloads": [
-    {
-      "arch": "amd64",
-      "os": "darwin",
-      "sha256": "9683cb47c4921abb5065372be345ba95e027a306c9691053f8e2fe70ba7776bd",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.1/workflow-plugin-cloudflare-darwin-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "08eb4c0d4f68f46a417641224a120fc88bd1a3c041e4ece313529933b946e616",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.1/workflow-plugin-cloudflare-darwin-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "linux",
-      "sha256": "fa0685bac1ceffe485df5851a072a34fce9db65166c3d9cd8c2f9637eb1d2329",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.1/workflow-plugin-cloudflare-linux-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "linux",
-      "sha256": "4903431615f625fbef8f1a76bbc15855b9a80ffb1592187db1f9078d238dd7fe",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.1/workflow-plugin-cloudflare-linux-arm64.tar.gz"
+      "name": "CLOUDFLARE_API_TOKEN",
+      "prompt": "Cloudflare API token",
+      "sensitive": true
     }
   ],
   "status": "experimental",
-  "category": "infrastructure"
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.3"
 }
