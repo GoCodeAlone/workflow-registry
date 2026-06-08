@@ -1,31 +1,5 @@
 {
-  "name": "workflow-plugin-vectorstore",
-  "version": "0.1.3",
-  "description": "Vector database integration for RAG pipelines with Pinecone support",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "core",
-  "private": false,
-  "minEngineVersion": "0.51.7",
-  "required_secrets": [
-    {
-      "name": "PINECONE_API_KEY",
-      "sensitive": true,
-      "description": "Pinecone API key (provider: pinecone). Other vector providers (e.g. Milvus) use their own auth. Referenced as ${PINECONE_API_KEY}.",
-      "prompt": "Pinecone API key"
-    }
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
-  "keywords": [
-    "vector",
-    "vectorstore",
-    "pinecone",
-    "rag",
-    "embeddings",
-    "similarity-search"
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -42,44 +16,70 @@
     ],
     "triggerTypes": []
   },
+  "category": "data",
+  "description": "Vector database integration for RAG pipelines with Pinecone support",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "8816f0504b5de20890e643231e97d96b5211b1431530f0de17219f644c6d6ee5",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.3/workflow-plugin-vectorstore-darwin-amd64.tar.gz"
+      "sha256": "100cd24e54034e23bb94127053d870be26c2ec77809c527919d2b3f502a283e4",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.4/workflow-plugin-vectorstore-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "becdf86dc2fd072cc7ffd872b5be30bb19c851c8d106e415845d969fd69805ea",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.3/workflow-plugin-vectorstore-darwin-arm64.tar.gz"
+      "sha256": "2a512fe5402c74f1782f6b2b6178f1d5d5cdcc9643b41ea97a9a694120198b0a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.4/workflow-plugin-vectorstore-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "e248070bd6f74ec48e00697a76cea0501ea0e97aec7ebe86947ad4b52d6315e3",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.3/workflow-plugin-vectorstore-linux-amd64.tar.gz"
+      "sha256": "d408c2d7b09cdc65349af8195dc0eff8c3f8eac6d6b394dba2886b0fcf1e631a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.4/workflow-plugin-vectorstore-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "9b064879b172d852529cfde22390cd777ac499bb6b61374a7a757460915be72e",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.3/workflow-plugin-vectorstore-linux-arm64.tar.gz"
+      "sha256": "afc14ad0fddab439a81aa1da230281246662187666549576ed3e52a946949d4b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.4/workflow-plugin-vectorstore-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "7f3046f3304257c3271d3833bf1a906797426b397c821191d00eafa401169784",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.3/workflow-plugin-vectorstore-windows-amd64.tar.gz"
+      "sha256": "d46baa60b5a1dfead4f42a89b5f7740e584bcb10b5cb46b627a5876e91ff2120",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.4/workflow-plugin-vectorstore-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "600b6efa3e46f114a0fa3458c055486dea95644a32e7d63732cc4b2c86a93dfb",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.3/workflow-plugin-vectorstore-windows-arm64.tar.gz"
+      "sha256": "66b6efc42ce7e26bc26560803cfcae459cb401c84f78bd322df7e61079e6e0ae",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore/releases/download/v0.1.4/workflow-plugin-vectorstore-windows-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
+  "keywords": [
+    "vector",
+    "vectorstore",
+    "pinecone",
+    "rag",
+    "embeddings",
+    "similarity-search"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "workflow-plugin-vectorstore",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-vectorstore",
+  "required_secrets": [
+    {
+      "description": "Pinecone API key (provider: pinecone). Other vector providers (e.g. Milvus) use their own auth. Referenced as ${PINECONE_API_KEY}.",
+      "name": "PINECONE_API_KEY",
+      "prompt": "Pinecone API key",
+      "sensitive": true
     }
   ],
   "status": "experimental",
-  "category": "data"
+  "tier": "core",
+  "type": "external",
+  "version": "0.1.4"
 }

@@ -1,23 +1,5 @@
 {
-  "name": "workflow-plugin-entra",
-  "version": "0.1.2",
-  "description": "Microsoft Entra ID management provider plugin",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.64.0",
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-entra",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-entra",
-  "keywords": [
-    "entra",
-    "microsoft-graph",
-    "identity",
-    "iam",
-    "sso",
-    "oidc"
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -45,52 +27,70 @@
     ],
     "triggerTypes": []
   },
-  "required_secrets": [
-    {
-      "name": "ENTRA_TENANT_ID",
-      "sensitive": false,
-      "description": "Microsoft Entra ID tenant ID. Referenced as ${ENTRA_TENANT_ID} in the provider tenant_id config.",
-      "prompt": "Entra tenant ID"
-    },
-    {
-      "name": "ENTRA_CLIENT_ID",
-      "sensitive": false,
-      "description": "Entra app client ID. Referenced as ${ENTRA_CLIENT_ID} in client_id.",
-      "prompt": "Entra client ID"
-    },
-    {
-      "name": "ENTRA_CLIENT_SECRET",
-      "sensitive": true,
-      "description": "Entra app client secret. Referenced as ${ENTRA_CLIENT_SECRET} in client_secret.",
-      "prompt": "Entra client secret"
-    }
-  ],
+  "category": "integrations",
+  "description": "Microsoft Entra ID management provider plugin",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "3e962959e5d3ae2db75a17d6092c531679cbdb8b8a312638e82db765c61c2c45",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.2/workflow-plugin-entra-darwin-amd64.tar.gz"
+      "sha256": "d2ba9cd64de53052a7a755b2ab5f205c604feb1102a3ba679aab7800f9c997ec",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.3/workflow-plugin-entra-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "26b72e9115e4b41ea403853851c865a92880b2ebd25521b99cf7e167da2dfc17",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.2/workflow-plugin-entra-darwin-arm64.tar.gz"
+      "sha256": "4ef8d74cf4e111d1773c5fcfe1e7b33f8578d51a906edc661ed35bda2af0bb70",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.3/workflow-plugin-entra-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "e96d859ee740bae6d7d2bbe7bd976ba5aabd090dbde613c580496b31766629fe",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.2/workflow-plugin-entra-linux-amd64.tar.gz"
+      "sha256": "dc37af43ca4ecaa148a91f27315c9c704595d421e4724cd935a4c860c78d7d6b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.3/workflow-plugin-entra-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "8b756b218ed08deebd4a80d1e9f3719afe80875f3f2550b68ad5afba6ea49aec",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.2/workflow-plugin-entra-linux-arm64.tar.gz"
+      "sha256": "b5f7cc90efcdf86e143e9923ea9a50ae09610c0881e3bf56cea1dfac61d3b5e2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-entra/releases/download/v0.1.3/workflow-plugin-entra-linux-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-entra",
+  "keywords": [
+    "entra",
+    "microsoft-graph",
+    "identity",
+    "iam",
+    "sso",
+    "oidc"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.64.0",
+  "name": "workflow-plugin-entra",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-entra",
+  "required_secrets": [
+    {
+      "description": "Microsoft Entra ID tenant ID. Referenced as ${ENTRA_TENANT_ID} in the provider tenant_id config.",
+      "name": "ENTRA_TENANT_ID",
+      "prompt": "Entra tenant ID",
+      "sensitive": false
+    },
+    {
+      "description": "Entra app client ID. Referenced as ${ENTRA_CLIENT_ID} in client_id.",
+      "name": "ENTRA_CLIENT_ID",
+      "prompt": "Entra client ID",
+      "sensitive": false
+    },
+    {
+      "description": "Entra app client secret. Referenced as ${ENTRA_CLIENT_SECRET} in client_secret.",
+      "name": "ENTRA_CLIENT_SECRET",
+      "prompt": "Entra client secret",
+      "sensitive": true
     }
   ],
   "status": "experimental",
-  "category": "integrations"
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.3"
 }

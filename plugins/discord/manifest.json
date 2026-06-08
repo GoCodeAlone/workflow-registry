@@ -1,31 +1,5 @@
 {
-  "name": "discord",
-  "version": "0.1.7",
   "author": "GoCodeAlone",
-  "description": "Discord messaging, bot automation, and voice channel support. Provides a provider module, pipeline steps for sending/editing/deleting messages and managing voice, and a WebSocket Gateway event trigger.",
-  "source": "github.com/GoCodeAlone/workflow-plugin-discord",
-  "type": "external",
-  "tier": "community",
-  "license": "MIT",
-  "minEngineVersion": "0.51.7",
-  "required_secrets": [
-    {
-      "name": "DISCORD_BOT_TOKEN",
-      "sensitive": true,
-      "description": "Discord bot token. Referenced as ${DISCORD_BOT_TOKEN} in the provider token config.",
-      "prompt": "Discord bot token"
-    }
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-discord",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-discord",
-  "keywords": [
-    "discord",
-    "messaging",
-    "bot",
-    "voice",
-    "chat",
-    "notifications"
-  ],
   "capabilities": {
     "moduleTypes": [
       "discord.provider"
@@ -46,32 +20,58 @@
       "trigger.discord"
     ]
   },
+  "category": "messaging",
+  "description": "Discord messaging, bot automation, and voice channel support. Provides a provider module, pipeline steps for sending/editing/deleting messages and managing voice, and a WebSocket Gateway event trigger.",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "21b152cf59cdec07ac65d93a459abeebb3878d234ac5b8df48cde12229ae6515",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.7/workflow-plugin-discord-darwin-amd64.tar.gz"
+      "sha256": "8af5014f5bc4510eafbf5e08b81a76ce02f2df352bb52929aad41e5b4a535771",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.8/workflow-plugin-discord-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "ceea8b3242049148de271518081540920f0027f6848d9b8fc58a336a711b1676",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.7/workflow-plugin-discord-darwin-arm64.tar.gz"
+      "sha256": "bf8c5cfcbfc014d7504b530f97256dfef29ec4f8ae4a953c23cae7d1e7c2788c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.8/workflow-plugin-discord-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "f6a1e5460fcf4c350975425f95d943032d013c58ec1e648b2c6b60727f845a78",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.7/workflow-plugin-discord-linux-amd64.tar.gz"
+      "sha256": "cd7b30faeeafea3c1b342998acb368827c0604b718491d322889675ea815caab",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.8/workflow-plugin-discord-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "1494a41598573639595d2e88aa1ff6f2b70f52bf35f3e48bb4756076e55973c5",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.7/workflow-plugin-discord-linux-arm64.tar.gz"
+      "sha256": "2c14956f26b5ad5687cc97f884c537a8ee650b71e444091c4bc10ed59ac9cf69",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-discord/releases/download/v0.1.8/workflow-plugin-discord-linux-arm64.tar.gz"
     }
   ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-discord",
+  "keywords": [
+    "discord",
+    "messaging",
+    "bot",
+    "voice",
+    "chat",
+    "notifications"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "discord",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-discord",
+  "required_secrets": [
+    {
+      "description": "Discord bot token. Referenced as ${DISCORD_BOT_TOKEN} in the provider token config.",
+      "name": "DISCORD_BOT_TOKEN",
+      "prompt": "Discord bot token",
+      "sensitive": true
+    }
+  ],
+  "source": "github.com/GoCodeAlone/workflow-plugin-discord",
   "status": "experimental",
-  "category": "messaging"
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.8"
 }

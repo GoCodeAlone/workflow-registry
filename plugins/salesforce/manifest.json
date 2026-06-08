@@ -1,38 +1,5 @@
 {
-  "name": "workflow-plugin-salesforce",
-  "version": "0.2.4",
-  "description": "Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.51.7",
-  "required_secrets": [
-    {
-      "name": "SALESFORCE_CLIENT_ID",
-      "sensitive": false,
-      "description": "Salesforce connected-app consumer key (OAuth path; alternate path uses accessToken + instanceUrl). Referenced as ${SALESFORCE_CLIENT_ID}.",
-      "prompt": "Salesforce client ID"
-    },
-    {
-      "name": "SALESFORCE_CLIENT_SECRET",
-      "sensitive": true,
-      "description": "Salesforce connected-app consumer secret. Referenced as ${SALESFORCE_CLIENT_SECRET}.",
-      "prompt": "Salesforce client secret"
-    }
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-salesforce",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-salesforce",
-  "keywords": [
-    "salesforce",
-    "crm",
-    "soql",
-    "sobject",
-    "apex",
-    "bulk-api",
-    "reports"
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -114,32 +81,65 @@
     ],
     "triggerTypes": []
   },
+  "category": "integrations",
+  "description": "Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "a4ab23a201c8bad01eb8823e133518f1343297a97cc15f0f9608a6e3ac0147c6",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.4/workflow-plugin-salesforce-darwin-amd64.tar.gz"
+      "sha256": "177c7c40a12680b9a7428dc987fae63e27d9d597d447e14b7c08f5beb79e9e78",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.6/workflow-plugin-salesforce-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "b3516db217240bc14521428166b2b3bc1c02589e54e065750dc86c0868cae7ca",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.4/workflow-plugin-salesforce-darwin-arm64.tar.gz"
+      "sha256": "c79c76881a0808babe4aea1f37d8e103304b7e174c17fac77b843470edfc9ea0",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.6/workflow-plugin-salesforce-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "f5b9696ee01100d05cccf2fc51d536d4f3c00f38fdb14a9644da0da8f2a345e7",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.4/workflow-plugin-salesforce-linux-amd64.tar.gz"
+      "sha256": "167242cabd6a7939887c10f094bf8c0dbad870983b880d467baf5682767b8269",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.6/workflow-plugin-salesforce-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "550cf0cc2be7bf86d72af1f08db3280e7c43a8b2421befc6d92ec207b1a4bebd",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.4/workflow-plugin-salesforce-linux-arm64.tar.gz"
+      "sha256": "520dbb58c3d2b6127484598ee1de2214ab4f0750540fe38dc09a27d579110939",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-salesforce/releases/download/v0.2.6/workflow-plugin-salesforce-linux-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-salesforce",
+  "keywords": [
+    "salesforce",
+    "crm",
+    "soql",
+    "sobject",
+    "apex",
+    "bulk-api",
+    "reports"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "workflow-plugin-salesforce",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-salesforce",
+  "required_secrets": [
+    {
+      "description": "Salesforce connected-app consumer key (OAuth path; alternate path uses accessToken + instanceUrl). Referenced as ${SALESFORCE_CLIENT_ID}.",
+      "name": "SALESFORCE_CLIENT_ID",
+      "prompt": "Salesforce client ID",
+      "sensitive": false
+    },
+    {
+      "description": "Salesforce connected-app consumer secret. Referenced as ${SALESFORCE_CLIENT_SECRET}.",
+      "name": "SALESFORCE_CLIENT_SECRET",
+      "prompt": "Salesforce client secret",
+      "sensitive": true
     }
   ],
   "status": "experimental",
-  "category": "integrations"
+  "tier": "community",
+  "type": "external",
+  "version": "0.2.6"
 }
