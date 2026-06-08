@@ -1,23 +1,5 @@
 {
-  "name": "workflow-plugin-auth0",
-  "version": "0.1.2",
-  "description": "Auth0 identity and access management provider plugin",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.64.0",
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-auth0",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-auth0",
-  "keywords": [
-    "auth0",
-    "identity",
-    "iam",
-    "sso",
-    "oidc",
-    "rbac"
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -45,52 +27,70 @@
     ],
     "triggerTypes": []
   },
-  "required_secrets": [
-    {
-      "name": "AUTH0_DOMAIN",
-      "sensitive": false,
-      "description": "Auth0 tenant domain (e.g. example.us.auth0.com). Referenced as ${AUTH0_DOMAIN}.",
-      "prompt": "Auth0 domain"
-    },
-    {
-      "name": "AUTH0_CLIENT_ID",
-      "sensitive": false,
-      "description": "Auth0 M2M application client ID. Referenced as ${AUTH0_CLIENT_ID}.",
-      "prompt": "Auth0 client ID"
-    },
-    {
-      "name": "AUTH0_CLIENT_SECRET",
-      "sensitive": true,
-      "description": "Auth0 M2M application client secret (client-credentials path; static-token path uses a management token instead). Referenced as ${AUTH0_CLIENT_SECRET}.",
-      "prompt": "Auth0 client secret"
-    }
-  ],
+  "category": "integrations",
+  "description": "Auth0 identity and access management provider plugin",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "d281716ae62867ef8d0f67116b7e4436a5fe76e635a942753781f37b28a92433",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.2/workflow-plugin-auth0-darwin-amd64.tar.gz"
+      "sha256": "f7f7029982e996d658e04f2681eafef2cb6158cef7965a7a86829980a51c5189",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.3/workflow-plugin-auth0-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "4ff80ffb4e9b4515a692fef257eebd91046c8fcb864aef333b11584ffad29670",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.2/workflow-plugin-auth0-darwin-arm64.tar.gz"
+      "sha256": "9b2434d499fc057daf9cbad5bdc9b446f738bfd808fd4a6c6ec396252ee5bb11",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.3/workflow-plugin-auth0-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "a5c699d380f4120dd88dde84084fc8e41db79ed10a3800632aee5ff7acc72b54",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.2/workflow-plugin-auth0-linux-amd64.tar.gz"
+      "sha256": "2381586c79bead7462024c6c611af66dcaf0760788912836bd43532cd4b874b9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.3/workflow-plugin-auth0-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "8d471b57cd6fbf1fb1373215fd99da45ad24b4e25c0edfdae38ba54a8a582e38",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.2/workflow-plugin-auth0-linux-arm64.tar.gz"
+      "sha256": "302e71f1441f475d5fd6935044c56ebb7fcb7135f1020e07aeb2d0aeeb3dc469",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth0/releases/download/v0.1.3/workflow-plugin-auth0-linux-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-auth0",
+  "keywords": [
+    "auth0",
+    "identity",
+    "iam",
+    "sso",
+    "oidc",
+    "rbac"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.64.0",
+  "name": "workflow-plugin-auth0",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-auth0",
+  "required_secrets": [
+    {
+      "description": "Auth0 tenant domain (e.g. example.us.auth0.com). Referenced as ${AUTH0_DOMAIN}.",
+      "name": "AUTH0_DOMAIN",
+      "prompt": "Auth0 domain",
+      "sensitive": false
+    },
+    {
+      "description": "Auth0 M2M application client ID. Referenced as ${AUTH0_CLIENT_ID}.",
+      "name": "AUTH0_CLIENT_ID",
+      "prompt": "Auth0 client ID",
+      "sensitive": false
+    },
+    {
+      "description": "Auth0 M2M application client secret (client-credentials path; static-token path uses a management token instead). Referenced as ${AUTH0_CLIENT_SECRET}.",
+      "name": "AUTH0_CLIENT_SECRET",
+      "prompt": "Auth0 client secret",
+      "sensitive": true
     }
   ],
   "status": "experimental",
-  "category": "integrations"
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.3"
 }
