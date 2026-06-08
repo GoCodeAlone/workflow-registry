@@ -93,6 +93,11 @@
           "items": { "type": "string" },
           "description": "IaC state-storage backends this plugin's drivers can manage (e.g. spaces, gcs, s3). Provider-specific list — not all IaC providers expose a state backend, so this is separate from iacProvider.resourceTypes."
         },
+        "resourceTypes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Top-level resource types this plugin can manage when it does not publish a nested iacProvider block."
+        },
         "iacProvider": {
           "type": "object",
           "description": "IaC provider declaration — name and supported resource types",

@@ -69,6 +69,8 @@ assert_jq "foo-iac capabilities.cliCommands[0].subcommands[0].name" \
   '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0].subcommands[0].name' '"sync"'
 assert_jq "foo-iac capabilities.migrationDrivers" \
   '.[] | select(.name=="foo-iac") | .capabilities.migrationDrivers' '["foo-migrate"]'
+assert_jq "foo-iac capabilities.resourceTypes" \
+  '.[] | select(.name=="foo-iac") | .capabilities.resourceTypes' '["infra.provider_root"]'
 assert_jq "foo-iac iacProvider.computePlanVersion" \
   '.[] | select(.name=="foo-iac") | .iacProvider.computePlanVersion' '"v2"'
 assert_jq "foo-iac required_secrets has 2 items" \

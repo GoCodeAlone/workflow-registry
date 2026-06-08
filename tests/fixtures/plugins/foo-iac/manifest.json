@@ -15,6 +15,7 @@
   "keywords": ["dns", "iac"],
   "capabilities": {
     "moduleTypes": ["iac.provider.foo"],
+    "resourceTypes": ["infra.provider_root"],
     "configProvider": true,
     "iacStateBackends": ["spaces", "gcs"],
     "serviceMethods": ["foo.collector/query", "foo.collector/stats"],
