@@ -1,22 +1,12 @@
 {
-  "name": "workflow-plugin-compute",
-  "version": "0.1.7",
-  "description": "Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.27.0",
-  "keywords": [
-    "workflow-compute",
-    "distributed-compute",
-    "product-capture",
-    "proof"
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-compute",
   "capabilities": {
+    "cliCommands": [
+      {
+        "description": "Operate a workflow-compute control plane, including projectless agent setup",
+        "name": "compute"
+      }
+    ],
     "configProvider": false,
     "moduleTypes": [
       "compute.provider",
@@ -28,28 +18,38 @@
       "step.compute_wait",
       "step.compute_map"
     ],
-    "triggerTypes": [],
-    "cliCommands": [
-      {
-        "name": "compute",
-        "description": "Operate a workflow-compute control plane"
-      }
-    ]
+    "triggerTypes": []
   },
+  "category": "core",
+  "description": "Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads",
   "downloads": [
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "53e5d60485de99086aaf38fe22dd7d8ee55e1002a16f2f3de25b30a9f8749817",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.7/workflow-plugin-compute-darwin-arm64.tar.gz"
+      "sha256": "6ee1df1d0c2553482e39d6fad886c729ff63aa7213aa4087c93923886dbe34f9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.8/workflow-plugin-compute-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "c693b5122c65f2a39de36ecbbc5b1bfb1f39e66aa0987725ce86d2e7acd33747",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.7/workflow-plugin-compute-linux-amd64.tar.gz"
+      "sha256": "e0a67783cdea0e8bd3b531c1d8975f290b152affd7a25937b79fbe35df758bcc",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.8/workflow-plugin-compute-linux-amd64.tar.gz"
     }
   ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute",
+  "keywords": [
+    "workflow-compute",
+    "distributed-compute",
+    "product-capture",
+    "proof"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.27.0",
+  "name": "workflow-plugin-compute",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-compute",
   "status": "verified",
-  "category": "core"
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.8"
 }
