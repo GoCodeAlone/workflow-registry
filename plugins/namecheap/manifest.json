@@ -21,26 +21,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "f5120051e00f824f1c2087c3b0136cd8b8bcb29194f0891ce2a591c7bd3823fe",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.6/workflow-plugin-namecheap-darwin-amd64.tar.gz"
+      "sha256": "22dac5e8aac00db6de1a3108b2f4abd56e287a99821b2baf5f9ebdccd9578203",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.7/workflow-plugin-namecheap-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "1c0ce72c95e505efde85a9761781b8ed5892c8ef4b69681f758d19c144c23695",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.6/workflow-plugin-namecheap-darwin-arm64.tar.gz"
+      "sha256": "860f624afe35f212e3545692e45cba400e86df6944c5353be86111306f445150",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.7/workflow-plugin-namecheap-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "a20ebf6a05f047f45e8ff16f4c0ad0a64d908f3ae63aa0a81252b535a16945d5",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.6/workflow-plugin-namecheap-linux-amd64.tar.gz"
+      "sha256": "c2028c813a32ab864b87966c7e24cc241044c19ebe657cd2e1b41e43d4155154",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.7/workflow-plugin-namecheap-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "655d83beecb4eb49c4b9c215d453b881f10f7601eff4d0338d2882da7e2e5fa7",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.6/workflow-plugin-namecheap-linux-arm64.tar.gz"
+      "sha256": "5cdeae9befd5d3bd117ba3e2337900120020c27eaf082a61c7fecb19c2348041",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-namecheap/releases/download/v0.1.7/workflow-plugin-namecheap-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-namecheap",
@@ -81,5 +81,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.1.6"
+  "version": "0.1.7"
 }
