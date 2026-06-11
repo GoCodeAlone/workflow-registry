@@ -26,14 +26,14 @@
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "c9fe4ae8ec6b7cd037692da917cd10b278361d36397688d973f31170c691c3c5",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.9/workflow-plugin-compute-darwin-arm64.tar.gz"
+      "sha256": "2fff26c160ac7b705d3f8fdb7db3b034b8924665881af2939c8f9d65db645d99",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.11/workflow-plugin-compute-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "d9bf3942cf96083c05e54623df2aa29bdd35e5bfc187fb5d490bcf4f90ab4d8e",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.9/workflow-plugin-compute-linux-amd64.tar.gz"
+      "sha256": "b28c051e3473844fe304fab7b715c2630714224644dc90f23fbe474f80c75e8a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.11/workflow-plugin-compute-linux-amd64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute",
@@ -44,12 +44,12 @@
     "proof"
   ],
   "license": "MIT",
-  "minEngineVersion": "0.27.0",
+  "minEngineVersion": "0.78.2",
   "name": "workflow-plugin-compute",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-compute",
   "status": "verified",
   "tier": "community",
   "type": "external",
-  "version": "0.1.9"
+  "version": "0.1.11"
 }
