@@ -21,26 +21,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "36b5e99d42e0d0a740be9afe0ee4cfa354eea4e4012d947d88041e71a348f17b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.3/workflow-plugin-cloudflare-darwin-amd64.tar.gz"
+      "sha256": "63e386258d55452e4297fbac4cb1e3ccd10e1c521004fee8245a610beef3d618",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.4/workflow-plugin-cloudflare-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "0fa8fea4e6e73c0c451ccc55b3445e67376f8fd07b4cdbba925610bcc5b19140",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.3/workflow-plugin-cloudflare-darwin-arm64.tar.gz"
+      "sha256": "56636733e58734345c10d299422b07bf3b67d4d63c3e80c56b3f836ee5e2fdde",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.4/workflow-plugin-cloudflare-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "99e6c5720a6e3c23ad845bd7bc782996302704ec2a772044851ce8fd48da911d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.3/workflow-plugin-cloudflare-linux-amd64.tar.gz"
+      "sha256": "793611a2b98d40120ce5bbb4fd58f63b475d50ecc53993c7d07c065557f6dbb8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.4/workflow-plugin-cloudflare-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "a605363d7e68f32bbd95b4ab5ac7cdae45817c126ff9af8ae1eda716578be561",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.3/workflow-plugin-cloudflare-linux-arm64.tar.gz"
+      "sha256": "cab832e7ee31d520b61d318ff32e45916ee2dee3408ce21ac048d4ca6b41f306",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare/releases/download/v0.1.4/workflow-plugin-cloudflare-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-cloudflare",
@@ -69,5 +69,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.1.3"
+  "version": "0.1.4"
 }
