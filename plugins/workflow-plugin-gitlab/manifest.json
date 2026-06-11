@@ -1,111 +1,17 @@
 {
-  "name": "workflow-plugin-gitlab",
-  "version": "1.1.1",
-  "description": "GitLab integration plugin: webhook handling and GitLab CI pipeline management",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "status": "experimental",
-  "category": "integrations",
-  "minEngineVersion": "0.53.0",
-  "keywords": [
-    "gitlab",
-    "webhook",
-    "git",
-    "ci",
-    "cd",
-    "pipeline",
-    "merge-request",
-    "integration"
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-gitlab",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-gitlab",
-  "source": "github.com/GoCodeAlone/workflow-plugin-gitlab",
-  "required_secrets": [
-    {
-      "name": "GITLAB_TOKEN",
-      "sensitive": true,
-      "description": "GitLab personal, project, or group access token with API permissions for pipeline, merge-request, CI/CD variable, and environment management operations.",
-      "prompt": "GitLab API token"
-    }
-  ],
-  "secret_targets": [
-    {
-      "provider": "gitlab",
-      "scopes": ["project", "group", "env"],
-      "description": "GitLab CI/CD variables at project, group, and environment scope."
-    },
-    {
-      "provider": "github",
-      "scopes": ["repo", "env", "org"],
-      "description": "GitLab token stored as GitHub Actions secrets when workflows run on GitHub."
-    },
-    {
-      "provider": "vault",
-      "scopes": ["mount"],
-      "description": "GitLab token stored in Vault for application/runtime retrieval."
-    },
-    {
-      "provider": "file",
-      "scopes": ["directory"],
-      "description": "GitLab token stored in a local file-backed secret store."
-    },
-    {
-      "provider": "keychain",
-      "scopes": ["service"],
-      "description": "GitLab token stored in the local OS keychain."
-    },
-    {
-      "provider": "env",
-      "scopes": ["process"],
-      "description": "GitLab token provided by the local process environment."
-    }
-  ],
-  "downloads": [
-    {
-      "os": "darwin",
-      "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.1/workflow-plugin-gitlab-darwin-amd64.tar.gz",
-      "sha256": "1666d2ee8655fef07fea994a4a3d4c7ecbfb45197d6fc899e1523da892f46f5c"
-    },
-    {
-      "os": "darwin",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.1/workflow-plugin-gitlab-darwin-arm64.tar.gz",
-      "sha256": "31139cef74a86e28ebde30dee43a7cc9f0b8359b27a35f68462585cdd00bb6f6"
-    },
-    {
-      "os": "linux",
-      "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.1/workflow-plugin-gitlab-linux-amd64.tar.gz",
-      "sha256": "a7dd6dd3f769b4f49b2bcff3745377c1955d5ccf71a10036367302ae1d5ec7f2"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.1/workflow-plugin-gitlab-linux-arm64.tar.gz",
-      "sha256": "305cd4b741a7b913a49e918b568cc49a05436790e6b1e1d4cfda03e8a28e58ab"
-    },
-    {
-      "os": "windows",
-      "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.1/workflow-plugin-gitlab-windows-amd64.tar.gz",
-      "sha256": "a0446972e31fc2633899fe36dd906493fb4062070866023445440d2e817f769c"
-    },
-    {
-      "os": "windows",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.1/workflow-plugin-gitlab-windows-arm64.tar.gz",
-      "sha256": "b3dd712e21dd26a9baf79e6a9335505ad0b22ea0bcee456a0dfe9f6d3d5ef57e"
-    }
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
       "git.webhook",
       "gitlab.webhook",
       "gitlab.client"
+    ],
+    "serviceMethods": [
+      "gitlab.client/trigger_pipeline",
+      "gitlab.client/pipeline_status",
+      "gitlab.client/create_merge_request",
+      "gitlab.client/mr_comment"
     ],
     "stepTypes": [
       "step.gitlab_trigger_pipeline",
@@ -119,12 +25,122 @@
       "step.gitlab_environment_ensure",
       "step.gitlab_environment_list"
     ],
-    "serviceMethods": [
-      "gitlab.client/trigger_pipeline",
-      "gitlab.client/pipeline_status",
-      "gitlab.client/create_merge_request",
-      "gitlab.client/mr_comment"
-    ],
     "triggerTypes": []
-  }
+  },
+  "category": "integrations",
+  "description": "GitLab integration plugin: webhook handling and GitLab CI pipeline management",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "b6be7cfa0d54758e4264d5dca40c8ed251f7a8bddef989aa7210346b217bc402",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.3/workflow-plugin-gitlab-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "f4e53f37008691f0e9d3d77862e72ad5b514e0f74d4d7b298909773c96dff7cf",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.3/workflow-plugin-gitlab-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "74dcb158f7799a713af2a6b6053b640335fe56a69994229e50fcc28b37860348",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.3/workflow-plugin-gitlab-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "08590e2a6eced3bc39c7cfb5e8ab27ff6888ec058dc579b9ca373153cfc0b356",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.3/workflow-plugin-gitlab-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "c85a863ed71b735c5f265b44afdc1bfd129223301505d349be142171c071dd03",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.3/workflow-plugin-gitlab-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "4469ff26acf926d749836a9e6c4c9a82d09c7da603ee3b68d287eb5b2df0d4b3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gitlab/releases/download/v1.1.3/workflow-plugin-gitlab-windows-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-gitlab",
+  "keywords": [
+    "gitlab",
+    "webhook",
+    "git",
+    "ci",
+    "cd",
+    "pipeline",
+    "merge-request",
+    "integration"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.53.0",
+  "name": "workflow-plugin-gitlab",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-gitlab",
+  "required_secrets": [
+    {
+      "description": "GitLab personal, project, or group access token with API permissions for pipeline, merge-request, CI/CD variable, and environment management operations.",
+      "name": "GITLAB_TOKEN",
+      "prompt": "GitLab API token",
+      "sensitive": true
+    }
+  ],
+  "secret_targets": [
+    {
+      "description": "GitLab CI/CD variables at project, group, and environment scope.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group",
+        "env"
+      ]
+    },
+    {
+      "description": "GitLab token stored as GitHub Actions secrets when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
+    },
+    {
+      "description": "GitLab token stored in Vault for application/runtime retrieval.",
+      "provider": "vault",
+      "scopes": [
+        "mount"
+      ]
+    },
+    {
+      "description": "GitLab token stored in a local file-backed secret store.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "GitLab token stored in the local OS keychain.",
+      "provider": "keychain",
+      "scopes": [
+        "service"
+      ]
+    },
+    {
+      "description": "GitLab token provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
+    }
+  ],
+  "source": "github.com/GoCodeAlone/workflow-plugin-gitlab",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "1.1.3"
 }
