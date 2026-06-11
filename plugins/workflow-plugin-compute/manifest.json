@@ -26,14 +26,14 @@
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "b8e7f91c962012c5df46e812b88d84863bbea67d1d11e847d8b7f397cf87d5c2",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.10/workflow-plugin-compute-darwin-arm64.tar.gz"
+      "sha256": "2fff26c160ac7b705d3f8fdb7db3b034b8924665881af2939c8f9d65db645d99",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.11/workflow-plugin-compute-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "300e2fd1f09e94bac8f11d4363adcd90f9450b7684fd08ff4abde511e9e8c14c",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.10/workflow-plugin-compute-linux-amd64.tar.gz"
+      "sha256": "b28c051e3473844fe304fab7b715c2630714224644dc90f23fbe474f80c75e8a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.11/workflow-plugin-compute-linux-amd64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute",
@@ -51,5 +51,5 @@
   "status": "verified",
   "tier": "community",
   "type": "external",
-  "version": "0.1.10"
+  "version": "0.1.11"
 }
