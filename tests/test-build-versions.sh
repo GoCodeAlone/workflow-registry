@@ -84,6 +84,12 @@ case "${endpoint}" in
         "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
       },
       {
+        "name": "workflow-plugin-shared_1.2.3_windows_arm64.tar.gz",
+        "browser_download_url": "https://downloads.example/shared/v1.2.3/windows-arm64.tar.gz",
+        "url": "https://api.github.com/repos/example/shared-plugin/releases/assets/3",
+        "digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      },
+      {
         "name": "checksums.txt",
         "browser_download_url": "https://downloads.example/shared/v1.2.3/checksums.txt",
         "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
@@ -138,13 +144,19 @@ test -f "${local_versions}" || fail "plugin-local versions.json missing"
 assert_jq_file "alpha versions has two releases" "${alpha_versions}" '.versions | length' '2'
 assert_jq_file "alpha latest version" "${alpha_latest}" '.version' '"1.2.3"'
 assert_jq_file "alpha min engine propagated" "${alpha_latest}" '.minEngineVersion' '"0.75.0"'
-assert_jq_file "matching assets only" "${alpha_latest}" '.downloads | length' '2'
+assert_jq_file "matching assets only" "${alpha_latest}" '.downloads | length' '3'
 assert_jq_file "download URL uses browser_download_url" "${alpha_latest}" \
   '.downloads[] | select(.os=="linux" and .arch=="amd64") | .url' \
   '"https://downloads.example/shared/v1.2.3/linux-amd64.tar.gz"'
 assert_jq_file "sha256 prefix stripped" "${alpha_latest}" \
   '.downloads[] | select(.os=="linux" and .arch=="amd64") | .sha256' \
   '"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'
+assert_jq_file "underscore asset names are parsed" "${alpha_latest}" \
+  '.downloads[] | select(.os=="windows" and .arch=="arm64") | .url' \
+  '"https://downloads.example/shared/v1.2.3/windows-arm64.tar.gz"'
+assert_jq_file "underscore asset sha256 prefix stripped" "${alpha_latest}" \
+  '.downloads[] | select(.os=="windows" and .arch=="arm64") | .sha256' \
+  '"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"'
 assert_jq_file "beta reuses same release data with its own min engine" "${beta_latest}" \
   '.minEngineVersion' '"0.76.0"'
 assert_jq_file "non-GitHub plugin writes empty versions" "${local_versions}" \

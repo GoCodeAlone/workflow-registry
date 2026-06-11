@@ -113,9 +113,9 @@ while IFS= read -r manifest; do
         minEngineVersion: (if $minEng != "" then $minEng else null end),
         downloads: [
           (.assets // [])[] |
-          select(.name | test("(linux|darwin|windows)-(amd64|arm64)[.]tar[.]gz$")) |
+          select(.name | test("(linux|darwin|windows)[-_](amd64|arm64)[.]tar[.]gz$")) |
           . as $asset |
-          ($asset.name | capture("(?<os>linux|darwin|windows)-(?<arch>amd64|arm64)[.]tar[.]gz$")) as $parts |
+          ($asset.name | capture("(?<os>linux|darwin|windows)[-_](?<arch>amd64|arm64)[.]tar[.]gz$")) as $parts |
           {
             os:     $parts.os,
             arch:   $parts.arch,
