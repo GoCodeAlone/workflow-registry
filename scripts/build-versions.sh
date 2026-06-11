@@ -7,17 +7,17 @@
 # Requires: gh CLI (authenticated), jq
 #
 # Notes:
-#   - `gh release list` does NOT support --json assets; per-release assets are
-#     fetched via `gh release view <tag> --json assets`.
+#   - GitHub's REST releases list includes release assets, so each upstream repo
+#     is fetched once and reused for all registry plugins that share it.
 #   - Asset digests (sha256) are read directly from the `digest` field returned
-#     by `gh release view`, so checksums.txt does not need to be downloaded.
+#     by the API, so checksums.txt does not need to be downloaded.
 #   - The canonical plugin name used in versions.json is the directory name
 #     (same convention as build-index.sh), not the manifest's "name" field.
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_ROOT="${REPO_ROOT:-$(cd "${SCRIPT_DIR}/.." && pwd)}"
 PLUGINS_DIR="${REPO_ROOT}/plugins"
 OUT_DIR="${REPO_ROOT}/v1"
 
@@ -69,20 +69,21 @@ while IFS= read -r manifest; do
   repo_cache_dir="${release_cache_root}/$(echo "${gh_repo}" | tr '/:' '__')"
   mkdir -p "${repo_cache_dir}"
 
-  echo "  ${plugin_name}: fetching releases for ${gh_repo}..."
-
-  # List releases (tagName + publishedAt only; assets not available in list output)
+  # List releases and their assets in one REST call per upstream repo.
   releases_cache="${repo_cache_dir}/releases.json"
   if [[ ! -f "${releases_cache}" ]]; then
-    if ! releases_list="$(run_gh release list \
-      --repo "${gh_repo}" \
-      --limit 100 \
-      --json tagName,publishedAt \
-      2>&1)"; then
-      echo "    WARNING: failed to list releases for ${gh_repo}: ${releases_list}" >&2
+    echo "  ${plugin_name}: fetching releases for ${gh_repo}..."
+    releases_error="${repo_cache_dir}/releases.err"
+    if ! releases_list="$(run_gh api \
+      "repos/${gh_repo}/releases?per_page=100" \
+      2>"${releases_error}")"; then
+      echo "    WARNING: failed to list releases for ${gh_repo}: $(cat "${releases_error}")" >&2
       releases_list="[]"
     fi
+    rm -f "${releases_error}"
     printf '%s\n' "${releases_list}" > "${releases_cache}"
+  else
+    echo "  ${plugin_name}: using cached releases for ${gh_repo}..."
   fi
   releases_list="$(cat "${releases_cache}")"
 
@@ -97,27 +98,12 @@ while IFS= read -r manifest; do
   final_versions_file="${release_cache_root}/versions-$(echo "${plugin_name}" | sed 's/[^A-Za-z0-9._-]/_/g').json"
   printf '[]\n' > "${final_versions_file}"
   while IFS= read -r release_entry; do
-    tag="$(echo "${release_entry}" | jq -r '.tagName')"
-    published_at="$(echo "${release_entry}" | jq -r '.publishedAt')"
+    tag="$(echo "${release_entry}" | jq -r '.tag_name // .tagName')"
+    published_at="$(echo "${release_entry}" | jq -r '.published_at // .publishedAt')"
     ver="$(echo "${tag}" | sed 's/^v//')"
 
-    # gh release view returns assets with a `digest` field (sha256:... format)
-    tag_cache_key="$(echo "${tag}" | sed 's/[^A-Za-z0-9._-]/_/g')"
-    release_detail_cache="${repo_cache_dir}/${tag_cache_key}.json"
-    if [[ ! -f "${release_detail_cache}" ]]; then
-      if ! release_detail="$(run_gh release view "${tag}" \
-        --repo "${gh_repo}" \
-        --json assets \
-        2>&1)"; then
-        echo "    WARNING: failed to fetch assets for ${gh_repo}@${tag}: ${release_detail}" >&2
-        release_detail='{"assets":[]}'
-      fi
-      printf '%s\n' "${release_detail}" > "${release_detail_cache}"
-    fi
-    release_detail="$(cat "${release_detail_cache}")"
-
     version_entry_file="${release_cache_root}/version-entry-$(echo "${plugin_name}-${tag}" | sed 's/[^A-Za-z0-9._-]/_/g').json"
-    echo "${release_detail}" | jq \
+    echo "${release_entry}" | jq \
       --arg ver "${ver}" \
       --arg published_at "${published_at}" \
       --arg minEng "${min_engine}" '
@@ -126,15 +112,15 @@ while IFS= read -r manifest; do
         released: $published_at,
         minEngineVersion: (if $minEng != "" then $minEng else null end),
         downloads: [
-          .assets[] |
+          (.assets // [])[] |
           select(.name | test("(linux|darwin|windows)-(amd64|arm64)[.]tar[.]gz$")) |
           . as $asset |
           ($asset.name | capture("(?<os>linux|darwin|windows)-(?<arch>amd64|arm64)[.]tar[.]gz$")) as $parts |
           {
             os:     $parts.os,
             arch:   $parts.arch,
-            url:    $asset.url,
-            sha256: ($asset.digest | if . then ltrimstr("sha256:") else "" end)
+            url:    ($asset.browser_download_url // $asset.url // ""),
+            sha256: (($asset.digest // "") | ltrimstr("sha256:"))
           }
         ]
       }
