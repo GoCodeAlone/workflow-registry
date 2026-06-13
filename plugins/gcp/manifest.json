@@ -39,38 +39,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "876221e62ff87077ebb767e0e8f132c93c936d50f9dce4ffd1c8bcafb0108f91",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.2/workflow-plugin-gcp_2.3.2_darwin_amd64.tar.gz"
+      "sha256": "13f493f56784bb4de7c28fb18889b6d185e628b830c5aa45e50589977cb18ff9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.3/workflow-plugin-gcp_2.3.3_darwin_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "756289e29c4bde28dcf97e954ffa01a24a3f4e80b47908f01cf44fb0c7ccd20f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.2/workflow-plugin-gcp_2.3.2_darwin_arm64.tar.gz"
+      "sha256": "830e8cc53c55d0a99f71d6bcb6ceed3f229865daf4950222482cc2d81ceb4d5e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.3/workflow-plugin-gcp_2.3.3_darwin_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "6778762a7e294349da8128b4364483db2887858b71916fa768368d43c0ed446f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.2/workflow-plugin-gcp_2.3.2_linux_amd64.tar.gz"
+      "sha256": "c9540c4c6fc2d2ede1cbfb62eeb36ebaed6e9068fce4f2d9c7b5fea356c545c3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.3/workflow-plugin-gcp_2.3.3_linux_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "aaa81e0be677956e4e9d2bbec7f95bfc4d9d27fe43eff7908267d15e3194ae60",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.2/workflow-plugin-gcp_2.3.2_linux_arm64.tar.gz"
+      "sha256": "e7a4368fea2da0a448a6b557eb37d7562ee595d1ffc4416a26dec25e24f9edb6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.3/workflow-plugin-gcp_2.3.3_linux_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "5abe3f03fe58b0a4385fe703d60f046737311853d727f18ea2c18c16e203c8da",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.2/workflow-plugin-gcp_2.3.2_windows_amd64.tar.gz"
+      "sha256": "afb72ae99cab8eb1e499d9b874d48ba834ebc275ce93721a2b80fe0c6fc6fc28",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.3/workflow-plugin-gcp_2.3.3_windows_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "96cd429d8835fb817c5063a782791535bfec0e468ef5c9a6ff068952314906cd",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.2/workflow-plugin-gcp_2.3.2_windows_arm64.tar.gz"
+      "sha256": "e52a930b8945e30964c0a4ade79bdc32044718eed552817abc78dd151af00234",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-gcp/releases/download/v2.3.3/workflow-plugin-gcp_2.3.3_windows_arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-gcp",
@@ -101,5 +101,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "2.3.2"
+  "version": "2.3.3"
 }
