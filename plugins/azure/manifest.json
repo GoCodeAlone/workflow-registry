@@ -36,26 +36,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "91968f10a955c61791f87302c4321ab5436acb2cc6cc6103635520ba0ee6f538",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.2/workflow-plugin-azure-darwin-amd64.tar.gz"
+      "sha256": "225f4647fb9588a17cb2e756b6b8977a72dabd8ef375020272dc1dba994689c8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.3/workflow-plugin-azure-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "a5dc876c43232f8685d3a4d20f02112e7f856f3cd8d5490a0206f27bc44620bc",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.2/workflow-plugin-azure-darwin-arm64.tar.gz"
+      "sha256": "90a6997dccfdd59f97126a378d015b4ef4a78d34c9538dfa42a2571feb82a610",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.3/workflow-plugin-azure-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "ff8e17cf1a524710fe9805eeeabf775fbe699dc2c5564c6ba326a71e16889b76",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.2/workflow-plugin-azure-linux-amd64.tar.gz"
+      "sha256": "8f9da76e087d9c0e6bdf13522b95876889662ecc71b84bb28891077a9e4588d6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.3/workflow-plugin-azure-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "9a3c1a189c6f2a9a2e13044ceda08a423ae4353dc5aa3f4592c133fa7869090f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.2/workflow-plugin-azure-linux-arm64.tar.gz"
+      "sha256": "b5d2b02be9f08f2ce679b4992f51641e9a10cd47bf5f8f5fc6a6ee7d26627538",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-azure/releases/download/v2.3.3/workflow-plugin-azure-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-azure",
@@ -106,5 +106,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "2.3.2"
+  "version": "2.3.3"
 }
