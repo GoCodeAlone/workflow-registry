@@ -35,6 +35,39 @@
     "triggerTypes": []
   },
   "category": "infrastructure",
+  "config_targets": [
+    {
+      "description": "Stored as GitHub Actions variables when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
+    },
+    {
+      "description": "Stored as GitLab CI/CD variables when workflows run on GitLab; variables may also be narrowed with GitLab environment_scope.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group"
+      ]
+    },
+    {
+      "description": "Stored in a local dotenv/config file for local workflows.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "Provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
+    }
+  ],
   "description": "AWS provider plugin for workflow IaC — manages ECS, EKS, RDS, ElastiCache, VPC, ALB, Route53, ECR, API Gateway, Security Groups, IAM, S3, and ACM resources",
   "downloads": [
     {
@@ -95,18 +128,75 @@
   "name": "workflow-plugin-aws",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-aws",
-  "required_secrets": [
+  "required_config": [
     {
-      "description": "AWS access key ID. For credentials.type: env or static; profile/role_arn deployments may skip. Referenced as ${AWS_ACCESS_KEY_ID} in the iac.provider/aws config.",
+      "description": "AWS region for provider operations and config templates. Referenced as ${AWS_REGION}.",
+      "key": "region",
+      "name": "AWS_REGION",
+      "prompt": "AWS region",
+      "sensitive": false
+    },
+    {
+      "description": "AWS access key ID. For credentials.type: env or static; profile/role_arn deployments may skip. Referenced as ${AWS_ACCESS_KEY_ID}.",
+      "key": "access_key_id",
       "name": "AWS_ACCESS_KEY_ID",
       "prompt": "AWS access key ID",
-      "sensitive": true
-    },
+      "sensitive": false
+    }
+  ],
+  "required_secrets": [
     {
       "description": "AWS secret access key (pairs with AWS_ACCESS_KEY_ID). Referenced as ${AWS_SECRET_ACCESS_KEY}.",
       "name": "AWS_SECRET_ACCESS_KEY",
       "prompt": "AWS secret access key",
       "sensitive": true
+    }
+  ],
+  "secret_targets": [
+    {
+      "description": "Stored as GitHub Actions secrets when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
+    },
+    {
+      "description": "Stored as GitLab CI/CD variables when workflows run on GitLab; variables may also be narrowed with GitLab environment_scope.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group"
+      ]
+    },
+    {
+      "description": "Stored in Vault for application/runtime retrieval.",
+      "provider": "vault",
+      "scopes": [
+        "mount"
+      ]
+    },
+    {
+      "description": "Stored in a local file-backed secret store.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "Stored in the local OS keychain.",
+      "provider": "keychain",
+      "scopes": [
+        "service"
+      ]
+    },
+    {
+      "description": "Provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
     }
   ],
   "status": "experimental",

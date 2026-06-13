@@ -51,11 +51,29 @@
     {"name": "FOO_USER", "sensitive": false, "description": "Foo username"},
     {"name": "FOO_PASS", "sensitive": true, "description": "Foo password"}
   ],
+  "required_config": [
+    {
+      "name": "FOO_ACCOUNT_ID",
+      "key": "account_id",
+      "sensitive": false,
+      "description": "Foo account identifier",
+      "prompt": "Foo account",
+      "config_leak": "should_not_appear"
+    }
+  ],
   "secret_targets": [
     {
       "provider": "github",
       "scopes": ["repo", "env"],
       "description": "Foo credentials stored in GitHub Actions secrets",
+      "target_leak": "should_not_appear"
+    }
+  ],
+  "config_targets": [
+    {
+      "provider": "github",
+      "scopes": ["repo", "env"],
+      "description": "Foo settings stored in GitHub Actions variables",
       "target_leak": "should_not_appear"
     }
   ],

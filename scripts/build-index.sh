@@ -77,10 +77,20 @@ while IFS= read -r manifest; do
   # G3-include: dependencies.minVersion
   # G3-include: dependencies.maxVersion
   # G3-include: required_secrets
+  # G3-include: required_config
+  # G3-include: required_config.name
+  # G3-include: required_config.key
+  # G3-include: required_config.sensitive
+  # G3-include: required_config.description
+  # G3-include: required_config.prompt
   # G3-include: secret_targets
   # G3-include: secret_targets.provider
   # G3-include: secret_targets.scopes
   # G3-include: secret_targets.description
+  # G3-include: config_targets
+  # G3-include: config_targets.provider
+  # G3-include: config_targets.scopes
+  # G3-include: config_targets.description
   # G3-include: capabilities
   # G3-include: capabilities.moduleTypes
   # G3-include: capabilities.stepTypes
@@ -201,8 +211,30 @@ while IFS= read -r manifest; do
   )
   +
   (
+    if (.required_config // null) == null then {}
+    else { required_config: [.required_config[] | {
+      name:        (.name // null),
+      key:         (.key // null),
+      sensitive:   (.sensitive // false),
+      description: (.description // null),
+      prompt:      (.prompt // null)
+    }]}
+    end
+  )
+  +
+  (
     if (.secret_targets // null) == null then {}
     else { secret_targets: [.secret_targets[] | {
+      provider:    (.provider // null),
+      scopes:      (.scopes // []),
+      description: (.description // null)
+    }]}
+    end
+  )
+  +
+  (
+    if (.config_targets // null) == null then {}
+    else { config_targets: [.config_targets[] | {
       provider:    (.provider // null),
       scopes:      (.scopes // []),
       description: (.description // null)

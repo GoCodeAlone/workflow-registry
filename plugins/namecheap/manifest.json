@@ -16,6 +16,39 @@
     "triggerTypes": []
   },
   "category": "infrastructure",
+  "config_targets": [
+    {
+      "description": "Stored as GitHub Actions variables when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
+    },
+    {
+      "description": "Stored as GitLab CI/CD variables when workflows run on GitLab; variables may also be narrowed with GitLab environment_scope.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group"
+      ]
+    },
+    {
+      "description": "Stored in a local dotenv/config file for local workflows.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "Provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
+    }
+  ],
   "description": "Namecheap DNS provider for workflow IaC (infra.dns) backed by the official go-namecheap-sdk.",
   "downloads": [
     {
@@ -58,24 +91,75 @@
   "name": "workflow-plugin-namecheap",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-namecheap",
-  "required_secrets": [
+  "required_config": [
     {
-      "description": "Namecheap account username (= ApiUser per API)",
+      "description": "Namecheap account username (also the ApiUser per Namecheap API)",
+      "key": "api_user",
       "name": "NAMECHEAP_API_USER",
       "prompt": "Namecheap username",
       "sensitive": false
     },
     {
+      "description": "Non-secret public IP sent as Namecheap ClientIp on every API request; it must already be allowlisted in the Namecheap control panel.",
+      "key": "client_ip",
+      "name": "NAMECHEAP_CLIENT_IP",
+      "prompt": "Public IP already allowlisted in Namecheap (CIDR not supported)",
+      "sensitive": false
+    }
+  ],
+  "required_secrets": [
+    {
       "description": "Namecheap API key (rotate via Profile → Tools → Namecheap API Access)",
       "name": "NAMECHEAP_API_KEY",
       "prompt": "Namecheap API key",
       "sensitive": true
+    }
+  ],
+  "secret_targets": [
+    {
+      "description": "Stored as GitHub Actions secrets when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
     },
     {
-      "description": "Public IP of the wfctl runner — Namecheap requires single-IP allowlisting (CIDR is unsupported)",
-      "name": "NAMECHEAP_CLIENT_IP",
-      "prompt": "Public IP to whitelist",
-      "sensitive": false
+      "description": "Stored as GitLab CI/CD variables when workflows run on GitLab; variables may also be narrowed with GitLab's separate environment_scope field.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group"
+      ]
+    },
+    {
+      "description": "Stored in Vault for application/runtime retrieval.",
+      "provider": "vault",
+      "scopes": [
+        "mount"
+      ]
+    },
+    {
+      "description": "Stored in a local file-backed secret store.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "Stored in the local OS keychain.",
+      "provider": "keychain",
+      "scopes": [
+        "service"
+      ]
+    },
+    {
+      "description": "Provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
     }
   ],
   "status": "experimental",

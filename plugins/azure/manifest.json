@@ -31,6 +31,39 @@
     "triggerTypes": []
   },
   "category": "infrastructure",
+  "config_targets": [
+    {
+      "description": "Stored as GitHub Actions variables when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
+    },
+    {
+      "description": "Stored as GitLab CI/CD variables when workflows run on GitLab; variables may also be narrowed with GitLab environment_scope.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group"
+      ]
+    },
+    {
+      "description": "Stored in a local dotenv/config file for local workflows.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "Provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
+    }
+  ],
   "description": "Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates",
   "downloads": [
     {
@@ -77,30 +110,82 @@
   "name": "workflow-plugin-azure",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-azure",
-  "required_secrets": [
+  "required_config": [
     {
-      "description": "Azure AD app (service principal) client ID for DefaultAzureCredential. Referenced as ${AZURE_CLIENT_ID}.",
-      "name": "AZURE_CLIENT_ID",
-      "prompt": "Azure client ID",
+      "description": "Azure subscription ID for IaC operations. Referenced as ${AZURE_SUBSCRIPTION_ID}.",
+      "key": "subscription_id",
+      "name": "AZURE_SUBSCRIPTION_ID",
+      "prompt": "Azure subscription ID",
       "sensitive": false
     },
     {
-      "description": "Azure AD app client secret. Referenced as ${AZURE_CLIENT_SECRET}.",
-      "name": "AZURE_CLIENT_SECRET",
-      "prompt": "Azure client secret",
-      "sensitive": true
-    },
-    {
       "description": "Azure AD tenant ID. Referenced as ${AZURE_TENANT_ID}.",
+      "key": "tenant_id",
       "name": "AZURE_TENANT_ID",
       "prompt": "Azure tenant ID",
       "sensitive": false
     },
     {
-      "description": "Azure subscription ID for IaC operations. Referenced as ${AZURE_SUBSCRIPTION_ID}.",
-      "name": "AZURE_SUBSCRIPTION_ID",
-      "prompt": "Azure subscription ID",
+      "description": "Azure AD app (service principal) client ID for DefaultAzureCredential. Referenced as ${AZURE_CLIENT_ID}.",
+      "key": "client_id",
+      "name": "AZURE_CLIENT_ID",
+      "prompt": "Azure client ID",
       "sensitive": false
+    }
+  ],
+  "required_secrets": [
+    {
+      "description": "Azure AD app client secret. Referenced as ${AZURE_CLIENT_SECRET}.",
+      "name": "AZURE_CLIENT_SECRET",
+      "prompt": "Azure client secret",
+      "sensitive": true
+    }
+  ],
+  "secret_targets": [
+    {
+      "description": "Stored as GitHub Actions secrets when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
+    },
+    {
+      "description": "Stored as GitLab CI/CD variables when workflows run on GitLab; variables may also be narrowed with GitLab environment_scope.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group"
+      ]
+    },
+    {
+      "description": "Stored in Vault for application/runtime retrieval.",
+      "provider": "vault",
+      "scopes": [
+        "mount"
+      ]
+    },
+    {
+      "description": "Stored in a local file-backed secret store.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "Stored in the local OS keychain.",
+      "provider": "keychain",
+      "scopes": [
+        "service"
+      ]
+    },
+    {
+      "description": "Provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
     }
   ],
   "status": "experimental",

@@ -75,12 +75,20 @@ assert_jq "foo-iac iacProvider.computePlanVersion" \
   '.[] | select(.name=="foo-iac") | .iacProvider.computePlanVersion' '"v2"'
 assert_jq "foo-iac required_secrets has 2 items" \
   '.[] | select(.name=="foo-iac") | .required_secrets | length' '2'
+assert_jq "foo-iac required_config has 1 item" \
+  '.[] | select(.name=="foo-iac") | .required_config | length' '1'
 assert_jq "foo-iac secret_targets has 1 item" \
   '.[] | select(.name=="foo-iac") | .secret_targets | length' '1'
+assert_jq "foo-iac config_targets has 1 item" \
+  '.[] | select(.name=="foo-iac") | .config_targets | length' '1'
 assert_jq "foo-iac secret_targets[0].provider" \
   '.[] | select(.name=="foo-iac") | .secret_targets[0].provider' '"github"'
 assert_jq "foo-iac secret_targets[0].scopes" \
   '.[] | select(.name=="foo-iac") | .secret_targets[0].scopes' '["repo","env"]'
+assert_jq "foo-iac config_targets[0].provider" \
+  '.[] | select(.name=="foo-iac") | .config_targets[0].provider' '"github"'
+assert_jq "foo-iac config_targets[0].scopes" \
+  '.[] | select(.name=="foo-iac") | .config_targets[0].scopes' '["repo","env"]'
 
 # === Empty-array preservation ===
 assert_jq "bar-simple required_secrets preserved as []" \
@@ -99,11 +107,25 @@ fi
 if jq -e '.[] | select(.name=="qux-no-secrets") | has("secret_targets")' "${INDEX}" >/dev/null; then
   fail "qux-no-secrets should have no secret_targets key (manifest omits it)"
 fi
+if jq -e '.[] | select(.name=="qux-no-secrets") | has("required_config")' "${INDEX}" >/dev/null; then
+  fail "qux-no-secrets should have no required_config key (manifest omits it)"
+fi
+if jq -e '.[] | select(.name=="qux-no-secrets") | has("config_targets")' "${INDEX}" >/dev/null; then
+  fail "qux-no-secrets should have no config_targets key (manifest omits it)"
+fi
 
 # === required_secrets per-item allowlist (extras dropped) ===
 assert_jq "required_secrets[0] item has exactly 4 known keys" \
   '.[] | select(.name=="foo-iac") | .required_secrets[0] | keys_unsorted | sort' \
   '["description","name","prompt","sensitive"]'
+
+# === required_config per-item allowlist (extras dropped) ===
+assert_jq "required_config[0] item has exactly 5 known keys" \
+  '.[] | select(.name=="foo-iac") | .required_config[0] | keys_unsorted | sort' \
+  '["description","key","name","prompt","sensitive"]'
+if jq -e '.[] | select(.name=="foo-iac") | .required_config[0] | has("config_leak")' "${INDEX}" >/dev/null; then
+  fail "G3 allowlist regression: required_config item leaked sub-field 'config_leak'"
+fi
 
 # === secret_targets per-item allowlist (extras dropped) ===
 assert_jq "secret_targets[0] item has exactly 3 known keys" \
@@ -111,6 +133,14 @@ assert_jq "secret_targets[0] item has exactly 3 known keys" \
   '["description","provider","scopes"]'
 if jq -e '.[] | select(.name=="foo-iac") | .secret_targets[0] | has("target_leak")' "${INDEX}" >/dev/null; then
   fail "G3 allowlist regression: secret_targets item leaked sub-field 'target_leak'"
+fi
+
+# === config_targets per-item allowlist (extras dropped) ===
+assert_jq "config_targets[0] item has exactly 3 known keys" \
+  '.[] | select(.name=="foo-iac") | .config_targets[0] | keys_unsorted | sort' \
+  '["description","provider","scopes"]'
+if jq -e '.[] | select(.name=="foo-iac") | .config_targets[0] | has("target_leak")' "${INDEX}" >/dev/null; then
+  fail "G3 allowlist regression: config_targets item leaked sub-field 'target_leak'"
 fi
 
 # === Per-item allowlist on cliCommands (extras dropped) ===

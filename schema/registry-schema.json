@@ -344,6 +344,37 @@
         "additionalProperties": false
       }
     },
+    "required_config": {
+      "type": "array",
+      "description": "Non-secret configuration variables the plugin requires. Consumed by `wfctl env setup`/`wfctl vars setup` to drive provider-backed variable prompts.",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Default environment/config variable name (e.g. NAMECHEAP_API_USER)"
+          },
+          "key": {
+            "type": "string",
+            "description": "Canonical plugin config key used when a manifest maps this value to a custom stored name"
+          },
+          "sensitive": {
+            "type": "boolean",
+            "description": "Must be false for required_config; sensitive values belong in required_secrets"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description shown above the prompt"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Optional short prompt label (defaults to name)"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
     "secret_targets": {
       "type": "array",
       "description": "Secret provider targets this plugin supports. Consumed by wfctl to present provider-owned scopes such as GitHub repo/org/env, GitLab project/group/env, Vault mount, or local file-backed stores.",
@@ -354,6 +385,30 @@
           "provider": {
             "type": "string",
             "description": "Canonical secret provider name (e.g. github, gitlab, vault, file, keychain, env)"
+          },
+          "scopes": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Provider-owned scope identifiers supported by this target"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable target description shown by wfctl"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "config_targets": {
+      "type": "array",
+      "description": "Variable/config provider targets this plugin supports. Consumed by wfctl to present provider-owned scopes such as GitHub repo/org/env variables, GitLab project/group variables, or local file-backed stores.",
+      "items": {
+        "type": "object",
+        "required": ["provider", "scopes"],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "Canonical variable/config provider name (e.g. github, gitlab, env)"
           },
           "scopes": {
             "type": "array",
