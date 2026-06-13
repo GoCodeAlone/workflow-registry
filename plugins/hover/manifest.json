@@ -21,26 +21,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "cbd7f72ebac3bc4c0b934bcd15645e6731fb0243114ddb9a857a7e08cff5535b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.9/workflow-plugin-hover-darwin-amd64.tar.gz"
+      "sha256": "c186691b876c4324afccf140cd5467d5f83e77e1562860414d491c0361edcfc0",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.10/workflow-plugin-hover-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "b904ea939dd8ac03a00a8cd4df92b4bfa6c9728e2d3373af7bd5c64650b43c39",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.9/workflow-plugin-hover-darwin-arm64.tar.gz"
+      "sha256": "28e8a405e791aca9308939f2de0226daf3b747e010787004e5a653066507e44d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.10/workflow-plugin-hover-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "fd53cdaad144147af9e1cb639d28ee561ab98bcbfde439a3e41780bb47f19b4d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.9/workflow-plugin-hover-linux-amd64.tar.gz"
+      "sha256": "2bed0c3ac7567407006fb996c66021d0d436ddfe6f15731690419a424baa91e9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.10/workflow-plugin-hover-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "7d2a95aeb8f86caed80c3663c5341fd837e39b626870d793509251215658db7d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.9/workflow-plugin-hover-linux-arm64.tar.gz"
+      "sha256": "a7689482f44b982f2bef41f8b1222e945b76603941cda72f1d1c331c4e84d999",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.10/workflow-plugin-hover-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-hover",
@@ -82,5 +82,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.5.9"
+  "version": "0.5.10"
 }
