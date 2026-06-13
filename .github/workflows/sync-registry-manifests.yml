@@ -60,7 +60,7 @@ jobs:
 
       - name: Set up wfctl
         env:
-          WFCTL_VERSION: v0.80.6
+          WFCTL_VERSION: v0.80.7
         run: |
           set -euo pipefail
           install_dir="${RUNNER_TEMP}/wfctl-bin"
