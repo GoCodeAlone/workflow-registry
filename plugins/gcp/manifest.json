@@ -34,6 +34,39 @@
     "workflowHandlers": []
   },
   "category": "infrastructure",
+  "config_targets": [
+    {
+      "description": "Stored as GitHub Actions variables when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
+    },
+    {
+      "description": "Stored as GitLab CI/CD variables when workflows run on GitLab; variables may also be narrowed with GitLab environment_scope.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group"
+      ]
+    },
+    {
+      "description": "Stored in a local dotenv/config file for local workflows.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "Provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
+    }
+  ],
   "description": "GCP infrastructure provider plugin for workflow — manages Cloud Run, GKE, Cloud SQL, Memorystore, VPC, Load Balancer, Cloud DNS, Artifact Registry, API Gateway, Firewall, IAM, GCS, and Certificate Manager",
   "downloads": [
     {
@@ -90,12 +123,68 @@
   "name": "workflow-plugin-gcp",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-gcp",
+  "required_config": [
+    {
+      "description": "GCP project ID for provider operations and config templates. Referenced as ${GCP_PROJECT}.",
+      "key": "project_id",
+      "name": "GCP_PROJECT",
+      "prompt": "GCP project ID",
+      "sensitive": false
+    }
+  ],
   "required_secrets": [
     {
       "description": "GCP service-account JSON key (inline blob). For the credentials.service_account_json path; ADC / Workload Identity deployments may skip. Referenced as ${GCP_SERVICE_ACCOUNT_JSON}.",
       "name": "GCP_SERVICE_ACCOUNT_JSON",
       "prompt": "GCP service-account JSON",
       "sensitive": true
+    }
+  ],
+  "secret_targets": [
+    {
+      "description": "Stored as GitHub Actions secrets when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
+    },
+    {
+      "description": "Stored as GitLab CI/CD variables when workflows run on GitLab; variables may also be narrowed with GitLab environment_scope.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group"
+      ]
+    },
+    {
+      "description": "Stored in Vault for application/runtime retrieval.",
+      "provider": "vault",
+      "scopes": [
+        "mount"
+      ]
+    },
+    {
+      "description": "Stored in a local file-backed secret store.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "Stored in the local OS keychain.",
+      "provider": "keychain",
+      "scopes": [
+        "service"
+      ]
+    },
+    {
+      "description": "Provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
     }
   ],
   "status": "experimental",

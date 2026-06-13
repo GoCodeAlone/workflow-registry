@@ -20,6 +20,8 @@
 #   - assets.* (ui, config) — added round 2 per Copilot
 #   - dependencies.items.* (name, minVersion, maxVersion) — added round 2 per Copilot
 #   - secret_targets.items.* (provider, scopes, description)
+#   - required_config.items.* (name, key, sensitive, description, prompt)
+#   - config_targets.items.* (provider, scopes, description)
 
 set -euo pipefail
 
@@ -60,7 +62,9 @@ schema_props() {
       ((.properties.iacProvider.properties // {}) | keys[] | "iacProvider." + .),
       ((.properties.assets.properties // {}) | keys[] | "assets." + .),
       ((.properties.dependencies.items.properties // {}) | keys[] | "dependencies." + .),
-      ((.properties.secret_targets.items.properties // {}) | keys[] | "secret_targets." + .)
+      ((.properties.secret_targets.items.properties // {}) | keys[] | "secret_targets." + .),
+      ((.properties.required_config.items.properties // {}) | keys[] | "required_config." + .),
+      ((.properties.config_targets.items.properties // {}) | keys[] | "config_targets." + .)
     ] | .[]
   ' "${SCHEMA}" | sort -u
 }
