@@ -9,7 +9,9 @@
       "name": "hover",
       "resourceTypes": [
         "infra.dns",
-        "infra.dns_delegation"
+        "infra.dns_delegation",
+        "infra.domain",
+        "infra.http_redirect"
       ]
     },
     "moduleTypes": [
@@ -17,7 +19,9 @@
     ],
     "resourceTypes": [
       "infra.dns",
-      "infra.dns_delegation"
+      "infra.dns_delegation",
+      "infra.domain",
+      "infra.http_redirect"
     ],
     "stepTypes": [],
     "triggerTypes": []
@@ -61,26 +65,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "af235b86083659ec291a6d024584e326f225163b71f749b07228e47922ae736f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.11/workflow-plugin-hover-darwin-amd64.tar.gz"
+      "sha256": "d5672a3a94f8221f763636ebb355aca5480d4a068a2fc1f89ca2b5c6563a2cf8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.6.1/workflow-plugin-hover-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "b4372edf8b9444c35e2ce21ad7217db6e1d48d0155f035ee4870ebfeb9bf00d6",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.11/workflow-plugin-hover-darwin-arm64.tar.gz"
+      "sha256": "ca7555c6806ab4181b8d16d705f203decf72c8d85f21349a43b31d46c92d6097",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.6.1/workflow-plugin-hover-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "90a6a1f18fb76cdaf4340c8aa4471ac4fb0a2d8e139a18511834ffc626081ade",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.11/workflow-plugin-hover-linux-amd64.tar.gz"
+      "sha256": "3634a053e59ec7628f64df341c6f9ea8bd003ccf02a01da8ae067c6c857fa433",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.6.1/workflow-plugin-hover-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "4345c47469a7e4fb99c1109f726a510c7d1142ee494dc59dcba52321d51fc59f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.5.11/workflow-plugin-hover-linux-arm64.tar.gz"
+      "sha256": "e86e9757259701ed0bf2a02f5b2b8fde4fc76fb309be7f2859fec3374436806f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-hover/releases/download/v0.6.1/workflow-plugin-hover-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-hover",
@@ -172,5 +176,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.5.11"
+  "version": "0.6.1"
 }
