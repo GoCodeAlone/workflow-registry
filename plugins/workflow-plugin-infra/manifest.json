@@ -9,6 +9,10 @@
       {
         "description": "DNS intent orchestration helpers",
         "name": "dns"
+      },
+      {
+        "description": "Compatibility alias for wfctl dns policy",
+        "name": "dns-policy"
       }
     ],
     "configProvider": true,
@@ -38,38 +42,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "742726cd1034f2df43f88458506cdc2a6a8d5a1da2a043daee5e527c512d00a2",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_darwin_amd64.tar.gz"
+      "sha256": "a69076cb0c9b14b32ebb1dd191b929615cc603c79dc6c7ed8ba0b848f4400a14",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.3/workflow-plugin-infra_1.6.3_darwin_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "6d50f3c4c54ceb127690ce2cb1047e4179ca680cf89cb5578a170dec0cd8aee7",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_darwin_arm64.tar.gz"
+      "sha256": "deb8c29b0c8bcf88c674f462ef7614d3c7f650dc9436324d83274561ded46ddb",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.3/workflow-plugin-infra_1.6.3_darwin_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "0b31ab26d4c0cab2707fb393f4b14b5ddfcc897b557f556d6951d356bd7fe5aa",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_linux_amd64.tar.gz"
+      "sha256": "12f98620b8a421d41110da61fc949765c7a765556cfd8dc25e00bde169de9617",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.3/workflow-plugin-infra_1.6.3_linux_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "80b3ef35fe3b6d00b08f523156ba9f3e9d0a96507ab0bfeb72c88d4cc92db2e8",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_linux_arm64.tar.gz"
+      "sha256": "67c0dae8829de732dd43a47bc1c87ee9d12944a1737f38b7e5b7c4afcf8336c0",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.3/workflow-plugin-infra_1.6.3_linux_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "5092c68e15b2854125972325ee714dc73ec9dd702e17305a2647a0df264c6d48",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_windows_amd64.tar.gz"
+      "sha256": "253dcc03b03b95f81aab583710b3641be97204d52b76fe08a71bd68f4fa4d3c2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.3/workflow-plugin-infra_1.6.3_windows_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "7e8d15509b1c2edfcabec6e35972f7f64dab6bc78a8df2010c465d10ada0817f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_windows_arm64.tar.gz"
+      "sha256": "8dda4d112110bf3fbcefd77d8cc477ea8188e790981934c7d93090af430dcf07",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.3/workflow-plugin-infra_1.6.3_windows_arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-infra",
@@ -86,7 +90,7 @@
     "dns"
   ],
   "license": "MIT",
-  "minEngineVersion": "0.80.14",
+  "minEngineVersion": "0.80.17",
   "name": "workflow-plugin-infra",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-infra",
@@ -94,5 +98,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "1.6.2"
+  "version": "1.6.3"
 }
