@@ -92,12 +92,11 @@
   ],
   "secret_targets": [
     {
-      "description": "GitLab CI/CD variables at project, group, and environment scope.",
+      "description": "GitLab CI/CD variables at project or group scope; variables may also be narrowed with GitLab's separate environment_scope field.",
       "provider": "gitlab",
       "scopes": [
         "project",
-        "group",
-        "env"
+        "group"
       ]
     },
     {
