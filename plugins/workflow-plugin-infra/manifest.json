@@ -38,38 +38,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "52f6d3e6532cb4de174d015ceec5b63ba9e4c68c62a46aa7ed8ea0658a8c6480",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.0/workflow-plugin-infra_1.6.0_darwin_amd64.tar.gz"
+      "sha256": "742726cd1034f2df43f88458506cdc2a6a8d5a1da2a043daee5e527c512d00a2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_darwin_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "d813b2b76365c2be88467ecd23035491dc5646fa3b2ae0af5312835cf26f7f90",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.0/workflow-plugin-infra_1.6.0_darwin_arm64.tar.gz"
+      "sha256": "6d50f3c4c54ceb127690ce2cb1047e4179ca680cf89cb5578a170dec0cd8aee7",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_darwin_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "f19e3bc6da22408e016922c825686255283f1f1d97f178714605873c2a59482a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.0/workflow-plugin-infra_1.6.0_linux_amd64.tar.gz"
+      "sha256": "0b31ab26d4c0cab2707fb393f4b14b5ddfcc897b557f556d6951d356bd7fe5aa",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_linux_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "f58746f4a1d02baf25a7740a69c031d49d1d357439a15d91b71df73b9ce75c13",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.0/workflow-plugin-infra_1.6.0_linux_arm64.tar.gz"
+      "sha256": "80b3ef35fe3b6d00b08f523156ba9f3e9d0a96507ab0bfeb72c88d4cc92db2e8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_linux_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "5d719248c31b590537e438b58c29d1c591bd39bdc610d79a54fd2d66e955da2c",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.0/workflow-plugin-infra_1.6.0_windows_amd64.tar.gz"
+      "sha256": "5092c68e15b2854125972325ee714dc73ec9dd702e17305a2647a0df264c6d48",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_windows_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "13d0771db5b2ca737f23976cf798713f77ce975fc49c44387f7482a90edf5ffb",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.0/workflow-plugin-infra_1.6.0_windows_arm64.tar.gz"
+      "sha256": "7e8d15509b1c2edfcabec6e35972f7f64dab6bc78a8df2010c465d10ada0817f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-infra/releases/download/v1.6.2/workflow-plugin-infra_1.6.2_windows_arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-infra",
@@ -94,5 +94,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "1.6.0"
+  "version": "1.6.2"
 }
