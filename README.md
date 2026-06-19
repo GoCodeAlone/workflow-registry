@@ -178,6 +178,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [scalekit](./plugins/scalekit/manifest.json) | Scalekit enterprise SSO and Directory Sync provider plugin | community |
 | [security-scanner](./plugins/security-scanner/manifest.json) | Security scanner plugin for workflow engine — vulnerability scanning, secret detection, and compliance checks | community |
 | [security](./plugins/security/manifest.json) | Unified security plugin: WAF (Coraza/AWS/GCloud/Cloudflare), MFA/encryption (TOTP, AES-256-GCM, AWS KMS, GCP KMS, Vault Transit), authorization (Casbin RBAC, Permit.io), data protection (PII detection/masking), sandbox (WASM/wazero, Docker), and supply-chain security (signatures, vuln scanning, SBOM) | premium |
+| [site-onboarding](./plugins/site-onboarding/manifest.json) | Dry-run multisite site/domain onboarding planner for Workflow. | community |
 | [slack](./plugins/slack/manifest.json) | Slack messaging and workspace automation. Provides a provider module backed by the Slack Web API and Socket Mode, pipeline steps for messages/blocks/reactions/files, and a Socket Mode event trigger. | community |
 | [steam](./plugins/steam/manifest.json) | External plugin for the workflow engine. | community |
 | [teams](./plugins/teams/manifest.json) | Microsoft Teams messaging and channel management via the Microsoft Graph API. Provides a provider module with Azure AD client credentials auth, pipeline steps for messages/cards/channels/members, and an HTTP webhook trigger for Graph change notifications. | community |

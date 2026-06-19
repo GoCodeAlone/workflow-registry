@@ -1,0 +1,69 @@
+{
+  "name": "workflow-plugin-site-onboarding",
+  "version": "0.1.0",
+  "description": "Dry-run multisite site/domain onboarding planner for Workflow.",
+  "author": "GoCodeAlone",
+  "license": "MIT",
+  "type": "external",
+  "tier": "community",
+  "private": true,
+  "minEngineVersion": "0.64.4",
+  "keywords": [
+    "multisite",
+    "onboarding",
+    "dns",
+    "github"
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-site-onboarding",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-site-onboarding",
+  "source": "github.com/GoCodeAlone/workflow-plugin-site-onboarding",
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.site_onboarding_plan_generate",
+      "step.site_onboarding_admin_contribution_describe"
+    ],
+    "triggerTypes": []
+  },
+  "status": "experimental",
+  "category": "core",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "7dd3fef4c6972035868fde343971ba1cf9a85e9fa09955a885740ec29372a2e3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-site-onboarding/releases/download/v0.1.0/workflow-plugin-site-onboarding-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "c323d49cbaaea00acc88e7d673a456a8570e4cd22fb056e7ea1ce18684872d78",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-site-onboarding/releases/download/v0.1.0/workflow-plugin-site-onboarding-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "0dc20777ed623d27ac8200702b7fe802e1f052f0df80b0d31ddc5577069d408d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-site-onboarding/releases/download/v0.1.0/workflow-plugin-site-onboarding-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "3e8947135110b9f0c54cd3cf05e645cd94d06815b90ee8893c786216d410a875",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-site-onboarding/releases/download/v0.1.0/workflow-plugin-site-onboarding-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "a07f0c014c52c2aad39bc4712903d776c2ff7b70156ae95d66f8c2c584420a3b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-site-onboarding/releases/download/v0.1.0/workflow-plugin-site-onboarding-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "c9857faf86d475b13dbe6734d5929fb51f7d36418736561adb2e107cfaaf0669",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-site-onboarding/releases/download/v0.1.0/workflow-plugin-site-onboarding-windows-arm64.tar.gz"
+    }
+  ]
+}
