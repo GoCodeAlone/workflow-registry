@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-cms",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Multi-tenant CMS engine — TenantResolver + static-wins routing + WYSIWYG page authoring (TipTap default). Foundation of gocodealone-multisite.",
   "author": "GoCodeAlone",
   "license": "MIT",
@@ -38,26 +38,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "0856e877ee363d70b72ae24ce91acfc5b48f8809a09e40723b7dc46eab0f1d1f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.1/workflow-plugin-cms-darwin-amd64.tar.gz"
+      "sha256": "2b56bb69429147a2020450b0f060a25531468069145993ac6ea3e83446e615c6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.2/workflow-plugin-cms-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "925f5b8f075c503346c718cb0dd2cf01e77072dc0fc99b7e6539e2188cd618be",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.1/workflow-plugin-cms-darwin-arm64.tar.gz"
+      "sha256": "902f13cd89298cd1918aeb087db51fea9a0ae3ce9a46cc900d21ebca07455c43",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.2/workflow-plugin-cms-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "86d32aab67dcb5b21b6bf5e7967f79f3bec3f899b772dd7241017c0561ca7bc0",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.1/workflow-plugin-cms-linux-amd64.tar.gz"
+      "sha256": "190733e4cde05b8603b368e004d865a29493d177794186a739764f797fc2fd53",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.2/workflow-plugin-cms-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "beb0c8db6ba1eb8fb519bf1596506cfb19b4bb0549e2b3b1ba1b90fbc88cbef0",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.1/workflow-plugin-cms-linux-arm64.tar.gz"
+      "sha256": "56c0166da9a4f6e3e455145262f4b2b9b696a4a4257ce5f444bffb5dbca3f354",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.2/workflow-plugin-cms-linux-arm64.tar.gz"
     }
   ]
 }

@@ -23,26 +23,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "e57c9aa9d38c0d2769b7077ae8dad83fd7d88029549599607f3301042170e00c",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.10/workflow-plugin-admin-darwin-amd64.tar.gz"
+      "sha256": "0e30822d0f9f073a57a0de37e477f89636b36501c6539ab6655f49c9d751ab73",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.13/workflow-plugin-admin-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "48f6acff2f9b96602eb841fff48130cb8c4fb40a54e53fe07e92d1d6d434585b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.10/workflow-plugin-admin-darwin-arm64.tar.gz"
+      "sha256": "07cd33a1b58e5afd846be2fa407d4db6f4938d6a32c9e2e1ecae36afd0d77d76",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.13/workflow-plugin-admin-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "2c2c80e078106a8ca6c8f63923259c02ca5188c22da65af1aff2f03d33a87515",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.10/workflow-plugin-admin-linux-amd64.tar.gz"
+      "sha256": "9fa2ebc4d2d6aedf71b973cd8899f97f05b8b7dceb8ddca89c0936913838ad31",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.13/workflow-plugin-admin-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "91203e8b7d0fc5b506e2a83f7025b3144f05a3b66b4f623889e9148f1ade7941",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.10/workflow-plugin-admin-linux-arm64.tar.gz"
+      "sha256": "3c38937aac688931735bfab76d221fa749bc3177dfc4fecce79052ec5f221395",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-admin/releases/download/v1.1.13/workflow-plugin-admin-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-admin",
@@ -63,5 +63,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "external",
-  "version": "1.1.10"
+  "version": "1.1.13"
 }
