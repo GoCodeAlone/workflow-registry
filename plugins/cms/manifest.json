@@ -1,23 +1,5 @@
 {
-  "name": "workflow-plugin-cms",
-  "version": "0.1.2",
-  "description": "Multi-tenant CMS engine — TenantResolver + static-wins routing + WYSIWYG page authoring (TipTap default). Foundation of gocodealone-multisite.",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.64.4",
-  "keywords": [
-    "cms",
-    "multi-tenant",
-    "wysiwyg",
-    "tiptap",
-    "static-site",
-    "domain-routing"
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-cms",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-cms",
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -32,32 +14,50 @@
     ],
     "triggerTypes": []
   },
-  "status": "experimental",
   "category": "core",
+  "description": "Multi-tenant CMS engine — TenantResolver + static-wins routing + WYSIWYG page authoring (TipTap default). Foundation of gocodealone-multisite.",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "2b56bb69429147a2020450b0f060a25531468069145993ac6ea3e83446e615c6",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.2/workflow-plugin-cms-darwin-amd64.tar.gz"
+      "sha256": "abb4ff415c364552605a73933ae2093e8d647c18463125167ba2d82c9b00dd50",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.4/workflow-plugin-cms-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "902f13cd89298cd1918aeb087db51fea9a0ae3ce9a46cc900d21ebca07455c43",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.2/workflow-plugin-cms-darwin-arm64.tar.gz"
+      "sha256": "3cf0094b001c2d91fdc9da9371e9d10d045c7098683c2c0e908b3fc8ae9b7be1",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.4/workflow-plugin-cms-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "190733e4cde05b8603b368e004d865a29493d177794186a739764f797fc2fd53",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.2/workflow-plugin-cms-linux-amd64.tar.gz"
+      "sha256": "5a52522c6bd918316893911324f529247e435cde7cdb8590cad2515702a6c9f6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.4/workflow-plugin-cms-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "56c0166da9a4f6e3e455145262f4b2b9b696a4a4257ce5f444bffb5dbca3f354",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.2/workflow-plugin-cms-linux-arm64.tar.gz"
+      "sha256": "729c827690ca2ed30678796e7cf2e8ba8e4699d951c689551047c9d0128a92f6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.4/workflow-plugin-cms-linux-arm64.tar.gz"
     }
-  ]
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-cms",
+  "keywords": [
+    "cms",
+    "multi-tenant",
+    "wysiwyg",
+    "tiptap",
+    "static-site",
+    "domain-routing"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.80.24",
+  "name": "workflow-plugin-cms",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-cms",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.4"
 }
