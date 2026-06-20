@@ -27,6 +27,10 @@
       "step.auth_policy_audit",
       "step.auth_provider_catalog",
       "step.auth_admin_contribution_describe",
+      "step.auth_admin_identity_describe",
+      "step.auth_admin_invite_issue",
+      "step.auth_admin_invite_redeem",
+      "step.auth_admin_invite_revoke",
       "step.auth_admin_config_describe",
       "step.auth_admin_config_validate",
       "step.auth_oauth_provider_config",
@@ -46,26 +50,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "abd374e286e6f53dde36208e8e83a9be951e1342c8382ac7f66afffe2045945a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.7/workflow-plugin-auth_0.3.7_darwin_amd64.tar.gz"
+      "sha256": "5197fdffcd782998f8d2937e6339f685dd4951faab6a19d8f2381b573b95dc82",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.8/workflow-plugin-auth_0.3.8_darwin_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "b7a46c450aaacb895a22be9ecbac4fcec78cf1ffefa3d6261f6ce0efbed5a2e3",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.7/workflow-plugin-auth_0.3.7_darwin_arm64.tar.gz"
+      "sha256": "7c26b0b86f022ad104fd2d06fbe9d71f2c1b7faa6ca204ef3f368bbac63e1d91",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.8/workflow-plugin-auth_0.3.8_darwin_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "312bcf64af6dae2462aea264c8c1e9015746a4613599b6955c3f2a135ce00797",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.7/workflow-plugin-auth_0.3.7_linux_amd64.tar.gz"
+      "sha256": "99757d698e31cfad572bfdd9fe3fe8cc1ec0394e3a643d358f93ac63aed7d779",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.8/workflow-plugin-auth_0.3.8_linux_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "b278b166c384de0e7cdf8c70d61ea40d77cd8dd9bacc70d2b79f18814bee55d8",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.7/workflow-plugin-auth_0.3.7_linux_arm64.tar.gz"
+      "sha256": "637f2d9d10dfc73ab0c7513516374ad2c4f6f9ee9c63a5604257c1986a48ef5c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-auth/releases/download/v0.3.8/workflow-plugin-auth_0.3.8_linux_arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-auth",
@@ -84,5 +88,5 @@
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-auth",
   "tier": "core",
   "type": "external",
-  "version": "0.3.7"
+  "version": "0.3.8"
 }
