@@ -85,47 +85,10 @@ jobs:
           PLUGIN_FROM_INPUT:    ${{ github.event.inputs.plugin }}
           EVENT_NAME:           ${{ github.event_name }}
           DISPATCH_ACTION:      ${{ github.event.action }}
+          PLUGINS_DIR:          plugins
         run: |
           set -euo pipefail
-          plugin=""
-          case "${EVENT_NAME}" in
-            repository_dispatch)
-              if [[ "${DISPATCH_ACTION}" == "plugin-release" ]]; then
-                plugin="${PLUGIN_FROM_DISPATCH}"
-                if [[ -z "${plugin}" ]]; then
-                  echo "::warning::plugin-release dispatch received with empty client_payload.plugin; skipping (use workflow-release for full-sync intent)"
-                  echo "skip=1" >> "$GITHUB_OUTPUT"
-                  echo "plugin=" >> "$GITHUB_OUTPUT"
-                  exit 0
-                fi
-              fi
-              ;;
-            workflow_dispatch)
-              plugin="${PLUGIN_FROM_INPUT}"
-              ;;
-          esac
-          if [[ -n "${plugin}" ]]; then
-            if [[ "${plugin}" == "." || "${plugin}" == ".." ]]; then
-              echo "::warning::plugin-name '.'/'..' rejected (path traversal attempt); skipping"
-              echo "skip=1" >> "$GITHUB_OUTPUT"
-              echo "plugin=" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-            if [[ ! "${plugin}" =~ ^[A-Za-z0-9._-]+$ ]]; then
-              echo "::warning::plugin-name regex validation failed; ignoring this dispatch"
-              echo "skip=1" >> "$GITHUB_OUTPUT"
-              echo "plugin=" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-            if [[ ! -f "plugins/${plugin}/manifest.json" ]]; then
-              echo "::warning::dispatched plugin has no plugins/<name>/manifest.json; skipping"
-              echo "skip=1" >> "$GITHUB_OUTPUT"
-              echo "plugin=" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-          fi
-          echo "plugin=${plugin}" >> "$GITHUB_OUTPUT"
-          echo "skip=0" >> "$GITHUB_OUTPUT"
+          scripts/resolve-sync-plugin-filter.sh
 
       - name: Detect and update drifted manifests
         if: steps.filter.outputs.skip != '1'
