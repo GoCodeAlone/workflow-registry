@@ -20,26 +20,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "abb4ff415c364552605a73933ae2093e8d647c18463125167ba2d82c9b00dd50",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.4/workflow-plugin-cms-darwin-amd64.tar.gz"
+      "sha256": "3a0497bfb53e825ff6c6e24b7dd86583b5039a8b951a5ddf2c24789c73e4b18c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.5/workflow-plugin-cms-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "3cf0094b001c2d91fdc9da9371e9d10d045c7098683c2c0e908b3fc8ae9b7be1",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.4/workflow-plugin-cms-darwin-arm64.tar.gz"
+      "sha256": "33d839532ff85102fb3de343da73e28764d05b9dd3c9e5770734f2524378e6b2",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.5/workflow-plugin-cms-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "5a52522c6bd918316893911324f529247e435cde7cdb8590cad2515702a6c9f6",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.4/workflow-plugin-cms-linux-amd64.tar.gz"
+      "sha256": "c15edd12e39834267a080eeccbae4b7b8bdc57e323c34b9f732af7caf7c6e2fc",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.5/workflow-plugin-cms-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "729c827690ca2ed30678796e7cf2e8ba8e4699d951c689551047c9d0128a92f6",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.4/workflow-plugin-cms-linux-arm64.tar.gz"
+      "sha256": "c26f6a9e62aabcbae46dfb2b0f2f9b50b467ad64e1a4dea9c06c7ace8b48cdef",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-cms/releases/download/v0.1.5/workflow-plugin-cms-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-cms",
@@ -59,5 +59,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.1.4"
+  "version": "0.1.5"
 }
