@@ -9,8 +9,8 @@ if ! grep -Fq 'GH_TOKEN: ${{ secrets.RELEASES_TOKEN || secrets.GITHUB_TOKEN }}' 
   exit 1
 fi
 
-if ! grep -Fq 'run_gh release list' "$script" || ! grep -Fq 'run_gh release view' "$script"; then
-  echo "build-versions must wrap gh release calls with a timeout guard" >&2
+if ! grep -Fq 'run_gh api' "$script"; then
+  echo "build-versions must wrap gh API calls with a timeout guard" >&2
   exit 1
 fi
 
