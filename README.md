@@ -185,11 +185,11 @@ These plugins are distributed outside the engine repository and are maintained a
 | [template](./plugins/template/manifest.json) | Template repository for creating workflow engine external plugins | community |
 | [turnio](./plugins/turnio/manifest.json) | turn.io WhatsApp API integration — messaging, contacts, templates, flows, and journeys | community |
 | [twilio](./plugins/twilio/manifest.json) | Comprehensive Twilio integration — SMS, Voice, Verify, Video, Conversations, TaskRouter, and 40+ products | community |
-| [workflow-plugin-atlas-migrate](./plugins/workflow-plugin-atlas-migrate/manifest.json) | Atlas migration driver plugin for the workflow engine: ariga.io/atlas v1 backed Up/Down/Status/Goto with SQL-backed revision tracking and auto-generated atlas.sum | community |
+| [workflow-plugin-atlas-migrate](./plugins/workflow-plugin-atlas-migrate/manifest.json) | Atlas migration driver plugin for the workflow engine | community |
 | [workflow-plugin-compute](./plugins/workflow-plugin-compute/manifest.json) | Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads | community |
 | [workflow-plugin-gitlab](./plugins/workflow-plugin-gitlab/manifest.json) | GitLab integration plugin: webhook handling and GitLab CI pipeline management | community |
 | [workflow-plugin-infra](./plugins/workflow-plugin-infra/manifest.json) | Abstract infra.* module types with IaCProvider delegation + dynamic plan/apply SPA, exec-env, and reconcile (plugs into workflow-plugin-admin) | community |
-| [workflow-plugin-migrations](./plugins/workflow-plugin-migrations/manifest.json) | Database migration plugin for the workflow engine: golang-migrate + goose drivers, pre-deploy runner, wfctl migrate CLI, static lint tool, and tenant-ensure schema setup | community |
+| [workflow-plugin-migrations](./plugins/workflow-plugin-migrations/manifest.json) | Database migration plugin for the workflow engine: golang-migrate + goose + atlas drivers, pre-deploy runner, wfctl db-migrate CLI, static lint tool | community |
 | [workflow-plugin-product-capture](./plugins/workflow-plugin-product-capture/manifest.json) | Product URL capture provider for workflow-compute | community |
 | [ws-auth](./plugins/ws-auth/manifest.json) | WebSocket HMAC authentication plugin for workflow engine | community |
 

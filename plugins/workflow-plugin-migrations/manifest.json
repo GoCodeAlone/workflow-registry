@@ -1,19 +1,19 @@
 {
   "name": "workflow-plugin-migrations",
-  "version": "0.3.9",
-  "description": "Database migration plugin for the workflow engine: golang-migrate + goose drivers, pre-deploy runner, wfctl migrate CLI, static lint tool, and tenant-ensure schema setup",
+  "version": "0.3.10",
+  "description": "Database migration plugin for the workflow engine: golang-migrate + goose + atlas drivers, pre-deploy runner, wfctl db-migrate CLI, static lint tool",
   "author": "GoCodeAlone",
   "license": "Apache-2.0",
   "type": "external",
   "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.51.7",
+  "minEngineVersion": "0.80.24",
   "keywords": [
     "migrations",
     "database",
     "postgres",
     "golang-migrate",
-    "goose"
+    "goose",
+    "atlas"
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-migrations",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-migrations",
@@ -36,7 +36,7 @@
     ],
     "cliCommands": [
       {
-        "name": "migrate",
+        "name": "db-migrate",
         "description": "Run and inspect database migrations",
         "subcommands": [
           {
@@ -85,96 +85,37 @@
     ],
     "buildHooks": []
   },
-  "assets": {
-    "ui": false,
-    "config": true
-  },
   "downloads": [
     {
-      "arch": "amd64",
-      "os": "darwin",
-      "sha256": "6f6d30951634a40fa673b4b973db33eb838702a3e482d262cd71b0aad94c27db",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-migrate-darwin-amd64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "darwin",
-      "sha256": "c17f5807a12d43e028d7c8fa1cd7787f51afa98f3d7e4bbe8ba160396a6116ce",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-atlas-migrate-darwin-amd64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "darwin",
-      "sha256": "9f07826d42de4c6c72bf064ca58b83c37dad646dbd2678ddf2f86f77ace224bd",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-migrations-darwin-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "75e8a1a7ab30bf868467871996d01811627d0eed83b81cc71bfb3a3fa0834d55",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-migrate-darwin-arm64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "2b471f8324728f92d99435e5273c058f1e5fae17070cf56103618dec2ca53018",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-atlas-migrate-darwin-arm64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "e64067c538f3f438486a751cd7e53be2393ed35891feec680f379d56f080e5a1",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-migrations-darwin-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
       "os": "linux",
-      "sha256": "7d00f725b9130f9a04a1ef6477d4e70aa595140d7ab80ebfee060dcf823adb0a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-migrate-linux-amd64.tar.gz"
-    },
-    {
       "arch": "amd64",
-      "os": "linux",
-      "sha256": "ea581def53dd81cff821717f08faf0b647b9589f73918276643b3ac08a7d5725",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-atlas-migrate-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-migrations-linux-amd64.tar.gz"
     },
     {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-migrations-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
       "arch": "amd64",
-      "os": "linux",
-      "sha256": "254e3e06578b193589927947c10190c04ffd7d79cd3cdfc9cd08920fbc75bd05",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-migrations-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-migrations-darwin-amd64.tar.gz"
     },
     {
+      "os": "darwin",
       "arch": "arm64",
-      "os": "linux",
-      "sha256": "7af0470070685fe9c0edf3b39d51e81ef33bcbdf7f2980cb5b7a56de763f44cb",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-migrate-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-migrations-darwin-arm64.tar.gz"
     },
     {
-      "arch": "arm64",
-      "os": "linux",
-      "sha256": "b632560e18000ae181786029dfa17529cfbb3bb1a2cca0ac6598b10a2fd4f33c",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-atlas-migrate-linux-arm64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "linux",
-      "sha256": "99614d183730604afc572ebe10f83aa9ad41554962f9ef7065a8a937b98791ec",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-migrations-linux-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
       "os": "windows",
-      "sha256": "b94d65a08664fec8b21859499dc0ad4a0aec036f90842e264f4c45b7ca3e2d27",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-migrations-windows-amd64.tar.gz"
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-migrations-windows-amd64.tar.gz"
     },
     {
-      "arch": "arm64",
       "os": "windows",
-      "sha256": "3cde35af8c715ece9077fa801893a3a19a1a43c3481bcdba53c425ed06b6b8bf",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.9/workflow-plugin-migrations-windows-arm64.tar.gz"
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-migrations-windows-arm64.tar.gz"
     }
   ],
-  "status": "experimental",
   "category": "data"
 }
