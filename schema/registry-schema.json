@@ -144,7 +144,7 @@
               "description": {
                 "type": "string"
               },
-              "flags_passthrough": {
+              "flagsPassthrough": {
                 "type": "boolean",
                 "description": "When true, wfctl passes all flags through to the plugin binary"
               },

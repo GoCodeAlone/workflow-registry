@@ -63,8 +63,8 @@ assert_jq "foo-iac capabilities.iacProvider.supportedCanonicalKeys" \
   '["zone","record"]'
 assert_jq "foo-iac capabilities.cliCommands[0].name" \
   '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0].name' '"foo"'
-assert_jq "foo-iac capabilities.cliCommands[0].flags_passthrough" \
-  '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0].flags_passthrough' 'true'
+assert_jq "foo-iac capabilities.cliCommands[0].flagsPassthrough" \
+  '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0].flagsPassthrough' 'true'
 assert_jq "foo-iac capabilities.cliCommands[0].subcommands[0].name" \
   '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0].subcommands[0].name' '"sync"'
 assert_jq "foo-iac capabilities.migrationDrivers" \
@@ -146,7 +146,7 @@ fi
 # === Per-item allowlist on cliCommands (extras dropped) ===
 assert_jq "cliCommands item has exactly 4 known keys" \
   '.[] | select(.name=="foo-iac") | .capabilities.cliCommands[0] | keys_unsorted | sort' \
-  '["description","flags_passthrough","name","subcommands"]'
+  '["description","flagsPassthrough","name","subcommands"]'
 
 # === schema-extension-pr fields ===
 # configProvider + iacStateBackends are included; serviceMethods + iacProvider.configSchema are excluded.

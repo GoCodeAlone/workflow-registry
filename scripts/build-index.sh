@@ -110,7 +110,7 @@ while IFS= read -r manifest; do
   # G3-include: capabilities.cliCommands
   # G3-include: capabilities.cliCommands.name
   # G3-include: capabilities.cliCommands.description
-  # G3-include: capabilities.cliCommands.flags_passthrough
+  # G3-include: capabilities.cliCommands.flagsPassthrough
   # G3-include: capabilities.cliCommands.subcommands
   # G3-include: capabilities.cliCommands.subcommands.name
   # G3-include: capabilities.cliCommands.subcommands.description
@@ -178,7 +178,7 @@ while IFS= read -r manifest; do
         [(.capabilities.cliCommands // [])[] | {
           name:              (.name // null),
           description:       (.description // null),
-          flags_passthrough: (.flags_passthrough // false),
+          flagsPassthrough: (.flagsPassthrough // false),
           subcommands: (
             [(.subcommands // [])[] | {
               name:        (.name // null),

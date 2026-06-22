@@ -317,3 +317,6 @@ jobs:
           else
             scripts/reconcile-sync-prs.sh --current-pr "${pr_number}" --mode full
           fi
+
+          # Auto-merge: repo allows auto-merge; PR merges automatically once CI checks pass (no manual approval for routine version bumps).
+          gh pr merge "${pr_number}" --auto --squash
