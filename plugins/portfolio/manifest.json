@@ -7,18 +7,39 @@
   "capabilities": {
     "cliCommands": [
       {
-        "description": "Cross-repo portfolio catalog generator (wfctl portfolio scan|status)",
-        "flags_passthrough": true,
+        "description": "portfolio catalog generator",
         "name": "portfolio"
       }
-    ],
-    "configProvider": false,
-    "moduleTypes": [],
-    "stepTypes": [],
-    "triggerTypes": []
+    ]
   },
   "category": "other",
   "description": "Cross-repo portfolio catalog generator — wfctl portfolio scan|status for the GoCodeAlone org. Scans repos (git + gh + capability/inventory) into a living catalog (docs/PORTFOLIO.md) + follow-up queue + tooling inventory. CLI-only plugin (no host/gRPC protocol).",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "88a50995e2d4d0402af22298f21628a5f8206b9d3f3e1d71ef447b9eba8dc2cd",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.1.1/workflow-plugin-portfolio-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "307d90a0b38e0746540773590b47afd901c050eb44773509198fec4dd8427054",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.1.1/workflow-plugin-portfolio-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "61157bf4e9114beef3f9b5058afea8c6f6781167bc75f6e17da1de4d9c4bdba8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.1.1/workflow-plugin-portfolio-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "7c54b733a2ad0cac31c58b28de6db37dddf65d3a99f04726229c2bfd89616bca",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.1.1/workflow-plugin-portfolio-linux-arm64.tar.gz"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-portfolio",
   "keywords": [
     "portfolio",

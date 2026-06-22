@@ -1,23 +1,22 @@
 {
-  "name": "scaffold-workflow-plugin",
-  "version": "0.1.1",
   "author": "GoCodeAlone",
-  "description": "Template repository for creating workflow engine external plugins",
-  "source": "github.com/GoCodeAlone/scaffold-workflow-plugin",
-  "type": "external",
-  "tier": "community",
-  "license": "MIT",
-  "homepage": "https://github.com/GoCodeAlone/scaffold-workflow-plugin",
-  "repository": "https://github.com/GoCodeAlone/scaffold-workflow-plugin",
-  "private": false,
-  "status": "experimental",
   "capabilities": {
     "configProvider": false,
-    "moduleTypes": [],
-    "stepTypes": [],
+    "iacProvider": {
+      "resourceTypes": [
+        "TEMPLATE.resource"
+      ]
+    },
+    "moduleTypes": [
+      "TEMPLATE.module"
+    ],
+    "stepTypes": [
+      "TEMPLATE.step"
+    ],
     "triggerTypes": []
   },
   "category": "core",
+  "description": "Template repository for creating workflow engine external plugins",
   "downloads": [
     {
       "arch": "amd64",
@@ -56,5 +55,15 @@
       "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.1/scaffold-workflow-plugin-windows-arm64.tar.gz"
     }
   ],
-  "minEngineVersion": "0.51.7"
+  "homepage": "https://github.com/GoCodeAlone/scaffold-workflow-plugin",
+  "license": "MIT",
+  "minEngineVersion": "0.62.0",
+  "name": "scaffold-workflow-plugin",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/scaffold-workflow-plugin",
+  "source": "github.com/GoCodeAlone/scaffold-workflow-plugin",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.1"
 }
