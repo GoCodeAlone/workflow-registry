@@ -7,18 +7,39 @@
   "capabilities": {
     "cliCommands": [
       {
-        "description": "Cross-repo portfolio catalog generator (wfctl portfolio scan|status)",
-        "flags_passthrough": true,
+        "description": "portfolio catalog generator",
         "name": "portfolio"
       }
-    ],
-    "configProvider": false,
-    "moduleTypes": [],
-    "stepTypes": [],
-    "triggerTypes": []
+    ]
   },
   "category": "other",
   "description": "Cross-repo portfolio catalog generator — wfctl portfolio scan|status for the GoCodeAlone org. Scans repos (git + gh + capability/inventory) into a living catalog (docs/PORTFOLIO.md) + follow-up queue + tooling inventory. CLI-only plugin (no host/gRPC protocol).",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "de25199eb705c87d85911a20d70ce97a34522bcc1e76006a8bdbe38b1e4c4738",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.3.0/workflow-plugin-portfolio-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "50ec09671a5e8279aed3a2983dcfebf84339e214b2fe7f916068927586465af3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.3.0/workflow-plugin-portfolio-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "97f2ce5d675157729837ed19b4b780098b1867a3664f608684305636c94b2ec3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.3.0/workflow-plugin-portfolio-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "8765a6ddb4bb5df17e1127ed474de3dedcac2b948be6bf5afa658ea8fb1178e5",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.3.0/workflow-plugin-portfolio-linux-arm64.tar.gz"
+    }
+  ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-portfolio",
   "keywords": [
     "portfolio",
@@ -35,5 +56,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "external",
-  "version": "0.1.1"
+  "version": "0.3.0"
 }
