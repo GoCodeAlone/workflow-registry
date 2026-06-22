@@ -1,0 +1,39 @@
+{
+  "assets": {
+    "config": false,
+    "ui": false
+  },
+  "author": "GoCodeAlone",
+  "capabilities": {
+    "cliCommands": [
+      {
+        "description": "Cross-repo portfolio catalog generator (wfctl portfolio scan|status)",
+        "flags_passthrough": true,
+        "name": "portfolio"
+      }
+    ],
+    "configProvider": false,
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": []
+  },
+  "category": "other",
+  "description": "Cross-repo portfolio catalog generator — wfctl portfolio scan|status for the GoCodeAlone org. Scans repos (git + gh + capability/inventory) into a living catalog (docs/PORTFOLIO.md) + follow-up queue + tooling inventory. CLI-only plugin (no host/gRPC protocol).",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-portfolio",
+  "keywords": [
+    "portfolio",
+    "catalog",
+    "tracking",
+    "tooling",
+    "wfctl"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.80.25",
+  "name": "portfolio",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-portfolio",
+  "status": "experimental",
+  "tier": "core",
+  "type": "external",
+  "version": "0.1.1"
+}

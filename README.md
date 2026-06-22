@@ -135,6 +135,7 @@ These plugins are maintained by GoCodeAlone as core platform capabilities, but a
 | [erp](./plugins/erp/manifest.json) | Enterprise ERP integration via OData v4 with SAP adapter |
 | [github](./plugins/github/manifest.json) | GitHub integration plugin: webhook handling, GitHub Actions, PRs, issues, releases, and deployments |
 | [payments](./plugins/payments/manifest.json) | Multi-provider payment processing plugin (Stripe, PayPal) |
+| [portfolio](./plugins/portfolio/manifest.json) | Cross-repo portfolio catalog generator — wfctl portfolio scan\|status for the GoCodeAlone org. Scans repos (git + gh + capability/inventory) into a living catalog (docs/PORTFOLIO.md) + follow-up queue + tooling inventory. CLI-only plugin (no host/gRPC protocol). |
 | [sso](./plugins/sso/manifest.json) | Enterprise SSO via OpenID Connect with multi-provider support |
 | [tofu](./plugins/tofu/manifest.json) | OpenTofu/Terraform adapter: HCL generation from abstract infra specs, plan/apply execution, and state import/export |
 | [vectorstore](./plugins/vectorstore/manifest.json) | Vector database integration for RAG pipelines with Pinecone support |
