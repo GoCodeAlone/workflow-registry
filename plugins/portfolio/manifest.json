@@ -18,26 +18,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "88a50995e2d4d0402af22298f21628a5f8206b9d3f3e1d71ef447b9eba8dc2cd",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.1.1/workflow-plugin-portfolio-darwin-amd64.tar.gz"
+      "sha256": "6e10cbfba57f9a11a9103e3699d5d73666b9c86f6aee09c1eb570c1a7d950bb8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.2.0/workflow-plugin-portfolio-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "307d90a0b38e0746540773590b47afd901c050eb44773509198fec4dd8427054",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.1.1/workflow-plugin-portfolio-darwin-arm64.tar.gz"
+      "sha256": "929c4e9c3e2dfd9544c02492d8a9cd134cd5243d200d2e0663ab7527a3a6d29e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.2.0/workflow-plugin-portfolio-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "61157bf4e9114beef3f9b5058afea8c6f6781167bc75f6e17da1de4d9c4bdba8",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.1.1/workflow-plugin-portfolio-linux-amd64.tar.gz"
+      "sha256": "377bc115e1001936f45a3deb47b48fa809864ede158f22cf1c0e7e2f925d86ce",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.2.0/workflow-plugin-portfolio-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "7c54b733a2ad0cac31c58b28de6db37dddf65d3a99f04726229c2bfd89616bca",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.1.1/workflow-plugin-portfolio-linux-arm64.tar.gz"
+      "sha256": "ddacdeb8bac4458110ff7e2c68ab447b5a1ba637231e3e2e2f4e1c976f97d83d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-portfolio/releases/download/v0.2.0/workflow-plugin-portfolio-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-portfolio",
@@ -56,5 +56,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "external",
-  "version": "0.1.1"
+  "version": "0.2.0"
 }
