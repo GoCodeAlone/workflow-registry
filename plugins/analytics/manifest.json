@@ -31,7 +31,7 @@
       {
         "name": "analytics",
         "description": "Inject analytics and tag-manager snippets into rendered HTML",
-        "flags_passthrough": true,
+        "flagsPassthrough": true,
         "subcommands": [
           {
             "name": "inject",

@@ -80,7 +80,7 @@
             "description": "Ensure a tenant schema exists in the database"
           }
         ],
-        "flags_passthrough": true
+        "flagsPassthrough": true
       }
     ],
     "buildHooks": []
