@@ -95,7 +95,6 @@ These plugins ship in the `GoCodeAlone/workflow` engine and are available withou
 | [docmanager](./plugins/docmanager/manifest.json) | Markdown documentation management HTTP API (documents and categories), provided as a built-in native plugin |
 | [eventstore](./plugins/eventstore/manifest.json) | Event store service module for execution event persistence |
 | [featureflags](./plugins/featureflags/manifest.json) | Feature flag service module and pipeline steps (feature_flag, ff_gate) |
-| [gitlab](./plugins/gitlab/manifest.json) | GitLab CI integration: webhook receiver (gitlab.webhook), API client (gitlab.client), pipeline trigger/status steps, and MR management steps. |
 | [http](./plugins/http/manifest.json) | HTTP server, router, handlers, middleware, proxy, and static file serving |
 | [infra](./plugins/infra/manifest.json) | Abstract infra.* module types with IaCProvider delegation |
 | [integration](./plugins/integration/manifest.json) | Integration workflow handler for connector-based multi-system workflows |
@@ -110,7 +109,6 @@ These plugins ship in the `GoCodeAlone/workflow` engine and are available withou
 | [pipelinesteps](./plugins/pipelinesteps/manifest.json) | Generic pipeline step types, pre-processing validators, and pipeline workflow handler (including base64_decode) |
 | [platform](./plugins/platform/manifest.json) | Platform infrastructure modules, workflow handler, reconciliation trigger, and template step |
 | [policy](./plugins/policy/manifest.json) | Policy engine plugin with mock backend for testing and development |
-| [scanner](./plugins/scanner/manifest.json) | Security scanner provider with pluggable backends |
 | [scheduler](./plugins/scheduler/manifest.json) | Scheduler workflow handler and schedule trigger for cron-based job execution |
 | [secrets](./plugins/secrets/manifest.json) | Secrets management modules (Vault, AWS Secrets Manager, OS Keychain) |
 | [statemachine](./plugins/statemachine/manifest.json) | State machine engine, tracker, connector modules and workflow handler |
