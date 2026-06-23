@@ -20,9 +20,7 @@
     "spa"
   ],
   "capabilities": {
-    "moduleTypes": [
-      "static.fileserver"
-    ],
+    "moduleTypes": [],
     "stepTypes": [],
     "triggerTypes": [],
     "workflowHandlers": []
