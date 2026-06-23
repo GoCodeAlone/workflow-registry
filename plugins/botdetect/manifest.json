@@ -1,0 +1,81 @@
+{
+  "name": "workflow-plugin-botdetect",
+  "version": "0.2.6",
+  "author": "GoCodeAlone",
+  "description": "Behavioral analysis for bot detection: timing, entropy, session patterns, replay scanning",
+  "source": "github.com/GoCodeAlone/workflow-plugin-botdetect",
+  "type": "external",
+  "tier": "community",
+  "license": "Proprietary",
+  "private": true,
+  "minEngineVersion": "0.51.7",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-botdetect",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-botdetect",
+  "keywords": [
+    "botdetect",
+    "anti-cheat",
+    "games",
+    "moderation",
+    "behavioral-analysis"
+  ],
+  "dependencies": [
+    {
+      "name": "workflow-plugin-gameserver",
+      "minVersion": "0.0.0"
+    },
+    {
+      "name": "workflow-plugin-moderation",
+      "minVersion": "0.0.0"
+    }
+  ],
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [
+      "botdetect.engine"
+    ],
+    "stepTypes": [
+      "step.botdetect_timing_extract",
+      "step.botdetect_entropy_extract",
+      "step.botdetect_session_record",
+      "step.botdetect_session_analyze",
+      "step.botdetect_scan_game",
+      "step.botdetect_scan_player",
+      "step.botdetect_scan_recent",
+      "step.botdetect_score_player",
+      "step.botdetect_emit_flags",
+      "step.botdetect_review_queue_add",
+      "step.botdetect_review_queue_get",
+      "step.botdetect_flag_dismiss",
+      "step.botdetect_flag_confirm"
+    ],
+    "triggerTypes": []
+  },
+  "status": "experimental",
+  "category": "security",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "47403a81a2cd2d4e1f3b8daed4bcc4c31b592da60f61d852c76cbb0927fb715c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-botdetect/releases/download/v0.2.6/workflow-plugin-botdetect-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "be80c09fc3845a4c1e110e05041dadeaa584ee67243bbb6f126000204b7d2b63",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-botdetect/releases/download/v0.2.6/workflow-plugin-botdetect-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "2d2c18c36f6e5078ebdd91db81958f0b5cb24d4fb011adf755859bd2e2deb95e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-botdetect/releases/download/v0.2.6/workflow-plugin-botdetect-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "c58e9146266099bfb3b1eef4e6ea211fc5d1360c5f2f58d976a80c7575b5acca",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-botdetect/releases/download/v0.2.6/workflow-plugin-botdetect-linux-arm64.tar.gz"
+    }
+  ]
+}

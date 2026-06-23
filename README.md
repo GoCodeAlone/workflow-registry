@@ -155,6 +155,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [authz-ui](./plugins/authz-ui/manifest.json) | Casbin authorization policy management UI (React SPA) | premium |
 | [aws](./plugins/aws/manifest.json) | AWS provider plugin for workflow IaC — manages ECS, EKS, RDS, ElastiCache, VPC, ALB, Route53, ECR, API Gateway, Security Groups, IAM, S3, and ACM resources | community |
 | [azure](./plugins/azure/manifest.json) | Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates | community |
+| [botdetect](./plugins/botdetect/manifest.json) | Behavioral analysis for bot detection: timing, entropy, session patterns, replay scanning | community |
 | [broker](./plugins/broker/manifest.json) | External plugin for the workflow engine. | community |
 | [cloud-ui](./plugins/cloud-ui/manifest.json) | Cloud management UI plugin (React SPA) | premium |
 | [cloudflare](./plugins/cloudflare/manifest.json) | Cloudflare DNS provider for workflow IaC (infra.dns) | community |
@@ -162,13 +163,14 @@ These plugins are distributed outside the engine repository and are maintained a
 | [datadog](./plugins/datadog/manifest.json) | Datadog monitoring and observability — metrics, events, monitors, dashboards, logs, synthetics, SLOs, incidents, and more | community |
 | [digitalocean](./plugins/digitalocean/manifest.json) | DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway | community |
 | [discord](./plugins/discord/manifest.json) | Discord messaging, bot automation, and voice channel support. Provides a provider module, pipeline steps for sending/editing/deleting messages and managing voice, and a WebSocket Gateway event trigger. | community |
-| [edge-compute](./plugins/edge-compute/manifest.json) | Edge WASM provider contracts for workflow-compute | community |
+| [edge-compute](./plugins/edge-compute/manifest.json) | Reusable Edge WASM provider contracts for workflow-compute and compatible edge runtimes | community |
 | [entra](./plugins/entra/manifest.json) | Microsoft Entra ID management provider plugin | community |
 | [eventbus](./plugins/eventbus/manifest.json) | Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations. | community |
 | [gcp](./plugins/gcp/manifest.json) | GCP infrastructure provider plugin for workflow — manages Cloud Run, GKE, Cloud SQL, Memorystore, VPC, Load Balancer, Cloud DNS, Artifact Registry, API Gateway, Firewall, IAM, GCS, and Certificate Manager | community |
 | [hover](./plugins/hover/manifest.json) | Hover DNS provider for workflow IaC (infra.dns). No official API; mimics the browser-side username+password+TOTP login flow used by pjslauta/hover-dyn-dns. | community |
 | [launchdarkly](./plugins/launchdarkly/manifest.json) | LaunchDarkly feature management — flags, segments, environments, projects, metrics, experiments, approvals, audit log, and more | community |
 | [messaging-core](./plugins/messaging-core/manifest.json) | Shared messaging interfaces for workflow platform plugins | community |
+| [moderation](./plugins/moderation/manifest.json) | Trust and safety for game platforms: reputation, bans, text and voice moderation, and admin workflows | community |
 | [monday](./plugins/monday/manifest.json) | Comprehensive monday.com integration — boards, items, columns, groups, workspaces, and all resources via GraphQL | community |
 | [namecheap](./plugins/namecheap/manifest.json) | Namecheap DNS provider for workflow IaC (infra.dns) backed by the official go-namecheap-sdk. | community |
 | [okta](./plugins/okta/manifest.json) | Okta identity and access management — users, groups, applications, authorization servers, MFA, policies, and more | community |
@@ -184,6 +186,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [steam](./plugins/steam/manifest.json) | External plugin for the workflow engine. | community |
 | [teams](./plugins/teams/manifest.json) | Microsoft Teams messaging and channel management via the Microsoft Graph API. Provides a provider module with Azure AD client credentials auth, pipeline steps for messages/cards/channels/members, and an HTTP webhook trigger for Graph change notifications. | community |
 | [template](./plugins/template/manifest.json) | Template repository for creating workflow engine external plugins | community |
+| [tournament](./plugins/tournament/manifest.json) | Tournament management plugin with bracket engines, scheduling, and prize distribution | community |
 | [turnio](./plugins/turnio/manifest.json) | turn.io WhatsApp API integration — messaging, contacts, templates, flows, and journeys | community |
 | [twilio](./plugins/twilio/manifest.json) | Comprehensive Twilio integration — SMS, Voice, Verify, Video, Conversations, TaskRouter, and 40+ products | community |
 | [workflow-plugin-atlas-migrate](./plugins/workflow-plugin-atlas-migrate/manifest.json) | Atlas migration driver plugin for the workflow engine | community |
