@@ -1,0 +1,84 @@
+{
+  "name": "workflow-plugin-moderation",
+  "version": "0.1.5",
+  "author": "GoCodeAlone",
+  "description": "Trust and safety for game platforms: reputation, bans, text and voice moderation, and admin workflows",
+  "source": "github.com/GoCodeAlone/workflow-plugin-moderation",
+  "type": "external",
+  "tier": "community",
+  "license": "Proprietary",
+  "private": true,
+  "minEngineVersion": "0.51.7",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-moderation",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-moderation",
+  "keywords": [
+    "moderation",
+    "trust-safety",
+    "games",
+    "voice",
+    "reputation"
+  ],
+  "dependencies": [
+    {
+      "name": "workflow-plugin-websocket",
+      "minVersion": "0.5.0"
+    },
+    {
+      "name": "workflow-plugin-gameserver",
+      "minVersion": "0.27.0"
+    }
+  ],
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [
+      "moderation.engine"
+    ],
+    "stepTypes": [
+      "step.moderation_appeal_resolve",
+      "step.moderation_appeal_submit",
+      "step.moderation_ban_check",
+      "step.moderation_ban_player",
+      "step.moderation_chat_filter",
+      "step.moderation_chat_report",
+      "step.moderation_cheat_evaluate",
+      "step.moderation_cheat_signal",
+      "step.moderation_mute_check",
+      "step.moderation_player_kick",
+      "step.moderation_reputation_get",
+      "step.moderation_reputation_update",
+      "step.moderation_voice_block",
+      "step.moderation_voice_clip_report",
+      "step.moderation_voice_mute",
+      "step.moderation_vote_kick"
+    ],
+    "triggerTypes": []
+  },
+  "status": "experimental",
+  "category": "security",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "ed71b6ef483d8cce67566197f264b293c221d9ff36aa4951d14e6e88b8f0327e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-moderation/releases/download/v0.1.5/workflow-plugin-moderation-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "7dd26b369df54671a8eff89930ae9d0587fa5f082513e48587d621e508a3363b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-moderation/releases/download/v0.1.5/workflow-plugin-moderation-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "2a78f0085de0e7780bb0e6e791da553954adbf6da0c2e33076fd85e85c4320ff",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-moderation/releases/download/v0.1.5/workflow-plugin-moderation-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "1be597362e08012524a6794bb5382f60f707fb686cfe8089aaec60d56756f191",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-moderation/releases/download/v0.1.5/workflow-plugin-moderation-linux-arm64.tar.gz"
+    }
+  ]
+}
