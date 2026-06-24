@@ -24,26 +24,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "b61bbb867a5fee4f829cf220d87ad35d0cffa482304d75511e0acc89f38e05b4",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.11/workflow-plugin-authz-darwin-amd64.tar.gz"
+      "sha256": "db72004a7d2c1595b4d3e6b9f3c7590f746572a40ca35b42a53037033bc67016",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.13/workflow-plugin-authz-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "ab0a137a4e7cf59ccb836c66a337dde8132d438d0940d9aa0ec612675b765802",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.11/workflow-plugin-authz-darwin-arm64.tar.gz"
+      "sha256": "df246ebd90836d8081321fe1be6f5316470fd3ab655a5ba95a24648cd594f78e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.13/workflow-plugin-authz-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "9d7ed36a37487661ad5e1fb79adcf14356e07e20fc64776f783dddab420c80b8",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.11/workflow-plugin-authz-linux-amd64.tar.gz"
+      "sha256": "9cde2bdd5000e5708aa98a66b5e462e6d2d925de6b3d50918d5f706e937b502f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.13/workflow-plugin-authz-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "74cda186e43efe2c5945879596870965dbfdc146aa6baad8b45e9bbb5c10fcbe",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.11/workflow-plugin-authz-linux-arm64.tar.gz"
+      "sha256": "7e1ce2cb5fff8895d5b2f0079b592392d32d609d6d8d101d3d21841459d2e900",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz/releases/download/v0.5.13/workflow-plugin-authz-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-authz",
@@ -62,5 +62,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "external",
-  "version": "0.5.11"
+  "version": "0.5.13"
 }
