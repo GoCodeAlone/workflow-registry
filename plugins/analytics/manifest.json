@@ -1,23 +1,23 @@
 {
-  "name": "workflow-plugin-analytics",
-  "version": "0.1.3",
-  "description": "Analytics and tag-manager injection for rendered HTML assets",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.57.4",
-  "keywords": [
-    "analytics",
-    "google-analytics",
-    "google-tag-manager",
-    "html",
-    "tags"
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
   "capabilities": {
+    "cliCommands": [
+      {
+        "description": "Inject analytics and tag-manager snippets into rendered HTML",
+        "flagsPassthrough": true,
+        "name": "analytics",
+        "subcommands": [
+          {
+            "description": "Inject provider snippet into HTML files",
+            "name": "inject"
+          },
+          {
+            "description": "Ensure Google Analytics and Google Tag Manager resources",
+            "name": "google"
+          }
+        ]
+      }
+    ],
     "moduleTypes": [
       "analytics.google_provider"
     ],
@@ -26,57 +26,63 @@
       "step.analytics_google_ga4_ensure",
       "step.analytics_google_gtm_ensure"
     ],
-    "triggerTypes": [],
-    "cliCommands": [
-      {
-        "name": "analytics",
-        "description": "Inject analytics and tag-manager snippets into rendered HTML",
-        "flagsPassthrough": true,
-        "subcommands": [
-          {
-            "name": "inject",
-            "description": "Inject provider snippet into HTML files"
-          },
-          {
-            "name": "google",
-            "description": "Ensure Google Analytics and Google Tag Manager resources"
-          }
-        ]
-      }
-    ]
+    "triggerTypes": []
   },
+  "category": "integrations",
+  "description": "Analytics and tag-manager injection for rendered HTML assets",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "55ca8644437ec7947e9f5b46b467fcad9917207ab17a75e64808140029a3be80",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.3/workflow-plugin-analytics-darwin-amd64.tar.gz"
+      "sha256": "317a67419320c0585cda8cc34910da928a9ba997642f2740d5dd33e851a603d9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.4/workflow-plugin-analytics-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "d5b24e998dba1d19f758c699a4a9795cc08ccffb5210725bec75e65b7d48a0ef",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.3/workflow-plugin-analytics-darwin-arm64.tar.gz"
+      "sha256": "3a9f752733e59f1592e2125ed5f4914acfb8e4e38cec32dd000444bb852790dc",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.4/workflow-plugin-analytics-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "9b19bf3481f6d561ce5da467f87328ccd21079045ccab661a551915e91d03067",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.3/workflow-plugin-analytics-linux-amd64.tar.gz"
+      "sha256": "920fe1ddd7a9648cdf16bfc767d6760ceeeb7a1639947ed23019ec22454bec7e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.4/workflow-plugin-analytics-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "25e2654f74da6601ec39dc2c246a41c36b9681b7bf9ee63c48431acf6120d29e",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.3/workflow-plugin-analytics-linux-arm64.tar.gz"
+      "sha256": "9e3412fad7cfb2dcdc63bcf7c86e2f689f2fa2f952b31aff471553f8de3bbc99",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.4/workflow-plugin-analytics-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "ca600a320061c85aa777f8de4bb6235c36a10a9cbb5744f06d31fd809018c9ca",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.3/workflow-plugin-analytics-windows-amd64.tar.gz"
+      "sha256": "23b98ec60479f52e230bac9a9bad37c2c82e64fc1f8984f032e0ff9deb7e291b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.4/workflow-plugin-analytics-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "ff3abaac26ad1ef19d15c33dba2151d1f1d3f679528a2d38d21e771a282a0c5b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.4/workflow-plugin-analytics-windows-arm64.tar.gz"
     }
   ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
+  "keywords": [
+    "analytics",
+    "google-analytics",
+    "google-tag-manager",
+    "html",
+    "tags"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.57.4",
+  "name": "workflow-plugin-analytics",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
   "status": "verified",
-  "category": "integrations"
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.4"
 }
