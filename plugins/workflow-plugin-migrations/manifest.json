@@ -5,7 +5,7 @@
     "cliCommands": [
       {
         "description": "Run and inspect database migrations",
-        "flags_passthrough": true,
+        "flagsPassthrough": true,
         "name": "db-migrate",
         "subcommands": [
           {

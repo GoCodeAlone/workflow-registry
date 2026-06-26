@@ -4,7 +4,7 @@
     "cliCommands": [
       {
         "description": "Validate and inspect product capture provider requests",
-        "flags_passthrough": true,
+        "flagsPassthrough": true,
         "name": "product-capture",
         "subcommands": [
           {
