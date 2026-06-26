@@ -14,7 +14,7 @@
 #   - Top-level properties of the schema
 #   - capabilities.* direct children
 #   - capabilities.iacProvider.* (name, resourceTypes, supportedCanonicalKeys)
-#   - capabilities.cliCommands.items.* (name, description, flagsPassthrough, subcommands)
+#   - capabilities.cliCommands.items.* (name, description, flagsPassthrough, flags_passthrough, subcommands)
 #   - capabilities.cliCommands.subcommands.items.* (name, description) — added round 2 per Copilot
 #   - iacProvider.* (top-level — name, resourceTypes, computePlanVersion)
 #   - assets.* (ui, config) — added round 2 per Copilot

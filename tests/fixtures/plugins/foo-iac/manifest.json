@@ -29,7 +29,7 @@
       {
         "name": "foo",
         "description": "Manage foo DNS",
-        "flagsPassthrough": true,
+        "flags_passthrough": true,
         "subcommands": [
           {
             "name": "sync",

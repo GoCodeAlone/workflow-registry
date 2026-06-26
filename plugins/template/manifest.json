@@ -2,17 +2,8 @@
   "author": "GoCodeAlone",
   "capabilities": {
     "configProvider": false,
-    "iacProvider": {
-      "resourceTypes": [
-        "TEMPLATE.resource"
-      ]
-    },
-    "moduleTypes": [
-      "TEMPLATE.module"
-    ],
-    "stepTypes": [
-      "TEMPLATE.step"
-    ],
+    "moduleTypes": [],
+    "stepTypes": [],
     "triggerTypes": []
   },
   "category": "core",

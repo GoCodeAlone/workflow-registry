@@ -148,6 +148,10 @@
                 "type": "boolean",
                 "description": "When true, wfctl passes all flags through to the plugin binary"
               },
+              "flags_passthrough": {
+                "type": "boolean",
+                "description": "Legacy spelling for flagsPassthrough emitted by older plugin manifests"
+              },
               "subcommands": {
                 "type": "array",
                 "items": {
