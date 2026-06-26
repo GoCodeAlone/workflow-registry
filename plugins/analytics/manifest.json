@@ -1,23 +1,23 @@
 {
-  "name": "workflow-plugin-analytics",
-  "version": "0.1.3",
-  "description": "Analytics and tag-manager injection for rendered HTML assets",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.57.4",
-  "keywords": [
-    "analytics",
-    "google-analytics",
-    "google-tag-manager",
-    "html",
-    "tags"
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
   "capabilities": {
+    "cliCommands": [
+      {
+        "description": "Inject analytics and tag-manager snippets into rendered HTML",
+        "flags_passthrough": true,
+        "name": "analytics",
+        "subcommands": [
+          {
+            "description": "Inject provider snippet into HTML files",
+            "name": "inject"
+          },
+          {
+            "description": "Ensure Google Analytics and Google Tag Manager resources",
+            "name": "google"
+          }
+        ]
+      }
+    ],
     "moduleTypes": [
       "analytics.google_provider"
     ],
@@ -26,25 +26,10 @@
       "step.analytics_google_ga4_ensure",
       "step.analytics_google_gtm_ensure"
     ],
-    "triggerTypes": [],
-    "cliCommands": [
-      {
-        "name": "analytics",
-        "description": "Inject analytics and tag-manager snippets into rendered HTML",
-        "flagsPassthrough": true,
-        "subcommands": [
-          {
-            "name": "inject",
-            "description": "Inject provider snippet into HTML files"
-          },
-          {
-            "name": "google",
-            "description": "Ensure Google Analytics and Google Tag Manager resources"
-          }
-        ]
-      }
-    ]
+    "triggerTypes": []
   },
+  "category": "integrations",
+  "description": "Analytics and tag-manager injection for rendered HTML assets",
   "downloads": [
     {
       "arch": "amd64",
@@ -77,6 +62,21 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-analytics/releases/download/v0.1.3/workflow-plugin-analytics-windows-amd64.tar.gz"
     }
   ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
+  "keywords": [
+    "analytics",
+    "google-analytics",
+    "google-tag-manager",
+    "html",
+    "tags"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.57.4",
+  "name": "workflow-plugin-analytics",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-analytics",
   "status": "verified",
-  "category": "integrations"
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.3"
 }
