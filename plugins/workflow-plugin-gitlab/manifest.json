@@ -79,7 +79,7 @@
     "integration"
   ],
   "license": "MIT",
-  "minEngineVersion": "0.53.0",
+  "minEngineVersion": "0.83.0",
   "name": "workflow-plugin-gitlab",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-gitlab",
   "required_secrets": [

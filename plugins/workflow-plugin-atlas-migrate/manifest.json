@@ -1,54 +1,172 @@
 {
-  "name": "workflow-plugin-atlas-migrate",
-  "version": "0.3.10",
-  "description": "Atlas migration driver plugin for the workflow engine",
   "author": "GoCodeAlone",
-  "license": "Apache-2.0",
-  "type": "external",
-  "tier": "community",
-  "minEngineVersion": "0.80.24",
+  "capabilities": {
+    "buildHooks": [],
+    "cliCommands": [
+      {
+        "description": "Run and inspect database migrations",
+        "flagsPassthrough": true,
+        "name": "db-migrate",
+        "subcommands": [
+          {
+            "description": "Apply all pending migrations",
+            "name": "up"
+          },
+          {
+            "description": "Roll back migrations",
+            "name": "down"
+          },
+          {
+            "description": "Show migration status",
+            "name": "status"
+          },
+          {
+            "description": "Migrate to a specific version",
+            "name": "goto"
+          },
+          {
+            "description": "Force-set the recorded migration version",
+            "name": "force"
+          },
+          {
+            "description": "Repair a known dirty migration metadata state",
+            "name": "repair-dirty"
+          },
+          {
+            "description": "Validate a candidate migration directory against a baseline",
+            "name": "validate-upgrade"
+          },
+          {
+            "description": "Static analysis for migration files",
+            "name": "lint"
+          },
+          {
+            "description": "Run full-cycle and checkpoint migration tests",
+            "name": "test"
+          },
+          {
+            "description": "Ensure a tenant schema exists in the database",
+            "name": "tenant-ensure"
+          }
+        ]
+      }
+    ],
+    "configProvider": false,
+    "migrationDrivers": [
+      "golang-migrate",
+      "goose"
+    ],
+    "moduleTypes": [
+      "database.migrations",
+      "database.migration_driver"
+    ],
+    "stepTypes": [
+      "step.migrate_up",
+      "step.migrate_down",
+      "step.migrate_status",
+      "step.migrate_to"
+    ],
+    "triggerTypes": []
+  },
+  "category": "data",
+  "description": "Atlas migration driver plugin for the workflow engine",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "f777262dcaa897174458be211da1117327cf5dd9c3093f719e5852a253cef703",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-migrate-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "88412be1c0a30dc4f1132c387754ca58ff066d6e935c688a34116531964a7550",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-migrate-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "4e86009fadf24af5c2a5af142bb5d5fc0b21c01fc9c56bd0f97972202e9b4df6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-migrate-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "fd589260bca2eaa7275bff3f29a3203155c65a07939abda2e070468c2f08af57",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-migrate-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "490005c3bc7105d8b16c2b25742d591f6255ffedf3e14727020eb8c54c8c0099",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-atlas-migrate-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "be3e32c997fa951f5497b54aec4f3e642b6fa1c808214d34d968dcd3122d4460",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-atlas-migrate-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "7e8e11b614bcaae8491da436f17d4c966164cfd659a0061a1a491f76c23cb3a6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-atlas-migrate-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "edefa0f0fe66ab317c647f7aee391355dcc9d7005b714e4bb3601e23e64de34b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-atlas-migrate-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "58085a2eedf85efa2ba36bd5a48063181fa65018878562afcebbc4719d32ea07",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-migrations-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "b75d5999a6e467a79fb340da3f7d078cb9101c4ebdb77afbb3a2f6c841d6d58f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-migrations-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "c2f07854a6e37b1e85867aa696b3012154acaccb24c9b4d268b273d34b3659ed",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-migrations-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "8a9365ea467159645fe903053ab057c0d99ed03b7e8953ebba733885f1bafe20",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-migrations-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "b62e93333afb6e641eb8c860d67780d7fe0ca8c16ad39469c18562d5333c2996",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-migrations-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "a946dde708644c75a9228da6a08b8953d7e3a4b381ffba154d5b72250486f8aa",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.12/workflow-plugin-migrations-windows-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-migrations",
   "keywords": [
     "migrations",
     "database",
     "atlas"
   ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-migrations",
+  "license": "Apache-2.0",
+  "minEngineVersion": "0.80.24",
+  "name": "workflow-plugin-atlas-migrate",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-migrations",
-  "capabilities": {
-    "configProvider": false,
-    "moduleTypes": [
-      "database.migrations",
-      "database.migration_driver"
-    ],
-    "stepTypes": [],
-    "triggerTypes": [],
-    "migrationDrivers": [
-      "atlas"
-    ],
-    "cliCommands": [],
-    "buildHooks": []
-  },
-  "downloads": [
-    {
-      "os": "linux",
-      "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-atlas-migrate-linux-amd64.tar.gz"
-    },
-    {
-      "os": "linux",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-atlas-migrate-linux-arm64.tar.gz"
-    },
-    {
-      "os": "darwin",
-      "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-atlas-migrate-darwin-amd64.tar.gz"
-    },
-    {
-      "os": "darwin",
-      "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.3.10/workflow-plugin-atlas-migrate-darwin-arm64.tar.gz"
-    }
-  ],
-  "category": "data"
+  "tier": "community",
+  "type": "external",
+  "version": "0.3.12"
 }

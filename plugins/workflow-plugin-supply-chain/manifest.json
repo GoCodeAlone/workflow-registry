@@ -34,7 +34,7 @@
     "cliCommands": [
       {
         "description": "Supply-chain verification and SBOM commands",
-        "flagsPassthrough": true,
+        "flags_passthrough": true,
         "name": "supply-chain",
         "subcommands": [
           {
@@ -57,7 +57,7 @@
       },
       {
         "description": "Scaffold supply-chain config into app.yaml and CI",
-        "flagsPassthrough": true,
+        "flags_passthrough": true,
         "name": "scaffold",
         "subcommands": [
           {
@@ -72,7 +72,7 @@
       },
       {
         "description": "CI preflight and doctor commands",
-        "flagsPassthrough": true,
+        "flags_passthrough": true,
         "name": "ci",
         "subcommands": [
           {
