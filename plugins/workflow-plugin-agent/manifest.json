@@ -1,0 +1,45 @@
+{
+  "name": "workflow-plugin-agent",
+  "version": "0.9.2",
+  "author": "GoCodeAlone",
+  "description": "AI agent primitives for workflow apps — provider abstraction (multi-model), execution loop, tool registry, model pull/test",
+  "source": "github.com/GoCodeAlone/workflow-plugin-agent",
+  "type": "external",
+  "tier": "core",
+  "license": "Proprietary",
+  "private": true,
+  "minEngineVersion": "0.3.11",
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-agent",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-agent",
+  "keywords": [
+    "agent",
+    "ai",
+    "llm",
+    "provider",
+    "memory",
+    "tools",
+    "executor",
+    "autonomous",
+    "loop-detection",
+    "orchestration",
+    "mcp",
+    "sse",
+    "approvals",
+    "jwt",
+    "bcrypt"
+  ],
+  "capabilities": {
+    "moduleTypes": [
+      "agent.provider"
+    ],
+    "stepTypes": [
+      "step.agent_execute",
+      "step.provider_test",
+      "step.provider_models",
+      "step.model_pull"
+    ],
+    "triggerTypes": [],
+    "workflowHandlers": []
+  },
+  "category": "ai"
+}
