@@ -43,7 +43,6 @@
       "security.encryption.aws-kms",
       "security.encryption.gcp-kms",
       "security.encryption.vault-transit",
-      "authz.casbin",
       "permit.provider",
       "data.pii",
       "data.pii.gcp-dlp",

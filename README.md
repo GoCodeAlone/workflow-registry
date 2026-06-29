@@ -83,7 +83,6 @@ These plugins ship in the `GoCodeAlone/workflow` engine and are available withou
 |--------|-------------|
 | [actors](./plugins/actors/manifest.json) | Actor model support with goakt v4 |
 | [admincore](./plugins/admincore/manifest.json) | Core admin-console UI navigation pages, provided as a built-in native plugin |
-| [agent](./plugins/agent/manifest.json) | AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection, orchestration (SSE hub, scheduler, MCP client/server, approvals, sub-agents, webhooks, security auditing, JWT, bcrypt, OAuth) |
 | [ai](./plugins/ai/manifest.json) | AI pipeline steps (complete, classify, extract), dynamic components, and sub-workflow orchestration |
 | [api](./plugins/api/manifest.json) | REST API handlers, CQRS query/command, API gateway, and data transformation |
 | [auth](./plugins/auth/manifest.json) | JWT authentication, OAuth2, user store, and auth middleware wiring |
@@ -138,6 +137,7 @@ These plugins are maintained by GoCodeAlone as core platform capabilities, but a
 | [tofu](./plugins/tofu/manifest.json) | OpenTofu/Terraform adapter: HCL generation from abstract infra specs, plan/apply execution, and state import/export |
 | [vectorstore](./plugins/vectorstore/manifest.json) | Vector database integration for RAG pipelines with Pinecone support |
 | [websocket](./plugins/websocket/manifest.json) | General-purpose WebSocket support — rooms, broadcast, send, close |
+| [workflow-plugin-agent](./plugins/workflow-plugin-agent/manifest.json) | AI agent primitives for workflow apps — provider abstraction (multi-model), execution loop, tool registry, model pull/test |
 | [workflow-plugin-auth](./plugins/workflow-plugin-auth/manifest.json) | Passwordless authentication plugin: WebAuthn/passkeys, TOTP, email magic links |
 | [workflow-plugin-supply-chain](./plugins/workflow-plugin-supply-chain/manifest.json) | Supply chain security: SBOM generation, keyless signing, SLSA provenance, vulnerability scanning, and wfctl CLI extensions |
 
