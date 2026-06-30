@@ -48,6 +48,18 @@ case "${event_name}" in
 esac
 
 if [[ -n "${plugin}" ]]; then
+  if [[ "${plugin}" == */* ]]; then
+    owner="${plugin%/*}"
+    repo="${plugin##*/}"
+    if [[ -z "${owner}" || -z "${repo}" || "${owner}" == */* || "${owner}" == "." || "${owner}" == ".." || ! "${owner}" =~ ^[A-Za-z0-9._-]+$ ]]; then
+      warn "plugin repository slug must be owner/repo; skipping"
+      emit "skip" "1"
+      emit "plugin" ""
+      exit 0
+    fi
+    plugin="${repo}"
+  fi
+
   if [[ "${plugin}" == "." || "${plugin}" == ".." ]]; then
     warn "plugin-name '.'/'..' rejected (path traversal attempt); skipping"
     emit "skip" "1"

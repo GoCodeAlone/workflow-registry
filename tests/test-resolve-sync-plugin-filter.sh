@@ -8,7 +8,8 @@ trap 'rm -rf "${tmp}"' EXIT
 
 mkdir -p "${tmp}/plugins/auth" \
   "${tmp}/plugins/workflow-plugin-auth" \
-  "${tmp}/plugins/admin"
+  "${tmp}/plugins/admin" \
+  "${tmp}/plugins/workflow-plugin-signal"
 
 cat > "${tmp}/plugins/auth/manifest.json" <<'JSON'
 {"name":"auth","repository":"https://github.com/GoCodeAlone/workflow"}
@@ -18,6 +19,9 @@ cat > "${tmp}/plugins/workflow-plugin-auth/manifest.json" <<'JSON'
 JSON
 cat > "${tmp}/plugins/admin/manifest.json" <<'JSON'
 {"name":"admin","repository":"https://github.com/GoCodeAlone/workflow-plugin-admin"}
+JSON
+cat > "${tmp}/plugins/workflow-plugin-signal/manifest.json" <<'JSON'
+{"name":"workflow-plugin-signal","repository":"https://github.com/GoCodeAlone/workflow-plugin-signal"}
 JSON
 
 run_case() {
@@ -53,6 +57,10 @@ assert_contains "${out}" "skip=0"
 
 out="$(run_case repository_dispatch plugin-release workflow-plugin-auth "")"
 assert_contains "${out}" "plugin=workflow-plugin-auth"
+assert_contains "${out}" "skip=0"
+
+out="$(run_case repository_dispatch plugin-release GoCodeAlone/workflow-plugin-signal "")"
+assert_contains "${out}" "plugin=workflow-plugin-signal"
 assert_contains "${out}" "skip=0"
 
 out="$(run_case workflow_dispatch "" "" auth)"
