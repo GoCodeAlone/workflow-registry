@@ -192,6 +192,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [workflow-plugin-signal](./plugins/workflow-plugin-signal/manifest.json) | Signal protocol primitives for Workflow | community |
 | [workflow-plugin-site-onboarding](./plugins/workflow-plugin-site-onboarding/manifest.json) | Dry-run multisite site/domain onboarding planner for Workflow. | community |
 | [workflow-plugin-steam](./plugins/workflow-plugin-steam/manifest.json) | External plugin for the workflow engine. | community |
+| [workflow-plugin-stream](./plugins/workflow-plugin-stream/manifest.json) | Live video ingest, multiplex, and restream via MediaMTX | community |
 | [workflow-plugin-tournament](./plugins/workflow-plugin-tournament/manifest.json) | Tournament management plugin with bracket engines, scheduling, and prize distribution | community |
 | [workflow-plugin-turnio](./plugins/workflow-plugin-turnio/manifest.json) | turn.io WhatsApp API integration — messaging, contacts, templates, flows, and journeys | community |
 | [workflow-plugin-twilio](./plugins/workflow-plugin-twilio/manifest.json) | Comprehensive Twilio integration — SMS, Voice, Verify, Video, Conversations, TaskRouter, and 40+ products | community |

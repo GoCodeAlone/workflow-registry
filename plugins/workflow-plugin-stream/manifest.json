@@ -1,0 +1,58 @@
+{
+  "author": "GoCodeAlone",
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [],
+    "stepTypes": [
+      "stream.start",
+      "stream.restream"
+    ],
+    "triggerTypes": []
+  },
+  "category": "core",
+  "description": "Live video ingest, multiplex, and restream via MediaMTX",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "aa74814a72f3432dc3737668297528e5da914aa7f690b360c8a732501fbad0b8",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.0/workflow-plugin-stream_0.1.0_darwin_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "bc67333233f7d14a00533a5e08710e9f91d41f67e39e577df3f8949e11431d29",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.0/workflow-plugin-stream_0.1.0_darwin_arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "9a5958c9386c2201aa23993b03d096314ea153742caa9d40163696f5eff5987f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.0/workflow-plugin-stream_0.1.0_linux_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "bb84be07477a391852fe7315aa4bd6cf03a0e23b5657a2994acc3c87085fbc5b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.0/workflow-plugin-stream_0.1.0_linux_arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-stream",
+  "keywords": [
+    "compute",
+    "streaming",
+    "video",
+    "mediamtx",
+    "runtime-adapter"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.64.7",
+  "name": "workflow-plugin-stream",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-stream",
+  "source": "github.com/GoCodeAlone/workflow-plugin-stream",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.0"
+}
