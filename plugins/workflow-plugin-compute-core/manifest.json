@@ -12,38 +12,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "7654a8c2ecbbff45c617c37af5344be9c3e88fcbba7c1262c0995774af1b0dd4",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.1/workflow-plugin-compute-core-darwin-amd64.tar.gz"
+      "sha256": "59aba7bbf874fe329fa3092f0adb786b41936a69b339bf535773c509e7bcf777",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.2/workflow-plugin-compute-core-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "9b1deadd26c6448992f4294ff55a5c4058c1413831439872b0c024442451e0b8",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.1/workflow-plugin-compute-core-darwin-arm64.tar.gz"
+      "sha256": "bf6c7fb58a0f5e0f9d2cff5fb1aa5798f26e6bfb060dc7902b124678732c8168",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.2/workflow-plugin-compute-core-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "adb423a8140c6d47b24b90777ff0f394fdbe689c1533312d930a22d5146dbe7f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.1/workflow-plugin-compute-core-linux-amd64.tar.gz"
+      "sha256": "e0e4bd14e07038032f9d3445568e12087794af7008cf337c726c5132a3334965",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.2/workflow-plugin-compute-core-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "6eee750a03cac2af209feb6c1bcd4160c0c6885d26e52d796a77128461955b46",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.1/workflow-plugin-compute-core-linux-arm64.tar.gz"
+      "sha256": "21f42519272834e6875b1cc9a8f30df1073c1f1fe6ac334ca0d78f3257886276",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.2/workflow-plugin-compute-core-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "02032df29234ff2ac26c9aaa9d5d69bb6f0261ad9a8b75234705829709f4a6f9",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.1/workflow-plugin-compute-core-windows-amd64.tar.gz"
+      "sha256": "6a9de55a44b9d0ebd98446cfb5864f55bbf9d06dace4454b3fa76345cfe86240",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.2/workflow-plugin-compute-core-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "df63ea67b99c2759870136d8287af6c3e30186cd9966cc0a4fcc1f313a092b7e",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.1/workflow-plugin-compute-core-windows-arm64.tar.gz"
+      "sha256": "c9fc307934a8b9a0b59181c0b828039cd0e7814e5725aecdf5bf36780d4cff8f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.2/workflow-plugin-compute-core-windows-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute-core",
@@ -60,5 +60,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.8.1"
+  "version": "0.8.2"
 }
