@@ -15,26 +15,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "e11486e28f54907622f2ff53b56fb606ce7833189c4650b306f836fd75dba6b4",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.2/workflow-plugin-stream_0.1.2_darwin_amd64.tar.gz"
+      "sha256": "87980ffe3951767c7176136f0e5e97d04da781804ba023b689a818f195844292",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.3/workflow-plugin-stream_0.1.3_darwin_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "bbaed0a38e3aaedc39f31b855efe6a2c851b0be347ebfa105f8f4e0a30b96c8d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.2/workflow-plugin-stream_0.1.2_darwin_arm64.tar.gz"
+      "sha256": "e21b3010ba0f1ca92441fac6f4c6e775bbe8dd52ae2fbe4610d8b6b5b82474e1",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.3/workflow-plugin-stream_0.1.3_darwin_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "a2e93aa8616f72e8acf35befc055738b31ff6cf776266c614d5ce4d97e685200",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.2/workflow-plugin-stream_0.1.2_linux_amd64.tar.gz"
+      "sha256": "538f833edf0e76cdc7a5cb290ed7378dd9a210e33442825a9a15c41c9900cb66",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.3/workflow-plugin-stream_0.1.3_linux_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "c21708efc648e0a08058330255f0a29d6f6f93492a42788940d4d188ebc4ca11",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.2/workflow-plugin-stream_0.1.2_linux_arm64.tar.gz"
+      "sha256": "ed18f0d846a929c021007d7070656163d1f658c2199b2a57ae8798835c212404",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-stream/releases/download/v0.1.3/workflow-plugin-stream_0.1.3_linux_arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-stream",
@@ -54,5 +54,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }
