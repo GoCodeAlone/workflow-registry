@@ -43,7 +43,6 @@
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-signal",
-  "iacProvider": {},
   "license": "MIT",
   "minEngineVersion": "0.51.7",
   "name": "workflow-plugin-signal",
