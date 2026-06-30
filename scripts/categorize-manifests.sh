@@ -105,6 +105,7 @@ declare -A CATEGORY_MAP=(
   [workflow-plugin-compute]="core"
   [workflow-plugin-gitlab]="integrations"
   [workflow-plugin-migrations]="data"
+  [workflow-plugin-platform]="infrastructure"
   [workflow-plugin-product-capture]="core"
   [workflow-plugin-supply-chain]="security"
   [ws-auth]="messaging"
