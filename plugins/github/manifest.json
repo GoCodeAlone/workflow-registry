@@ -38,38 +38,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "47ac0e48f147f40802f01b41f0d0ca01d8f9a85fc6e8f3af71860019b7bf44a9",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.12/workflow-plugin-github-darwin-amd64.tar.gz"
+      "sha256": "aa563cc1b8ece585b817ba3be112e495bd301db6e40a6a8c0c8f19d5aa4c7837",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.16/workflow-plugin-github-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "9199600b97193bdd3568461ce728eeb241b6f6d164471612ea11fc741dd567e3",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.12/workflow-plugin-github-darwin-arm64.tar.gz"
+      "sha256": "38a70ee3f8640e23712a811daaceacca0438a8073a54f25aa28d211582c61ae3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.16/workflow-plugin-github-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "bb7d677052661dbac3a0acb397ab9f7cbd2956194b0d948a5cb3105be3fe1f68",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.12/workflow-plugin-github-linux-amd64.tar.gz"
+      "sha256": "b7a0f77e61b37c219728435baadec7e70c82eeff1b79e65128211f9fd4fd842e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.16/workflow-plugin-github-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "85cea79dbc8feccc3b34a706bc2d4efedd2176c03a82dba295a4ac811a17b434",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.12/workflow-plugin-github-linux-arm64.tar.gz"
+      "sha256": "1ed95347df86a62c941f457c4a714f77b458f085631f3ea31156e56e9ef054fe",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.16/workflow-plugin-github-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "7e0eaa6c5c21ba7f39eeee281647dada2d513a5d86e859d0892bbb8b3d0caee9",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.12/workflow-plugin-github-windows-amd64.tar.gz"
+      "sha256": "6f08154dc673b6cc04c9e62caa2a74da3fc5d8565fd2b040747af54fd4550227",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.16/workflow-plugin-github-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "5afb232de58d0a5f7cb5ef607d9012200b46cecea266a689975792e3d72e9305",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.12/workflow-plugin-github-windows-arm64.tar.gz"
+      "sha256": "8a0658963eaf19ed88bb36e2a6541a68012c57b99a7747becf2256c9470d2118",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-github/releases/download/v1.0.16/workflow-plugin-github-windows-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-github",
@@ -147,5 +147,5 @@
   "status": "experimental",
   "tier": "core",
   "type": "external",
-  "version": "1.0.12"
+  "version": "1.0.16"
 }
