@@ -1,36 +1,9 @@
 {
-  "name": "security",
-  "version": "2.0.3",
+  "assets": {
+    "config": true,
+    "ui": false
+  },
   "author": "GoCodeAlone",
-  "description": "Unified security plugin: WAF (Coraza/AWS/GCloud/Cloudflare), MFA/encryption (TOTP, AES-256-GCM, AWS KMS, GCP KMS, Vault Transit), authorization (Casbin RBAC, Permit.io), data protection (PII detection/masking), sandbox (WASM/wazero, Docker), and supply-chain security (signatures, vuln scanning, SBOM)",
-  "source": "github.com/GoCodeAlone/workflow-plugin-security",
-  "type": "external",
-  "tier": "premium",
-  "license": "Proprietary",
-  "private": true,
-  "minEngineVersion": "0.53.0",
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-security",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-security",
-  "keywords": [
-    "security",
-    "waf",
-    "coraza",
-    "mfa",
-    "totp",
-    "encryption",
-    "kms",
-    "vault",
-    "authz",
-    "casbin",
-    "rbac",
-    "permit",
-    "pii",
-    "data-protection",
-    "sandbox",
-    "wasm",
-    "supply-chain",
-    "sbom"
-  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -43,6 +16,7 @@
       "security.encryption.aws-kms",
       "security.encryption.gcp-kms",
       "security.encryption.vault-transit",
+      "authz.casbin",
       "permit.provider",
       "data.pii",
       "data.pii.gcp-dlp",
@@ -93,10 +67,8 @@
     ],
     "triggerTypes": []
   },
-  "assets": {
-    "ui": false,
-    "config": true
-  },
+  "category": "security",
+  "description": "Unified security plugin: WAF (Coraza/AWS/GCloud/Cloudflare), MFA/encryption (TOTP, AES-256-GCM, AWS KMS, GCP KMS, Vault Transit), authorization (Casbin RBAC, Permit.io), data protection (PII detection/masking), sandbox (WASM/wazero, Docker), and supply-chain security (signatures, vuln scanning, SBOM)",
   "downloads": [
     {
       "arch": "amd64",
@@ -123,5 +95,34 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.3/workflow-plugin-security-linux-arm64.tar.gz"
     }
   ],
-  "category": "security"
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-security",
+  "keywords": [
+    "security",
+    "waf",
+    "coraza",
+    "mfa",
+    "totp",
+    "encryption",
+    "kms",
+    "vault",
+    "authz",
+    "casbin",
+    "rbac",
+    "permit",
+    "pii",
+    "data-protection",
+    "sandbox",
+    "wasm",
+    "supply-chain",
+    "sbom"
+  ],
+  "license": "Proprietary",
+  "minEngineVersion": "0.53.0",
+  "name": "security",
+  "private": true,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-security",
+  "source": "github.com/GoCodeAlone/workflow-plugin-security",
+  "tier": "premium",
+  "type": "external",
+  "version": "2.0.3"
 }
