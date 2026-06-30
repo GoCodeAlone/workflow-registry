@@ -1,0 +1,56 @@
+{
+  "author": "GoCodeAlone",
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [],
+    "stepTypes": [
+      "step.signal_fingerprint"
+    ],
+    "triggerTypes": []
+  },
+  "category": "core",
+  "description": "Signal protocol primitives for Workflow",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "5dca64da67debd915b285a3eb3cab4f96e28be58c72a39252a43d04ee62f68bc",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.1.0/workflow-plugin-signal-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "991ebe7df2dead9e784ec73fd19572f04c4021c14d840602cf0f21b7b1eef1b7",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.1.0/workflow-plugin-signal-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "27d997f3894b419dff29e6755bd6e2bc10ef8a76b3f24f61b054a00f583e023f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.1.0/workflow-plugin-signal-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "3552661407d31062bb322e7bec5bab042f1c1e75b68959a5257a33a2b2102540",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.1.0/workflow-plugin-signal-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "fdd24c3c620a705ead88f22042211a73740c9a065ba932654aae819028a60947",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.1.0/workflow-plugin-signal-windows-amd64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-signal",
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "workflow-plugin-signal",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-signal",
+  "source": "github.com/GoCodeAlone/workflow-plugin-signal",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.0"
+}

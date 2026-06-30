@@ -188,6 +188,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [workflow-plugin-salesforce](./plugins/workflow-plugin-salesforce/manifest.json) | Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more | community |
 | [workflow-plugin-scalekit](./plugins/workflow-plugin-scalekit/manifest.json) | Scalekit enterprise SSO and Directory Sync provider plugin | community |
 | [workflow-plugin-security-scanner](./plugins/workflow-plugin-security-scanner/manifest.json) | Security scanner plugin for workflow engine — vulnerability scanning, secret detection, and compliance checks | community |
+| [workflow-plugin-signal](./plugins/workflow-plugin-signal/manifest.json) | Signal protocol primitives for Workflow | community |
 | [workflow-plugin-site-onboarding](./plugins/workflow-plugin-site-onboarding/manifest.json) | Dry-run multisite site/domain onboarding planner for Workflow. | community |
 | [workflow-plugin-steam](./plugins/workflow-plugin-steam/manifest.json) | External plugin for the workflow engine. | community |
 | [workflow-plugin-tournament](./plugins/workflow-plugin-tournament/manifest.json) | Tournament management plugin with bracket engines, scheduling, and prize distribution | community |
