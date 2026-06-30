@@ -83,7 +83,6 @@ These plugins ship in the `GoCodeAlone/workflow` engine and are available withou
 |--------|-------------|
 | [actors](./plugins/actors/manifest.json) | Actor model support with goakt v4 |
 | [admincore](./plugins/admincore/manifest.json) | Core admin-console UI navigation pages, provided as a built-in native plugin |
-| [agent](./plugins/agent/manifest.json) | AI agent primitives for workflow apps — provider abstraction, execution loop, tool registry, memory, loop detection, orchestration (SSE hub, scheduler, MCP client/server, approvals, sub-agents, webhooks, security auditing, JWT, bcrypt, OAuth) |
 | [ai](./plugins/ai/manifest.json) | AI pipeline steps (complete, classify, extract), dynamic components, and sub-workflow orchestration |
 | [api](./plugins/api/manifest.json) | REST API handlers, CQRS query/command, API gateway, and data transformation |
 | [auth](./plugins/auth/manifest.json) | JWT authentication, OAuth2, user store, and auth middleware wiring |
@@ -123,23 +122,24 @@ These plugins are maintained by GoCodeAlone as core platform capabilities, but a
 | Plugin | Description |
 |--------|-------------|
 | [admin](./plugins/admin/manifest.json) | Admin dashboard UI and config-driven admin routes with embedded React UI. Provides user management, workflow management, settings, and real-time monitoring. |
-| [approval](./plugins/approval/manifest.json) | Human-in-the-loop approval workflows with state machine |
-| [audit](./plugins/audit/manifest.json) | Compliance audit logging with EventBus collection and S3/database sinks |
 | [authz](./plugins/authz/manifest.json) | RBAC authorization plugin using Casbin |
 | [bento](./plugins/bento/manifest.json) | Stream processing via Bento — 100+ connectors, Bloblang transforms, at-least-once delivery |
-| [ci-generator](./plugins/ci-generator/manifest.json) | CI/CD config generator for GitHub Actions, GitLab CI, Jenkins, and CircleCI |
-| [crm](./plugins/crm/manifest.json) | Vendor-neutral CRM integration with Salesforce adapter |
 | [data-engineering](./plugins/data-engineering/manifest.json) | Data engineering: CDC, lakehouse (Iceberg), time-series (InfluxDB/TimescaleDB/ClickHouse/QuestDB/Druid), graph (Neo4j), data quality, migrations, catalog (DataHub/OpenMetadata) |
-| [erp](./plugins/erp/manifest.json) | Enterprise ERP integration via OData v4 with SAP adapter |
 | [github](./plugins/github/manifest.json) | GitHub integration plugin: webhook handling, GitHub Actions, PRs, issues, releases, and deployments |
-| [payments](./plugins/payments/manifest.json) | Multi-provider payment processing plugin (Stripe, PayPal) |
 | [portfolio](./plugins/portfolio/manifest.json) | Cross-repo portfolio catalog generator — wfctl portfolio scan\|status for the GoCodeAlone org. Scans repos (git + gh + capability/inventory) into a living catalog (docs/PORTFOLIO.md) + follow-up queue + tooling inventory. CLI-only plugin (no host/gRPC protocol). |
-| [sso](./plugins/sso/manifest.json) | Enterprise SSO via OpenID Connect with multi-provider support |
-| [tofu](./plugins/tofu/manifest.json) | OpenTofu/Terraform adapter: HCL generation from abstract infra specs, plan/apply execution, and state import/export |
-| [vectorstore](./plugins/vectorstore/manifest.json) | Vector database integration for RAG pipelines with Pinecone support |
-| [websocket](./plugins/websocket/manifest.json) | General-purpose WebSocket support — rooms, broadcast, send, close |
+| [workflow-plugin-agent](./plugins/workflow-plugin-agent/manifest.json) | AI agent primitives for workflow apps — provider abstraction (multi-model), execution loop, tool registry, model pull/test |
+| [workflow-plugin-approval](./plugins/workflow-plugin-approval/manifest.json) | Human-in-the-loop approval workflows with state machine |
+| [workflow-plugin-audit](./plugins/workflow-plugin-audit/manifest.json) | Compliance audit logging with EventBus collection and S3/database sinks |
 | [workflow-plugin-auth](./plugins/workflow-plugin-auth/manifest.json) | Passwordless authentication plugin: WebAuthn/passkeys, TOTP, email magic links |
+| [workflow-plugin-ci-generator](./plugins/workflow-plugin-ci-generator/manifest.json) | CI/CD config generator for GitHub Actions, GitLab CI, Jenkins, and CircleCI |
+| [workflow-plugin-crm](./plugins/workflow-plugin-crm/manifest.json) | Vendor-neutral CRM integration with Salesforce adapter |
+| [workflow-plugin-erp](./plugins/workflow-plugin-erp/manifest.json) | Enterprise ERP integration via OData v4 with SAP adapter |
+| [workflow-plugin-payments](./plugins/workflow-plugin-payments/manifest.json) | Multi-provider payment processing plugin (Stripe, PayPal) |
+| [workflow-plugin-sso](./plugins/workflow-plugin-sso/manifest.json) | Enterprise SSO via OpenID Connect with multi-provider support |
 | [workflow-plugin-supply-chain](./plugins/workflow-plugin-supply-chain/manifest.json) | Supply chain security: SBOM generation, keyless signing, SLSA provenance, vulnerability scanning, and wfctl CLI extensions |
+| [workflow-plugin-tofu](./plugins/workflow-plugin-tofu/manifest.json) | OpenTofu/Terraform adapter: HCL generation from abstract infra specs, plan/apply execution, and state import/export |
+| [workflow-plugin-vectorstore](./plugins/workflow-plugin-vectorstore/manifest.json) | Vector database integration for RAG pipelines with Pinecone support |
+| [workflow-plugin-websocket](./plugins/workflow-plugin-websocket/manifest.json) | General-purpose WebSocket support — rooms, broadcast, send, close |
 
 ## Community and Premium External Plugins
 
@@ -147,54 +147,54 @@ These plugins are distributed outside the engine repository and are maintained a
 
 | Plugin | Description | Tier |
 |--------|-------------|------|
-| [analytics](./plugins/analytics/manifest.json) | Analytics and tag-manager injection for rendered HTML assets | community |
-| [audit-chain](./plugins/audit-chain/manifest.json) | Tamper-evident hash-chained audit logging with periodic Merkle root anchoring (OpenTimestamps/Bitcoin, git, Sigstore) | community |
-| [auth0](./plugins/auth0/manifest.json) | Auth0 identity and access management provider plugin | community |
 | [authz-ui](./plugins/authz-ui/manifest.json) | Casbin authorization policy management UI (React SPA) | premium |
-| [aws](./plugins/aws/manifest.json) | AWS provider plugin for workflow IaC — manages ECS, EKS, RDS, ElastiCache, VPC, ALB, Route53, ECR, API Gateway, Security Groups, IAM, S3, and ACM resources | community |
-| [azure](./plugins/azure/manifest.json) | Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates | community |
-| [botdetect](./plugins/botdetect/manifest.json) | Behavioral analysis for bot detection: timing, entropy, session patterns, replay scanning | community |
-| [broker](./plugins/broker/manifest.json) | External plugin for the workflow engine. | community |
 | [cloud-ui](./plugins/cloud-ui/manifest.json) | Cloud management UI plugin (React SPA) | premium |
-| [cloudflare](./plugins/cloudflare/manifest.json) | Cloudflare DNS provider for workflow IaC (infra.dns) | community |
-| [cms](./plugins/cms/manifest.json) | Multi-tenant CMS engine — TenantResolver + static-wins routing + WYSIWYG page authoring (TipTap default). Foundation of gocodealone-multisite. | community |
-| [datadog](./plugins/datadog/manifest.json) | Datadog monitoring and observability — metrics, events, monitors, dashboards, logs, synthetics, SLOs, incidents, and more | community |
-| [digitalocean](./plugins/digitalocean/manifest.json) | DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway | community |
 | [discord](./plugins/discord/manifest.json) | Discord messaging, bot automation, and voice channel support. Provides a provider module, pipeline steps for sending/editing/deleting messages and managing voice, and a WebSocket Gateway event trigger. | community |
-| [edge-compute](./plugins/edge-compute/manifest.json) | Reusable Edge WASM provider contracts for workflow-compute and compatible edge runtimes | community |
-| [entra](./plugins/entra/manifest.json) | Microsoft Entra ID management provider plugin | community |
-| [eventbus](./plugins/eventbus/manifest.json) | Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations. | community |
-| [gcp](./plugins/gcp/manifest.json) | GCP infrastructure provider plugin for workflow — manages Cloud Run, GKE, Cloud SQL, Memorystore, VPC, Load Balancer, Cloud DNS, Artifact Registry, API Gateway, Firewall, IAM, GCS, and Certificate Manager | community |
-| [hover](./plugins/hover/manifest.json) | Hover DNS provider for workflow IaC (infra.dns). No official API; mimics the browser-side username+password+TOTP login flow used by pjslauta/hover-dyn-dns. | community |
-| [launchdarkly](./plugins/launchdarkly/manifest.json) | LaunchDarkly feature management — flags, segments, environments, projects, metrics, experiments, approvals, audit log, and more | community |
-| [messaging-core](./plugins/messaging-core/manifest.json) | Shared messaging interfaces for workflow platform plugins | community |
-| [moderation](./plugins/moderation/manifest.json) | Trust and safety for game platforms: reputation, bans, text and voice moderation, and admin workflows | community |
-| [monday](./plugins/monday/manifest.json) | Comprehensive monday.com integration — boards, items, columns, groups, workspaces, and all resources via GraphQL | community |
-| [namecheap](./plugins/namecheap/manifest.json) | Namecheap DNS provider for workflow IaC (infra.dns) backed by the official go-namecheap-sdk. | community |
-| [okta](./plugins/okta/manifest.json) | Okta identity and access management — users, groups, applications, authorization servers, MFA, policies, and more | community |
-| [openlms](./plugins/openlms/manifest.json) | OpenLMS learning management — courses, enrollments, grades, assignments, quizzes, users, competencies, calendars, forums, and more | community |
 | [ratchet](./plugins/ratchet/manifest.json) | Autonomous AI agent orchestration platform — custom EnginePlugin for building AI-powered workflow applications with agent coordination, task management, and intelligent pipeline execution | community |
-| [rooms](./plugins/rooms/manifest.json) | Room management plugin for workflow engine — join, leave, broadcast, members | community |
-| [salesforce](./plugins/salesforce/manifest.json) | Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more | community |
-| [scalekit](./plugins/scalekit/manifest.json) | Scalekit enterprise SSO and Directory Sync provider plugin | community |
-| [security-scanner](./plugins/security-scanner/manifest.json) | Security scanner plugin for workflow engine — vulnerability scanning, secret detection, and compliance checks | community |
+| [scaffold-workflow-plugin](./plugins/scaffold-workflow-plugin/manifest.json) | Template repository for creating workflow engine external plugins | community |
 | [security](./plugins/security/manifest.json) | Unified security plugin: WAF (Coraza/AWS/GCloud/Cloudflare), MFA/encryption (TOTP, AES-256-GCM, AWS KMS, GCP KMS, Vault Transit), authorization (Casbin RBAC, Permit.io), data protection (PII detection/masking), sandbox (WASM/wazero, Docker), and supply-chain security (signatures, vuln scanning, SBOM) | premium |
-| [site-onboarding](./plugins/site-onboarding/manifest.json) | Dry-run multisite site/domain onboarding planner for Workflow. | community |
 | [slack](./plugins/slack/manifest.json) | Slack messaging and workspace automation. Provides a provider module backed by the Slack Web API and Socket Mode, pipeline steps for messages/blocks/reactions/files, and a Socket Mode event trigger. | community |
-| [steam](./plugins/steam/manifest.json) | External plugin for the workflow engine. | community |
 | [teams](./plugins/teams/manifest.json) | Microsoft Teams messaging and channel management via the Microsoft Graph API. Provides a provider module with Azure AD client credentials auth, pipeline steps for messages/cards/channels/members, and an HTTP webhook trigger for Graph change notifications. | community |
-| [template](./plugins/template/manifest.json) | Template repository for creating workflow engine external plugins | community |
-| [tournament](./plugins/tournament/manifest.json) | Tournament management plugin with bracket engines, scheduling, and prize distribution | community |
-| [turnio](./plugins/turnio/manifest.json) | turn.io WhatsApp API integration — messaging, contacts, templates, flows, and journeys | community |
-| [twilio](./plugins/twilio/manifest.json) | Comprehensive Twilio integration — SMS, Voice, Verify, Video, Conversations, TaskRouter, and 40+ products | community |
+| [workflow-plugin-analytics](./plugins/workflow-plugin-analytics/manifest.json) | Analytics and tag-manager injection for rendered HTML assets | community |
 | [workflow-plugin-atlas-migrate](./plugins/workflow-plugin-atlas-migrate/manifest.json) | Atlas migration driver plugin for the workflow engine | community |
+| [workflow-plugin-audit-chain](./plugins/workflow-plugin-audit-chain/manifest.json) | Tamper-evident hash-chained audit logging with periodic Merkle root anchoring (OpenTimestamps/Bitcoin, git, Sigstore) | community |
+| [workflow-plugin-auth0](./plugins/workflow-plugin-auth0/manifest.json) | Auth0 identity and access management provider plugin | community |
+| [workflow-plugin-aws](./plugins/workflow-plugin-aws/manifest.json) | AWS provider plugin for workflow IaC — manages ECS, EKS, RDS, ElastiCache, VPC, ALB, Route53, ECR, API Gateway, Security Groups, IAM, S3, and ACM resources | community |
+| [workflow-plugin-azure](./plugins/workflow-plugin-azure/manifest.json) | Microsoft Azure infrastructure provider: ACI, AKS, SQL, Redis, VNet, LB, DNS, ACR, APIM, NSG, MSI, Blob Storage, App Service Certificates | community |
+| [workflow-plugin-botdetect](./plugins/workflow-plugin-botdetect/manifest.json) | Behavioral analysis for bot detection: timing, entropy, session patterns, replay scanning | community |
+| [workflow-plugin-broker](./plugins/workflow-plugin-broker/manifest.json) | External plugin for the workflow engine. | community |
+| [workflow-plugin-cloudflare](./plugins/workflow-plugin-cloudflare/manifest.json) | Cloudflare DNS provider for workflow IaC (infra.dns) | community |
+| [workflow-plugin-cms](./plugins/workflow-plugin-cms/manifest.json) | Multi-tenant CMS engine — TenantResolver + static-wins routing + WYSIWYG page authoring (TipTap default). Foundation of gocodealone-multisite. | community |
 | [workflow-plugin-compute](./plugins/workflow-plugin-compute/manifest.json) | Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads | community |
+| [workflow-plugin-datadog](./plugins/workflow-plugin-datadog/manifest.json) | Datadog monitoring and observability — metrics, events, monitors, dashboards, logs, synthetics, SLOs, incidents, and more | community |
+| [workflow-plugin-digitalocean](./plugins/workflow-plugin-digitalocean/manifest.json) | DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway | community |
+| [workflow-plugin-edge-compute](./plugins/workflow-plugin-edge-compute/manifest.json) | Reusable Edge WASM provider contracts for workflow-compute and compatible edge runtimes | community |
+| [workflow-plugin-entra](./plugins/workflow-plugin-entra/manifest.json) | Microsoft Entra ID management provider plugin | community |
+| [workflow-plugin-eventbus](./plugins/workflow-plugin-eventbus/manifest.json) | Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations. | community |
+| [workflow-plugin-gcp](./plugins/workflow-plugin-gcp/manifest.json) | GCP infrastructure provider plugin for workflow — manages Cloud Run, GKE, Cloud SQL, Memorystore, VPC, Load Balancer, Cloud DNS, Artifact Registry, API Gateway, Firewall, IAM, GCS, and Certificate Manager | community |
 | [workflow-plugin-gitlab](./plugins/workflow-plugin-gitlab/manifest.json) | GitLab integration plugin: webhook handling and GitLab CI pipeline management | community |
+| [workflow-plugin-hover](./plugins/workflow-plugin-hover/manifest.json) | Hover DNS provider for workflow IaC (infra.dns). No official API; mimics the browser-side username+password+TOTP login flow used by pjslauta/hover-dyn-dns. | community |
 | [workflow-plugin-infra](./plugins/workflow-plugin-infra/manifest.json) | Abstract infra.* module types with IaCProvider delegation + dynamic plan/apply SPA, exec-env, and reconcile (plugs into workflow-plugin-admin) | community |
+| [workflow-plugin-launchdarkly](./plugins/workflow-plugin-launchdarkly/manifest.json) | LaunchDarkly feature management — flags, segments, environments, projects, metrics, experiments, approvals, audit log, and more | community |
+| [workflow-plugin-messaging-core](./plugins/workflow-plugin-messaging-core/manifest.json) | Shared messaging interfaces for workflow platform plugins | community |
 | [workflow-plugin-migrations](./plugins/workflow-plugin-migrations/manifest.json) | Database migration plugin for the workflow engine: golang-migrate + goose + atlas drivers, pre-deploy runner, wfctl db-migrate CLI, static lint tool | community |
+| [workflow-plugin-moderation](./plugins/workflow-plugin-moderation/manifest.json) | Trust and safety for game platforms: reputation, bans, text and voice moderation, and admin workflows | community |
+| [workflow-plugin-monday](./plugins/workflow-plugin-monday/manifest.json) | Comprehensive monday.com integration — boards, items, columns, groups, workspaces, and all resources via GraphQL | community |
+| [workflow-plugin-namecheap](./plugins/workflow-plugin-namecheap/manifest.json) | Namecheap DNS provider for workflow IaC (infra.dns) backed by the official go-namecheap-sdk. | community |
+| [workflow-plugin-okta](./plugins/workflow-plugin-okta/manifest.json) | Okta identity and access management — users, groups, applications, authorization servers, MFA, policies, and more | community |
+| [workflow-plugin-openlms](./plugins/workflow-plugin-openlms/manifest.json) | OpenLMS learning management — courses, enrollments, grades, assignments, quizzes, users, competencies, calendars, forums, and more | community |
 | [workflow-plugin-product-capture](./plugins/workflow-plugin-product-capture/manifest.json) | Product URL capture provider for workflow-compute | community |
+| [workflow-plugin-rooms](./plugins/workflow-plugin-rooms/manifest.json) | Room management plugin for workflow engine — join, leave, broadcast, members | community |
+| [workflow-plugin-salesforce](./plugins/workflow-plugin-salesforce/manifest.json) | Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more | community |
+| [workflow-plugin-scalekit](./plugins/workflow-plugin-scalekit/manifest.json) | Scalekit enterprise SSO and Directory Sync provider plugin | community |
+| [workflow-plugin-security-scanner](./plugins/workflow-plugin-security-scanner/manifest.json) | Security scanner plugin for workflow engine — vulnerability scanning, secret detection, and compliance checks | community |
 | [workflow-plugin-signal](./plugins/workflow-plugin-signal/manifest.json) | Signal protocol primitives for Workflow | community |
-| [ws-auth](./plugins/ws-auth/manifest.json) | WebSocket HMAC authentication plugin for workflow engine | community |
+| [workflow-plugin-site-onboarding](./plugins/workflow-plugin-site-onboarding/manifest.json) | Dry-run multisite site/domain onboarding planner for Workflow. | community |
+| [workflow-plugin-steam](./plugins/workflow-plugin-steam/manifest.json) | External plugin for the workflow engine. | community |
+| [workflow-plugin-tournament](./plugins/workflow-plugin-tournament/manifest.json) | Tournament management plugin with bracket engines, scheduling, and prize distribution | community |
+| [workflow-plugin-turnio](./plugins/workflow-plugin-turnio/manifest.json) | turn.io WhatsApp API integration — messaging, contacts, templates, flows, and journeys | community |
+| [workflow-plugin-twilio](./plugins/workflow-plugin-twilio/manifest.json) | Comprehensive Twilio integration — SMS, Voice, Verify, Video, Conversations, TaskRouter, and 40+ products | community |
+| [workflow-plugin-ws-auth](./plugins/workflow-plugin-ws-auth/manifest.json) | WebSocket HMAC authentication plugin for workflow engine | community |
 
 ## Templates
 
