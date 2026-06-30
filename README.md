@@ -193,6 +193,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [workflow-plugin-infra](./plugins/workflow-plugin-infra/manifest.json) | Abstract infra.* module types with IaCProvider delegation + dynamic plan/apply SPA, exec-env, and reconcile (plugs into workflow-plugin-admin) | community |
 | [workflow-plugin-migrations](./plugins/workflow-plugin-migrations/manifest.json) | Database migration plugin for the workflow engine: golang-migrate + goose + atlas drivers, pre-deploy runner, wfctl db-migrate CLI, static lint tool | community |
 | [workflow-plugin-product-capture](./plugins/workflow-plugin-product-capture/manifest.json) | Product URL capture provider for workflow-compute | community |
+| [workflow-plugin-signal](./plugins/workflow-plugin-signal/manifest.json) | Signal protocol primitives for Workflow | community |
 | [ws-auth](./plugins/ws-auth/manifest.json) | WebSocket HMAC authentication plugin for workflow engine | community |
 
 ## Templates
