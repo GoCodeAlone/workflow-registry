@@ -184,6 +184,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [workflow-plugin-namecheap](./plugins/workflow-plugin-namecheap/manifest.json) | Namecheap DNS provider for workflow IaC (infra.dns) backed by the official go-namecheap-sdk. | community |
 | [workflow-plugin-okta](./plugins/workflow-plugin-okta/manifest.json) | Okta identity and access management — users, groups, applications, authorization servers, MFA, policies, and more | community |
 | [workflow-plugin-openlms](./plugins/workflow-plugin-openlms/manifest.json) | OpenLMS learning management — courses, enrollments, grades, assignments, quizzes, users, competencies, calendars, forums, and more | community |
+| [workflow-plugin-platform](./plugins/workflow-plugin-platform/manifest.json) | Provider-neutral platform intent modules: Kubernetes, ECS, DNS, networking, API gateway, autoscaling, multi-region, DigitalOcean aliases, app.container | community |
 | [workflow-plugin-product-capture](./plugins/workflow-plugin-product-capture/manifest.json) | Product URL capture provider for workflow-compute | community |
 | [workflow-plugin-rooms](./plugins/workflow-plugin-rooms/manifest.json) | Room management plugin for workflow engine — join, leave, broadcast, members | community |
 | [workflow-plugin-salesforce](./plugins/workflow-plugin-salesforce/manifest.json) | Salesforce CRM — records, SOQL queries, bulk operations, approvals, flows, reports, dashboards, metadata, and more | community |
