@@ -4,6 +4,7 @@
     "configProvider": false,
     "moduleTypes": [],
     "stepTypes": [
+      "media.batch_transform",
       "media.transform"
     ],
     "triggerTypes": []
@@ -14,26 +15,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "b9f9e97e42ec9c7513014c537616966ca82784b05626d8ce324730fa2b362095",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-media/releases/download/v0.1.0/workflow-plugin-media_0.1.0_darwin_amd64.tar.gz"
+      "sha256": "7d2f5ba209b9e64387fbea90f2347e8f56afb3aef32ca991053c9dc4cab9ec09",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-media/releases/download/v0.2.0/workflow-plugin-media_0.2.0_darwin_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "8eefa2c13f6400ebd2c00b68c7f4575168189ade9c468be0d1b50f24912a5598",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-media/releases/download/v0.1.0/workflow-plugin-media_0.1.0_darwin_arm64.tar.gz"
+      "sha256": "486bcf7d5013f8b155ca26f1023319e9d1a96bcd7bffb6f502f5e0f9baea6689",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-media/releases/download/v0.2.0/workflow-plugin-media_0.2.0_darwin_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "35c16117c2f422e37d9f10e13977859945b5a0d3ee2fd55204b6f1a54905fd77",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-media/releases/download/v0.1.0/workflow-plugin-media_0.1.0_linux_amd64.tar.gz"
+      "sha256": "58d1d3fddc33c4bd84338b04c51260f1c1097bde127f401bd093eab6a33bb7a4",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-media/releases/download/v0.2.0/workflow-plugin-media_0.2.0_linux_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "1e7a4ae1f0aa11c3d63e1efff431d465cbe9e8b978170d32c0f39a7148a92619",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-media/releases/download/v0.1.0/workflow-plugin-media_0.1.0_linux_arm64.tar.gz"
+      "sha256": "b63cbbfc2ae276dff58afebc589b8113dafaa445fa4d2da3123151d891a0fc87",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-media/releases/download/v0.2.0/workflow-plugin-media_0.2.0_linux_arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-media",
@@ -53,5 +54,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.1.0"
+  "version": "0.2.0"
 }
