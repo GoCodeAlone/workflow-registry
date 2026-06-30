@@ -22,26 +22,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "c346848a389aa2838e58299beda64e633dd63380d527a9cced4e0cbcdfe6bdf9",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v1.0.10/workflow-plugin-authz-ui-darwin-amd64.tar.gz"
+      "sha256": "d8931544153449fcee324fd0796bb89809d1489ab649ede5498a712eae4d2abf",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v1.0.11/workflow-plugin-authz-ui-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "04e15f161a616ddfaa61bd3e3aa3dd2d18205f0cb6d6c36354286252616cc4d3",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v1.0.10/workflow-plugin-authz-ui-darwin-arm64.tar.gz"
+      "sha256": "cb010ede74a4091ffefdfb6c4b593e4391eba55eab3df5d5a13b2528e831bb7f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v1.0.11/workflow-plugin-authz-ui-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "238ddeecd89287f9b5a41d1e77849d9e82c43f9e46852f9e2a2070d81154ee07",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v1.0.10/workflow-plugin-authz-ui-linux-amd64.tar.gz"
+      "sha256": "e4d6c1ff07dd00540a1b82dd96564585ff5b039840837622f16b011c1852f6be",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v1.0.11/workflow-plugin-authz-ui-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "a273c3525147689c473ed56c26cef17aec9aafa91f89616b674c091042ec820b",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v1.0.10/workflow-plugin-authz-ui-linux-arm64.tar.gz"
+      "sha256": "e493a0c387017cde0c72a7461b9638957d3ec8a95547007ab57808cd97c194b9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui/releases/download/v1.0.11/workflow-plugin-authz-ui-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-authz-ui",
@@ -63,5 +63,5 @@
   "source": "github.com/GoCodeAlone/workflow-plugin-authz-ui",
   "tier": "premium",
   "type": "external",
-  "version": "1.0.10"
+  "version": "1.0.11"
 }

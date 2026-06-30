@@ -1,16 +1,5 @@
 {
-  "name": "scaffold-workflow-plugin",
-  "version": "0.1.1",
   "author": "GoCodeAlone",
-  "description": "Template repository for creating workflow engine external plugins",
-  "source": "github.com/GoCodeAlone/scaffold-workflow-plugin",
-  "type": "external",
-  "tier": "community",
-  "license": "MIT",
-  "homepage": "https://github.com/GoCodeAlone/scaffold-workflow-plugin",
-  "repository": "https://github.com/GoCodeAlone/scaffold-workflow-plugin",
-  "private": false,
-  "status": "experimental",
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [],
@@ -18,43 +7,54 @@
     "triggerTypes": []
   },
   "category": "core",
+  "description": "Template repository for creating workflow engine external plugins",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "c41a3dfcd8605651589938e04e348a26b7f3768a13e4d52f8f1eda8ce9705617",
-      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.1/scaffold-workflow-plugin-darwin-amd64.tar.gz"
+      "sha256": "cf42a74263a19266c28fbe2b61dd0839bcce374f4e0eec6ad2aa27b4febf2054",
+      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.2/scaffold-workflow-plugin-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "e02ef0174c893dcd88839e2381ac4a956b89e0fe653824fa06a0c26b5bbaffed",
-      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.1/scaffold-workflow-plugin-darwin-arm64.tar.gz"
+      "sha256": "04c9264101dd611f54be9c2c207e56d4d15409d2f960668d44cc6b2b5fd7518a",
+      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.2/scaffold-workflow-plugin-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "cd75250f7e935f6f140440c3270cd0aa5632562c747be21392612ee17956716a",
-      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.1/scaffold-workflow-plugin-linux-amd64.tar.gz"
+      "sha256": "a499a7d94de3bb0ddacfc661968f2f9025fcd85726b350ea54815c6b80ad2d93",
+      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.2/scaffold-workflow-plugin-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "18b80cff98bec715801e022baf9eab72dcf9b9c2240777d94167c211b6979a4c",
-      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.1/scaffold-workflow-plugin-linux-arm64.tar.gz"
+      "sha256": "c564b8b57ea26d055d28488263fb0da630545ce126e1d1a671ad3f3aaf1cda34",
+      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.2/scaffold-workflow-plugin-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "a07b06c5ff8702c3722879fda8fc2033ca2bd434289477c9edddb740bcb16f0d",
-      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.1/scaffold-workflow-plugin-windows-amd64.tar.gz"
+      "sha256": "9615452cba5b024a9e220ffd9947cd3f55dfabda2e0d628802df55d9e4653ae8",
+      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.2/scaffold-workflow-plugin-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "cf185cef5845d0540fb3930041b783a393865a59632017b72952e6e5672ad787",
-      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.1/scaffold-workflow-plugin-windows-arm64.tar.gz"
+      "sha256": "04ad9fd199c627742de0ae80972c8d5b28055024b9b71ac8ccb7e3087e72c02d",
+      "url": "https://github.com/GoCodeAlone/scaffold-workflow-plugin/releases/download/v0.1.2/scaffold-workflow-plugin-windows-arm64.tar.gz"
     }
   ],
-  "minEngineVersion": "0.51.7"
+  "homepage": "https://github.com/GoCodeAlone/scaffold-workflow-plugin",
+  "license": "MIT",
+  "minEngineVersion": "0.62.0",
+  "name": "scaffold-workflow-plugin",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/scaffold-workflow-plugin",
+  "source": "github.com/GoCodeAlone/scaffold-workflow-plugin",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.2"
 }

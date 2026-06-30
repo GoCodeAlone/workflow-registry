@@ -93,6 +93,54 @@
       "sensitive": true
     }
   ],
+  "secret_targets": [
+    {
+      "description": "Stored as GitHub Actions secrets when workflows run on GitHub.",
+      "provider": "github",
+      "scopes": [
+        "repo",
+        "env",
+        "org"
+      ]
+    },
+    {
+      "description": "Stored as GitLab CI/CD variables when workflows run on GitLab.",
+      "provider": "gitlab",
+      "scopes": [
+        "project",
+        "group",
+        "env"
+      ]
+    },
+    {
+      "description": "Stored in Vault for application/runtime retrieval.",
+      "provider": "vault",
+      "scopes": [
+        "mount"
+      ]
+    },
+    {
+      "description": "Stored in a local file-backed secret store.",
+      "provider": "file",
+      "scopes": [
+        "directory"
+      ]
+    },
+    {
+      "description": "Stored in the local OS keychain.",
+      "provider": "keychain",
+      "scopes": [
+        "service"
+      ]
+    },
+    {
+      "description": "Provided by the local process environment.",
+      "provider": "env",
+      "scopes": [
+        "process"
+      ]
+    }
+  ],
   "status": "verified",
   "tier": "core",
   "type": "external",
