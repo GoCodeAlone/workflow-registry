@@ -3,7 +3,7 @@
   "capabilities": {
     "cliCommands": [
       {
-        "description": "Operate a workflow-compute control plane, including projectless agent setup",
+        "description": "Operate a workflow-compute control plane, including projectless agent setup and network audit checks",
         "name": "compute"
       }
     ],
@@ -16,7 +16,8 @@
     "stepTypes": [
       "step.compute_dispatch",
       "step.compute_wait",
-      "step.compute_map"
+      "step.compute_map",
+      "step.compute_stream"
     ],
     "triggerTypes": []
   },
@@ -26,14 +27,14 @@
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "3f2864ff3cf00846349358f676aed221503bc369773c2779211e0bc3f5ccc205",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.13/workflow-plugin-compute-darwin-arm64.tar.gz"
+      "sha256": "e01bd240d85dcbce5eaf6ace86465ed69b80d00abab4b6c39484599a53a1736f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.14/workflow-plugin-compute-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "4d8288fc78c640bc8e8a645f138d70b32c6603f5bcbe5bba2c54170a2cb3b420",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.13/workflow-plugin-compute-linux-amd64.tar.gz"
+      "sha256": "be54f435f643015219ab4b77da25ecb5d20a75902ef7f1dd7e85061674a91191",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.14/workflow-plugin-compute-linux-amd64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute",
@@ -51,5 +52,5 @@
   "status": "verified",
   "tier": "community",
   "type": "external",
-  "version": "0.1.13"
+  "version": "0.1.14"
 }
