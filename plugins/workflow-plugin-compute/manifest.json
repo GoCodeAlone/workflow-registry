@@ -17,24 +17,25 @@
       "step.compute_dispatch",
       "step.compute_wait",
       "step.compute_map",
-      "step.compute_stream"
+      "step.compute_stream",
+      "step.compute_chain"
     ],
     "triggerTypes": []
   },
   "category": "core",
-  "description": "Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads",
+  "description": "Workflow adapter for workflow-compute dispatch, wait, map, chain, provider, pool, catalog, and product-capture workloads",
   "downloads": [
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "e01bd240d85dcbce5eaf6ace86465ed69b80d00abab4b6c39484599a53a1736f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.14/workflow-plugin-compute-darwin-arm64.tar.gz"
+      "sha256": "979c3a708d7b624dc726ee9333b3608783da1e2857c23d078db8e542e1ab72a5",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.15/workflow-plugin-compute-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "be54f435f643015219ab4b77da25ecb5d20a75902ef7f1dd7e85061674a91191",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.14/workflow-plugin-compute-linux-amd64.tar.gz"
+      "sha256": "1d0ec4041c5d9d66436a41f99bf6fa7de2718b3ba28ec78746a1cc0635c77c98",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute/releases/download/v0.1.15/workflow-plugin-compute-linux-amd64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute",
@@ -52,5 +53,5 @@
   "status": "verified",
   "tier": "community",
   "type": "external",
-  "version": "0.1.14"
+  "version": "0.1.15"
 }
