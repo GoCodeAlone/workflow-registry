@@ -54,7 +54,7 @@
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner",
   "license": "MIT",
-  "minEngineVersion": "0.51.7",
+  "minEngineVersion": "0.83.0",
   "name": "workflow-plugin-security-scanner",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-security-scanner",
