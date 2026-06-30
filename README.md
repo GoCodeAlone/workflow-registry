@@ -177,6 +177,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [workflow-plugin-hover](./plugins/workflow-plugin-hover/manifest.json) | Hover DNS provider for workflow IaC (infra.dns). No official API; mimics the browser-side username+password+TOTP login flow used by pjslauta/hover-dyn-dns. | community |
 | [workflow-plugin-infra](./plugins/workflow-plugin-infra/manifest.json) | Abstract infra.* module types with IaCProvider delegation + dynamic plan/apply SPA, exec-env, and reconcile (plugs into workflow-plugin-admin) | community |
 | [workflow-plugin-launchdarkly](./plugins/workflow-plugin-launchdarkly/manifest.json) | LaunchDarkly feature management — flags, segments, environments, projects, metrics, experiments, approvals, audit log, and more | community |
+| [workflow-plugin-media](./plugins/workflow-plugin-media/manifest.json) | Reusable media transforms (ffmpeg) | community |
 | [workflow-plugin-messaging-core](./plugins/workflow-plugin-messaging-core/manifest.json) | Shared messaging interfaces for workflow platform plugins | community |
 | [workflow-plugin-migrations](./plugins/workflow-plugin-migrations/manifest.json) | Database migration plugin for the workflow engine: golang-migrate + goose + atlas drivers, pre-deploy runner, wfctl db-migrate CLI, static lint tool | community |
 | [workflow-plugin-moderation](./plugins/workflow-plugin-moderation/manifest.json) | Trust and safety for game platforms: reputation, bans, text and voice moderation, and admin workflows | community |
