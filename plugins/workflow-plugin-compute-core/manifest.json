@@ -1,0 +1,64 @@
+{
+  "author": "GoCodeAlone",
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [],
+    "stepTypes": [],
+    "triggerTypes": []
+  },
+  "category": "core",
+  "description": "Public compute protocol and provider catalog core for Workflow.",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "7fe2e3d311de3a5b391d9541eab980654feec55f55b2103e2f430a6e17de08bb",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.0/workflow-plugin-compute-core-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "5f86c1212160633f5dd2150d6404d8e29177c1c0d9de711310de1fef92f994a7",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.0/workflow-plugin-compute-core-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "2c291f9cc9f80c3ab0c731ead49d459f43df75374d4452783c4805dc0094063c",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.0/workflow-plugin-compute-core-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "b7df27fb06c740352bb637cd386969977f06377332146f9b3e5a238a6560f200",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.0/workflow-plugin-compute-core-linux-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "c66ec0bee0bf27164a53e37d5d017d3ffcb10b870b62b1b15f1969aaa907379b",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.0/workflow-plugin-compute-core-windows-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "19c89216546187bb84c3cbff4e07542d7086ea3f5bab1ad7e8819541260353a6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-compute-core/releases/download/v0.8.0/workflow-plugin-compute-core-windows-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-compute-core",
+  "keywords": [
+    "compute",
+    "protocol",
+    "provider-catalog"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.64.7",
+  "name": "workflow-plugin-compute-core",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-compute-core",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.8.0"
+}

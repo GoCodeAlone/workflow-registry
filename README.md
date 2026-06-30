@@ -165,6 +165,7 @@ These plugins are distributed outside the engine repository and are maintained a
 | [workflow-plugin-broker](./plugins/workflow-plugin-broker/manifest.json) | External plugin for the workflow engine. | community |
 | [workflow-plugin-cloudflare](./plugins/workflow-plugin-cloudflare/manifest.json) | Cloudflare DNS provider for workflow IaC (infra.dns) | community |
 | [workflow-plugin-cms](./plugins/workflow-plugin-cms/manifest.json) | Multi-tenant CMS engine — TenantResolver + static-wins routing + WYSIWYG page authoring (TipTap default). Foundation of gocodealone-multisite. | community |
+| [workflow-plugin-compute-core](./plugins/workflow-plugin-compute-core/manifest.json) | Public compute protocol and provider catalog core for Workflow. | community |
 | [workflow-plugin-compute](./plugins/workflow-plugin-compute/manifest.json) | Workflow adapter for workflow-compute dispatch, wait, map, provider, pool, catalog, and product-capture workloads | community |
 | [workflow-plugin-datadog](./plugins/workflow-plugin-datadog/manifest.json) | Datadog monitoring and observability — metrics, events, monitors, dashboards, logs, synthetics, SLOs, incidents, and more | community |
 | [workflow-plugin-digitalocean](./plugins/workflow-plugin-digitalocean/manifest.json) | DigitalOcean IaC provider: App Platform, DOKS, databases, Redis cache, load balancers, VPC, firewall, DNS, Spaces, DOCR, certificates, Droplets, Block Storage Volumes, IAM, and API gateway | community |
