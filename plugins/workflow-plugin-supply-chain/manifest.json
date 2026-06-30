@@ -105,22 +105,22 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.4.7/workflow-plugin-supply-chain-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.4.11/workflow-plugin-supply-chain-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.4.7/workflow-plugin-supply-chain-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.4.11/workflow-plugin-supply-chain-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.4.7/workflow-plugin-supply-chain-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.4.11/workflow-plugin-supply-chain-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.4.7/workflow-plugin-supply-chain-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain/releases/download/v0.4.11/workflow-plugin-supply-chain-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain",
@@ -143,5 +143,5 @@
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-supply-chain",
   "tier": "core",
   "type": "external",
-  "version": "0.4.7"
+  "version": "0.4.11"
 }
