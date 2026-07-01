@@ -3,14 +3,17 @@
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
+      "encrypted_space.proof_policy",
       "encrypted_space.store",
       "encrypted_space.verifier"
     ],
     "stepTypes": [
       "step.encrypted_space_append",
+      "step.encrypted_space_append_verified",
       "step.encrypted_space_fast_forward",
       "step.encrypted_space_epoch_rotate",
       "step.encrypted_space_member_update",
+      "step.encrypted_space_proof_evidence",
       "step.encrypted_space_verify_membership",
       "step.encrypted_space_verify_operation",
       "step.encrypted_space_verify_checkpoint",
@@ -24,38 +27,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "44a653879a97882e5d007a695af52c612d87807b5697166f0569ef76348fc397",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.3.0/workflow-plugin-encrypted-spaces-darwin-amd64.tar.gz"
+      "sha256": "8c3e76333077b3c114c42e4244d7e555b6e402d78da143ede98b156b1a80ea8a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "599e5717286c7ecc176b9f038b4005e58ed1af33c6ab6fe7d4620dd380030f36",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.3.0/workflow-plugin-encrypted-spaces-darwin-arm64.tar.gz"
+      "sha256": "7809338df876ccde413382b2d8e3ff3c1081b150fb8e5d361666fe1107019746",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "20a1776f136ed04ef3b7f5536ca43c36f8c639c3026c8e35232af7b3a208c590",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.3.0/workflow-plugin-encrypted-spaces-linux-amd64.tar.gz"
+      "sha256": "286e687f63d4e3571cc3ce69f8a74eeed3b5f33be82f1bd8583e67767346a5e1",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "1880ef101f975b4b19524dc134f16054a8002518fa57eeaf5a527b659e971d9d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.3.0/workflow-plugin-encrypted-spaces-linux-arm64.tar.gz"
+      "sha256": "73c7f7aa1540d9c7da92747aaf74038bf2b7ffae53ca1cfa2fa699e96a685d95",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "3a32bd6a6f539d1f809152d3f42a1a2569a38ba1bc696386a769c210dce27e29",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.3.0/workflow-plugin-encrypted-spaces-windows-amd64.tar.gz"
+      "sha256": "c565bc6078c1a6f9a7934daf9b38fdf5d7f9c5bb37ff552b0c29af31378c5fcc",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "f146db6b82fa069e9fbec58f75d169f3989b9d4fd7ab503e08e6a6d2c1516140",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.3.0/workflow-plugin-encrypted-spaces-windows-arm64.tar.gz"
+      "sha256": "c494221807be2f9d475b3675f8c6034fbfb8d5f29725fd067d441e04500203f6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-windows-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces",
@@ -68,5 +71,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.3.0"
+  "version": "0.4.0"
 }
