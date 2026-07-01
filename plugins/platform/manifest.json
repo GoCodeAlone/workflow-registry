@@ -4,6 +4,7 @@
     "moduleTypes": [
       "app.container",
       "argo.workflows",
+      "iac.provider",
       "iac.state",
       "platform.context",
       "platform.dns",
