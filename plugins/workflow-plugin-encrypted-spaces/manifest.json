@@ -4,6 +4,7 @@
     "configProvider": false,
     "moduleTypes": [
       "encrypted_space.proof_policy",
+      "encrypted_space.state_store",
       "encrypted_space.store",
       "encrypted_space.verifier"
     ],
@@ -14,6 +15,11 @@
       "step.encrypted_space_epoch_rotate",
       "step.encrypted_space_member_update",
       "step.encrypted_space_proof_evidence",
+      "step.encrypted_space_state_init",
+      "step.encrypted_space_state_load",
+      "step.encrypted_space_state_save",
+      "step.encrypted_space_state_update",
+      "step.encrypted_space_member_check",
       "step.encrypted_space_verify_membership",
       "step.encrypted_space_verify_operation",
       "step.encrypted_space_verify_checkpoint",
@@ -27,38 +33,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "8c3e76333077b3c114c42e4244d7e555b6e402d78da143ede98b156b1a80ea8a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-darwin-amd64.tar.gz"
+      "sha256": "8980e5e5e29611520a593c7f5304c93ed906f4758d9bab85043f2453408cff80",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.6.0/workflow-plugin-encrypted-spaces-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "7809338df876ccde413382b2d8e3ff3c1081b150fb8e5d361666fe1107019746",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-darwin-arm64.tar.gz"
+      "sha256": "4737eb1b8a3ff6f4c6a4bf190cc252d939db38a85a9403537863083a099df330",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.6.0/workflow-plugin-encrypted-spaces-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "286e687f63d4e3571cc3ce69f8a74eeed3b5f33be82f1bd8583e67767346a5e1",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-linux-amd64.tar.gz"
+      "sha256": "f3e4b966d143e9f6c63e8ca2d88ebd2371e2222077b20f6ad9a8b7578351bbcc",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.6.0/workflow-plugin-encrypted-spaces-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "73c7f7aa1540d9c7da92747aaf74038bf2b7ffae53ca1cfa2fa699e96a685d95",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-linux-arm64.tar.gz"
+      "sha256": "d367a3f2da643d2c7c9d5fbc707364ceb2197a8b241e8e17b3a90e8d9e9cd3cd",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.6.0/workflow-plugin-encrypted-spaces-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "c565bc6078c1a6f9a7934daf9b38fdf5d7f9c5bb37ff552b0c29af31378c5fcc",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-windows-amd64.tar.gz"
+      "sha256": "a70e59e1b49cb705d1d445c3551a875f7bc60e15e08dbc25fc66da4e3961b1b3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.6.0/workflow-plugin-encrypted-spaces-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "c494221807be2f9d475b3675f8c6034fbfb8d5f29725fd067d441e04500203f6",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-windows-arm64.tar.gz"
+      "sha256": "22741b32f2527c26ba97ab63c05239a1e70fbfe1a6bf334b710c3e7cd9419e94",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.6.0/workflow-plugin-encrypted-spaces-windows-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces",
@@ -71,5 +77,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.4.0"
+  "version": "0.6.0"
 }
