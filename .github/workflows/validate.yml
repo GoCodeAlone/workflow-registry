@@ -115,5 +115,8 @@ jobs:
       - name: Run primary projection contract
         run: bash tests/test-build-index.sh
 
+      - name: Run Pages artifact contract
+        run: bash tests/test-prepare-pages-artifact.sh
+
       - name: Run schema↔allowlist drift guard
         run: bash tests/test-schema-allowlist-coverage.sh

@@ -5,7 +5,10 @@
 
 The official plugin and template registry for the [GoCodeAlone/workflow](https://github.com/GoCodeAlone/workflow) engine.
 
-**Registry API**: `https://gocodealone.github.io/workflow-registry/v1/`
+**Registry API**: `https://gocodealone.github.io/workflow-registry/`
+
+The registry is also mirrored at `https://gocodealone.github.io/workflow-registry/v1/`
+for versioned API consumers and existing `wfctl` defaults.
 
 This registry catalogs built-in plugins, first-party external plugins, community extensions, and reusable templates that can be used with the workflow engine. It serves as the source of truth for the `wfctl` CLI's marketplace and `wfctl publish` command.
 
@@ -36,7 +39,8 @@ The registry is consumed by:
 - `wfctl marketplace` — browse and search available plugins
 - `wfctl publish` — submit your plugin to the registry
 - The workflow UI Marketplace page
-- The static JSON API at `https://gocodealone.github.io/workflow-registry/v1/`
+- The static JSON API at `https://gocodealone.github.io/workflow-registry/`
+  and its `/v1/` compatibility mirror
 
 ---
 
@@ -276,7 +280,9 @@ The [Build & Deploy](.github/workflows/build-pages.yml) workflow runs on every p
 
 1. Generates `v1/index.json` from all manifests
 2. Queries GitHub Releases for each plugin to build `v1/plugins/<name>/versions.json`
-3. Deploys the `v1/` directory to GitHub Pages
+3. Prepares a `public/` Pages artifact that exposes the registry at both the
+   site root and `/v1/`
+4. Deploys the `public/` directory to GitHub Pages
 
 PRs that fail validation cannot be merged.
 
@@ -345,13 +351,22 @@ workflow-registry/
 ├── scripts/
 │   ├── build-index.sh          # Generates v1/index.json
 │   ├── build-versions.sh       # Queries GitHub Releases → v1/plugins/*/versions.json
+│   ├── prepare-pages-artifact.sh # Mirrors v1/ into public root and public/v1/
 │   ├── validate-manifests.sh   # CI manifest validation
 │   └── validate-templates.sh   # CI template validation
 ├── .github/workflows/
 │   ├── validate.yml            # PR validation gate
 │   └── build-pages.yml         # Build and deploy static registry to GitHub Pages
-└── v1/                         # Generated — served via GitHub Pages (not committed)
+├── v1/                         # Generated registry data (not committed)
+│   ├── index.json              # Array of all plugin summaries, sorted by name
+│   └── plugins/
+│       └── <name>/
+│           ├── manifest.json   # Copy of source manifest
+│           ├── versions.json   # Release history from GitHub
+│           └── latest.json     # Latest release entry only
+└── public/                     # Generated Pages artifact (not committed)
     ├── index.json              # Array of all plugin summaries, sorted by name
+    ├── v1/                     # Compatibility mirror of the same registry data
     └── plugins/
         └── <name>/
             ├── manifest.json   # Copy of source manifest
@@ -363,10 +378,14 @@ workflow-registry/
 
 | Endpoint | Description |
 |----------|-------------|
-| `GET /v1/index.json` | All plugin summaries (name, description, version, capabilities, ...) |
-| `GET /v1/plugins/<name>/manifest.json` | Full manifest for a specific plugin |
-| `GET /v1/plugins/<name>/versions.json` | All release versions with download URLs |
-| `GET /v1/plugins/<name>/latest.json` | Latest release version only |
+| `GET /index.json` | All plugin summaries (name, description, version, capabilities, ...) |
+| `GET /plugins/<name>/manifest.json` | Full manifest for a specific plugin |
+| `GET /plugins/<name>/versions.json` | All release versions with download URLs |
+| `GET /plugins/<name>/latest.json` | Latest release version only |
+| `GET /v1/index.json` | Compatibility mirror of `/index.json` |
+| `GET /v1/plugins/<name>/manifest.json` | Compatibility mirror of `/plugins/<name>/manifest.json` |
+| `GET /v1/plugins/<name>/versions.json` | Compatibility mirror of `/plugins/<name>/versions.json` |
+| `GET /v1/plugins/<name>/latest.json` | Compatibility mirror of `/plugins/<name>/latest.json` |
 
 ---
 
