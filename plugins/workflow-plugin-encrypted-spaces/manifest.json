@@ -33,38 +33,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "b0372cf8353c3b21e574d952661d285ccb0ed955115c84da868e11318910d8f1",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.0/workflow-plugin-encrypted-spaces-darwin-amd64.tar.gz"
+      "sha256": "6f7506fe81fdc6c9cd984089f8d7bc7678b5887540dad9d1f3d16fcbcadf3d5e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.1/workflow-plugin-encrypted-spaces-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "2a33681d0b6a633a16093cd1370b986a4f2935ef9512bd903a07b0a486e99ccf",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.0/workflow-plugin-encrypted-spaces-darwin-arm64.tar.gz"
+      "sha256": "3040c6697b44089c7ce313ec8061774a31a68536d188c101abcd2cf357b26066",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.1/workflow-plugin-encrypted-spaces-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "eb8829059a076d53848c6656658c7782d26b39874862221b7f2100fc50ed376d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.0/workflow-plugin-encrypted-spaces-linux-amd64.tar.gz"
+      "sha256": "7789907795f4604cbcfb9a90e218365887513c5fda53e81e253f3f0dee4fe0bf",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.1/workflow-plugin-encrypted-spaces-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "68102a49d981ba03575930126ad9833c21992c27874896d6b5bf1b60b1aa708d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.0/workflow-plugin-encrypted-spaces-linux-arm64.tar.gz"
+      "sha256": "829c78885effcfcddbd77dc95f7c4cb0c95dce8fd128c18140d90abe947cd5cb",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.1/workflow-plugin-encrypted-spaces-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "78a94a8112b8c489329a6f433cfc807e6f311dffc613f0d3d90e797a12ec07a0",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.0/workflow-plugin-encrypted-spaces-windows-amd64.tar.gz"
+      "sha256": "cbc31a376b14c1142f3c64a1bbde0e817ed068b57cb6ab983b0e5c969989dd01",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.1/workflow-plugin-encrypted-spaces-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "0cb08b2033841d4579e1f88690ad1759ae6c84daa8d48fa62fa1fa3e4b54aada",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.0/workflow-plugin-encrypted-spaces-windows-arm64.tar.gz"
+      "sha256": "64606504c1d41685f908522d97b2575d729cb088f5f8860143fb44d91f54fd7a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.7.1/workflow-plugin-encrypted-spaces-windows-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces",
@@ -77,5 +77,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.7.0"
+  "version": "0.7.1"
 }
