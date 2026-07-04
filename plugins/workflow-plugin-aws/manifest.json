@@ -74,38 +74,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "fce310deebc6ed70d23abba6407e4c8d947e4919b7719bcfe67b2e924cf71725",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.5/workflow-plugin-aws-darwin-amd64.tar.gz"
+      "sha256": "f63092cbfff59d99aac63f1a0ae31d0442123e69d919730adc65fe50f708609e",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.6/workflow-plugin-aws-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "8f7008aafa9d19c2e292fab45d243cf0ff897755933a675ec2e9648b88ad4a25",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.5/workflow-plugin-aws-darwin-arm64.tar.gz"
+      "sha256": "71d57f8c31457a200b8219a8d9fd13137fa2e72e586dfad8817708ec923cba32",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.6/workflow-plugin-aws-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "84fc6b1b027bf6b5f88afa552d04448c51603888655bf3922505baadc4b8984f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.5/workflow-plugin-aws-linux-amd64.tar.gz"
+      "sha256": "c5fd64ffce69bf8bbdc44c43780e2f0efbe8dcc18f4107cf0047ffaa62d2ae33",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.6/workflow-plugin-aws-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "c06c3859cdcbe054e213f192e3618414a314d743a254685f69c1a3b368eb4736",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.5/workflow-plugin-aws-linux-arm64.tar.gz"
+      "sha256": "a876e794cca84f8a812f720485c502e7ca951ade8e18a862f4363a6b9ec259fc",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.6/workflow-plugin-aws-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "fb572a79188c871ec346ac88adff65a843e242ca0b8702c83c0a0db499464cd5",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.5/workflow-plugin-aws-windows-amd64.tar.gz"
+      "sha256": "43b036ef22d521b82d2617ba4cb318b5d15ce0707d73b2d8568e2313d4460f4a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.6/workflow-plugin-aws-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "960c5fc8050f8e753a4cc3eb38861414a94789ff05cbd1a0036a87f26d84a571",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.5/workflow-plugin-aws-windows-arm64.tar.gz"
+      "sha256": "4d068e3ec82a021794c4b8b6cd1a249d082949c5bc83b59541e0e9fa826fbcd9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-aws/releases/download/v2.3.6/workflow-plugin-aws-windows-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-aws",
@@ -203,5 +203,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "2.3.5"
+  "version": "2.3.6"
 }
