@@ -127,6 +127,7 @@ jobs:
             run_wfctl wfctl plugin registry-sync core --fix --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
             run_wfctl wfctl plugin registry-sync readme --registry-dir .
           fi
+          bash scripts/validate-manifests.sh
           if git diff --quiet -- plugins README.md; then
             echo "changed=0" >> "$GITHUB_OUTPUT"
           else
@@ -258,6 +259,7 @@ jobs:
                 run_wfctl wfctl plugin registry-sync core --fix --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
               fi
               run_wfctl wfctl plugin registry-sync readme --registry-dir .
+              bash scripts/validate-manifests.sh
               git add plugins/ README.md
               if git diff --cached --quiet; then
                 echo "PR #${existing} already at expected state on re-sync; nothing new to append"
