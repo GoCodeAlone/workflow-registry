@@ -73,26 +73,22 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "be097b3079b0a166acdda02e64697373d0c680328a9316f51d059dcbbc6e7dd7",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.3/workflow-plugin-security-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.4/workflow-plugin-security-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "b35fb4c80b51775bc020c858a82de4b92791f3357fb3cca8d76630a083c016eb",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.3/workflow-plugin-security-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.4/workflow-plugin-security-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "ccbca3de9b94e738155a8c61bea8250dc7e442af080232b2d0969b30fe908fc3",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.3/workflow-plugin-security-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.4/workflow-plugin-security-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "90e3ad6851a9502c6a7d7acc92a208dca54babadbb140571464597b0c38ccb7f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.3/workflow-plugin-security-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-security/releases/download/v2.0.4/workflow-plugin-security-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-security",
@@ -124,5 +120,5 @@
   "source": "github.com/GoCodeAlone/workflow-plugin-security",
   "tier": "premium",
   "type": "external",
-  "version": "2.0.3"
+  "version": "2.0.4"
 }
