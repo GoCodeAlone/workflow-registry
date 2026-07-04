@@ -4,9 +4,9 @@
 
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SCHEMA="$REPO_ROOT/schema/registry-schema.json"
-PLUGINS_DIR="$REPO_ROOT/plugins"
+REPO_ROOT="${REGISTRY_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SCHEMA="${REGISTRY_SCHEMA:-$REPO_ROOT/schema/registry-schema.json}"
+PLUGINS_DIR="${PLUGINS_DIR:-$REPO_ROOT/plugins}"
 
 errors=0
 
@@ -15,6 +15,33 @@ AJV="${AJV:-$(command -v ajv 2>/dev/null || echo "npx --yes ajv-cli")}"
 
 for manifest in "$PLUGINS_DIR"/*/manifest.json; do
   if ! $AJV validate --spec=draft2020 -s "$SCHEMA" -d "$manifest"; then
+    errors=$((errors + 1))
+  fi
+  if ! jq -e '
+    (.name // "") as $name |
+    (.source // "") as $source |
+    (.repository // "") as $repository |
+    ($name != "scaffold-workflow-plugin")
+    and ($source != "github.com/GoCodeAlone/scaffold-workflow-plugin")
+    and ($repository != "https://github.com/GoCodeAlone/scaffold-workflow-plugin")
+  ' "$manifest" >/dev/null; then
+    echo "$manifest invalid: scaffold/template repositories must not be published as installable plugins" >&2
+    errors=$((errors + 1))
+  fi
+  if jq -e '.. | objects | has("flags_passthrough")' "$manifest" >/dev/null; then
+    echo "$manifest invalid: use capabilities.cliCommands[].flagsPassthrough instead of legacy flags_passthrough" >&2
+    errors=$((errors + 1))
+  fi
+  if ! jq -e '
+    [
+      (.capabilities.moduleTypes // [])[],
+      (.capabilities.stepTypes // [])[],
+      (.capabilities.triggerTypes // [])[],
+      (.capabilities.workflowHandlers // [])[],
+      (.capabilities.resourceTypes // [])[]
+    ] | all(. as $value | ($value | test("(^TEMPLATE\\.|\\.TEMPLATE\\.|\\.placeholder$|^placeholder\\.)") | not))
+  ' "$manifest" >/dev/null; then
+    echo "$manifest invalid: placeholder capability names must not be published" >&2
     errors=$((errors + 1))
   fi
   if ! jq -e '
