@@ -28,6 +28,7 @@
       "step.signal_fingerprint_assert",
       "step.signal_trust_observe",
       "step.signal_account_keys",
+      "step.signal_username_artifact_prepare",
       "step.signal_username_link_create",
       "step.signal_username_link_decrypt",
       "step.signal_service_contract_check",
@@ -77,32 +78,32 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "d92bac263b288bf6a493945953edc8e89b762c05489eae43a6aa7624f6f968fc",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.22.0/workflow-plugin-signal-darwin-amd64.tar.gz"
+      "sha256": "b9c17f4615a1d0368ccacd50bb2381aa6abad7436f99798f9229de2a155046f0",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.23.0/workflow-plugin-signal-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "9c4c9e739651d7253717f326d959fb10db5b935299ed3da63a2d7348159b115e",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.22.0/workflow-plugin-signal-darwin-arm64.tar.gz"
+      "sha256": "2604e134a41dbc559a5ed4213a92b6f6243a3c670738196cc32654461d18ea32",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.23.0/workflow-plugin-signal-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "49ce1184d9f67b5b182a83c2a910c0a33a67ce25a3bd9f88bf14ff1bd34d13af",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.22.0/workflow-plugin-signal-linux-amd64.tar.gz"
+      "sha256": "c537ef6cff1f93381b348a56bf5eb7d6c09a67c854c4530344d3b653f3b7a617",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.23.0/workflow-plugin-signal-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "5e19e85987bc591a96870d123f3b731b54cb721bae639e6d5d59f934273df420",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.22.0/workflow-plugin-signal-linux-arm64.tar.gz"
+      "sha256": "6055ae04b81ac5d72e5a50356b879e65f1bea68c9ab34c803fe8cd87441b8c19",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.23.0/workflow-plugin-signal-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "28a4472ebeb6b3d08784d3f9ce15a516cdfff729c409a4e278102cdbd43b5c11",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.22.0/workflow-plugin-signal-windows-amd64.tar.gz"
+      "sha256": "13e46b0ba8d5408395d6f137726d06ae5f2351fedd1ea0164dbf11bfc5377b34",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-signal/releases/download/v0.23.0/workflow-plugin-signal-windows-amd64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-signal",
@@ -115,5 +116,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.22.0"
+  "version": "0.23.0"
 }
