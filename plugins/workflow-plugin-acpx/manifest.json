@@ -1,0 +1,71 @@
+{
+  "author": "GoCodeAlone",
+  "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [],
+    "stepTypes": [
+      "acpx.bundle_validate",
+      "acpx.bundle_summary",
+      "acpx.flow_validate"
+    ],
+    "triggerTypes": []
+  },
+  "category": "ai",
+  "description": "ACPX durable bundle validation and summaries",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "sha256": "d331c4a402a7b5e55154cb28f8766bbacd3bbecdf9a7b5996c1c25e481451526",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-acpx/releases/download/v0.1.0/workflow-plugin-acpx_0.1.0_darwin_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "sha256": "83d8d75df8a42368c3746503ab25ba84cf855235244ac6f9325221480e9b8be6",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-acpx/releases/download/v0.1.0/workflow-plugin-acpx_0.1.0_darwin_arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "sha256": "1e5a9593177baf62a3ef004d1a8ca24d497cd22456ecf4d9c918501f2ed33335",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-acpx/releases/download/v0.1.0/workflow-plugin-acpx_0.1.0_linux_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "sha256": "e883da10ebcfd85177544db79f7af53c62322cb41c5b28aab065e62b591cdf97",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-acpx/releases/download/v0.1.0/workflow-plugin-acpx_0.1.0_linux_arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "windows",
+      "sha256": "cc6b6349e554cf107b4dc4f7caae723467bd9282522619aad23844276db9cc2a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-acpx/releases/download/v0.1.0/workflow-plugin-acpx_0.1.0_windows_amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "windows",
+      "sha256": "27e732aeea6cef36c969c521f5172caf711c5b5925e2fa935d82341148b71312",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-acpx/releases/download/v0.1.0/workflow-plugin-acpx_0.1.0_windows_arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-acpx",
+  "keywords": [
+    "acpx",
+    "acp",
+    "agent",
+    "replay",
+    "flow",
+    "archive"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.85.1",
+  "name": "workflow-plugin-acpx",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-acpx",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.0"
+}
