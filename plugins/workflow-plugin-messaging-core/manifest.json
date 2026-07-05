@@ -1,17 +1,7 @@
 {
-  "name": "workflow-plugin-messaging-core",
-  "version": "0.1.0",
   "author": "GoCodeAlone",
-  "description": "Shared messaging interfaces for workflow platform plugins",
-  "source": "github.com/GoCodeAlone/workflow-plugin-messaging-core",
-  "type": "external",
-  "tier": "community",
-  "license": "MIT",
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core",
-  "private": false,
-  "status": "experimental",
   "capabilities": {
+    "configProvider": false,
     "moduleTypes": [],
     "stepTypes": [
       "step.messaging_send",
@@ -19,8 +9,41 @@
       "step.messaging_receive",
       "step.messaging_react"
     ],
-    "triggerTypes": [],
-    "workflowHandlers": []
+    "triggerTypes": []
   },
-  "category": "core"
+  "category": "core",
+  "description": "Shared messaging interfaces for workflow platform plugins",
+  "downloads": [
+    {
+      "arch": "amd64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.2/workflow-plugin-messaging-core-darwin-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "darwin",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.2/workflow-plugin-messaging-core-darwin-arm64.tar.gz"
+    },
+    {
+      "arch": "amd64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.2/workflow-plugin-messaging-core-linux-amd64.tar.gz"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.2/workflow-plugin-messaging-core-linux-arm64.tar.gz"
+    }
+  ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core",
+  "license": "MIT",
+  "minEngineVersion": "0.51.7",
+  "name": "workflow-plugin-messaging-core",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core",
+  "source": "github.com/GoCodeAlone/workflow-plugin-messaging-core",
+  "status": "experimental",
+  "tier": "community",
+  "type": "external",
+  "version": "0.1.2"
 }
