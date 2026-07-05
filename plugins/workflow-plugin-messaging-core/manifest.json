@@ -17,22 +17,22 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.1/workflow-plugin-messaging-core-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.2/workflow-plugin-messaging-core-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.1/workflow-plugin-messaging-core-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.2/workflow-plugin-messaging-core-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.1/workflow-plugin-messaging-core-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.2/workflow-plugin-messaging-core-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.1/workflow-plugin-messaging-core-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core/releases/download/v0.1.2/workflow-plugin-messaging-core-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-messaging-core",
@@ -45,5 +45,5 @@
   "status": "experimental",
   "tier": "community",
   "type": "external",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }
