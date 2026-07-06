@@ -1,24 +1,5 @@
 {
-  "name": "workflow-plugin-eventbus",
-  "version": "0.3.7",
-  "description": "Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations.",
   "author": "GoCodeAlone",
-  "license": "MIT",
-  "type": "external",
-  "tier": "community",
-  "private": false,
-  "minEngineVersion": "0.53.0",
-  "keywords": [
-    "eventbus",
-    "nats",
-    "kafka",
-    "kinesis",
-    "iac",
-    "infra",
-    "jetstream"
-  ],
-  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-eventbus",
-  "repository": "https://github.com/GoCodeAlone/workflow-plugin-eventbus",
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
@@ -35,44 +16,63 @@
       "trigger.eventbus.subscribe"
     ]
   },
+  "category": "infrastructure",
+  "description": "Provisions durable event-bus clusters (NATS / Kafka / Kinesis) as IaC and exposes typed pipeline steps for publish / consume operations.",
   "downloads": [
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "ffacdae9a0676f91134610009bfe0f80e1a605fdb27cd74304b3f5f4e09ce223",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.7/workflow-plugin-eventbus-darwin-amd64.tar.gz"
+      "sha256": "474051b86a1fe197cc76d48edae3c3095e2d08a935c4954a26ef275f890f58d4",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.8/workflow-plugin-eventbus-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "127d79b14a340a97ff5967d02cd2f2f9cacc6acccd9fae9e389a849c6549aac5",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.7/workflow-plugin-eventbus-darwin-arm64.tar.gz"
+      "sha256": "d9b029d6f476c7c03610deefff5d32cdfde2414e44c0104e2ab381b01e43ee93",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.8/workflow-plugin-eventbus-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "501eec593483da539e77c1f74612c86955b6329f9f34876cbf1c4c65be4b7678",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.7/workflow-plugin-eventbus-linux-amd64.tar.gz"
+      "sha256": "42195ce1fad2383ae1926c5728acabe97877b332895ba9338eda30ea831e6b52",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.8/workflow-plugin-eventbus-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "4ec6c2d51c379637401fec1c5d22e43aa2ac10b0fde07534630cf07121b32f0a",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.7/workflow-plugin-eventbus-linux-arm64.tar.gz"
+      "sha256": "19776d9e3e112c86d6f64d72bdb14b9eee471f4030d72aa3065446c7f70cc2d1",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.8/workflow-plugin-eventbus-linux-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "5f28cf5ac162e0c4cb415457b739a385293a3476cb1197b3c073a4e948ba0028",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.7/workflow-plugin-eventbus-windows-amd64.tar.gz"
+      "sha256": "ae0abce1f5818d08ffde84267d9beb074c397283ef50ebe1ecbe8e8712eb0c6f",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.8/workflow-plugin-eventbus-windows-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "3b688c101f21bf036178ae1bd7f3348d459040b20d94a940f299cb0cb7e91324",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.7/workflow-plugin-eventbus-windows-arm64.tar.gz"
+      "sha256": "0e73ba5d81bcd263e94263a42a815f1c0322d013f4b184636e182cf90900d56d",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-eventbus/releases/download/v0.3.8/workflow-plugin-eventbus-windows-arm64.tar.gz"
     }
   ],
+  "homepage": "https://github.com/GoCodeAlone/workflow-plugin-eventbus",
+  "keywords": [
+    "eventbus",
+    "nats",
+    "kafka",
+    "kinesis",
+    "iac",
+    "infra",
+    "jetstream"
+  ],
+  "license": "MIT",
+  "minEngineVersion": "0.53.0",
+  "name": "workflow-plugin-eventbus",
+  "private": false,
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-eventbus",
   "status": "verified",
-  "category": "infrastructure"
+  "tier": "community",
+  "type": "external",
+  "version": "0.3.8"
 }
