@@ -57,6 +57,7 @@ validate_releases_file() {
       has("tag_name") and (.tag_name | type == "string" and test("\\S")) and
       has("draft") and (.draft | type == "boolean") and
       has("prerelease") and (.prerelease | type == "boolean") and
+      has("assets") and (.assets | type == "array") and
       has("published_at") and
       (if .draft
        then (.published_at == null or (.published_at | valid_timestamp))

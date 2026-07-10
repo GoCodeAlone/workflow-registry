@@ -231,6 +231,10 @@ if [[ "${endpoint}" == "repos/example/shared-plugin/releases?per_page=100" ||
       printf '[{"tag_name":"v0.36.1","published_at":"not-a-timestamp","draft":false,"prerelease":false,"assets":[]}]\n'
       exit 0
       ;;
+    invalid-assets-type)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":{}}]\n'
+      exit 0
+      ;;
   esac
 fi
 
@@ -311,6 +315,7 @@ assert_failed_build_preserves_alpha "invalid-prerelease-type" "release with non-
 assert_failed_build_preserves_alpha "empty-tag" "release with empty tag"
 assert_failed_build_preserves_alpha "missing-published" "non-draft release missing published timestamp"
 assert_failed_build_preserves_alpha "invalid-published" "release with invalid published timestamp"
+assert_failed_build_preserves_alpha "invalid-assets-type" "release with non-array assets"
 
 GH_CALLS_FILE="${calls_file}" PATH="${tmp}/bin:${PATH}" \
   bash "${tmp}/scripts/build-versions.sh" >/dev/null
