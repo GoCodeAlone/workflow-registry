@@ -2,8 +2,8 @@
 # tests/test-build-versions.sh
 #
 # Regression coverage for scripts/build-versions.sh. The version builder should
-# fetch GitHub release metadata and assets in one cached REST call per upstream
-# repo, preserving the public versions.json/latest.json contract.
+# fetch paginated GitHub release metadata and cache it per upstream repo while
+# preserving the public versions.json/latest.json contract.
 
 set -euo pipefail
 
@@ -22,9 +22,14 @@ mkdir -p "${tmp}/scripts" \
   "${tmp}/plugins/plugin-alpha" \
   "${tmp}/plugins/plugin-beta" \
   "${tmp}/plugins/plugin-local" \
+  "${tmp}/plugins/plugin-no-releases" \
   "${tmp}/plugins/plugin-prerelease-only" \
+  "${tmp}/v1/plugins/plugin-alpha" \
+  "${tmp}/v1/plugins/plugin-no-releases" \
   "${tmp}/v1/plugins/plugin-prerelease-only" \
+  "${tmp}/public/plugins/plugin-no-releases" \
   "${tmp}/public/plugins/plugin-prerelease-only" \
+  "${tmp}/public/v1/plugins/plugin-no-releases" \
   "${tmp}/public/v1/plugins/plugin-prerelease-only" \
   "${tmp}/bin"
 
@@ -54,6 +59,36 @@ cat > "${tmp}/plugins/plugin-prerelease-only/manifest.json" <<'JSON'
 {
   "name": "plugin-prerelease-only",
   "repository": "https://github.com/example/prerelease-only"
+}
+JSON
+
+cat > "${tmp}/plugins/plugin-no-releases/manifest.json" <<'JSON'
+{
+  "name": "plugin-no-releases",
+  "repository": "https://github.com/example/no-releases"
+}
+JSON
+
+cat > "${tmp}/v1/plugins/plugin-no-releases/latest.json" <<'JSON'
+{
+  "version": "0.8.0"
+}
+JSON
+cp "${tmp}/v1/plugins/plugin-no-releases/latest.json" \
+  "${tmp}/public/plugins/plugin-no-releases/latest.json"
+cp "${tmp}/v1/plugins/plugin-no-releases/latest.json" \
+  "${tmp}/public/v1/plugins/plugin-no-releases/latest.json"
+
+cat > "${tmp}/v1/plugins/plugin-alpha/versions.json" <<'JSON'
+{
+  "name": "plugin-alpha",
+  "versions": [{"version": "0.35.0", "prerelease": false}]
+}
+JSON
+cat > "${tmp}/v1/plugins/plugin-alpha/latest.json" <<'JSON'
+{
+  "version": "0.35.0",
+  "prerelease": false
 }
 JSON
 
@@ -87,25 +122,41 @@ if [[ "$1" != "api" ]]; then
 fi
 
 endpoint="$2"
-case "${endpoint}" in
-  repos/example/shared-plugin/releases\?per_page=100)
-    printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
-    cat <<'JSON'
+mode="${GH_FIXTURE_MODE:-success}"
+
+emit_shared_page_one() {
+  jq -n '
+    [
+      {
+        tag_name: "v1.0.0-rc.1",
+        published_at: "2026-07-10T12:00:00Z",
+        draft: false,
+        prerelease: true,
+        assets: []
+      },
+      {
+        tag_name: "v1.1.0",
+        published_at: null,
+        draft: true,
+        prerelease: false,
+        assets: []
+      }
+    ] + [
+      range(2; 100) as $release |
+      {
+        tag_name: ("v9.0.0-draft." + ($release | tostring)),
+        published_at: null,
+        draft: true,
+        prerelease: true,
+        assets: []
+      }
+    ]
+  '
+}
+
+emit_shared_page_two() {
+  cat <<'JSON'
 [
-  {
-    "tag_name": "v1.0.0-rc.1",
-    "published_at": "2026-07-10T12:00:00Z",
-    "draft": false,
-    "prerelease": true,
-    "assets": []
-  },
-  {
-    "tag_name": "v1.1.0",
-    "published_at": "2026-07-09T12:00:00Z",
-    "draft": true,
-    "prerelease": false,
-    "assets": []
-  },
   {
     "tag_name": "v0.36.1",
     "published_at": "2026-07-08T12:00:00Z",
@@ -139,8 +190,64 @@ case "${endpoint}" in
   }
 ]
 JSON
+}
+
+if [[ "${endpoint}" == "repos/example/shared-plugin/releases?per_page=100" ||
+      "${endpoint}" == "repos/example/shared-plugin/releases?per_page=100&page=1" ]]; then
+  case "${mode}" in
+    api-failure)
+      echo "fixture API failure" >&2
+      exit 44
+      ;;
+    malformed-json)
+      printf '{not-json\n'
+      exit 0
+      ;;
+    missing-draft)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","prerelease":false,"assets":[]}]\n'
+      exit 0
+      ;;
+    invalid-draft-type)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":"false","prerelease":false,"assets":[]}]\n'
+      exit 0
+      ;;
+    missing-prerelease)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"assets":[]}]\n'
+      exit 0
+      ;;
+    invalid-prerelease-type)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":"false","assets":[]}]\n'
+      exit 0
+      ;;
+    empty-tag)
+      printf '[{"tag_name":"","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":[]}]\n'
+      exit 0
+      ;;
+    missing-published)
+      printf '[{"tag_name":"v0.36.1","published_at":null,"draft":false,"prerelease":false,"assets":[]}]\n'
+      exit 0
+      ;;
+    invalid-published)
+      printf '[{"tag_name":"v0.36.1","published_at":"not-a-timestamp","draft":false,"prerelease":false,"assets":[]}]\n'
+      exit 0
+      ;;
+  esac
+fi
+
+case "${endpoint}" in
+  repos/example/shared-plugin/releases\?per_page=100|repos/example/shared-plugin/releases\?per_page=100\&page=1)
+    printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
+    emit_shared_page_one
     ;;
-  repos/example/prerelease-only/releases\?per_page=100)
+  repos/example/shared-plugin/releases\?per_page=100\&page=2)
+    printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
+    emit_shared_page_two
+    ;;
+  repos/example/no-releases/releases\?per_page=100|repos/example/no-releases/releases\?per_page=100\&page=1)
+    printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
+    printf '[]\n'
+    ;;
+  repos/example/prerelease-only/releases\?per_page=100|repos/example/prerelease-only/releases\?per_page=100\&page=1)
     printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
     cat <<'JSON'
 [
@@ -171,12 +278,45 @@ chmod +x "${tmp}/bin/gh"
 
 PATH="${tmp}/bin:${PATH}" \
   bash "${tmp}/scripts/build-index.sh" >/dev/null
+
+fail() { echo "FAIL: $*" >&2; exit 1; }
+alpha_versions="${tmp}/v1/plugins/plugin-alpha/versions.json"
+alpha_latest="${tmp}/v1/plugins/plugin-alpha/latest.json"
+expected_alpha_versions="${tmp}/expected-alpha-versions.json"
+expected_alpha_latest="${tmp}/expected-alpha-latest.json"
+cp "${alpha_versions}" "${expected_alpha_versions}"
+cp "${alpha_latest}" "${expected_alpha_latest}"
+
+assert_failed_build_preserves_alpha() {
+  local mode="$1" description="$2"
+  local output="${tmp}/build-${mode}.log"
+
+  if GH_FIXTURE_MODE="${mode}" GH_CALLS_FILE="${calls_file}" PATH="${tmp}/bin:${PATH}" \
+    bash "${tmp}/scripts/build-versions.sh" >"${output}" 2>&1; then
+    fail "${description} unexpectedly succeeded"
+  fi
+
+  cmp --silent "${expected_alpha_versions}" "${alpha_versions}" || \
+    fail "${description} replaced existing versions.json"
+  cmp --silent "${expected_alpha_latest}" "${alpha_latest}" || \
+    fail "${description} replaced or removed existing latest.json"
+}
+
+assert_failed_build_preserves_alpha "api-failure" "API fetch failure"
+assert_failed_build_preserves_alpha "malformed-json" "malformed API JSON"
+assert_failed_build_preserves_alpha "missing-draft" "release missing draft"
+assert_failed_build_preserves_alpha "invalid-draft-type" "release with non-boolean draft"
+assert_failed_build_preserves_alpha "missing-prerelease" "release missing prerelease"
+assert_failed_build_preserves_alpha "invalid-prerelease-type" "release with non-boolean prerelease"
+assert_failed_build_preserves_alpha "empty-tag" "release with empty tag"
+assert_failed_build_preserves_alpha "missing-published" "non-draft release missing published timestamp"
+assert_failed_build_preserves_alpha "invalid-published" "release with invalid published timestamp"
+
 GH_CALLS_FILE="${calls_file}" PATH="${tmp}/bin:${PATH}" \
   bash "${tmp}/scripts/build-versions.sh" >/dev/null
 PATH="${tmp}/bin:${PATH}" \
   bash "${tmp}/scripts/prepare-pages-artifact.sh" >/dev/null
 
-fail() { echo "FAIL: $*" >&2; exit 1; }
 assert_jq_file() {
   local desc="$1" file="$2" expr="$3" expected="$4"
   local actual
@@ -186,22 +326,27 @@ assert_jq_file() {
   fi
 }
 
-alpha_versions="${tmp}/v1/plugins/plugin-alpha/versions.json"
-alpha_latest="${tmp}/v1/plugins/plugin-alpha/latest.json"
 beta_latest="${tmp}/v1/plugins/plugin-beta/latest.json"
 local_versions="${tmp}/v1/plugins/plugin-local/versions.json"
+no_releases_versions="${tmp}/v1/plugins/plugin-no-releases/versions.json"
+no_releases_latest="${tmp}/v1/plugins/plugin-no-releases/latest.json"
 prerelease_versions="${tmp}/v1/plugins/plugin-prerelease-only/versions.json"
 prerelease_latest="${tmp}/v1/plugins/plugin-prerelease-only/latest.json"
 root_alpha_latest="${tmp}/public/plugins/plugin-alpha/latest.json"
 v1_alpha_latest="${tmp}/public/v1/plugins/plugin-alpha/latest.json"
+root_alpha_versions="${tmp}/public/plugins/plugin-alpha/versions.json"
+v1_alpha_versions="${tmp}/public/v1/plugins/plugin-alpha/versions.json"
 
 test -f "${alpha_versions}" || fail "plugin-alpha versions.json missing"
-test -f "${alpha_latest}" || fail "plugin-alpha latest.json missing"
+test -f "${alpha_latest}" || fail "stable release on page 2 was not published as latest"
 test -f "${beta_latest}" || fail "plugin-beta latest.json missing"
 test -f "${local_versions}" || fail "plugin-local versions.json missing"
+test -f "${no_releases_versions}" || fail "plugin-no-releases versions.json missing"
 test -f "${prerelease_versions}" || fail "plugin-prerelease-only versions.json missing"
 test -f "${root_alpha_latest}" || fail "public root plugin-alpha latest.json missing"
 test -f "${v1_alpha_latest}" || fail "public v1 plugin-alpha latest.json missing"
+test -f "${root_alpha_versions}" || fail "public root plugin-alpha versions.json missing"
+test -f "${v1_alpha_versions}" || fail "public v1 plugin-alpha versions.json missing"
 
 assert_jq_file "alpha latest stays on stable release" "${alpha_latest}" '.version' '"0.36.1"'
 assert_jq_file "alpha versions has two non-draft releases" "${alpha_versions}" '.versions | length' '2'
@@ -211,16 +356,24 @@ assert_jq_file "alpha stable release marked non-prerelease" "${alpha_versions}" 
   '.versions[] | select(.version=="0.36.1") | .prerelease' 'false'
 assert_jq_file "alpha draft excluded" "${alpha_versions}" \
   '[.versions[] | select(.version=="1.1.0")] | length' '0'
-assert_jq_file "canonical plugin index stays stable" "${tmp}/v1/index.json" \
+assert_jq_file "manifest-backed canonical plugin index stays stable" "${tmp}/v1/index.json" \
   '.[] | select(.name=="plugin-alpha") | .version' '"0.36.1"'
-assert_jq_file "public root plugin index stays stable" "${tmp}/public/index.json" \
+assert_jq_file "manifest-backed public root plugin index stays stable" "${tmp}/public/index.json" \
   '.[] | select(.name=="plugin-alpha") | .version' '"0.36.1"'
-assert_jq_file "public v1 plugin index stays stable" "${tmp}/public/v1/index.json" \
+assert_jq_file "manifest-backed public v1 plugin index stays stable" "${tmp}/public/v1/index.json" \
   '.[] | select(.name=="plugin-alpha") | .version' '"0.36.1"'
 assert_jq_file "public root latest stays stable" "${root_alpha_latest}" \
   '.version' '"0.36.1"'
 assert_jq_file "public v1 latest stays stable" "${v1_alpha_latest}" \
   '.version' '"0.36.1"'
+assert_jq_file "public root versions retains RC metadata" "${root_alpha_versions}" \
+  '.versions[] | select(.version=="1.0.0-rc.1") | .prerelease' 'true'
+assert_jq_file "public v1 versions retains RC metadata" "${v1_alpha_versions}" \
+  '.versions[] | select(.version=="1.0.0-rc.1") | .prerelease' 'true'
+assert_jq_file "public root versions excludes drafts" "${root_alpha_versions}" \
+  '[.versions[] | select(.version=="1.1.0")] | length' '0'
+assert_jq_file "public v1 versions excludes drafts" "${v1_alpha_versions}" \
+  '[.versions[] | select(.version=="1.1.0")] | length' '0'
 assert_jq_file "alpha min engine propagated" "${alpha_latest}" '.minEngineVersion' '"0.75.0"'
 assert_jq_file "matching assets only" "${alpha_latest}" '.downloads | length' '3'
 assert_jq_file "download URL uses browser_download_url" "${alpha_latest}" \
@@ -239,20 +392,27 @@ assert_jq_file "beta reuses same release data with its own min engine" "${beta_l
   '.minEngineVersion' '"0.76.0"'
 assert_jq_file "non-GitHub plugin writes empty versions" "${local_versions}" \
   '.versions' '[]'
+assert_jq_file "no-release repo writes empty versions" "${no_releases_versions}" \
+  '.versions' '[]'
 assert_jq_file "prerelease-only repo retains RC history" "${prerelease_versions}" \
   '.versions[] | select(.version=="2.0.0-rc.1") | .prerelease' 'true'
 assert_jq_file "prerelease-only repo excludes draft" "${prerelease_versions}" \
   '[.versions[] | select(.version=="1.0.0")] | length' '0'
 
 [[ ! -e "${prerelease_latest}" ]] || fail "prerelease-only latest.json was not removed"
+[[ ! -e "${no_releases_latest}" ]] || fail "no-release latest.json was not removed"
+[[ ! -e "${tmp}/public/plugins/plugin-no-releases/latest.json" ]] || \
+  fail "no-release latest.json was published at root"
+[[ ! -e "${tmp}/public/v1/plugins/plugin-no-releases/latest.json" ]] || \
+  fail "no-release latest.json was published at v1"
 [[ ! -e "${tmp}/public/plugins/plugin-prerelease-only/latest.json" ]] || \
   fail "prerelease-only latest.json was published at root"
 [[ ! -e "${tmp}/public/v1/plugins/plugin-prerelease-only/latest.json" ]] || \
   fail "prerelease-only latest.json was published at v1"
 
 api_calls="$(wc -l < "${calls_file}" | tr -d ' ')"
-if [[ "${api_calls}" != "2" ]]; then
-  fail "expected two gh api calls for two upstream repos, got ${api_calls}"
+if [[ "${api_calls}" != "4" ]]; then
+  fail "expected four paginated gh api calls for three upstream repos, got ${api_calls}"
 fi
 
 echo "OK - test-build-versions.sh passed"
