@@ -17,6 +17,7 @@ fi
 
 tmp="$(mktemp -d)"
 trap 'rm -rf "${tmp}"' EXIT
+real_cp="$(command -v cp)"
 
 mkdir -p "${tmp}/scripts" \
   "${tmp}/plugins/plugin-alpha" \
@@ -343,11 +344,27 @@ expected_alpha_latest="${tmp}/expected-alpha-latest.json"
 cp "${alpha_versions}" "${expected_alpha_versions}"
 cp "${alpha_latest}" "${expected_alpha_latest}"
 
+failure_marker="${tmp}/first-versions-copy-failure"
+cat > "${tmp}/bin/cp" <<SH
+#!/usr/bin/env bash
+set -euo pipefail
+
+destination="\$2"
+if [[ -e "${failure_marker}" &&
+      "\${destination}" == *.versions.json.* ]]; then
+  printf 'partial output\n' > "\${destination}"
+  exit 77
+fi
+
+exec "\${REAL_CP}" "\$@"
+SH
+chmod +x "${tmp}/bin/cp"
+
 assert_failed_build_preserves_alpha() {
   local mode="$1" description="$2"
   local output="${tmp}/build-${mode}.log"
 
-  if GH_FIXTURE_MODE="${mode}" GH_CALLS_FILE="${calls_file}" PATH="${tmp}/bin:${PATH}" \
+  if GH_FIXTURE_MODE="${mode}" GH_CALLS_FILE="${calls_file}" REAL_CP="${real_cp}" PATH="${tmp}/bin:${PATH}" \
     bash "${tmp}/scripts/build-versions.sh" >"${output}" 2>&1; then
     fail "${description} unexpectedly succeeded"
   fi
@@ -378,10 +395,31 @@ assert_failed_build_preserves_alpha "missing-asset-effective-url" "asset without
 assert_failed_build_preserves_alpha "page-2-api-failure" "page 2 API failure"
 assert_failed_build_preserves_alpha "page-2-schema-failure" "page 2 schema failure"
 
+touch "${failure_marker}"
+if GH_CALLS_FILE="${calls_file}" REAL_CP="${real_cp}" \
+  PATH="${tmp}/bin:${PATH}" bash "${tmp}/scripts/build-versions.sh" \
+  >"${tmp}/build-first-versions-copy-failure.log" 2>&1; then
+  fail "first versions copy failure unexpectedly succeeded"
+fi
+rm -f "${failure_marker}"
+cmp --silent "${expected_alpha_versions}" "${alpha_versions}" || \
+  fail "first versions copy failure replaced existing versions.json"
+cmp --silent "${expected_alpha_latest}" "${alpha_latest}" || \
+  fail "first versions copy failure replaced or removed existing latest.json"
+shopt -s nullglob
+leftover_output_temps=(
+  "${tmp}/v1/plugins/plugin-alpha"/.versions.json.*
+  "${tmp}/v1/plugins/plugin-alpha"/.latest.json.*
+)
+shopt -u nullglob
+if ((${#leftover_output_temps[@]} != 0)); then
+  fail "first versions copy failure left output temp files: ${leftover_output_temps[*]}"
+fi
+
 : > "${calls_file}"
-GH_CALLS_FILE="${calls_file}" PATH="${tmp}/bin:${PATH}" \
+GH_CALLS_FILE="${calls_file}" REAL_CP="${real_cp}" PATH="${tmp}/bin:${PATH}" \
   bash "${tmp}/scripts/build-versions.sh" >/dev/null
-PATH="${tmp}/bin:${PATH}" \
+REAL_CP="${real_cp}" PATH="${tmp}/bin:${PATH}" \
   bash "${tmp}/scripts/prepare-pages-artifact.sh" >/dev/null
 
 assert_jq_file() {

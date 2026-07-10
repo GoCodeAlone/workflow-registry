@@ -141,7 +141,10 @@ publish_plugin_outputs() {
   latest_tmp="${dest_dir}/.latest.json.$$"
   rm -f "${versions_tmp}" "${latest_tmp}"
 
-  cp "${versions_source}" "${versions_tmp}"
+  if ! cp "${versions_source}" "${versions_tmp}"; then
+    rm -f "${versions_tmp}" "${latest_tmp}"
+    return 1
+  fi
   if [[ -n "${latest_source}" ]]; then
     if ! cp "${latest_source}" "${latest_tmp}"; then
       rm -f "${versions_tmp}" "${latest_tmp}"
@@ -203,7 +206,8 @@ while IFS= read -r manifest; do
     continue
   fi
 
-  # For each release tag, fetch full asset list (includes digest/sha256)
+  # Build each version from the releases-list response; assets are embedded
+  # there, so no per-tag network fetch is needed.
   final_versions_file="${release_cache_root}/versions-$(echo "${plugin_name}" | sed 's/[^A-Za-z0-9._-]/_/g').json"
   printf '[]\n' > "${final_versions_file}"
   while IFS= read -r release_entry; do
