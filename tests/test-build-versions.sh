@@ -183,7 +183,7 @@ emit_shared_page_two() {
       },
       {
         "name": "workflow-plugin-shared-linux-arm64.tar.gz",
-        "browser_download_url": null,
+        "browser_download_url": "",
         "url": "https://api.github.com/repos/example/shared-plugin/releases/assets/4",
         "digest": null
       },
@@ -261,6 +261,10 @@ if [[ "${endpoint}" == "repos/example/shared-plugin/releases?per_page=100" ||
       printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":[{"name":"workflow-plugin-shared-linux-amd64.tar.gz","browser_download_url":"https://downloads.example/shared/v0.36.1/linux-amd64.tar.gz","url":null,"digest":{}}]}]\n'
       exit 0
       ;;
+    invalid-asset-digest-content)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":[{"name":"workflow-plugin-shared-linux-amd64.tar.gz","browser_download_url":"https://downloads.example/shared/v0.36.1/linux-amd64.tar.gz","url":null,"digest":"sha256:not-a-sha256"}]}]\n'
+      exit 0
+      ;;
     missing-asset-effective-url)
       printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":[{"name":"workflow-plugin-shared-linux-amd64.tar.gz","browser_download_url":"","url":null,"digest":null}]}]\n'
       exit 0
@@ -278,6 +282,10 @@ case "${endpoint}" in
     if [[ "${mode}" == "page-2-api-failure" ]]; then
       echo "fixture page 2 API failure" >&2
       exit 45
+    fi
+    if [[ "${mode}" == "page-2-schema-failure" ]]; then
+      printf '{"not":"an array"}\n'
+      exit 0
     fi
     emit_shared_page_two
     ;;
@@ -355,8 +363,10 @@ assert_failed_build_preserves_alpha "invalid-asset-name-type" "asset with non-st
 assert_failed_build_preserves_alpha "invalid-asset-browser-url-type" "asset with non-string browser URL"
 assert_failed_build_preserves_alpha "invalid-asset-api-url-type" "asset with non-string API URL"
 assert_failed_build_preserves_alpha "invalid-asset-digest-type" "asset with non-string digest"
+assert_failed_build_preserves_alpha "invalid-asset-digest-content" "asset with invalid digest content"
 assert_failed_build_preserves_alpha "missing-asset-effective-url" "asset without effective URL"
 assert_failed_build_preserves_alpha "page-2-api-failure" "page 2 API failure"
+assert_failed_build_preserves_alpha "page-2-schema-failure" "page 2 schema failure"
 
 : > "${calls_file}"
 GH_CALLS_FILE="${calls_file}" PATH="${tmp}/bin:${PATH}" \
@@ -397,6 +407,8 @@ test -f "${v1_alpha_versions}" || fail "public v1 plugin-alpha versions.json mis
 
 assert_jq_file "alpha latest stays on stable release" "${alpha_latest}" '.version' '"0.36.1"'
 assert_jq_file "alpha versions has two non-draft releases" "${alpha_versions}" '.versions | length' '2'
+assert_jq_file "alpha versions preserve API order" "${alpha_versions}" \
+  '[.versions[].version]' '["1.0.0-rc.1","0.36.1"]'
 assert_jq_file "alpha RC retained as prerelease" "${alpha_versions}" \
   '.versions[] | select(.version=="1.0.0-rc.1") | .prerelease' 'true'
 assert_jq_file "alpha stable release marked non-prerelease" "${alpha_versions}" \

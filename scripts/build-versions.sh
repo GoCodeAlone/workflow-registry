@@ -53,6 +53,10 @@ validate_releases_file() {
     def nullable_string:
       . == null or type == "string";
 
+    def valid_digest:
+      . == null or
+      (type == "string" and test("^sha256:[0-9A-Fa-f]{64}$"));
+
     def valid_timestamp:
       if type != "string" or
          (test("^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$") | not)
@@ -76,7 +80,7 @@ validate_releases_file() {
         has("name") and (.name | nonempty_string) and
         (.browser_download_url | nullable_string) and
         (.url | nullable_string) and
-        (.digest | nullable_string) and
+        (.digest | valid_digest) and
         ((.browser_download_url | nonempty_string) or
          (.url | nonempty_string))
       ) and
@@ -224,7 +228,10 @@ while IFS= read -r manifest; do
           {
             os:     $parts.os,
             arch:   $parts.arch,
-            url:    ($asset.browser_download_url // $asset.url // ""),
+            url:    (if ($asset.browser_download_url // "") != ""
+                    then $asset.browser_download_url
+                    else ($asset.url // "")
+                    end),
             sha256: (($asset.digest // "") | ltrimstr("sha256:"))
           }
         ]
