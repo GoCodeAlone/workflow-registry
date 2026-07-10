@@ -51,6 +51,7 @@ while IFS= read -r manifest; do
   plugin_name="$(basename "$(dirname "${manifest}")")"
   dest_dir="${OUT_DIR}/plugins/${plugin_name}"
   mkdir -p "${dest_dir}"
+  rm -f "${dest_dir}/latest.json"
 
   # Read fields from manifest
   repository="$(jq -r '.repository // empty' "${manifest}")"
@@ -110,6 +111,7 @@ while IFS= read -r manifest; do
       {
         version: $ver,
         released: $published_at,
+        prerelease: ((.prerelease // false) == true),
         minEngineVersion: (if $minEng != "" then $minEng else null end),
         downloads: [
           (.assets // [])[] |
@@ -130,7 +132,7 @@ while IFS= read -r manifest; do
     jq --slurpfile v "${version_entry_file}" '. + [$v[0]]' \
       "${final_versions_file}" > "${next_versions_file}"
     mv "${next_versions_file}" "${final_versions_file}"
-  done < <(echo "${releases_list}" | jq -c '.[]')
+  done < <(echo "${releases_list}" | jq -c '.[] | select((.draft // false) == false)')
 
   # Write versions.json (newest-first order preserved from gh release list)
   jq -n \
@@ -142,11 +144,13 @@ while IFS= read -r manifest; do
   version_count="$(jq 'length' "${final_versions_file}")"
   echo "    wrote ${version_count} version(s)"
 
-  # Write latest.json (first/newest version entry)
-  latest="$(jq 'first // null' "${final_versions_file}")"
+  # Write latest.json from the first non-prerelease in GitHub release order.
+  latest="$(jq 'map(select(.prerelease == false)) | first // null' "${final_versions_file}")"
   if [[ "${latest}" != "null" ]]; then
     echo "${latest}" > "${dest_dir}/latest.json"
     echo "    latest: $(echo "${latest}" | jq -r '.version')"
+  else
+    echo "    no stable release found"
   fi
 
 done < <(find "${PLUGINS_DIR}" -name "manifest.json" | sort)
