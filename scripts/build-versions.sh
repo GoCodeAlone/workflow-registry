@@ -47,17 +47,39 @@ validate_releases_file() {
   local gh_repo="$1" releases_file="$2"
 
   if ! jq -e '
+    def nonempty_string:
+      if type == "string" then test("\\S") else false end;
+
+    def nullable_string:
+      . == null or type == "string";
+
     def valid_timestamp:
-      type == "string" and
-      ((try fromdateiso8601 catch null) != null);
+      if type != "string" or
+         (test("^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$") | not)
+      then false
+      else
+        (try fromdateiso8601 catch null) as $epoch |
+        if $epoch == null then false
+        else (($epoch | todateiso8601) == .)
+        end
+      end;
 
     type == "array" and
     all(.[];
       type == "object" and
-      has("tag_name") and (.tag_name | type == "string" and test("\\S")) and
+      has("tag_name") and (.tag_name | nonempty_string) and
       has("draft") and (.draft | type == "boolean") and
       has("prerelease") and (.prerelease | type == "boolean") and
       has("assets") and (.assets | type == "array") and
+      all(.assets[];
+        type == "object" and
+        has("name") and (.name | nonempty_string) and
+        (.browser_download_url | nullable_string) and
+        (.url | nullable_string) and
+        (.digest | nullable_string) and
+        ((.browser_download_url | nonempty_string) or
+         (.url | nonempty_string))
+      ) and
       has("published_at") and
       (if .draft
        then (.published_at == null or (.published_at | valid_timestamp))

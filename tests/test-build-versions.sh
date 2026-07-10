@@ -182,6 +182,12 @@ emit_shared_page_two() {
         "digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
       },
       {
+        "name": "workflow-plugin-shared-linux-arm64.tar.gz",
+        "browser_download_url": null,
+        "url": "https://api.github.com/repos/example/shared-plugin/releases/assets/4",
+        "digest": null
+      },
+      {
         "name": "checksums.txt",
         "browser_download_url": "https://downloads.example/shared/v0.36.1/checksums.txt",
         "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
@@ -235,6 +241,30 @@ if [[ "${endpoint}" == "repos/example/shared-plugin/releases?per_page=100" ||
       printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":{}}]\n'
       exit 0
       ;;
+    invalid-calendar-timestamp)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-02-30T12:00:00Z","draft":false,"prerelease":false,"assets":[]}]\n'
+      exit 0
+      ;;
+    invalid-asset-name-type)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":[{"name":42,"browser_download_url":"https://downloads.example/shared/v0.36.1/linux-amd64.tar.gz","url":null,"digest":null}]}]\n'
+      exit 0
+      ;;
+    invalid-asset-browser-url-type)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":[{"name":"workflow-plugin-shared-linux-amd64.tar.gz","browser_download_url":{},"url":"https://api.github.com/assets/1","digest":null}]}]\n'
+      exit 0
+      ;;
+    invalid-asset-api-url-type)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":[{"name":"workflow-plugin-shared-linux-amd64.tar.gz","browser_download_url":null,"url":[],"digest":null}]}]\n'
+      exit 0
+      ;;
+    invalid-asset-digest-type)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":[{"name":"workflow-plugin-shared-linux-amd64.tar.gz","browser_download_url":"https://downloads.example/shared/v0.36.1/linux-amd64.tar.gz","url":null,"digest":{}}]}]\n'
+      exit 0
+      ;;
+    missing-asset-effective-url)
+      printf '[{"tag_name":"v0.36.1","published_at":"2026-07-08T12:00:00Z","draft":false,"prerelease":false,"assets":[{"name":"workflow-plugin-shared-linux-amd64.tar.gz","browser_download_url":"","url":null,"digest":null}]}]\n'
+      exit 0
+      ;;
   esac
 fi
 
@@ -245,6 +275,10 @@ case "${endpoint}" in
     ;;
   repos/example/shared-plugin/releases\?per_page=100\&page=2)
     printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
+    if [[ "${mode}" == "page-2-api-failure" ]]; then
+      echo "fixture page 2 API failure" >&2
+      exit 45
+    fi
     emit_shared_page_two
     ;;
   repos/example/no-releases/releases\?per_page=100|repos/example/no-releases/releases\?per_page=100\&page=1)
@@ -316,7 +350,15 @@ assert_failed_build_preserves_alpha "empty-tag" "release with empty tag"
 assert_failed_build_preserves_alpha "missing-published" "non-draft release missing published timestamp"
 assert_failed_build_preserves_alpha "invalid-published" "release with invalid published timestamp"
 assert_failed_build_preserves_alpha "invalid-assets-type" "release with non-array assets"
+assert_failed_build_preserves_alpha "invalid-calendar-timestamp" "release with nonexistent calendar timestamp"
+assert_failed_build_preserves_alpha "invalid-asset-name-type" "asset with non-string name"
+assert_failed_build_preserves_alpha "invalid-asset-browser-url-type" "asset with non-string browser URL"
+assert_failed_build_preserves_alpha "invalid-asset-api-url-type" "asset with non-string API URL"
+assert_failed_build_preserves_alpha "invalid-asset-digest-type" "asset with non-string digest"
+assert_failed_build_preserves_alpha "missing-asset-effective-url" "asset without effective URL"
+assert_failed_build_preserves_alpha "page-2-api-failure" "page 2 API failure"
 
+: > "${calls_file}"
 GH_CALLS_FILE="${calls_file}" PATH="${tmp}/bin:${PATH}" \
   bash "${tmp}/scripts/build-versions.sh" >/dev/null
 PATH="${tmp}/bin:${PATH}" \
@@ -380,7 +422,7 @@ assert_jq_file "public root versions excludes drafts" "${root_alpha_versions}" \
 assert_jq_file "public v1 versions excludes drafts" "${v1_alpha_versions}" \
   '[.versions[] | select(.version=="1.1.0")] | length' '0'
 assert_jq_file "alpha min engine propagated" "${alpha_latest}" '.minEngineVersion' '"0.75.0"'
-assert_jq_file "matching assets only" "${alpha_latest}" '.downloads | length' '3'
+assert_jq_file "matching assets only" "${alpha_latest}" '.downloads | length' '4'
 assert_jq_file "download URL uses browser_download_url" "${alpha_latest}" \
   '.downloads[] | select(.os=="linux" and .arch=="amd64") | .url' \
   '"https://downloads.example/shared/v0.36.1/linux-amd64.tar.gz"'
@@ -393,6 +435,11 @@ assert_jq_file "underscore asset names are parsed" "${alpha_latest}" \
 assert_jq_file "underscore asset sha256 prefix stripped" "${alpha_latest}" \
   '.downloads[] | select(.os=="windows" and .arch=="arm64") | .sha256' \
   '"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"'
+assert_jq_file "API asset URL is accepted" "${alpha_latest}" \
+  '.downloads[] | select(.os=="linux" and .arch=="arm64") | .url' \
+  '"https://api.github.com/repos/example/shared-plugin/releases/assets/4"'
+assert_jq_file "null asset digest emits empty sha256" "${alpha_latest}" \
+  '.downloads[] | select(.os=="linux" and .arch=="arm64") | .sha256' '""'
 assert_jq_file "beta reuses same release data with its own min engine" "${beta_latest}" \
   '.minEngineVersion' '"0.76.0"'
 assert_jq_file "non-GitHub plugin writes empty versions" "${local_versions}" \
