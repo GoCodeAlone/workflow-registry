@@ -155,7 +155,13 @@ emit_shared_page_one() {
 }
 
 emit_shared_page_two() {
-  cat <<'JSON'
+  cat <<'JSON' | jq '. + [range(1; 100) as $release | {
+    tag_name: ("v8.0.0-draft." + ($release | tostring)),
+    published_at: null,
+    draft: true,
+    prerelease: true,
+    assets: []
+  }]'
 [
   {
     "tag_name": "v0.36.1",
@@ -288,6 +294,10 @@ case "${endpoint}" in
       exit 0
     fi
     emit_shared_page_two
+    ;;
+  repos/example/shared-plugin/releases\?per_page=100\&page=3)
+    echo "unexpected page 3 request" >&2
+    exit 43
     ;;
   repos/example/no-releases/releases\?per_page=100|repos/example/no-releases/releases\?per_page=100\&page=1)
     printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"

@@ -98,7 +98,7 @@ validate_releases_file() {
 
 fetch_releases_file() {
   local gh_repo="$1" repo_cache_dir="$2" releases_cache="$3"
-  local page=1 page_count
+  local page=1 page_count page_has_stable
   local releases_error page_file aggregate_file next_file
 
   aggregate_file="${repo_cache_dir}/releases.aggregate.json"
@@ -121,8 +121,9 @@ fetch_releases_file() {
     next_file="${aggregate_file}.next"
     jq -s '.[0] + .[1]' "${aggregate_file}" "${page_file}" > "${next_file}"
     mv "${next_file}" "${aggregate_file}"
+    page_has_stable="$(jq 'any(.[]; .draft == false and .prerelease == false)' "${page_file}")"
 
-    if (( page_count < 100 )); then
+    if (( page_count < 100 )) || [[ "${page_has_stable}" == "true" ]]; then
       break
     fi
     page=$((page + 1))
