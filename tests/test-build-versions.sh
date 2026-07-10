@@ -183,7 +183,7 @@ emit_shared_page_two() {
       },
       {
         "name": "workflow-plugin-shared-linux-arm64.tar.gz",
-        "browser_download_url": "",
+        "browser_download_url": "   ",
         "url": "https://api.github.com/repos/example/shared-plugin/releases/assets/4",
         "digest": null
       },

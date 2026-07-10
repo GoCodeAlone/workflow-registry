@@ -228,7 +228,7 @@ while IFS= read -r manifest; do
           {
             os:     $parts.os,
             arch:   $parts.arch,
-            url:    (if ($asset.browser_download_url // "") != ""
+            url:    (if (($asset.browser_download_url // "") | test("\\S"))
                     then $asset.browser_download_url
                     else ($asset.url // "")
                     end),
