@@ -190,7 +190,7 @@ while IFS= read -r manifest; do
   # List releases and their assets in one REST call per upstream repo.
   releases_cache="${repo_cache_dir}/releases.json"
   if [[ ! -f "${releases_cache}" ]]; then
-    echo "  ${plugin_name}: fetching releases for ${gh_repo}..."
+    echo "  ${plugin_name}: fetching release pages for ${gh_repo}..."
     fetch_releases_file "${gh_repo}" "${repo_cache_dir}" "${releases_cache}"
   else
     echo "  ${plugin_name}: using cached releases for ${gh_repo}..."
