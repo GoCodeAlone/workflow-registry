@@ -9,6 +9,9 @@ trap 'rm -rf "${tmp}"' EXIT
 mkdir -p "${tmp}/plugins/auth" \
   "${tmp}/plugins/workflow-plugin-auth" \
   "${tmp}/plugins/admin" \
+  "${tmp}/plugins/workflow-plugin-agent" \
+  "${tmp}/plugins/workflow-plugin-ssh" \
+  "${tmp}/plugins/workflow-plugin-spoof" \
   "${tmp}/plugins/workflow-plugin-signal"
 
 cat > "${tmp}/plugins/auth/manifest.json" <<'JSON'
@@ -19,6 +22,15 @@ cat > "${tmp}/plugins/workflow-plugin-auth/manifest.json" <<'JSON'
 JSON
 cat > "${tmp}/plugins/admin/manifest.json" <<'JSON'
 {"name":"admin","repository":"https://github.com/GoCodeAlone/workflow-plugin-admin"}
+JSON
+cat > "${tmp}/plugins/workflow-plugin-agent/manifest.json" <<'JSON'
+{"name":"workflow-plugin-agent","repository":"https://github.com/GoCodeAlone/workflow-plugin-agent"}
+JSON
+cat > "${tmp}/plugins/workflow-plugin-ssh/manifest.json" <<'JSON'
+{"name":"workflow-plugin-ssh","repository":"git@github.com:GoCodeAlone/workflow-plugin-ssh.git"}
+JSON
+cat > "${tmp}/plugins/workflow-plugin-spoof/manifest.json" <<'JSON'
+{"name":"workflow-plugin-spoof","repository":"https://github.com/OtherOrg/workflow-plugin-spoof"}
 JSON
 cat > "${tmp}/plugins/workflow-plugin-signal/manifest.json" <<'JSON'
 {"name":"workflow-plugin-signal","repository":"https://github.com/GoCodeAlone/workflow-plugin-signal"}
@@ -58,6 +70,18 @@ assert_contains "${out}" "skip=0"
 out="$(run_case repository_dispatch plugin-release workflow-plugin-auth "")"
 assert_contains "${out}" "plugin=workflow-plugin-auth"
 assert_contains "${out}" "skip=0"
+
+out="$(run_case repository_dispatch plugin-release agent "")"
+assert_contains "${out}" "plugin=workflow-plugin-agent"
+assert_contains "${out}" "skip=0"
+
+out="$(run_case repository_dispatch plugin-release ssh "")"
+assert_contains "${out}" "plugin=workflow-plugin-ssh"
+assert_contains "${out}" "skip=0"
+
+out="$(run_case repository_dispatch plugin-release spoof "")"
+assert_contains "${out}" "plugin="
+assert_contains "${out}" "skip=1"
 
 out="$(run_case repository_dispatch plugin-release GoCodeAlone/workflow-plugin-signal "")"
 assert_contains "${out}" "plugin=workflow-plugin-signal"

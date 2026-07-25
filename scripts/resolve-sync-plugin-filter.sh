@@ -29,6 +29,26 @@ manifest_repository() {
   jq -r '.repository // empty' "${manifest}"
 }
 
+normalize_github_repository() {
+  local repository="$1"
+  case "${repository}" in
+    https://github.com/*)
+      repository="${repository#https://github.com/}"
+      ;;
+    git@github.com:*)
+      repository="${repository#git@github.com:}"
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+  repository="${repository%.git}"
+  if [[ ! "${repository}" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]]; then
+    return 1
+  fi
+  printf '%s\n' "${repository}"
+}
+
 plugin=""
 case "${event_name}" in
   repository_dispatch)
@@ -76,10 +96,18 @@ if [[ -n "${plugin}" ]]; then
   manifest="${plugins_dir}/${plugin}/manifest.json"
   alias="workflow-plugin-${plugin}"
   alias_manifest="${plugins_dir}/${alias}/manifest.json"
+  alias_repository="GoCodeAlone/${alias}"
   if [[ -f "${manifest}" && -f "${alias_manifest}" ]]; then
-    repo="$(manifest_repository "${manifest}")"
-    alias_repo="$(manifest_repository "${alias_manifest}")"
-    if [[ "${repo}" == "https://github.com/GoCodeAlone/workflow" && "${alias_repo}" != "https://github.com/GoCodeAlone/workflow" ]]; then
+    repo="$(normalize_github_repository "$(manifest_repository "${manifest}")" || true)"
+    alias_repo="$(normalize_github_repository "$(manifest_repository "${alias_manifest}")" || true)"
+    if [[ "${repo}" == "GoCodeAlone/workflow" && "${alias_repo}" == "${alias_repository}" ]]; then
+      echo "resolved plugin-release alias ${plugin} -> ${alias}" >&2
+      plugin="${alias}"
+      manifest="${alias_manifest}"
+    fi
+  elif [[ ! -f "${manifest}" && -f "${alias_manifest}" ]]; then
+    alias_repo="$(normalize_github_repository "$(manifest_repository "${alias_manifest}")" || true)"
+    if [[ "${alias_repo}" == "${alias_repository}" ]]; then
       echo "resolved plugin-release alias ${plugin} -> ${alias}" >&2
       plugin="${alias}"
       manifest="${alias_manifest}"
