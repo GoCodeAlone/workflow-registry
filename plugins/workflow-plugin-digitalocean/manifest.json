@@ -8,6 +8,26 @@
     "configProvider": false,
     "iacProvider": {
       "configSchema": {
+        "digitalocean.database_user": {
+          "description": "Managed database user with provider-generated credentials and opt-in epoch-controlled password rotation.",
+          "fields": {
+            "database_id": {
+              "description": "Parent managed database's canonical UUID.",
+              "required": true,
+              "type": "string"
+            },
+            "rotation_epoch": {
+              "description": "Nonempty opaque epoch. Changing it requests password rotation; returned password and TLS URI are sensitive outputs, not desired inputs.",
+              "required": false,
+              "type": "string"
+            },
+            "username": {
+              "description": "Nonempty database username. The provider escapes it in API paths and resource identifiers.",
+              "required": true,
+              "type": "string"
+            }
+          }
+        },
         "infra.app_domain": {
           "description": "DigitalOcean App Platform domain binding. Updates only AppSpec.Domains on an existing App Platform app so DNS/domain aliases can be reconciled without rebuilding service images or runtime environment variables.",
           "fields": {
@@ -72,6 +92,16 @@
             "type": "string"
           }
         },
+        "infra.database": {
+          "description": "Managed database. Administrator password rotation is opt-in and separate from ordinary configuration updates.",
+          "fields": {
+            "admin_rotation_epoch": {
+              "description": "Nonempty opaque epoch. Changing it requests administrator password rotation; omission preserves legacy behavior.",
+              "required": false,
+              "type": "string"
+            }
+          }
+        },
         "infra.dns": {
           "description": "DigitalOcean DNS zone and record reconciliation. Declared records are upserted; absent_records deletes targeted stale records without making the whole zone authoritative.",
           "fields": {
@@ -89,6 +119,26 @@
               "description": "Records to create or update. Each record supports type, name, data, ttl, and type-specific fields.",
               "required": false,
               "type": "array\u003cobject\u003e"
+            }
+          }
+        },
+        "infra.droplet": {
+          "description": "DigitalOcean Droplet with optional fresh catalog price validation before plan, create, or destructive replacement.",
+          "fields": {
+            "max_monthly_usd": {
+              "description": "Positive finite monthly USD cap. A fresh Sizes API quote must confirm exact size and region availability and price at or below this cap; uncapped resources make no price lookup.",
+              "required": false,
+              "type": "number"
+            },
+            "region": {
+              "description": "Explicit region slug required when max_monthly_usd is present.",
+              "required": false,
+              "type": "string"
+            },
+            "size": {
+              "description": "Explicit size slug required when max_monthly_usd is present.",
+              "required": false,
+              "type": "string"
             }
           }
         },
@@ -144,6 +194,7 @@
         "infra.app_domain",
         "infra.k8s_cluster",
         "infra.database",
+        "digitalocean.database_user",
         "infra.cache",
         "infra.load_balancer",
         "infra.vpc",
@@ -173,11 +224,14 @@
       "workflow.plugin.external.iac.IaCProviderValidator",
       "workflow.plugin.external.iac.IaCProviderDriftConfigDetector",
       "workflow.plugin.external.iac.IaCProviderLogCapture",
+      "workflow.plugin.external.iac.IaCProviderRunner",
+      "workflow.plugin.external.iac.IaCProviderJobCanceler",
       "workflow.plugin.external.iac.IaCProviderRequirementMapper",
       "workflow.plugin.external.iac.IaCProviderRegionLister",
       "workflow.plugin.external.iac.IaCProviderOwnership",
       "workflow.plugin.external.iac.IaCProviderFinalizer",
       "workflow.plugin.external.iac.ResourceDriver",
+      "workflow.plugin.external.iac.ResourceSensitiveInputDeclarer",
       "workflow.plugin.external.iac.IaCStateBackend"
     ],
     "stepTypes": [
@@ -192,26 +246,26 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "78a28e9be0516b16003c20f515c39ef62e587d1076e730694ed53182780b40a3",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.18/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
+      "sha256": "4a935e896bf858addb5c30a06a79a814c8c0d5ff9963a4581b7e82052856d6ce",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.19/workflow-plugin-digitalocean-darwin-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "903361e5d964329b6033960c9ff19a417c28ed1ea6df30fc7174d4e5db0abb8d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.18/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
+      "sha256": "94da255667e8ef0040a036a2a58771166761ea3ca4b585074c8e31fed60832ce",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.19/workflow-plugin-digitalocean-darwin-arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "dc91393cd449b82e513f60f98d23b0fae5251ad21510e80226f5311397d69711",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.18/workflow-plugin-digitalocean-linux-amd64.tar.gz"
+      "sha256": "bd3d9ae1b9d2fa9df4032d0fcb05772fffda166052aae8a130092d1782e7681a",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.19/workflow-plugin-digitalocean-linux-amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "3f51108aa40cabb18d9c7d84c70e45148a21a7d04094aff79e9cd538690a0458",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.18/workflow-plugin-digitalocean-linux-arm64.tar.gz"
+      "sha256": "f05de17485f3a563ddc48aadca2b7fbfcdcdd072c5d6564d98e361f8fe2a06d3",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean/releases/download/v2.1.19/workflow-plugin-digitalocean-linux-arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean",
@@ -231,7 +285,7 @@
     "block-storage"
   ],
   "license": "MIT",
-  "minEngineVersion": "0.80.1",
+  "minEngineVersion": "0.86.1",
   "name": "workflow-plugin-digitalocean",
   "private": false,
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-digitalocean",
@@ -293,5 +347,5 @@
   "status": "verified",
   "tier": "community",
   "type": "external",
-  "version": "2.1.18"
+  "version": "2.1.19"
 }
