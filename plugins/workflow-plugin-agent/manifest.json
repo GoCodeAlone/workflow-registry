@@ -22,38 +22,38 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "6b7d21893f667b8b300bfd4088d44fa0fe77336501203f3dece862969527926c",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.10/workflow-plugin-agent_0.12.10_darwin_amd64.tar.gz"
+      "sha256": "1d2cddbe36f02aab82396e08a8ca63c52de5fb32eaaa8f876849a8745ed587c4",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.11/workflow-plugin-agent_0.12.11_darwin_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "darwin",
-      "sha256": "2b918649721e57c9b682fc08b28d3b51ff7d9eeff52edb72b3d094cbec327a3d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.10/workflow-plugin-agent_0.12.10_darwin_arm64.tar.gz"
+      "sha256": "1f3343c85bd64a930c0790e51110778c46da789858f60727ac32b4bd3d832b54",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.11/workflow-plugin-agent_0.12.11_darwin_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "linux",
-      "sha256": "8f0b54e37364d6c46f9633f46e2ca08da8a4d30207e1b9e593e1c976ab5d8355",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.10/workflow-plugin-agent_0.12.10_linux_amd64.tar.gz"
+      "sha256": "47464da423f44e23604a7723b5172f91bef8549d939835b07291e02f0ab831fb",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.11/workflow-plugin-agent_0.12.11_linux_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "linux",
-      "sha256": "73d18c8aa76cef081042908bb647bb98886fe8c9f44414e0856331d3c2154066",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.10/workflow-plugin-agent_0.12.10_linux_arm64.tar.gz"
+      "sha256": "74ad859d53810779d0747bf2a57e14ebb9cb0cc0840e0de41291a56e680e8e61",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.11/workflow-plugin-agent_0.12.11_linux_arm64.tar.gz"
     },
     {
       "arch": "amd64",
       "os": "windows",
-      "sha256": "8649ef86991fc75dcbffe3066df91fab9106e6a3af6f5a08e617c42bb0dd0a06",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.10/workflow-plugin-agent_0.12.10_windows_amd64.tar.gz"
+      "sha256": "96c31cc7819921938ef89f5dc85e09d6e571d55c665e6fdbd4092eb3a09d0be9",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.11/workflow-plugin-agent_0.12.11_windows_amd64.tar.gz"
     },
     {
       "arch": "arm64",
       "os": "windows",
-      "sha256": "1c7ecbcac7de11b558ec2a7ea486a66b0bb3c663518fb2bc18bb7c94bfc2dcc1",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.10/workflow-plugin-agent_0.12.10_windows_arm64.tar.gz"
+      "sha256": "3a6ad3df1703d98097c7075f3006f4e3f7258595e27b662dad2ddac968f97d20",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-agent/releases/download/v0.12.11/workflow-plugin-agent_0.12.11_windows_arm64.tar.gz"
     }
   ],
   "homepage": "https://github.com/GoCodeAlone/workflow-plugin-agent",
@@ -82,5 +82,5 @@
   "source": "github.com/GoCodeAlone/workflow-plugin-agent",
   "tier": "core",
   "type": "external",
-  "version": "0.12.10"
+  "version": "0.12.11"
 }
