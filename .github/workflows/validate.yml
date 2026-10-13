@@ -26,6 +26,9 @@ jobs:
       - name: Validate all plugin manifests
         run: bash scripts/validate-manifests.sh
 
+      - name: Test plugin archive roles and Atlas capabilities
+        run: bash tests/test-validate-manifests-artifacts.sh
+
       - name: Validate every plugin has a category assigned
         run: bash scripts/categorize-manifests.sh --check
 

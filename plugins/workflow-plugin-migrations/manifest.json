@@ -74,54 +74,6 @@
     {
       "arch": "amd64",
       "os": "darwin",
-      "sha256": "ae9c6de6c1c38ba8f7c3ba011abe08f86caacedc8295398fab22e200504095d5",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.4.1/workflow-migrate-darwin-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "9bdde90c760a11f6869028fac944a5ed8b8e26e0e727847c796f0aaab75aa45d",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.4.1/workflow-migrate-darwin-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "linux",
-      "sha256": "d57e388f8a8224624002984be7dda4af48a66a3e18fc15af49696f45263efa0f",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.4.1/workflow-migrate-linux-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "linux",
-      "sha256": "ed7a6484378667121820bf4d49e4e4444bab7c5c5f3330f73746183555af20ea",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.4.1/workflow-migrate-linux-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "darwin",
-      "sha256": "c8b1ffbaffd5f5ac3eaea24f66463b9cf60b4f2c03bef28c7ebde0378f57a6ae",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.4.1/workflow-plugin-atlas-migrate-darwin-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "darwin",
-      "sha256": "d765297ea18119d276fa5f8dc2bdd88b39800842627a5a9afe39a7aca84aa060",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.4.1/workflow-plugin-atlas-migrate-darwin-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "linux",
-      "sha256": "7a6e381ba2c1543ee45b15d97fdeb8464cd6eac5c23822c9e8b0e43e5a3cb9a2",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.4.1/workflow-plugin-atlas-migrate-linux-amd64.tar.gz"
-    },
-    {
-      "arch": "arm64",
-      "os": "linux",
-      "sha256": "e0b1834f30becfb36faec6dd1487857db6a94fbea943c82b7343490ee02e3f79",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.4.1/workflow-plugin-atlas-migrate-linux-arm64.tar.gz"
-    },
-    {
-      "arch": "amd64",
-      "os": "darwin",
       "sha256": "30574e2d75420a1cbfe48818bef28bc2db53d6474d125f3d0a6e4093bcf9c047",
       "url": "https://github.com/GoCodeAlone/workflow-plugin-migrations/releases/download/v0.4.1/workflow-plugin-migrations-darwin-amd64.tar.gz"
     },
