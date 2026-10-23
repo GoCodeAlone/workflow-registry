@@ -276,6 +276,9 @@ Every pull request and push to `main` triggers the [Validate Registry](.github/w
 
 The [Sync Registry Manifests](.github/workflows/sync-registry-manifests.yml) workflow runs daily, manually, and on `plugin-release` or `workflow-release` dispatch events. It uses `wfctl plugin registry-sync` to update release metadata, sync built-in core manifests from `GoCodeAlone/workflow`, regenerate this README, and open a PR when tracked registry files change. The old `scripts/sync-versions.sh`, `scripts/sync-core-manifests.sh`, and `scripts/generate-readme.sh` entrypoints are compatibility wrappers around the same `wfctl` commands.
 
+Core manifest sync and validation select Go from the checked-out Workflow
+`go.mod`, so the inspector uses a toolchain that meets the module's requirement.
+
 The [Build & Deploy](.github/workflows/build-pages.yml) workflow runs on every push to `main`, on a daily schedule, and whenever a plugin sends a `plugin-release` dispatch event. It:
 
 1. Generates `v1/index.json` from all manifests
@@ -283,6 +286,10 @@ The [Build & Deploy](.github/workflows/build-pages.yml) workflow runs on every p
 3. Prepares a `public/` Pages artifact that exposes the registry at both the
    site root and `/v1/`
 4. Deploys the `public/` directory to GitHub Pages
+
+Release-page fetches retry HTTP 500/502/503/504 and request timeouts up to three
+attempts, waiting 2 then 4 seconds. Other errors and exhausted retries fail the
+build before deployment; incomplete release responses are never cached.
 
 PRs that fail validation cannot be merged.
 
