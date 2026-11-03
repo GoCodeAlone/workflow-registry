@@ -28,7 +28,7 @@ for manifest in "$PLUGINS_DIR"/*/manifest.json; do
     echo "$manifest invalid: scaffold/template repositories must not be published as installable plugins" >&2
     errors=$((errors + 1))
   fi
-  if jq -e '.. | objects | has("flags_passthrough")' "$manifest" >/dev/null; then
+  if jq -e 'any(.. | objects; has("flags_passthrough"))' "$manifest" >/dev/null; then
     echo "$manifest invalid: use capabilities.cliCommands[].flagsPassthrough instead of legacy flags_passthrough" >&2
     errors=$((errors + 1))
   fi
@@ -50,7 +50,7 @@ for manifest in "$PLUGINS_DIR"/*/manifest.json; do
       true
     else
       all((.downloads // [])[]?;
-        (.url | test("/releases/download/v" + $version + "/"))
+        (.url | contains("/releases/download/v" + $version + "/"))
       )
     end
   ' "$manifest" >/dev/null; then

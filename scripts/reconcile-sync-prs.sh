@@ -74,7 +74,7 @@ prs_json="$(gh pr list --repo "$REPO" --state open --limit 100 \
 if [[ "$MODE" == "full" ]]; then
   candidates="$(jq -r --argjson current "$CURRENT_PR" '
     .[]
-    | select(.number != $current)
+    | select(.number < $current)
     | select(.author.login == "app/github-actions" or .author.login == "github-actions[bot]")
     | select(.headRefName | startswith("chore/sync-"))
     | [.number, .headRefName, .title] | @tsv
@@ -82,7 +82,7 @@ if [[ "$MODE" == "full" ]]; then
 else
   candidates="$(jq -r --argjson current "$CURRENT_PR" --arg plugin "$PLUGIN" '
     .[]
-    | select(.number != $current)
+    | select(.number < $current)
     | select(.author.login == "app/github-actions" or .author.login == "github-actions[bot]")
     | select(.headRefName | startswith("chore/sync-" + $plugin + "-"))
     | [.number, .headRefName, .title] | @tsv
