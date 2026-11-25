@@ -112,6 +112,13 @@ JSON
 
 calls_file="${tmp}/gh-api-calls"
 : > "${calls_file}"
+export GH_SLEEP_CALLS_FILE="${tmp}/gh-sleep-calls"
+: > "${GH_SLEEP_CALLS_FILE}"
+cat > "${tmp}/bin/sleep" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "${GH_SLEEP_CALLS_FILE}"
+SH
+chmod +x "${tmp}/bin/sleep"
 
 cat > "${tmp}/bin/gh" <<'SH'
 #!/usr/bin/env bash
@@ -124,6 +131,34 @@ fi
 
 endpoint="$2"
 mode="${GH_FIXTURE_MODE:-success}"
+printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
+attempt="$(grep -Fc "${endpoint}" "${GH_CALLS_FILE}")"
+
+if [[ "${endpoint}" == "repos/example/shared-plugin/releases?per_page=100&page=${GH_FAILURE_PAGE:-1}" ]]; then
+  case "${mode}" in
+    transient-*)
+      if (( attempt == 1 )); then
+        printf 'partial response that must be discarded\n'
+        echo "gh: Server Error (HTTP ${mode#transient-})" >&2
+        exit 1
+      fi
+      ;;
+    timeout-once)
+      if (( attempt == 1 )); then
+        printf 'partial timed-out response\n'
+        exit 124
+      fi
+      ;;
+    persistent-502)
+      echo 'gh: Server Error (HTTP 502)' >&2
+      exit 1
+      ;;
+    permanent-*)
+      echo "gh: Request failed (HTTP ${mode#permanent-})" >&2
+      exit 1
+      ;;
+  esac
+fi
 
 emit_shared_page_one() {
   jq -n '
@@ -281,11 +316,9 @@ fi
 
 case "${endpoint}" in
   repos/example/shared-plugin/releases\?per_page=100|repos/example/shared-plugin/releases\?per_page=100\&page=1)
-    printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
     emit_shared_page_one
     ;;
   repos/example/shared-plugin/releases\?per_page=100\&page=2)
-    printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
     if [[ "${mode}" == "page-2-api-failure" ]]; then
       echo "fixture page 2 API failure" >&2
       exit 45
@@ -301,11 +334,9 @@ case "${endpoint}" in
     exit 43
     ;;
   repos/example/no-releases/releases\?per_page=100|repos/example/no-releases/releases\?per_page=100\&page=1)
-    printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
     printf '[]\n'
     ;;
   repos/example/prerelease-only/releases\?per_page=100|repos/example/prerelease-only/releases\?per_page=100\&page=1)
-    printf '%s\n' "${endpoint}" >> "${GH_CALLS_FILE}"
     cat <<'JSON'
 [
   {
@@ -394,6 +425,48 @@ assert_failed_build_preserves_alpha "invalid-asset-digest-content" "asset with i
 assert_failed_build_preserves_alpha "missing-asset-effective-url" "asset without effective URL"
 assert_failed_build_preserves_alpha "page-2-api-failure" "page 2 API failure"
 assert_failed_build_preserves_alpha "page-2-schema-failure" "page 2 schema failure"
+
+# A failed page may be retried, but partial responses must never be cached or
+# published. Completed earlier pages and shared upstream caches remain reusable.
+for mode in transient-500 transient-502 transient-503 transient-504 timeout-once; do
+  for page in 1 2; do
+    : > "${calls_file}"
+    : > "${GH_SLEEP_CALLS_FILE}"
+    if ! GH_FIXTURE_MODE="${mode}" GH_FAILURE_PAGE="${page}" \
+      GH_CALLS_FILE="${calls_file}" REAL_CP="${real_cp}" PATH="${tmp}/bin:${PATH}" \
+      bash "${tmp}/scripts/build-versions.sh" >"${tmp}/build-${mode}-${page}.log" 2>&1; then
+      fail "${mode} on page ${page} did not recover"
+    fi
+    [[ "$(grep -Fc "shared-plugin/releases?per_page=100&page=${page}" "${calls_file}")" == 2 ]] || \
+      fail "${mode} did not retry only the failed page"
+    [[ "$(wc -l < "${calls_file}" | tr -d ' ')" == 5 ]] || \
+      fail "${mode} refetched a completed page or shared upstream"
+    [[ "$(cat "${GH_SLEEP_CALLS_FILE}")" == 2 ]] || fail "${mode} missing bounded retry delay"
+    [[ "$(jq -r '.version' "${alpha_latest}")" == 0.36.1 ]] || fail "${mode} lost stable page 2 release"
+    [[ "$(jq '.versions | length' "${alpha_versions}")" == 2 ]] || fail "${mode} duplicated release data"
+    cp "${expected_alpha_versions}" "${alpha_versions}"
+    cp "${expected_alpha_latest}" "${alpha_latest}"
+  done
+done
+
+for page in 1 2; do
+  : > "${calls_file}"
+  : > "${GH_SLEEP_CALLS_FILE}"
+  GH_FAILURE_PAGE="${page}" assert_failed_build_preserves_alpha "persistent-502" "persistent HTTP 502 on page ${page}"
+  [[ "$(grep -Fc "shared-plugin/releases?per_page=100&page=${page}" "${calls_file}")" == 3 ]] || \
+    fail "persistent HTTP 502 did not stop after three attempts"
+  [[ "$(cat "${GH_SLEEP_CALLS_FILE}")" == $'2\n4' ]] || fail "persistent HTTP 502 backoff was not bounded"
+  grep -Fq "page ${page} after 3 attempt(s)" "${tmp}/build-persistent-502.log" || fail "exhaustion diagnostic omitted page or attempt count"
+  grep -Fq 'HTTP 502' "${tmp}/build-persistent-502.log" || fail "exhaustion diagnostic omitted underlying error"
+done
+
+for mode in permanent-401 permanent-403 permanent-404 permanent-501 malformed-json missing-draft; do
+  : > "${calls_file}"
+  : > "${GH_SLEEP_CALLS_FILE}"
+  assert_failed_build_preserves_alpha "${mode}" "${mode} failure"
+  [[ "$(wc -l < "${calls_file}" | tr -d ' ')" == 1 ]] || fail "${mode} was retried"
+  [[ ! -s "${GH_SLEEP_CALLS_FILE}" ]] || fail "${mode} slept before failing"
+done
 
 touch "${failure_marker}"
 if GH_CALLS_FILE="${calls_file}" REAL_CP="${real_cp}" \

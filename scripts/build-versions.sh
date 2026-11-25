@@ -99,6 +99,7 @@ validate_releases_file() {
 fetch_releases_file() {
   local gh_repo="$1" repo_cache_dir="$2" releases_cache="$3"
   local page=1 page_count page_has_stable
+  local attempt status max_attempts=3
   local releases_error page_file aggregate_file next_file
 
   aggregate_file="${repo_cache_dir}/releases.aggregate.json"
@@ -107,13 +108,29 @@ fetch_releases_file() {
   while true; do
     page_file="${repo_cache_dir}/releases.page-${page}.json"
     releases_error="${repo_cache_dir}/releases.page-${page}.err"
-    if ! run_gh api \
-      "repos/${gh_repo}/releases?per_page=100&page=${page}" \
-      >"${page_file}" 2>"${releases_error}"; then
-      echo "error: failed to list releases for ${gh_repo} page ${page}: $(cat "${releases_error}")" >&2
-      rm -f "${page_file}" "${releases_error}" "${aggregate_file}"
-      return 1
-    fi
+    attempt=1
+    while true; do
+      # Truncate both files on every attempt; failed partial responses must
+      # never enter the aggregate or the shared upstream cache.
+      if run_gh api \
+        "repos/${gh_repo}/releases?per_page=100&page=${page}" \
+        >"${page_file}" 2>"${releases_error}"; then
+        break
+      else
+        status=$?
+      fi
+      # Retry only known transient server failures and the timeout wrapper's
+      # exit status. Authentication, missing repos, and bad metadata fail fast.
+      if (( attempt >= max_attempts )) ||
+        { (( status != 124 )) && ! grep -Eq '\(HTTP (500|502|503|504)\)' "${releases_error}"; }; then
+        echo "error: failed to list releases for ${gh_repo} page ${page} after ${attempt} attempt(s) (exit ${status}): $(cat "${releases_error}")" >&2
+        rm -f "${page_file}" "${releases_error}" "${aggregate_file}"
+        return 1
+      fi
+      echo "warning: retrying releases for ${gh_repo} page ${page} after attempt ${attempt}/${max_attempts} (exit ${status}): $(cat "${releases_error}")" >&2
+      sleep "$((attempt * 2))"
+      attempt=$((attempt + 1))
+    done
     rm -f "${releases_error}"
 
     validate_releases_file "${gh_repo} page ${page}" "${page_file}"

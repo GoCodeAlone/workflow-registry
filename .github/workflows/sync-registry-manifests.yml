@@ -37,12 +37,13 @@ jobs:
           path: _workflow
 
       - name: Set up Go
+        id: go
         if: >-
           !(github.event_name == 'repository_dispatch' && github.event.action == 'plugin-release' && github.event.client_payload.plugin)
           && !(github.event_name == 'workflow_dispatch' && github.event.inputs.plugin)
         uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
-          go-version: '1.26.5'
+          go-version-file: _workflow/go.mod
           cache: false
 
       - name: Cache Go modules
@@ -54,9 +55,9 @@ jobs:
           path: |
             ~/.cache/go-build
             ~/go/pkg/mod
-          key: ${{ runner.os }}-go-1.26.5-${{ hashFiles('_workflow/go.sum') }}
+          key: ${{ runner.os }}-go-${{ steps.go.outputs.go-version }}-${{ hashFiles('_workflow/go.sum') }}
           restore-keys: |
-            ${{ runner.os }}-go-1.26.5-
+            ${{ runner.os }}-go-${{ steps.go.outputs.go-version }}-
 
       - name: Set up wfctl
         env:
