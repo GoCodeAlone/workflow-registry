@@ -99,41 +99,117 @@ jobs:
           PLUGIN:   ${{ steps.filter.outputs.plugin }}
         run: |
           set -euo pipefail
+          record_workflow_commit() {
+            # This identifies the checked-out input, not the wfctl binary or
+            # an attestation that core inspection completed or the tree is clean.
+            [[ -n "${GITHUB_STEP_SUMMARY:-}" ]] || return 0
+            local workflow_commit state status
+            # An explicit Git directory prevents fallback to Registry's parent repo.
+            if workflow_commit="$(GIT_OPTIONAL_LOCKS=0 git --git-dir="$GITHUB_WORKSPACE/_workflow/.git" rev-parse --verify 'HEAD^{commit}' 2>/dev/null)"; then
+              status=0
+              state=resolved
+              if [[ ! "${workflow_commit}" =~ ^[0-9a-f]{40}$ ]]; then
+                workflow_commit=unavailable
+                state=invalid_output
+              fi
+            else
+              status=$?
+              workflow_commit=unavailable
+              state=lookup_failed
+            fi
+            # Never expose Git stderr, paths or arbitrary output. Failure of
+            # this optional record must not change sync's existing gates.
+            if ! { printf 'registry-sync workflow_checkout_commit=%s state=%s exit=%s\n' "${workflow_commit}" "${state}" "${status}" >> "${GITHUB_STEP_SUMMARY}"; } 2>/dev/null; then
+              echo '::warning::registry-sync provenance_summary_write_failed'
+            fi
+          }
           run_wfctl() {
-            local attempt max output status
+            local phase="$1"
+            shift
+            local attempt max output status outcome errors drift skips rejections
             max=6
             for attempt in $(seq 1 "${max}"); do
-              set +e
-              output="$("$@" 2>&1)"
-              status=$?
-              set -e
-              printf '%s\n' "${output}"
-              if [[ ${status} -eq 0 ]] && ! grep -Eq '(^|[[:space:]])ERROR[[:space:]]' <<<"${output}"; then
+              printf 'registry-sync phase=%s outcome=started attempt=%s/%s\n' "${phase}" "${attempt}" "${max}"
+              if output="$("$@" 2>&1)"; then
+                status=0
+              else
+                status=$?
+              fi
+              errors=0 drift=0 skips=0 rejections=0
+              if grep -Eq '(^|[[:space:]])ERROR[[:space:]]' <<<"${output}"; then errors=1; fi
+              if grep -Eq '(^|[[:space:]])MISMATCH[[:space:]]' <<<"${output}"; then drift=1; fi
+              if grep -Eq '(^|[[:space:]])SKIP[[:space:]]' <<<"${output}"; then skips=1; fi
+              if grep -Eq '(^|[[:space:]])REJECT[[:space:]]' <<<"${output}"; then rejections=1; fi
+              outcome=completed
+              if [[ ${status} -ne 0 ]]; then
+                outcome=command_failed
+              elif [[ ${errors} -eq 1 ]]; then
+                outcome=reported_error
+              elif [[ ${rejections} -eq 1 ]]; then
+                outcome=rejections_observed
+              elif [[ ${drift} -eq 1 ]]; then
+                outcome=drift_observed
+              elif [[ ${skips} -eq 1 ]]; then
+                # The pinned CLI conflates absent releases and lookup errors.
+                # Report the marker without claiming either underlying cause.
+                outcome=skips_observed
+              fi
+              # Child output may include upstream response bodies or paths.
+              # Only fixed labels and numeric status enter normal Actions logs.
+              printf 'registry-sync phase=%s outcome=%s exit=%s attempt=%s/%s errors=%s drift=%s skips=%s rejections=%s\n' "${phase}" "${outcome}" "${status}" "${attempt}" "${max}" "${errors}" "${drift}" "${skips}" "${rejections}"
+              if [[ ${status} -eq 0 && "${outcome}" != reported_error ]]; then
                 return 0
               fi
               if [[ ${attempt} -eq ${max} ]]; then
-                echo "::error::wfctl command failed after ${max} attempts: $*"
+                printf '::error::registry-sync phase=%s outcome=%s exit=%s attempts=%s\n' "${phase}" "${outcome}" "${status}" "${max}"
                 return 1
               fi
               sleep "$((attempt * 10))"
             done
           }
           if [[ -n "${PLUGIN}" ]]; then
-            echo "syncing single plugin: ${PLUGIN}"
-            run_wfctl wfctl plugin registry-sync --fix --plugin "${PLUGIN}" --registry-dir .
-            run_wfctl wfctl plugin registry-sync readme --registry-dir .
+            run_wfctl releases wfctl plugin registry-sync --fix --plugin "${PLUGIN}" --registry-dir .
+            run_wfctl readme wfctl plugin registry-sync readme --registry-dir .
           else
-            echo "syncing all plugins (cron / full run)"
-            run_wfctl wfctl plugin registry-sync --fix --registry-dir .
-            run_wfctl wfctl plugin registry-sync core --fix --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
-            run_wfctl wfctl plugin registry-sync readme --registry-dir .
+            record_workflow_commit
+            run_wfctl releases wfctl plugin registry-sync --fix --registry-dir .
+            run_wfctl core wfctl plugin registry-sync core --fix --registry-dir . --workflow-repo "$GITHUB_WORKSPACE/_workflow"
+            run_wfctl readme wfctl plugin registry-sync readme --registry-dir .
           fi
-          bash scripts/validate-manifests.sh
-          if git diff --quiet -- plugins README.md; then
-            echo "changed=0" >> "$GITHUB_OUTPUT"
+          echo 'registry-sync phase=validation outcome=started'
+          if output="$(bash scripts/validate-manifests.sh 2>&1)"; then
+            echo 'registry-sync phase=validation outcome=completed exit=0'
           else
-            echo "changed=1" >> "$GITHUB_OUTPUT"
+            status=$?
+            archive_roles=0 driver_only=0 outcome=unclassified_failure
+            if grep -Fq 'catalog downloads must select full plugin archives with one entry per supported OS/arch' <<<"${output}"; then archive_roles=1; fi
+            if grep -Fq 'Atlas catalog must match its driver-only capabilities' <<<"${output}"; then driver_only=1; fi
+            if [[ ${archive_roles} -eq 1 || ${driver_only} -eq 1 ]]; then outcome=manifest_rejected; fi
+            # Only source-defined categories escape the private capture; all
+            # other failures stay explicit rather than guessing their cause.
+            printf '::error::registry-sync phase=validation outcome=%s exit=%s archive_roles=%s driver_only=%s\n' "${outcome}" "${status}" "${archive_roles}" "${driver_only}"
+            exit "${status}"
           fi
+          echo 'registry-sync phase=diff outcome=started'
+          if git diff --quiet -- plugins README.md >/dev/null 2>&1; then
+            status=0
+          else
+            status=$?
+          fi
+          case "${status}" in
+            0)
+              echo 'registry-sync phase=diff outcome=unchanged exit=0'
+              echo "changed=0" >> "$GITHUB_OUTPUT"
+              ;;
+            1)
+              echo 'registry-sync phase=diff outcome=drift_observed exit=1'
+              echo "changed=1" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              printf '::error::registry-sync phase=diff outcome=command_failed exit=%s\n' "${status}"
+              exit "${status}"
+              ;;
+          esac
 
       - name: Open PR if manifests changed
         # I-5 (round-3): the && skip guard is REQUIRED. Without it, a
